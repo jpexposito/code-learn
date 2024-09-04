@@ -1,4 +1,4 @@
-# Code & Learn <img src=images/computer.png width="40">
+# Code & Learn <img src=images/coding-book.png width="40">
 
 _Descripción general del enfoque del repositorio_
 
