@@ -1,9 +1,17 @@
-# <img src=../../images/computer.png width="40"> Code & Learn (Entornos de Desarrollo).
+<div align="justify">
 
-_Descripción general del enfoque del repositorio_
+# <img src=../../../images/computer.png width="40"> Code & Learn (Entornos de Desarrollo)
 
-## Unidades
+## Utilización de técnicas de programación segura
+
+<div align="center">
+
+<img src=images/server-security.png width="400">
+
+</div>
 
 ## Licencia 📄
 
-Este proyecto está bajo la Licencia (Apache 2.0) - mira el archivo [LICENSE.md](../LICENSE.md) para detalles
+Este proyecto está bajo la Licencia (Apache 2.0) - mira el archivo [LICENSE.md](../../../LICENSE) para detalles
+
+</div>
