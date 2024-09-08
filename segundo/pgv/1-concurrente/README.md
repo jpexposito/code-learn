@@ -4,7 +4,7 @@
 
 ## Concurrencia
 
-<div style=" text-align: center; ">
+<div align="center">
 
 <img src=images/concurrencia.png width="400">
 
