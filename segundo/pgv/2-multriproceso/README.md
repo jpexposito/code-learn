@@ -1,10 +1,6 @@
 # <img src=../../../images/computer.png width="40"> Code & Learn (Programación de Servicios)
 
-## Programación multiproceso
-
-### Ejecutables. Procesos. Servicios
-
-#### Ejecutables
+<img src=images/procesos.png width="400">
 
 
 
