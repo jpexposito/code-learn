@@ -1,10 +1,10 @@
-<div style=" text-align: justify; ">
+<div style="align: justify; ">
 
 # <img src=../../../images/computer.png width="40"> Code & Learn (Programación de Servicios)
 
 ## Proramación Multiproceso
 
-<div style=" text-align: center; ">
+<div style="align: center; ">
 
 <img src=images/procesos.png width="400">
 
