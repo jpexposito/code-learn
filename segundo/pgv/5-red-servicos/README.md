@@ -1,10 +1,10 @@
-<div style="align: justify; ">
+<div align="justify">
 
 # <img src=../../../images/computer.png width="40"> Code & Learn (Programación de Servicios)
 
 ## Generación de servicios en red
 
-<div style="align: center; ">
+<div align="center">
 
 <img src=images/web-services.png width="400">
 

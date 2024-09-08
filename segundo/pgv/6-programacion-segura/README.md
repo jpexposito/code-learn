@@ -1,10 +1,10 @@
-<div style="align: justify; ">
+<div align="justify">
 
 # <img src=../../../images/computer.png width="40"> Code & Learn (Programación de Servicios)
 
 ## Utilización de técnicas de programación segura
 
-<div style="align: center; ">
+<div align="center">
 
 <img src=images/server-security.png width="400">
 
