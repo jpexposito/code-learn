@@ -1,7 +1,17 @@
+<div style=" text-align: justify; ">
+
 # <img src=../../../images/computer.png width="40"> Code & Learn (Programación de Servicios)
 
-## Titulo
+## Proramación Multihilo
+
+<div style=" text-align: center; ">
+
+<img src=images/threads.png width="400">
+
+</div>
 
 ## Licencia 📄
 
-Este proyecto está bajo la Licencia (Apache 2.0) - mira el archivo [LICENSE.md](../../../../LICENSE.md) para detalles
+Este proyecto está bajo la Licencia (Apache 2.0) - mira el archivo [LICENSE.md](../../../LICENSE) para detalles
+
+</div>
