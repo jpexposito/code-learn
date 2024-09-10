@@ -1,6 +1,6 @@
 <div align="justify">
 
-# <img src=../../../images/computer.png width="40"> Code & Learn (Programas, lenguajes y compiladores)
+# <img src=../../../../images/computer.png width="40"> Code & Learn (Programas, lenguajes y compiladores)
 
 ## Conceptos iniciales
 
