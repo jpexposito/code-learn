@@ -16,8 +16,8 @@
 
 
 	<div align="center">
-	    <a href="README.md"><img src="../../img/home.png" alt="XML Home" style="width:42px;height:42px;"></a>
-	    <a href="INSTALACION.md"><img src="../../img/next.png" alt="INSTALACION GIT" style="width:42px;height:42px;">
+	    <a href="README.md"><img src="images/home.png" alt="XML Home" style="width:42px;height:42px;"></a>
+	    <a href="INSTALACION.md"><img src="images/next.png" alt="INSTALACION GIT" style="width:42px;height:42px;">
 	</div>
 
  </div>

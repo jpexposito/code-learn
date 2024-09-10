@@ -182,8 +182,8 @@ nano ~/.gitconfig
  Existen muchas otras opciones que puede configurar, pero estas son las dos esenciales que se necesitan. Si omite este paso, probablemente verá mensajes de advertencia cuando realice una confirmación con Git. Esto implica un mayor trabajo para usted, pues tendrá que revisar las confirmaciones que haya realizado con la información corregida.
 
 <div align="center">
-    <a href="README.md"><img src="../../img/home.png" alt="Git Home" style="width:42px;height:42px;"></a>
-    <a href="OPERACIONES_ESENCIALES.md"><img src="../../img/next.png" alt="OPERACIONES ESENCIALES" style="width:42px;height:42px;"> 
+    <a href="README.md"><img src="images/home.png" alt="Git Home" style="width:42px;height:42px;"></a>
+    <a href="OPERACIONES_ESENCIALES.md"><img src="images/next.png" alt="OPERACIONES ESENCIALES" style="width:42px;height:42px;"> 
 </div>
 
 </div>

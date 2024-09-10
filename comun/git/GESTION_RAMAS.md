@@ -174,9 +174,9 @@ ha sido incorporada a dev y master, tanto en local como en origin.
 ‼️ Es importante recordar eliminar la rama una vez que ha sido incorporada a dev y master, tanto en local como en origin.
 
 <div align="center">
-    <a href="OPERACIONES_ESENCIALES.md"><img src="../../img/before.png" alt="Operaciones esenciales" style="width:42px;height:42px;"></a>
-    <a href="README.md"><img src="../../img/home.png" alt="XML Home" style="width:42px;height:42px;"></a>
-    <a href="HISTORIA.md"><img src="../../img/next.png" alt="History" style="width:42px;height:42px;">
+    <a href="OPERACIONES_ESENCIALES.md"><img src="images/before.png" alt="Operaciones esenciales" style="width:42px;height:42px;"></a>
+    <a href="README.md"><img src="images/home.png" alt="XML Home" style="width:42px;height:42px;"></a>
+    <a href="HISTORIA.md"><img src="images/next.png" alt="History" style="width:42px;height:42px;">
 </div>
 
 </div>
