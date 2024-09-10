@@ -36,6 +36,9 @@ Existen diferentes opciones de instaladores de JDK, las más comunes son:
 
 Estamos listos para hacer de VS Code nuestro IDE de Java, es hora de instalar algunas extensiones. Si presionamos las secciones de extensión en la barra lateral y escribimos Java en la barra de búsqueda, es posible que nos abrumemos con la lista de opciones.
 
+## Videos Youtuve
+
+- [Intalación y primeros pasos](https://www.youtube.com/watch?v=3gW6AJNcfR4)
 
 ## Licencia 📄
 

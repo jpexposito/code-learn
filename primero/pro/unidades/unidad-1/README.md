@@ -158,6 +158,17 @@ Javadoc, es una herramienta del SDK que permite documentar, de una manera rápid
 | . | Acceso a variables y métodos | a=obj.var1 |
 | ( ) | Agrupación de expresiones | a=(a+b)*c |
 
+## Primeros pasos con un Ide
+
+Vamos a realizar la instalación y configuración de nuestro ide a través del siguiente [enlace](../../../../comun/jdk/README.md).
+
+## Comenzandoa a ver algo de código
+
+Antes de empezar con Java, es necesario tener claros algunos conceptos sobre los programas y lenguajes de programación, así como el software necesario para desarrollarlos. Esta sección forma parte de otro curso en el que explicamos algunos conceptos básicos sobre desarrollo e ingeniería de software.
+
+- [Programas, lenguajes y compiladores](PROGRAMAS-LENGUAJES.md).
+
+
 ## Licencia 📄
 
 Este proyecto está bajo la Licencia (Apache 2.0) - mira el archivo [LICENSE.md](../LICENSE.md) para detalles
