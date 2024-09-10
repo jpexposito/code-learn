@@ -167,6 +167,7 @@ Vamos a realizar la instalación y configuración de nuestro ide a través del s
 Antes de empezar con Java, es necesario tener claros algunos conceptos sobre los programas y lenguajes de programación, así como el software necesario para desarrollarlos. Esta sección forma parte de otro curso en el que explicamos algunos conceptos básicos sobre desarrollo e ingeniería de software.
 
 - [Programas, lenguajes y compiladores](PROGRAMAS-LENGUAJES.md).
+- [Primeros pasos en java](PRIMEROS-PASOS-JAVA.md)
 
 
 ## Licencia 📄
