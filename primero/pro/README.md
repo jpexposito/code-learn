@@ -1,8 +1,8 @@
-# <img src=../../images/computer.png width="40"> Code & Learn (Programación).
-
-_Descripción general del enfoque del repositorio_
+# <img src=../../images/computer.png width="40"> Code & Learn (Programación)
 
 ## Unidades
+
+- [Unidad 1](unidades/unidad-1/README.md)
 
 ## Licencia 📄
 
