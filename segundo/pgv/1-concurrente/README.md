@@ -179,7 +179,7 @@ Siempre que la secuencialidad entre tareas se lleve a cabo por sentencias explí
 >
 > 👁️ Conocerlos, entenderlos y saber aplicarlos es a lo que dedicaremos una parte importante de este curso.
 
-#### Hilos vs procesos
+#### Hilos vs procesos
 
 Un hilo no es más que cada una de esas líneas de flujo que puede tener un proceso ejecutándose de forma concurrente. Un procesos es una unidad pesada de ejecución.
 
@@ -209,6 +209,7 @@ Un servicio es un proceso que, normalmente, es cargado durante el arranque del s
 
 Recibe el nombre de servicio ya que es un proceso que queda a la espera de que otro le pida que realice una tarea. Como deben atender las solicitudes de varios procesos, los servicios suelen ser programas multihilo.
 
+[Concurrencia](CONCURRENCIA.md)
 
 ## Licencia 📄
 
