@@ -100,10 +100,9 @@ El orden en el que se evalúan los operadores en una expresión aritmética es i
 int result = 4 + 2 / 2;
 ```
 
-___Entonces resultla variable obtiene un valor final de 5, porque la división 2 / 2se evalúa ANTES de la suma. Este es el orden de precedencia de los operadores aritméticos:
-
-1. Multiplicaciones, divisiones y módulos
-2. Sumas y restas
+___Entonces resultla variable obtiene un valor final de 5___, porque la división 2 / 2se evalúa ANTES de la suma. Este es el orden de precedencia de los operadores aritméticos:
+- Multiplicaciones, divisiones y módulos
+- Sumas y restas
 
 > Si en una operación hay más de un operador del mismo rango, se evalúan de izquierda a derecha. Por ejemplo, en este caso, primero aplicamos la multiplicación y luego la división, y el resultado final es 2:
 
