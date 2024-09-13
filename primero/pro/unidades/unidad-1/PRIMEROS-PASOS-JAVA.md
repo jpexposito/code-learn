@@ -4,7 +4,7 @@
 
 ## Lenguaje de programación Java
 
-___Java es un lenguaje orientado a objetos__, creado a principios de los años 90 por Sun Microsystems . Cuenta con su propia máquina virtual para ejecutar los programas, por lo que las aplicaciones Java son independientes de la plataforma, y ​​podemos ejecutarlas tanto en Linux, Windows, Mac y otros sistemas. De hecho, Java fue concebido para programar varios tipos de dispositivos electrónicos, incluidos los electrodomésticos. Pero se hizo tan popular que rápidamente se centró en aplicaciones informáticas.
+___Java es un lenguaje orientado a objetos___, creado a principios de los años 90 por Sun Microsystems . Cuenta con su propia máquina virtual para ejecutar los programas, por lo que las aplicaciones Java son independientes de la plataforma, y ​​podemos ejecutarlas tanto en Linux, Windows, Mac y otros sistemas. De hecho, Java fue concebido para programar varios tipos de dispositivos electrónicos, incluidos los electrodomésticos. Pero se hizo tan popular que rápidamente se centró en aplicaciones informáticas.
 
 Con Java y algunos otros lenguajes de aquellos años, empezamos a decir adiós a esta “puerta abierta” al mundo de bajo nivel. El acceso a la memoria y al sistema está mucho más restringido, y el lenguaje aporta otras funcionalidades de alto nivel, como el recolector de basura , que se encarga de limpiar la memoria periódicamente, eliminando todo elemento que ya no se utiliza. Esta tarea era completamente manual en lenguajes anteriores (C o C++).
 

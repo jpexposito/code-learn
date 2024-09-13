@@ -29,7 +29,7 @@ Hay dos tipos principales de software:
 
 Hemos visto que los programas son conjuntos de instrucciones que se le proporcionan a un ordenador para que realice una tarea. Estas instrucciones están escritas en un lenguaje de programación de nuestra elección, y de esta manera creamos unos archivos de texto llamados código fuente , escritos en el lenguaje elegido.
 
-#### Tipos de lenguaje
+### Tipos de lenguaje
 
 Cuando queremos elegir un lenguaje de programación específico, distinguimos entre lenguajes de alto nivel (cercanos al lenguaje humano, y por tanto, más fáciles de entender por los programadores), y lenguajes de bajo nivel (cercanos al lenguaje máquina, y por tanto, más difíciles de entender por los programadores, pero más eficientes).
 
