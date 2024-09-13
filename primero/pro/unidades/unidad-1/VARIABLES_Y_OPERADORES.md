@@ -8,22 +8,22 @@ Las __variables son elementos esenciales en todo programa__, ya que nos permiten
 
 Siempre que queramos utilizar una variable debemos declararla . Este paso consiste en:
 
-- Especificar el_ ___tipo de dato___ _de la variable (entero, texto…)_
+- Especificar el_ ___tipo de dato___ _de la variable_ (entero, texto…).
 - Especificar el ___nombre___ de la variable, que también se conoce como ___identificador de variable___ .
 Por ejemplo, de esta manera declaramos una variable para almacenar valores enteros, usando la palabra intpara especificar el tipo de datos:
 
-    ```java
-    int myVariable;
-    ```
+```java
+int myVariable;
+```
 
 - Además, también podemos asignar un valor a la variable. Este paso se puede realizar cuando la declaramos o más adelante en el código:
 
-    ```java
-        int myVariable = 3;
-        int myOtherVariable;
-        myOtherVariable = 5;
-        ...
-    ````
+```java
+int myVariable = 3;
+int myOtherVariable;
+myOtherVariable = 5;
+...
+```
 
 Además, las variables pueden cambiar sus valores en oraciones posteriores.
 

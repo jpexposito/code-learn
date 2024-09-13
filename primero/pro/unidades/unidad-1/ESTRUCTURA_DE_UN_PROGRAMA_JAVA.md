@@ -30,7 +30,7 @@ A continuación, iniciamos otro fragmento de código llamado __main__ , que es e
 
 La estructura de este programa es muy similar a la del mismo programa escrito en __C#__: siempre necesitamos definir una clase, aunque solo necesitemos un mainbloque. Este mainbloque está escrito en minúsculas en Java.
 
-Además, cada clase pública debe tener el mismo nombre que el archivo fuente que la contiene, por lo que necesitamos almacenar el código fuente del ejemplo anterior en un archivo llamado ___MyClass.java__ _(los archivos fuente de Java tienen .javaextensión )_. Si queremos compilar este código, utilizamos javacherramientas de nuestra instalación de __JDK__. _Podemos hacerlo a través de cualquier IDE, como Geany, o IntelliJ, siempre y cuando tengamos Java JDK correctamente instalado_.
+Además, cada clase pública debe tener el mismo nombre que el archivo fuente que la contiene, por lo que necesitamos almacenar el código fuente del ejemplo anterior en un archivo llamado ___MyClass.java__ _(los archivos fuente de Java tienen extensión .java)_. Si queremos compilar este código, utilizamos javacherramientas de nuestra instalación de __JDK__. _Podemos hacerlo a través de cualquier IDE, como Geany, o IntelliJ, siempre y cuando tengamos Java JDK correctamente instalado_.
 
 ```java
 javac MyClass.java
