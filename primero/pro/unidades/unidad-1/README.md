@@ -1,7 +1,5 @@
 # <img src=../../../../images/computer.png width="40"> Code & Learn (Programación: Introducción a la Programación)
 
-# Elementos de un programa informático
-
 ## Elementos de un programa informático
 
 - Estructura de bloques
@@ -13,7 +11,6 @@
 ## Lenguajes de programación
 
 <img src="https://itmastersmag.com/wp-content/uploads/2021/01/shutterstock_1078387013-scaled.jpg" width="440px">
-
 
 Lenguaje de alto nivel → Lenguaje más parecido al humano
 
