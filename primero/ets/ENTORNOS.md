@@ -1,3 +1,4 @@
+<div align="justify">
 
 # Entornos integrados de desarrollo
 
@@ -210,7 +211,7 @@ Otras funciones importantes son:
 
 ### Ejemplos
 
-<img align="center" width="300" height="300" src="../images/ide.png" alt="Entornos de desarrollo integrado">
+<img align="center"  src="images/ides.png" alt="Entornos de desarrollo integrado">
 
 - Destinados principalmente a C++:
   - DevC++
@@ -233,10 +234,15 @@ Otras funciones importantes son:
 
   Herramienta adoptada por Java para la gestión de librerías.
 
+<img align="center"  src="images/vscode-maven.png" alt="vscode + maven">
+
+
+<!--
 ### Tareas asociadas
 
  - [Tarea 1: Instalación de OpenJDK 8](tareas/tarea-jdk.md)    
  - [Tarea 2: Instalación de Maven](tareas/tarea-maven.md)  
  - [Tarea 3: Instalación de los IDE´s especificados](tareas/tarea-ide.md) 
+-->
 
-
+</div>

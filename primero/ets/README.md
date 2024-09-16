@@ -7,6 +7,7 @@
 <div align="center">
 
 <img src=images/ide-software.png width="400">
+</div>
 
 ## Contenidos del módulo
 
