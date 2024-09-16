@@ -8,6 +8,16 @@
 
 <img src=images/ide-software.png width="400">
 
+## Contenidos del módulo
+
+[Unidad 1: Entornos integrados de desarrollo](ENTORNOS.md)
+<!--
+
+[Unidad 2: Elementos de desarrollo del software](ELEMENTOS/README.md)
+[Unidad 5: Documentación y optimización](DOCUMENTACION.md)
+
+-->
+
 </div>
 
 ## Licencia 📄

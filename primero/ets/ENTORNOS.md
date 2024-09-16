@@ -210,7 +210,7 @@ Otras funciones importantes son:
 
 ### Ejemplos
 
-<img align="center" width="300" height="300" src="../img/ide.png" alt="Entornos de desarrollo integrado">
+<img align="center" width="300" height="300" src="../images/ide.png" alt="Entornos de desarrollo integrado">
 
 - Destinados principalmente a C++:
   - DevC++
