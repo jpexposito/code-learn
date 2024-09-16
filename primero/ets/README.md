@@ -1,6 +1,6 @@
 <div align="justify">
 
-# <img src=../../../images/computer.png width="40"> Code & Learn (Entornos de Desarrollo)
+# <img src=../../images/computer.png width="40"> Code & Learn (Entornos de Desarrollo)
 
 ## Utilización de técnicas de programación segura
 
