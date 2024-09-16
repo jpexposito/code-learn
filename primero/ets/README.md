@@ -6,7 +6,7 @@
 
 <div align="center">
 
-<img src=images/server-security.png width="400">
+<img src=images/ide-software.png width="400">
 
 </div>
 
