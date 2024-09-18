@@ -115,6 +115,20 @@ public class EjecutarProceso {
 }
 ```
 
+## Transiciones entre estados
+
+| Estado Actual                    | Evento                                         | Nuevo Estado                  | Correspondencia en Java (`ProcessBuilder`)                 |
+|-----------------------------------------------------|------------------------------------------------|-------------------------------------------------|-------------------------------------------------------------|
+| **Nuevo** (**New**)                               | Asignación de recursos                        | **Listo** (**Ready**)                          | Creación del `ProcessBuilder`                             |
+| **Listo** (**Ready**)                             | Asignación de CPU por el planificador          | **En ejecución** (**Running**)                 | Llamada a `processBuilder.start()`                          |
+| **En ejecución** (**Running**)                    | Espera de un evento externo                   | **Bloqueado** (**Blocked/Waiting**)             | Uso de `process.waitFor()` para esperar la terminación     |
+| **En ejecución** (**Running**)                    | Interrupción para dar la CPU a otro proceso   | **Listo** (**Ready**)                          | `processBuilder.redirectOutput()` para redirigir salida y controlar el proceso |
+| **Bloqueado** (**Blocked/Waiting**)                | Ocurre el evento esperado                     | **Listo** (**Ready**)                          | `process.waitFor()` para esperar eventos o resultados      |
+| **En ejecución** (**Running**)                    | Terminación del proceso                       | **Terminado** (**Terminated/Exit**)            | `process.waitFor()` devuelve el código de salida           |
+| **Listo** o **Bloqueado** (**Ready** or **Blocked/Waiting**) | Movimiento a memoria secundaria               | **Suspendido** (**Suspended**)                 | Java no maneja explícitamente el estado suspendido; el proceso debe ser reiniciado si es necesario |
+| **Suspendido** (**Suspended**)                    | Regreso a memoria principal                   | **Listo** (**Ready**) o **Bloqueado** (**Blocked/Waiting**) | Java no maneja explícitamente el regreso a memoria; el proceso debe ser reiniciado si es necesario |
+
+
 #### Modificar el Comando en Tiempo de Ejecución
 
 Puedes modificar el comando dependiendo de las condiciones del sistema, por ejemplo, adaptando el comando según el sistema operativo.

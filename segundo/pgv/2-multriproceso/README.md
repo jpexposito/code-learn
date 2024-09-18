@@ -48,9 +48,7 @@ Usar métodos para la sincronización entre procesos y subprocesos
 6. **Suspendido (Suspended)**:  
    El proceso ha sido trasladado a la memoria secundaria, lo que implica que ha sido pausado temporalmente para liberar recursos.
 
-## Transiciones entre estados:
-
-# Transiciones entre Estados de un Proceso
+## Transiciones entre estados
 
 | Estado Actual                      | Evento                                         | Nuevo Estado                   |
 |-----------------------------------------------------|------------------------------------------------|-------------------------------------------------|
