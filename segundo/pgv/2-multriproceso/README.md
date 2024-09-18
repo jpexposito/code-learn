@@ -26,6 +26,49 @@ Usar métodos para la sincronización entre procesos y subprocesos
 - Aprender la sintaxis y uso del comando curl para probar API REST desde un programa
 - Crear programas que ejecuten tareas en paralelo.
 
+## Estados de un proceso
+
+# Estados de un Proceso
+
+1. **Nuevo (New)**:  
+   El proceso ha sido creado, pero aún no está listo para ser ejecutado. Está en la cola de nuevos procesos.
+
+2. **Listo (Ready)**:  
+   El proceso está en la memoria principal, esperando a ser asignado a la CPU para ejecutarse.
+
+3. **En ejecución (Running)**:  
+   El proceso está siendo ejecutado por la CPU. Solo un proceso puede estar en este estado por CPU en un momento dado.
+
+4. **Bloqueado/Espera (Blocked/Waiting)**:  
+   El proceso no puede continuar hasta que ocurra algún evento externo, como la finalización de una operación de E/S o la recepción de datos.
+
+5. **Terminado (Terminated/Exit)**:  
+   El proceso ha finalizado su ejecución, ya sea de manera normal o debido a algún error.
+
+6. **Suspendido (Suspended)**:  
+   El proceso ha sido trasladado a la memoria secundaria, lo que implica que ha sido pausado temporalmente para liberar recursos.
+
+## Transiciones entre estados:
+
+# Transiciones entre Estados de un Proceso
+
+| Estado Actual (Español) | Estado Actual (Inglés) | Evento                            | Nuevo Estado (Español) | Nuevo Estado (Inglés) |
+|-------------------------|-------------------------|-----------------------------------|------------------------|-----------------------|
+| **Nuevo**               | **New**                 | Asignación de recursos             | **Listo**              | **Ready**             |
+| **Listo**               | **Ready**               | Asignación de CPU por el planificador | **En ejecución**     | **Running**           |
+| **En ejecución**        | **Running**             | Espera de un evento externo       | **Bloqueado**          | **Blocked/Waiting**   |
+| **En ejecución**        | **Running**             | Interrupción para dar la CPU a otro proceso | **Listo**            | **Ready**             |
+| **Bloqueado**           | **Blocked/Waiting**     | Ocurre el evento esperado          | **Listo**              | **Ready**             |
+| **En ejecución**        | **Running**             | Terminación del proceso            | **Terminado**          | **Terminated/Exit**   |
+| **Listo** o **Bloqueado** | **Ready** or **Blocked/Waiting** | Movimiento a memoria secundaria  | **Suspendido**         | **Suspended**         |
+| **Suspendido**          | **Suspended**           | Regreso a memoria principal        | **Listo** o **Bloqueado** | **Ready** or **Blocked/Waiting** |
+
+
+
+
+
+
+
 [Procesos en Java](PROCESOS-JAVA.md)
 
 ## Licencia 📄

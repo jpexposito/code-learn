@@ -82,6 +82,197 @@ if (isWindows) {
 }
 ```
 
+## ProcessBuilder y Process
+
+Java proporciona las clases ___ProcessBuilder y Process__ para gestionar procesos del sistema operativo desde aplicaciones Java. Estas clases permiten ejecutar _programas externos, capturar su salida, gestionar su entrada y modificar su comportamiento_.
+
+### Preparación y Configuración de un Proceso
+
+#### Crear un Proceso con ProcessBuilder
+
+Para ejecutar un comando del sistema operativo, puedes usar ProcessBuilder. Aquí un ejemplo que ejecuta el comando ping desde Java:
+
+```java
+import java.io.IOException;
+
+public class EjecutarProceso {
+    public static void main(String[] args) {
+        // Crear un nuevo proceso que ejecuta el comando 'ping'
+        ProcessBuilder pb = new ProcessBuilder("ping", "-c", "3", "google.com");
+
+        try {
+            // Iniciar el proceso
+            Process proceso = pb.start();
+            
+            // Esperar a que el proceso termine
+            int exitCode = proceso.waitFor();
+            System.out.println("Código de salida: " + exitCode);
+
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+#### Modificar el Comando en Tiempo de Ejecución
+
+Puedes modificar el comando dependiendo de las condiciones del sistema, por ejemplo, adaptando el comando según el sistema operativo.
+
+```java
+import java.io.IOException;
+
+public class ModificarComando {
+    public static void main(String[] args) {
+        String sistemaOperativo = System.getProperty("os.name").toLowerCase();
+        //DEBE DE EXISTIR LA VARIABLE DE ENTORNO
+        ProcessBuilder pb;
+
+        // Modificar el comando según el sistema operativo
+        if (sistemaOperativo.contains("win")) {
+            pb = new ProcessBuilder("cmd.exe", "/c", "dir"); // Comando para Windows
+        } else {
+            pb = new ProcessBuilder("ls", "-la"); // Comando para Linux/Mac
+        }
+
+        try {
+            Process proceso = pb.start();
+            int exitCode = proceso.waitFor();
+            System.out.println("Código de salida: " + exitCode);
+
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+#### Configuraciones Adicionales de un Proceso
+
+___ProcessBuilder___ permite configurar aspectos adicionales, como el directorio de trabajo o las variables de entorno del proceso.
+
+```java
+import java.io.IOException;
+import java.util.Map;
+
+public class ConfigurarProceso {
+    public static void main(String[] args) {
+        ProcessBuilder pb = new ProcessBuilder("printenv"); // Comando para listar variables de entorno
+
+        // Establecer un directorio de trabajo
+        pb.directory(new java.io.File("/tmp"));
+
+        // Modificar variables de entorno
+        Map<String, String> env = pb.environment();
+        env.put("MY_VAR", "12345");
+
+        try {
+            Process proceso = pb.start();
+            int exitCode = proceso.waitFor();
+            System.out.println("Código de salida: " + exitCode);
+
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Acceso al Proceso una Vez en Ejecución
+
+#### Capturar la Salida del Proceso
+
+Puedes capturar la salida estándar ___(stdout)___ del proceso que has lanzado con ___ProcessBuilder___.
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class CapturarSalidaProceso {
+    public static void main(String[] args) {
+        ProcessBuilder pb = new ProcessBuilder("ping", "-c", "3", "google.com");
+
+        try {
+            Process proceso = pb.start();
+
+            // Capturar la salida del proceso
+            BufferedReader reader = new BufferedReader(new InputStreamReader(proceso.getInputStream()));
+            String linea;
+            while ((linea = reader.readLine()) != null) {
+                System.out.println(linea);
+            }
+
+            // Esperar a que termine el proceso
+            int exitCode = proceso.waitFor();
+            System.out.println("Código de salida: " + exitCode);
+
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+#### Lanzar una Clase Java como Proceso Desde Otra Clase Java (IMP)
+
+Es posible ejecutar una clase Java desde otra clase Java utilizando ___ProcessBuilder___.
+
+___Primero___, creamos una clase simple llamada ___ClaseSecundaria.java___:
+
+```java
+public class ClaseSecundaria {
+    public static void main(String[] args) {
+        System.out.println("Hola desde ClaseSecundaria!");
+    }
+}
+```
+
+Luego, desde otra clase, puedes ejecutar ClaseSecundaria como un proceso:
+
+```java
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+public class EjecutarClaseJava {
+    public static void main(String[] args) {
+        // Comando para ejecutar una clase Java desde otra clase Java
+        ProcessBuilder pb = new ProcessBuilder("java", "ClaseSecundaria");
+
+        // Establecer el directorio donde se encuentra la clase compilada
+        pb.directory(new java.io.File("./out/production/tu-proyecto"));
+
+        try {
+            Process proceso = pb.start();
+
+            // Capturar la salida de la clase ejecutada
+            BufferedReader reader = new BufferedReader(new InputStreamReader(proceso.getInputStream()));
+            String linea;
+            while ((linea = reader.readLine()) != null) {
+                System.out.println(linea);
+            }
+
+            // Esperar a que termine el proceso
+            int exitCode = proceso.waitFor();
+            System.out.println("Código de salida: " + exitCode);
+
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+Si ejecutamos el código deberiamos de obtener:
+
+```code
+Hola desde ClaseSecundaria!
+Código de salida: 0
+```
+
+> ___Este ejemplo muestra cómo puedes ejecutar la clase ClaseSecundaria como un proceso desde la clase EjecutarClaseJava, capturando su salida en el proceso padre___.
+
 ## Licencia 📄
 
 Este proyecto está bajo la Licencia (Apache 2.0) - mira el archivo [LICENSE.md](../../../LICENSE) para detalles
