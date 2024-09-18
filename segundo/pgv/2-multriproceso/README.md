@@ -52,22 +52,16 @@ Usar métodos para la sincronización entre procesos y subprocesos
 
 # Transiciones entre Estados de un Proceso
 
-| Estado Actual (Español) | Estado Actual (Inglés) | Evento                            | Nuevo Estado (Español) | Nuevo Estado (Inglés) |
-|-------------------------|-------------------------|-----------------------------------|------------------------|-----------------------|
-| **Nuevo**               | **New**                 | Asignación de recursos             | **Listo**              | **Ready**             |
-| **Listo**               | **Ready**               | Asignación de CPU por el planificador | **En ejecución**     | **Running**           |
-| **En ejecución**        | **Running**             | Espera de un evento externo       | **Bloqueado**          | **Blocked/Waiting**   |
-| **En ejecución**        | **Running**             | Interrupción para dar la CPU a otro proceso | **Listo**            | **Ready**             |
-| **Bloqueado**           | **Blocked/Waiting**     | Ocurre el evento esperado          | **Listo**              | **Ready**             |
-| **En ejecución**        | **Running**             | Terminación del proceso            | **Terminado**          | **Terminated/Exit**   |
-| **Listo** o **Bloqueado** | **Ready** or **Blocked/Waiting** | Movimiento a memoria secundaria  | **Suspendido**         | **Suspended**         |
-| **Suspendido**          | **Suspended**           | Regreso a memoria principal        | **Listo** o **Bloqueado** | **Ready** or **Blocked/Waiting** |
-
-
-
-
-
-
+| Estado Actual                      | Evento                                         | Nuevo Estado                   |
+|-----------------------------------------------------|------------------------------------------------|-------------------------------------------------|
+| **Nuevo** (**New**)                               | Asignación de recursos                        | **Listo** (**Ready**)                          |
+| **Listo** (**Ready**)                             | Asignación de CPU por el planificador          | **En ejecución** (**Running**)                 |
+| **En ejecución** (**Running**)                    | Espera de un evento externo                   | **Bloqueado** (**Blocked/Waiting**)             |
+| **En ejecución** (**Running**)                    | Interrupción para dar la CPU a otro proceso   | **Listo** (**Ready**)                          |
+| **Bloqueado** (**Blocked/Waiting**)                | Ocurre el evento esperado                     | **Listo** (**Ready**)                          |
+| **En ejecución** (**Running**)                    | Terminación del proceso                       | **Terminado** (**Terminated/Exit**)            |
+| **Listo** o **Bloqueado** (**Ready** or **Blocked/Waiting**) | Movimiento a memoria secundaria               | **Suspendido** (**Suspended**)                 |
+| **Suspendido** (**Suspended**)                    | Regreso a memoria principal                   | **Listo** (**Ready**) o **Bloqueado** (**Blocked/Waiting**) |
 
 [Procesos en Java](PROCESOS-JAVA.md)
 
