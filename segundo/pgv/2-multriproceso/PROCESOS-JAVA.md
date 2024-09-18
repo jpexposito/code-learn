@@ -19,7 +19,7 @@ Cada aplicación en Java tiene acceso a una única instancia de _java.lang.Runti
 
 > Patrones de diseño: Singleton
 > 
-> __¿Qué son los patrones de diseño? ¿Qué es y para qué se usa el patrón de diseño singleton?
+> __¿Qué son los patrones de diseño? ¿Qué es y para qué se usa el patrón de diseño singleton?__
 >
 > Investiga cómo realizar una clase que siga el patrón de diseño singleton.
 > [Diseño basado en patrones](https://refactoring.guru/es/design-patterns/java).
@@ -36,18 +36,10 @@ Veamos un ejemplo sencillo de uso de este método
 public static void main(String[] args) throws IOException {
     // Launch notepad app
     Runtime.getRuntime().exec("notepad.exe");
-
-    // This way always works
-    // String separator = System.getProperty("file.separator");
-    // Runtime.getRuntime()
-    //    .exec("c:"+separator+"windows"+separator+"notepad.exe");
-
-    // This way used to work (UNIX style paths)
-    // Runtime.getRuntime().exec("c:/windows/notepad.exe");
 }
 ```
 
-Se puede observar que en el parámetro que pasamos al método exec indicamos el programa que queremos ejecutar. En este caso, como el notepad se encuentra en el PATH del sistema, no es necesario indicar la ruta donde se encuentra el programa. En otro caso, sí tendríamos que hacerlo.
+Se puede observar que en el parámetro que pasamos al método exec __indicamos el programa que queremos ejecutar__. En este caso, como el __notepad__ se encuentra en el __PATH__ del sistema, no es necesario indicar la ruta donde se encuentra el programa. _En otro caso, sí tendríamos que hacerlo_.
 
 ### Propiedades del sistema y comandos del sistema
 
