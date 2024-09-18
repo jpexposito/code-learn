@@ -287,6 +287,14 @@ Código de salida: 0
 
 > ___Este ejemplo muestra cómo puedes ejecutar la clase ClaseSecundaria como un proceso desde la clase EjecutarClaseJava, capturando su salida en el proceso padre___.
 
+## Tarea Propuesta
+
+Realiza un programa que realice las siguinetes tareas:
+- Una clase que realice la moficiación de un fichero que:
+  - Lo cree si no existe.
+  - Añada un un mensaje que se le pasa como parámetro.
+- Crea una clase padre que lance un número determinado de procesos, y que pasen como mensaje el proceso que es.
+
 ## Licencia 📄
 
 Este proyecto está bajo la Licencia (Apache 2.0) - mira el archivo [LICENSE.md](../../../LICENSE) para detalles
