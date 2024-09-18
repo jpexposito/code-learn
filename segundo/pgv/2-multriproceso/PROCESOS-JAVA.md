@@ -17,7 +17,7 @@ La clase __java.lang.Runtime__ se usa principalmente para interactuar con el _JR
 
 Cada aplicación en Java tiene acceso a una única instancia de _java.lang.Runtime_ a través del método __Runtime.getRuntime()__ que devuelve la instancia singleton de la clase __Runtime__.
 
-> Patrones de diseño: Singleton
+> Patrones de diseño: [Singleton](PATRON-SINGLETON.md)
 > 
 > __¿Qué son los patrones de diseño? ¿Qué es y para qué se usa el patrón de diseño singleton?__
 >
