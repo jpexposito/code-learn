@@ -1,6 +1,6 @@
 <div align="justify">
 
-# Tipos de Datos en Java
+# <img src=../../../../images/computer.png width="40"> Code & Learn (Tipos de Datos en Java)
 
 __Java__ es un __lenguaje de programación fuertemente tipado__, lo que significa que c__ada variable y expresión tiene un tipo de datos asociado__. Los tipos de datos en Java se pueden clasificar en dos categorías principales: primitivos y de referencia.
 
@@ -49,7 +49,7 @@ En Java, es posible convertir un tipo de dato a otro mediante casting. Existen d
         int entero = 5;
         float flotante = entero; // Casting implícito
     ```
-    
+    >
     > __Nota__:En este ejemplo, se realiza un casting implícito al convertir un __int__ en un __float__. ___No hay pérdida de datos en este caso___.
 
 - **Casting Explícito:**
@@ -59,7 +59,7 @@ En Java, es posible convertir un tipo de dato a otro mediante casting. Existen d
     double numeroDoble = 123.456;
     int numeroEntero = (int) numeroDoble; // Casting explícito
     ```
-    
+    >
     > __Nota__: En este caso, se realiza un casting explícito para convertir un __double__ en un __int__. ___Existe la posibilidad de pérdida de datos, ya que la parte decimal se trunca___.
 
 - **Casting entre Clases**
@@ -75,10 +75,10 @@ En Java, es posible convertir un tipo de dato a otro mediante casting. Existen d
 
     >__Nota__: En este ejemplo, se muestra cómo realizar __casting entre clases relacionadas por herencia__. El casting explícito se utiliza para indicar al compilador que estás consciente de la relación entre las clases.
 
-
-
 Es crucial entender los tipos de datos en Java y cómo se manejan las conversiones para evitar errores y garantizar un código robusto.
 
+## Licencia 📄
 
+Este proyecto está bajo la Licencia (Apache 2.0) - mira el archivo [LICENSE.md](../../../../LICENSE) para detalles
 
 </div>

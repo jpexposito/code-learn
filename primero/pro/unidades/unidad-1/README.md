@@ -165,6 +165,7 @@ Antes de empezar con Java, es necesario tener claros algunos conceptos sobre los
 
 - [Programas, lenguajes y compiladores](PROGRAMAS-LENGUAJES.md).
 - [Primeros pasos en java](PRIMEROS-PASOS-JAVA.md)
+- [Estructura de un programa en java](ESTRUCTURA-DE-UN-PROGRAMA-JAVA.md)
 
 
 ## Licencia 📄

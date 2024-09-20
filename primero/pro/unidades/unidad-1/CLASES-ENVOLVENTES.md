@@ -1,6 +1,6 @@
 <div align="justify">
 
-# Clases envolventes
+# <img src=../../../../images/computer.png width="40"> Code & Learn (Clases envolventes)
 
 Para cada uno de los tipos de datos primitivos existen una clase de envoltura asociada:
 
@@ -35,7 +35,6 @@ public class PruebaDatosPrimitivos {
 		System.out.println(Float.MIN_VALUE + " " + Float.MAX_VALUE);
 		System.out.println("Máximo y mínimo valor para un tipo de dato double:");
 		System.out.println(Double.MIN_VALUE + " " + Double.MAX_VALUE);
-
 	}
 
 }
@@ -47,7 +46,7 @@ Las conversiones entre los tipos primitivos y sus clases envolventes son automá
 
 **Unboxing:** Convertir un objeto de una clase Wrapper en su tipo primitivo.
 
-![imagen10](/Imagenes/imagen10.png)
+![imagen10](images/imagen10.png)
 
 ## Clase Integer
 
@@ -101,5 +100,9 @@ Métodos estáticos | char car=’u’;
 System.out.println(Character.toUpperCase(car)); |
 | Character valueOf(char c) | Método estático
 Devuelve un Character a partir de un char | Character m=Character.valueOf(’a’); |
+
+## Licencia 📄
+
+Este proyecto está bajo la Licencia (Apache 2.0) - mira el archivo [LICENSE.md](../../../../LICENSE) para detalles
 
 </div>
