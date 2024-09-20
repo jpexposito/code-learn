@@ -123,7 +123,7 @@ String text = "Hello" + (3 + 2);
 
 A veces necesitamos convertir un valor de un tipo en otro diferente. La forma en que realizamos este paso depende de los tipos involucrados.
 
-### Algunas conversiones básicas. 
+### Algunas conversiones básicas
 
 #### Conversión de tipos
 
@@ -207,5 +207,44 @@ String text = String.valueOf(number);
 > Define otra variable byte para almacenar la suma de ambas edades (es posible que tengas que convertir el resultado a un tipo de variable)
 > - Define una floatvariable para almacenar el promedio de estas edades, incluidos los dígitos fraccionarios.
 > - Imprime el mensaje __“El promedio de edad es” seguido del promedio calculado en el paso anterior__
+
+### Tipos Booleanos
+
+Java proporciona el tipo `boolean` para manejar valores lógicos, que solo pueden ser `true` o `false`. Estos valores booleanos suelen ser utilizados en condiciones y ciclos de control de flujo.
+
+#### Declaración y Asignación de `boolean`
+
+```java
+boolean esJavaDivertido = true;
+boolean esMayor = 10 > 5;  // true
+boolean esIgual = (5 == 5);  // true
+```
+
+#### Ejemplos de Operaciones con `boolean`
+
+##### Comparaciones
+
+El resultado de las comparaciones siempre será un valor booleano (`true` o `false`).
+
+```java
+boolean esMayor = 20 > 15;      // true
+boolean esMenor = 10 < 5;       // false
+boolean esIgual = 10 == 10;     // true
+boolean esDistinto = 5 != 10;   // true
+```
+
+#### Operadores Lógicos
+
+Los operadores lógicos permiten combinar múltiples condiciones.
+
+- __AND (&&)__: Verdadero si ambas condiciones son verdaderas.
+- __OR (||)__: Verdadero si al menos una de las condiciones es verdadera.
+- __NOT (!)__: Invierte el valor lógico.
+
+```java
+boolean resultadoAnd = (5 > 3) && (8 > 6);   // true
+boolean resultadoOr = (5 > 10) || (8 > 6);   // true
+boolean resultadoNot = !(5 > 3);             // false
+```
 
 </div>
