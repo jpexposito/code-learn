@@ -2,7 +2,7 @@
 
 # <img src=../../../../images/computer.png width="40"> Code & Learn (Tipos de Datos en Java)
 
-__Java__ es un __lenguaje de programación fuertemente tipado__, lo que significa que c__ada variable y expresión tiene un tipo de datos asociado__. Los tipos de datos en Java se pueden clasificar en dos categorías principales: primitivos y de referencia.
+__Java__ es un __lenguaje de programación fuertemente tipado__, lo que significa que __cada variable y expresión tiene un tipo de datos asociado__. Los tipos de datos en Java se pueden clasificar en dos categorías principales: primitivos y de referencia.
 
 ## Tipos de Datos Primitivos
 
