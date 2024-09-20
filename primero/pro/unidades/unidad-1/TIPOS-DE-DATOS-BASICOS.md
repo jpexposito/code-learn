@@ -22,13 +22,13 @@ Como hemos dicho antes, podemos elegir entre 4 tipos de datos diferentes para re
 | int           | 4               | -2.147.483.648 a 2.147.483.647          |
 | long          | 8               | hasta números de 18-19 dígitos         |
 
-Por ejemplo, si queremos gestionar la _edad de una persona_, podríamos utilizar una intvariable, pero desperdiciaríamos memoria, ya que esta edad suele ser _inferior a 100, y sólo necesitaríamos un único byte para almacenarla. byte En su lugar, podríamos utilizar una variable:
+Por ejemplo, si queremos gestionar la _edad de una persona_, podríamos utilizar una variable __int__, pero desperdiciaríamos memoria, ya que esta edad suele ser _inferior a 100, y sólo necesitaríamos un único byte para almacenarla. byte En su lugar, podríamos utilizar una variable:
 
 ```java
 byte age = 34;
 ```
 
-Sin embargo, si queremos almacenar el precio de un objeto, debemos utilizar una shorto incluso una intvariable:
+Sin embargo, si queremos almacenar el precio de un objeto, debemos utilizar una variable __short__ o incluso una variable __int__, dado que permite valores mayores:
 
 ```java
 short price = 4200;
@@ -38,13 +38,17 @@ int higherPrice = 2223424;
 ### Tipos de datos reales
 
 Si queremos trabajar con números reales, Java proporciona dos tipos de datos diferentes, cada uno con su propio espacio de memoria y rango:
-- __float__ El tipo de datos necesita 4 bytes de memoria y nos permite gestionar números con hasta 6 o 7 números significativos. Por ejemplo, si queremos almacenar el valor PI en una variable flotante con solo 4 o 5 dígitos fraccionarios (es decir, 3.14159 ), podemos usar una floatvariable.
+- __float__ El tipo de datos necesita 4 bytes de memoria y nos permite gestionar números con hasta 6 o 7 números significativos. Por ejemplo, si queremos almacenar el valor PI en una variable flotante con solo 4 o 5 dígitos fraccionarios (es decir, 3.14159 ), podemos usar una variable float.
+
+```java
 float pi = 3.14159;
-doubleEste tipo de datos necesita 8 bytes de memoria y nos permite manejar números con hasta 15 números significativos. De esta manera podemos almacenar más dígitos fraccionarios, si queremos:
-    
-    ```java
-    double pi = 3.14159265359;
-    ```
+```
+
+- __double__. Este tipo de datos necesita 8 bytes de memoria y nos permite manejar números con hasta 15 números significativos. De esta manera podemos almacenar más dígitos fraccionarios, si queremos:
+
+```java
+double pi = 3.14159265359;
+```
 
 En cuanto a float, las variables, si queremos asignarles un valor directo, debemos especificar un __f__ símbolo al final de dicho valor. Por lo tanto, el ejemplo dado anteriormente debe escribirse así (de lo contrario, obtendremos un error de compilación):
 
@@ -70,7 +74,7 @@ En cuanto al tipo __char__, tiene una longitud de 2 bytes, por lo que podemos re
 char symbol = 'a';
 ```
 
-Si queremos trabajar con textos más largos, entonces utilizamos Stringvariables, especificando el texto entre comillas dobles:
+Si queremos trabajar con textos más largos, entonces utilizamos variables __String__, especificando el texto entre comillas dobles:
 
 ```java
 String text = "Hello world";
@@ -148,7 +152,7 @@ byte value = 3;
 int number = value;
 ```
 
-La conversión de tipos puede ser útil, por ejemplo, para convertir divisiones de números enteros en números reales. Este ejemplo divide dos valores enteros, pero, como estamos convirtiendo uno de ellos en float, el resultado final será un número real, con los dígitos fraccionarios correspondientes, y se puede almacenar en una floatvariable:
+La conversión de tipos puede ser útil, por ejemplo, para convertir divisiones de números enteros en números reales. Este ejemplo divide dos valores enteros, pero, como estamos convirtiendo uno de ellos en __float__, el resultado final será un número real, con los dígitos fraccionarios correspondientes, y se puede almacenar en una variable __float__:
 
 ```java
 float result = (float) 3 / 2;
@@ -205,7 +209,7 @@ String text = String.valueOf(number);
 >
 > - Define dos variables byte para almacenar tu edad y la edad de un amigo.
 > Define otra variable byte para almacenar la suma de ambas edades (es posible que tengas que convertir el resultado a un tipo de variable)
-> - Define una floatvariable para almacenar el promedio de estas edades, incluidos los dígitos fraccionarios.
+> - Define una variable __float__ para almacenar el promedio de estas edades, incluidos los dígitos fraccionarios.
 > - Imprime el mensaje __“El promedio de edad es” seguido del promedio calculado en el paso anterior__
 
 ### Tipos Booleanos
