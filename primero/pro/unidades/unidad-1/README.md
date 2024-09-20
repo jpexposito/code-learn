@@ -166,6 +166,14 @@ Antes de empezar con Java, es necesario tener claros algunos conceptos sobre los
 - [Programas, lenguajes y compiladores](PROGRAMAS-LENGUAJES.md).
 - [Primeros pasos en java](PRIMEROS-PASOS-JAVA.md)
 - [Estructura de un programa en java](ESTRUCTURA-DE-UN-PROGRAMA-JAVA.md)
+- [Variables y operadores](VARIABLES-Y-OPERADORES.md).
+- [Tipos de datos básicos](TIPOS-DE-DATOS-BASICOS.md).
+- [Entrada y salida básicas](ENTRADA-Y-SALIDA-BASICAS.md).
+- [Conversores de Tipo](CONVERSORES-DE-TIPO.md)
+- [Clases envolventes](CLASES-ENVOLVENTES.md)
+- [Otros tipos de Elementos](OTROS-TIPOS-DE-ELEMENTOS.md)
+- [Operadores con Expresiones](OPERADORES-CON-EXPRESIONES.md)
+- [Cómo escribir código limpio](COMO-ESCRIBIR-CODIGO-LIMPIO.md).
 
 
 ## Licencia 📄
