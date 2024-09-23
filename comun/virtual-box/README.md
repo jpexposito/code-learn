@@ -64,4 +64,36 @@ Si tienes un archivo de disco duro virtual ___(.vdi, .vmdk, .vhd)___, deberás c
 Navega y selecciona tu archivo .vdi, .vmdk, o .vhd, y haz clic en Crear.
 Ahora, la máquina virtual debería estar lista para ejecutarse.
 
+## Exportar máquinas Virtuales
+
+1. Seleccionar la máquina virtual.
+En la ventana principal de VirtualBox, selecciona la máquina virtual que deseas exportar.
+
+2. Iniciar el proceso de exportación. Con la máquina seleccionada, ve al menú superior y selecciona:
+
+    ```code
+    Archivo → Exportar servicio virtualizado...
+    ```
+
+3. Seleccionar la máquina a exportar.
+Se abrirá una ventana donde podrás seleccionar la máquina que deseas exportar.
+Verifica que la máquina seleccionada sea la correcta y haz clic en Siguiente.
+
+4. Configurar el formato de exportación.
+A continuación, se te pedirá que elijas un formato de exportación. Generalmente, se utiliza el formato ___Open Virtualization Format 1.0 (OVA)___.
+Define la ubicación donde se guardará el archivo exportado _(usualmente con extensión .ova)_.
+Haz clic en ___Siguiente___.
+
+5. Configurar las opciones de exportación
+En la pantalla siguiente, puedes ajustar las opciones de exportación, como la versión de VirtualBox o los parámetros de la máquina.
+Normalmente, puedes dejar las opciones por defecto a menos que necesites algo específico.
+Haz clic en Exportar para continuar.
+
+6. Esperar la exportación
+VirtualBox comenzará el proceso de exportación. Esto puede tardar varios minutos, dependiendo del tamaño de la máquina virtual.
+Una barra de progreso te mostrará el estado de la exportación.
+
+7. Archivo exportado
+Una vez finalizada la exportación, el archivo .ova estará en la ubicación que seleccionaste. Este archivo contiene toda la configuración y los discos de la máquina virtual, listo para ser importado en otro sistema.
+
 </div>
