@@ -296,6 +296,8 @@ Realiza un programa que realice lo siguiente:
   - Añada una línea al final del fichero (__soy una línea del proceso(n)__).
 - Crea una clase padre (__ClaseA__) que lance un número determinado de procesos, y que pasen como mensaje el proceso que es.
 
+> [Métodos importantes y ejemplos](METODOS-IMPORTANTES.md)
+
 ## Licencia 📄
 
 Este proyecto está bajo la Licencia (Apache 2.0) - mira el archivo [LICENSE.md](../../../LICENSE) para detalles

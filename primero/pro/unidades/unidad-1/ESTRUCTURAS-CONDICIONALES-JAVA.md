@@ -17,7 +17,11 @@ if (condicion) {
 }
 ```
 
-El uso de llaves es opcional cuando solo hay una línea de código, pero puede generar errores si se olvida añadirlas al añadir más líneas.
+__Un ejemplo visual__:
+
+<img src="https://martipatgra.github.io/programacionJava/img/ifstatement.png" width="300">
+
+El __uso de llaves es opcional cuando solo hay una línea de código, pero puede generar errores si se olvida añadirlas al añadir más líneas__.
 
 ```java
 if (temperatura > 25) {
@@ -53,6 +57,10 @@ if (condicion) {
 }
 ```
 
+__Un ejemplo visual__:
+
+<img src="https://martipatgra.github.io/programacionJava/img/ud2ifelse.png" width="300">
+
 ### Ejemplo de uso
 
 ```java
@@ -76,6 +84,10 @@ if (condicion1) {
     // Código si ninguna de las condiciones anteriores es verdadera
 }
 ```
+
+__Un ejemplo visual__:
+
+<img src="https://martipatgra.github.io/programacionJava/img/ud2ifelseif.png" width="300">
 
 ### Ejemplo de uso
 
