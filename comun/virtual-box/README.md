@@ -5,13 +5,13 @@
 ## VirtualBox
 
 <div align="center">
-
 <img src=images/virtualBox.png width="400">
 </div>
 
 VirtualBox es un software de virtualización de código abierto desarrollado por Oracle, que permite ejecutar múltiples sistemas operativos (SO) de manera simultánea en una única máquina física. Es una herramienta multiplataforma, disponible para sistemas operativos como __Windows, macOS, Linux y Solaris__, y permite ejecutar una amplia variedad de sistemas operativos como máquinas virtuales (VM), tales como __Windows, Linux, macOS, FreeBSD y más__.
 
 Principales características de VirtualBox:
+
 - __Multiplataforma__: VirtualBox puede instalarse en diferentes sistemas operativos anfitriones (host) y ejecutar casi cualquier sistema operativo como invitado (guest). Esto lo hace ideal para desarrolladores y profesionales de TI que necesitan probar software en diferentes plataformas.
 
 - __Soporte para múltiples sistemas operativos__: VirtualBox soporta una gran cantidad de sistemas operativos, incluidos Windows, Linux (en varias distribuciones), macOS (con ciertas limitaciones), FreeBSD, y otros. Esto permite crear entornos de pruebas o entornos de desarrollo aislados para trabajar con distintos SO sin cambiar la configuración principal del equipo.
@@ -26,6 +26,42 @@ Principales características de VirtualBox:
 
 - __Gestión de recursos__: VirtualBox ofrece una interfaz para gestionar los recursos asignados a cada máquina virtual, como CPU, RAM, almacenamiento, y red. Esto permite un control detallado sobre cómo las máquinas virtuales afectan el rendimiento del sistema host.
 
+> __VirtualBox__ es una potente herramienta de virtualización que permite gestionar y ejecutar múltiples sistemas operativos en un solo equipo físico, facilitando tareas como pruebas de software, educación y configuración de entornos de desarrollo. Además, al ser de código abierto y gratuito, es una opción accesible para una amplia gama de usuarios.
+
+## Importar máquinas virtuales
+
+Asegúrate de tener un archivo de máquina virtual. Estos suelen tener las siguientes extensiones:
+
+- __.ova o .ovf__ (archivos de exportación de VirtualBox).
+- __.vdi, .vmdk, o .vhd__ (archivos de discos duros virtuales).
+
+### Importar archivo OVA/OVF
+
+Si el archivo es de tipo .ova o .ovf:
+
+- En VirtualBox, ve al menú principal y selecciona Archivo → Importar servicio virtualizado....
+- Selecciona el archivo .ova o .ovf que deseas importar y haz clic en Siguiente.
+
+<div align="center">
+<img src=images/virtualBox2.png width="400">
 </div>
+
+- Revisa la configuración de la máquina virtual que aparece en la pantalla de configuración. Ajusta si es necesario (memoria, CPU, etc.).
+- Haz clic en Importar para iniciar el proceso. Esto puede tardar dependiendo del tamaño de la máquina virtual.
+
+<div align="center">
+<img src=images/virtualBox3.png width="200">
+</div>
+
+### Añadir un disco virtual (VDI, VMDK, VHD)
+
+Si tienes un archivo de disco duro virtual ___(.vdi, .vmdk, .vhd)___, deberás crear manualmente una máquina virtual y agregar el disco existente:
+
+- Haz clic en Nueva en el menú principal de VirtualBox.
+- Asigna un nombre, elige el tipo y la versión del sistema operativo que vas a usar.
+- Configura la cantidad de memoria RAM para la máquina virtual.
+- En la opción Disco duro, selecciona Usar un archivo de disco duro existente.
+Navega y selecciona tu archivo .vdi, .vmdk, o .vhd, y haz clic en Crear.
+Ahora, la máquina virtual debería estar lista para ejecutarse.
 
 </div>
