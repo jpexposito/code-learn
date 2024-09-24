@@ -225,4 +225,8 @@ Comentarios de varias líneas, que comienzan con __/*__ y terminan con __\*/__. 
 int variable = 3;
 ```
 
+## Licencia 📄
+
+Este proyecto está bajo la Licencia (Apache 2.0) - mira el archivo [LICENSE.md](../../../../LICENSE) para detalles.
+
 </div>

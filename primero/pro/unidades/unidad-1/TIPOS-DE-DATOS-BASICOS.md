@@ -251,4 +251,8 @@ boolean resultadoOr = (5 > 10) || (8 > 6);   // true
 boolean resultadoNot = !(5 > 3);             // false
 ```
 
+## Licencia 📄
+
+Este proyecto está bajo la Licencia (Apache 2.0) - mira el archivo [LICENSE.md](../../../../LICENSE) para detalles.
+
 </div>
