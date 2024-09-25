@@ -26,6 +26,9 @@ Por último, para iniciar un nuevo proceso con lo que hemos configurado, simplem
 - `inheritIO()`
 - `redirectInput(File file), redirectOutput(File file), redirectError(File file)`
 - `start()`
+- `getOutputStream()`. El método ___getOutputStream()___ se utiliza para obtener el flujo de salida de un proceso creado mediante ProcessBuilder o el método Runtime.exec(). Este flujo permite enviar datos al proceso, es decir, escribir en la entrada estándar del proceso que se está ejecutando. Esto es útil cuando el proceso requiere alguna entrada del usuario o algún tipo de datos para continuar su ejecución. Este método es usado cuando queremos enviar datos a un proceso que está esperando la entrada del usuario o necesita datos para procesar, por ejemplo, con comandos como cat en Unix o scripts que leen de la entrada estándar.
+
+- `getInputStream()`. El método __getInputStream()__ se utiliza para obtener el flujo de entrada del proceso creado. Este flujo permite leer los datos que el proceso genera a través de su salida estándar. En otras palabras, se usa para capturar la salida que normalmente se vería en la consola (por ejemplo, los resultados de un comando). Es útil cuando se desea capturar o procesar la salida del proceso que se está ejecutando. Esto podría ser la salida de comandos como echo, ls, o cualquier aplicación que devuelva resultados mediante la consola.
 
 ## 3. Ejemplos
 
@@ -81,7 +84,106 @@ processBuilder.redirectOutput(log);
 Process process = processBuilder.start();
 assertEquals("Si se redirige, debería ser -1 ", -1, process.getInputStream().read());
 List<String> lines = Files.lines(log.toPath()).collect(Collectors.toList());
-assertThat("Los resultados deberían contener la versión de java: ", lines, hasItem(containsString("java version")));
+assertThat("Los resultados deberían contener la versión de java: ", lines, hasItem(contain
+sString("java version")));
+```
+
+#### 3.5. Capturando el Input/Out Stream
+
+##### Input
+
+```java
+import java.io.*;
+
+public class EjemploEntradaSalidaProcessBuilder {
+    public static void main(String[] args) {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        
+        // El comando 'cat' es usado para leer la entrada y devolverla.
+        processBuilder.command("cat");
+
+        try {
+            // Iniciar el proceso
+            Process proceso = processBuilder.start();
+
+            // Escribir en la entrada del proceso (OutputStream)
+            OutputStream outputStream = proceso.getOutputStream();
+            BufferedWriter escritor = new BufferedWriter(new OutputStreamWriter(outputStream));
+            
+            escritor.write("¡Hola desde Java!");
+            escritor.newLine();
+            escritor.flush();
+            escritor.close(); // Cerrar el stream después de escribir
+
+            // Capturar la salida del proceso usando getInputStream
+            InputStream inputStream = proceso.getInputStream();
+            BufferedReader lector = new BufferedReader(new InputStreamReader(inputStream));
+
+            String linea;
+            System.out.println("Salida del proceso:");
+            while ((linea = lector.readLine()) != null) {
+                System.out.println(linea);
+            }
+
+            // Esperar a que el proceso termine
+            int codigoSalida = proceso.waitFor();
+            System.out.println("\nEl proceso salió con el código: " + codigoSalida);
+
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+
+##### OutPut
+
+```java
+ProcessBuilder pb = new ProcessBuilder("cat");
+Process proceso = pb.start();
+
+// Escribimos en la entrada estándar del proceso
+OutputStream outputStream = proceso.getOutputStream();
+BufferedWriter escritor = new BufferedWriter(new OutputStreamWriter(outputStream));
+escritor.write("Hola, proceso!");
+escritor.flush();
+escritor.close();
+```
+
+##### Otros Ejemplos
+
+```java
+ProcessBuilder processBuilder = new ProcessBuilder();
+        
+        // Set the command to run. For this example, we are using the 'echo' command.
+        processBuilder.command("echo", "Hello, ProcessBuilder!");
+
+        try {
+            // Start the process
+            Process process = processBuilder.start();
+
+            // Capture the output of the process using getInputStream
+            InputStream inputStream = process.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+            String line;
+            System.out.println("Output of the process:");
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+
+            // Wait for the process to exit
+            int exitCode = process.waitFor();
+            System.out.println("\nExited with code: " + exitCode);
+
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+```
+
+```java
+
 ```
 
 ## Licencia 📄
