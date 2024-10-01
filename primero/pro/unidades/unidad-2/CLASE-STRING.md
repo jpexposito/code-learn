@@ -16,6 +16,7 @@ La clase `String` en Java es inmutable y proporciona muchos __métodos útiles__
 | `replace(CharSequence target, CharSequence replacement)` | Reemplaza una subcadena por otra.                                   |
 | `equals(Object anObject)`                | Compara dos cadenas y devuelve `true` si son iguales.               |
 | `split(String regex)`                    | Divide la cadena en partes utilizando un delimitador (expresión regular). |
+| contains| El método contains() devuelve true si el String contiene la secuencia de caracteres especificada.|
 
 ## Ejemplo de uso
 
@@ -65,6 +66,12 @@ public class StringExample {
         String[] parts = trimmedStr.split(" ");
         for (String part : parts) {
             System.out.println(part); // Salida: "Hola", "Mundo"
+            String texto = "Hola, mundo!";
+            char caracter = 'm';
+
+            boolean contiene = texto.contains(String.valueOf(caracter));
+
+            System.out.println("¿El texto contiene el carácter '" + caracter + "'? " + contiene);
         }
     }
 }
