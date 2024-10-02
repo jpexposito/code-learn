@@ -314,7 +314,7 @@ public class EjemploSynchronized {
 }
 ```
 
-> __Verifica que la salida es:El valor final de la cuenta es: 2000.
+> **Verifica que la salida es**:El valor final de la cuenta es: 2000.
 
 
 ## Licencia 📄
