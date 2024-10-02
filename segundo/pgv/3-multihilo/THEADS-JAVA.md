@@ -213,6 +213,110 @@ public class PausarReanudarEjemplo {
 - La **interrupción** de un hilo se realiza mediante el método `interrupt()`, y el hilo puede manejar la interrupción verificando el estado con `isInterrupted()` o mediante la excepción `InterruptedException`.
 - **Reanudar** un hilo interrumpido directamente no es posible, pero puedes controlar el flujo del hilo mediante un flag que gestione las pausas y reanudaciones utilizando los métodos `wait()` y `notify()`.
 
+## ¿Qué hace `synchronized` en Java?
+
+La palabra clave `synchronized` en Java es un modificador que se utiliza para garantizar que un método o bloque de código sea ___accesible por un solo hilo a la vez___. Esto es especialmente útil en un ___entorno de programación multihilo, donde múltiples hilos pueden intentar acceder y modificar los mismos recursos compartidos simultáneamente___, lo que puede llevar a condiciones de carrera y a un comportamiento inesperado del programa.
+
+### Funcionamiento de `synchronized`
+
+#### 1. Bloqueo de Método
+
+Cuando se utiliza `synchronized` en un método, el hilo que ejecuta ese método adquiere un **bloqueo** (_lock_) sobre el objeto que invoca el método. Esto significa que ***otros hilos no pueden ejecutar métodos sincronizados en el mismo objeto hasta que el primer hilo haya liberado el bloqueo***.
+
+```java
+public synchronized void metodoSincronizado() {
+    // Código que solo un hilo puede ejecutar a la vez
+}
+```
+
+#### 2. Bloqueo de Bloque de Código
+
+También puedes usar `synchronized` para crear un bloque de código sincronizado dentro de un método. Esto te permite sincronizar solo una parte del método, lo que puede ser más eficiente.
+
+```java
+public void metodoConBloqueo() {
+    synchronized (this) {
+        // Código que solo un hilo puede ejecutar a la vez
+    }
+}
+```
+
+#### 3. Bloqueo en el Nivel de Clase
+
+Si usas `synchronized` en un método estático, el bloqueo se aplica a la clase en su conjunto, no a una instancia específica de la clase.
+
+```java
+public static synchronized void metodoEstatico() {
+    // Código que solo un hilo puede ejecutar a la vez en toda la clase
+}
+```
+
+#### Ventajas de Usar `synchronized`
+
+- **Prevención de Condiciones de Carrera**: Ayuda a evitar que varios hilos accedan y modifiquen un recurso compartido simultáneamente, lo que puede causar resultados inconsistentes.
+- **Consistencia**: Asegura que las operaciones de lectura y escritura en los recursos compartidos se realicen en un estado coherente.
+
+#### Desventajas de Usar `synchronized`
+
+- **Rendimiento**: Puede afectar el rendimiento del programa, especialmente si hay muchas esperas, ya que otros hilos se bloquearán hasta que el hilo que tiene el bloqueo termine su tarea.
+- **Deadlocks**: Puede causar **bloqueos (deadlocks)** si no se manejan correctamente. Un deadlock ocurre cuando dos o más hilos están esperando indefinidamente para acceder a los recursos que poseen otros hilos.
+
+#### Resumen
+
+- **`synchronized`** garantiza que un método o bloque de código sea accesible por **un solo hilo a la vez**.
+- Previene condiciones de carrera y garantiza la consistencia en la manipulación de recursos compartidos.
+- Puede afectar el rendimiento y causar deadlocks si no se utiliza correctamente.
+
+### Ejemplo de Uso de `synchronized`
+
+Aquí hay un ejemplo simple de cómo se puede utilizar `synchronized` para proteger un recurso compartido:
+
+```java
+class Contador {
+    private int cuenta = 0;
+
+    // Método sincronizado para incrementar el contador
+    public synchronized void incrementar() {
+        cuenta++;
+    }
+
+    public int obtenerCuenta() {
+        return cuenta;
+    }
+}
+
+public class EjemploSynchronized {
+    public static void main(String[] args) {
+        Contador contador = new Contador();
+
+        // Crear múltiples hilos que incrementan el contador
+        Runnable tarea = () -> {
+            for (int i = 0; i < 1000; i++) {
+                contador.incrementar();
+            }
+        };
+
+        Thread hilo1 = new Thread(tarea);
+        Thread hilo2 = new Thread(tarea);
+
+        hilo1.start();
+        hilo2.start();
+
+        try {
+            hilo1.join();
+            hilo2.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("El valor final de la cuenta es: " + contador.obtenerCuenta());
+    }
+}
+```
+
+> __Verifica que la salida es:El valor final de la cuenta es: 2000.
+
+
 ## Licencia 📄
 
 Este proyecto está bajo la Licencia (Apache 2.0) - mira el archivo [LICENSE.md](../../../LICENSE) para detalles
