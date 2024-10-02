@@ -98,6 +98,9 @@ public class Main {
 
 >Salida: Ejecución en un hilo con expresión __Lambda que implementa Runnable__.
 
+
+[Clase Thread en Java](THEADS-JAVA.md)
+
 ## Licencia 📄
 
 Este proyecto está bajo la Licencia (Apache 2.0) - mira el archivo [LICENSE.md](../../../LICENSE) para detalles
