@@ -96,7 +96,7 @@ Para interrumpir un hilo, utilizamos el método `interrupt()` de la clase `Threa
 - **`Thread.currentThread().isInterrupted()`**: Este método permite que el hilo verifique si ha sido interrumpido. El hilo puede utilizar esta verificación periódicamente para decidir si debe continuar o detenerse.
 - **`InterruptedException`**: Si el hilo está en espera o durmiendo (usando métodos como `sleep()` o `wait()`), la interrupción generará una excepción `InterruptedException`. Esto le permite al hilo manejar la interrupción adecuadamente.
 
-## Ejemplo típico de interrupción:
+## Ejemplo típico de interrupción
 
 1. Llamar al método `interrupt()` para notificar al hilo que debe detenerse.
 2. En el código del hilo, verificar el estado de interrupción con `isInterrupted()` o capturar la excepción `InterruptedException`.
@@ -135,11 +135,27 @@ public class InterrupcionEjemplo {
 }
 ```
 
+## Dormir un Hilp y Despertarlo
+
+En Java, los métodos `wait()`, `notify()`, y `notifyAll`() ___permiten la comunicación entre hilos en situaciones donde uno o más hilos deben esperar a que se cumpla una condición específica antes de continuar su ejecución___.
+
+Los hilos utilizan el método `wait()` _para suspenderse temporalmente y liberar el monitor de un objeto_.
+Otro hilo puede invocar `notify() o notifyAll()` para **despertar** a esos hilos cuando la condición se cumpla.
+Diferencias entre `notify()` y `notifyAll()`
+
+- `notify()`: _Despierta solo un hilo (seleccionado de manera arbitraria)_ de **entre los hilos que están esperando en el monitor del objeto**.
+- `notifyAll()`: **Despierta todos los hilos** que _están esperando en el monitor del objeto_. Esto garantiza que todos los hilos competentes puedan continuar su ejecución, aunque **solo uno podrá adquirir el monitor del objeto a la vez**.
+
+**¿Cuándo usar notifyAll()?**
+
+- Múltiples hilos dependientes de una condición: Si varios hilos están esperando una condición y quieres que todos tengan la oportunidad de reanudar su ejecución, utilizas `notifyAll()`.
+- Evitar bloqueos en situaciones complejas: _En escenarios donde el uso de notify() podría provocar que el hilo incorrecto sea despertado (y esto cause un bloqueo o deadlock), notifyAll() es una opción más segura, ya que notifica a todos los hilos, permitiendo que el correcto continúe_.
+
 ## Reanudar un hilo
 
 En Java, no existe un método directo para **reanudar** un hilo que ha sido interrumpido. Una vez interrumpido, el hilo debe manejar la interrupción y terminar su ejecución o realizar una acción específica. Si necesitas un comportamiento de pausa y reanudación, puedes implementar una solución utilizando un **flag booleano**.
 
-## Implementación de pausa y reanudación:
+## Implementación de pausa y reanudación
 
 - Un **flag booleano** como `pausado` puede utilizarse para controlar el flujo del hilo.
 - Mientras el flag está en `true`, el hilo puede entrar en un estado de espera utilizando `wait()`.
@@ -203,6 +219,70 @@ public class PausarReanudarEjemplo {
 }
 ```
 
+Un ejemplo un poco más complejo:
+
+```java
+class Cola {
+    private boolean disponible = false;
+
+    public synchronized void esperar() throws InterruptedException {
+        while (!disponible) {
+            System.out.println(Thread.currentThread().getName() + " está esperando...");
+            wait();  // Hilo espera a que el recurso esté disponible
+        }
+        System.out.println(Thread.currentThread().getName() + " ha sido notificado.");
+    }
+
+    public synchronized void notificarTodos() {
+        disponible = true;
+        notifyAll();  // Despierta a todos los hilos que están esperando
+        System.out.println("Todos los hilos han sido notificados.");
+    }
+}
+
+public class EjemploNotifyAll {
+    public static void main(String[] args) throws InterruptedException {
+        Cola cola = new Cola();
+
+        // Crear varios hilos que están esperando
+        Thread hilo1 = new Thread(() -> {
+            try {
+                cola.esperar();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }, "Hilo 1");
+
+        Thread hilo2 = new Thread(() -> {
+            try {
+                cola.esperar();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }, "Hilo 2");
+
+        Thread hilo3 = new Thread(() -> {
+            try {
+                cola.esperar();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }, "Hilo 3");
+
+        // Iniciar los hilos
+        hilo1.start();
+        hilo2.start();
+        hilo3.start();
+
+        // Simula algún procesamiento antes de notificar a todos
+        Thread.sleep(2000);
+
+        // Notificar a todos los hilos
+        cola.notificarTodos();
+    }
+}
+```
+
 ## Diferencia entre interrupción y pausa/reanudar
 
 - **Interrumpir un hilo** implica enviar una señal para que el hilo detenga su tarea. No se puede reanudar directamente un hilo interrumpido.
@@ -215,7 +295,7 @@ public class PausarReanudarEjemplo {
 
 ## ¿Qué hace `synchronized` en Java?
 
-La palabra clave `synchronized` en Java es un modificador que se utiliza para garantizar que un método o bloque de código sea ___accesible por un solo hilo a la vez___. Esto es especialmente útil en un ___entorno de programación multihilo, donde múltiples hilos pueden intentar acceder y modificar los mismos recursos compartidos simultáneamente___, lo que puede llevar a condiciones de carrera y a un comportamiento inesperado del programa.
+La palabra clave `synchronized` en Java es un modificador que se utiliza para garantizar que un método o bloque de código sea ***accesible por un solo hilo a la vez***. Esto es especialmente útil en un *** entorno de programación multihilo, donde múltiples hilos pueden intentar acceder y modificar los mismos recursos compartidos simultáneamente, lo que puede llevar a condiciones de carrera y a un comportamiento inesperado del programa.
 
 ### Funcionamiento de `synchronized`
 
