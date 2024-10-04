@@ -235,12 +235,136 @@ for(int i=0; i < nombres.length; i++){
 
 Un _array_ tiene la propiedad __length__, que retorna su número de elementos. 
 
-[img_01]: images/01.png "Sentencia if-else"
-[img_02]: images/02.png "Sentencia for"
-[img_03]: images/03.png "Sentencia while"
-[img_04]: images/04.png "Sentencia do-while"
-[img_05]: images/05.png "Array"
+### Ejemplo: Invertir un array
 
+Para invertir un array en Java, necesitamos intercambiar los elementos de tal forma que el primero pase a ocupar la posición del último, el segundo ocupe el lugar del penúltimo, y así sucesivamente. Este proceso continúa hasta que llegamos a la mitad del array.
+
+#### Paso 1: Array original
+
+El array comienza con los elementos en sus posiciones originales. La estructura del array es la siguiente:
+
+```plaintext
+Índice:  0   1   2   3   4
+        [1] [2] [3] [4] [5]
+```
+
+#### Paso 2: Creamos un array del mismo tamaño
+
+La forma más sencilla es crear un nuevo array:
+
+__arrayFinal__:
+
+```plaintext
+Índice:  0   1   2   3   4
+        [0] [0] [0] [0] [0]
+```
+
+#### Paso 3: Recorrer el array orignal y copiar la el valor de la posición en el lugar opuesto
+
+El siguiente paso es recorrer el primer array, y colocar su valor en la posición opuesta.
+
+```plaintext
+Índice:  0   1   2   3   4
+        [4] [0] [0] [0] [0]
+```
+
+> __¿Cómo lo conseguimos?__
+
+```java
+for (int i= 0; i < arrayOriginal.lenght; i++) {
+   int valor = valor arrayOriginal[i];
+   arrayFinal[arrayOriginal.length-1-i] 
+}
+```
+
+Veamos como cambia:
+
+```bash
+i = 0;
+arrayOriginal.length = 5;
+
+valor arrayOriginal[0] = 0;
+
+arrayFinal[arrayOriginal.length-1-0] => arrayFinal[5-1-0] => arrayFinal[4]
+arrayFinal[4] = 0;
+```
+
+```bash
+i = 1;
+arrayOriginal.length = 5;
+
+valor arrayOriginal[1] = 1;
+
+arrayFinal[arrayOriginal.length-1-1] => arrayFinal[5-1-1] => arrayFinal[3]
+arrayFinal[4] = 1;
+```
+
+```bash
+i = 2;
+arrayOriginal.length = 5;
+
+valor arrayOriginal[2] = 2;
+
+arrayFinal[arrayOriginal.length-1-2] => arrayFinal[5-1-2] => arrayFinal[2]
+arrayFinal[4] = 2;
+```
+
+___... y asi consecutivamente___.
+
+#### Otra forma de hacerlo más optima
+
+__Original__
+
+```plaintext
+Índice:  0   1   2   3   4
+        [1] [2] [3] [4] [5]
+```
+
+Se trata de intercambiar los valores de las posiciones.
+
+##### Primer intercambio cuando i = 0
+
+En la primera iteración, el primer elemento (índice 0) se intercambia con el último elemento (índice 4). El array ahora se verá así:
+
+```plaintext
+Índice:  0   1   2   3   4
+        [5] [2] [3] [4] [1]
+
+```
+
+##### Intercambio cuando i = 1
+
+En la segunda iteración, el segundo elemento (índice 1) se intercambia con el penúltimo (índice 3). El array ahora se verá de la siguiente manera:
+
+```plaintext
+Índice:  0   1   2   3   4
+        [5] [4] [3] [2] [1]
+```
+
+##### Finalización cuando i = 2
+
+Cuando i llega al valor 2, hemos llegado a la mitad del array. En este punto, todos los elementos han sido intercambiados correctamente y no es necesario realizar más operaciones.
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        // Declaración e inicialización de un array de enteros
+        int[] numeros = {1, 2, 3, 4, 5};
+
+        int tamanioArray = array.length;
+        for (int i = 0; i < tamanioArray / 2; i++) {
+            int temp = array[i]; // Guardar temporalmente el valor del primer elemento
+            array[i] = array[tamanioArray - i - 1]; // Intercambiar con el último
+            array[tamanioArray - i - 1] = temp; // Asignar el valor temporal al último
+        }
+        
+        for (int numero : array) {
+            System.out.print(numero + " ");
+        }
+        System.out.println();
+    }
+}
+```
 
 ## Licencia 📄
 
