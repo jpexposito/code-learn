@@ -2,7 +2,6 @@
 
 # <img src=.../../../../images/computer.png width="40"> Code & Learn (Comandos de Git)
 
-## VirtualBox
 
 <div align="center">
 <img src=https://www.freecodecamp.org/espanol/news/content/images/size/w2000/2021/01/cover-pic-1-.jpeg width="400">
