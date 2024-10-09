@@ -98,6 +98,7 @@ public class Player implements Runnable {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
+
     }
 }
 ```
@@ -140,6 +141,50 @@ Tiene dos métodos:
 Representa un jugador que intentará atrapar una ficha llamando al **método atraparFicha() del FichaManager**. Si lo logra, ***simula que usa la ficha durante un tiempo (sleep)** . Si no hay fichas, se le informa que no pudo atrapar ninguna.
 
 > ***Cada Player es ejecutado en un hilo independiente, lo que simula la competencia simultánea por las fichas***.
+
+La clase Player extendiendo de **Thread** seria del siguiente modo:
+
+```java
+public class Player extends Thread {
+    private String nombre;
+    private FichaManager fichaManager;
+
+    // Constructor que inicializa al jugador con su nombre y el gestor de fichas
+    public Player(String nombre, FichaManager fichaManager) {
+        this.nombre = nombre;
+        this.fichaManager = fichaManager;
+    }
+
+    @Override
+    public void run() {
+        try {
+            System.out.println(nombre + " está intentando atrapar una ficha...");
+
+            // Intenta atrapar una ficha desde el gestor
+            String ficha = fichaManager.atraparFicha();
+
+            if (ficha != null) {
+                // Si logra atrapar una ficha
+                System.out.println(nombre + " atrapó " + ficha + "!");
+                
+                // Simula el uso de la ficha por un tiempo
+                Thread.sleep(1000);
+
+                // Puedes optar por liberar la ficha (opcional)
+                // fichaManager.liberarFicha(ficha);
+
+            } else {
+                // Si no quedan fichas disponibles
+                System.out.println(nombre + " no pudo atrapar una ficha, no quedan más disponibles.");
+            }
+
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+}
+
+```
 
 ## Licencia 📄
 
