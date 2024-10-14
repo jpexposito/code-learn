@@ -1,15 +1,14 @@
 <div align="justify">
 
-# <img src=../../../../images/computer.png width="40"> Code & Learn (Objetos en Java)
+# <img src=../../../../../images/computer.png width="40"> Code & Learn (Objetos en Java)
 
 ## Programacion orientado a objetos
 
 La programación orientada a objetos es un paradigma surgido en los años 70, que utiliza objetos como elementos fundamentales en la construcción de la solución. Un objeto es una abstracción de algún hecho o ente del mundo real, con atributos que representan sus características o propiedades, y métodos que emulan su comportamiento o actividad. Todas las propiedades y métodos comunes a los objetos se encapsulan o agrupan en clases. Una clase es una plantilla, un prototipo para crear objetos; en general, se dice que cada objeto es una instancia o ejemplar de una clase. la POO está basado en varias técnicas, incluyendo herencia, cohesión, abstracción, polimorfismo, acoplamiento y encapsulamiento. Su uso se popularizó a principios de la década de los años 1990. En la actualidad, existe una gran variedad de lenguajes de programación que soportan la orientación a objetos.
 
-
 ### Evolucion
 
-![Imagen de la evolución en los paradigmas de la programación](images/evolucion_poo.png)
+![Imagen de la evolución en los paradigmas de la programación](../images/evolucion_poo.png)
 
 ## Clases
 
@@ -28,29 +27,7 @@ class Libro
 
 **Forma de una clase:**
 
-![Forma de una clase de manera grafica](images/forma_clase.png)
-
-## Clase DecimalFormat
-
-Creando un objeto de la clase DecimalFormat, podemos darle un formato a un número con los separadores de millares o de unidades. Ejemplo:
-
-```java
-
-String valor = "1000";
-Int v = 1000000
-
-// le enviamos al constructor el patrón que deseamos seguir para separar las unidades.
-DecimalFormat formatea = new DecimalFormat("###,###.##"); 
- 
-System.outprintln(formatea.format(valor));
-//Nos devuelve 1.000
-System.out.println(formate.format(v));
-//Nos devuelve 1.000.000
-
-```
-
-Fuente: http://www.yoelprogramador.com/puntos-decimales-y-separador-de-miles-en-java/
-Oracle: https://docs.oracle.com/javase/7/docs/api/java/text/DecimalFormat.html
+![Forma de una clase de manera grafica](../images/forma_clase.png)
 
 ## Objetos
 
@@ -98,7 +75,7 @@ Los dos pasos pueden llevarse a cabo en una sola instrucción así:
 
 Representación gráfica:
 
-![Representación gráfica de un objeto creado](images/objeto_java.png)
+![Representación gráfica de un objeto creado](../images/objeto_java.png)
 
 
 ## Atributos
@@ -143,7 +120,7 @@ Parámetros: corresponde a un listado de declaración de variables separados por
 
 Ilustración gráfica de posibles métodos:
 
-![Representación gráfica sobre tipos de métodos](images/tipos_metodos.png)
+![Representación gráfica sobre tipos de métodos](../images/tipos_metodos.png)
 
 **Consideraciones para la definición de Métodos:**
 
