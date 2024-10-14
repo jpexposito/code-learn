@@ -38,7 +38,6 @@ Las clases son fundamentales en la programación orientada a objetos, permitiend
     }
     ```
 
-
 4. **Métodos**
 
 - Definen las acciones que un objeto de la clase puede realizar.
@@ -87,6 +86,8 @@ public static void main(String[] args) {
     // Código que se ejecuta al iniciar el programa
 }
 ```
+
+[PROGRAMACIÓN ORIENTADA A OBJETOS](POO-EN-JAVA.md).
 
 ## Licencia 📄
 
