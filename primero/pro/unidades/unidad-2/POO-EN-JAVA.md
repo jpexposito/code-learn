@@ -1,6 +1,6 @@
 <div align="justify">
 
-# <img src=../../../../../images/computer.png width="40"> Code & Learn (Objetos en Java)
+# <img src=../../../../images/computer.png width="40"> Code & Learn (Objetos en Java)
 
 ## Programacion orientado a objetos
 
