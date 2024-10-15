@@ -179,6 +179,46 @@ Muestra los cambios realizados a un archivo
 	git diff --staged
 ```
 
+## GIT RESET
+
+El comando git reset se utiliza para deshacer cambios en Git de manera más drástica que git revert. Dependiendo de la opción utilizada, puede cambiar el historial de commits, modificar el índice (staging area) o el estado del directorio de trabajo.
+
+**git reset** es útil cuando necesitas mover el **puntero HEAD** a un commit anterior y ajustar el contenido del área de trabajo y del índice en función de dicho commit.
+
+### Tipos de git reset
+
+- **git reset --soft**. Solo mueve el **puntero HEAD a un commit anterior**, pero mantiene los cambios en el índice (staging area) y el directorio de trabajo. Esto te permite volver a realizar un commit con los cambios.
+
+```bash
+git reset --soft <hash_del_commit>
+```
+
+- **git reset --mixed (por defecto)**. Mueve el puntero HEAD y también borra los cambios del área de stage, pero mantiene los archivos modificados en el directorio de trabajo. Este es el comportamiento predeterminado si no se especifica una opción.
+
+```bash
+git reset --mixed <hash_del_commit>
+```
+
+- **git reset --hard**: Este es el tipo más destructivo, ya que mueve el puntero HEAD, elimina los cambios del índice y también del directorio de trabajo. Los archivos modificados y no confirmados serán eliminados permanentemente.
+
+```bash
+git reset --hard <hash_del_commit>
+```
+
+#### Ejemplo:
+
+Si deseas mover HEAD al commit con el hash abc1234 y eliminar los cambios no confirmados, podrías usar:
+
+```bash
+git reset --hard abc1234
+```
+
+Diferencias clave entre las opciones de git reset:
+- --soft: Conserva los cambios en el stage.
+- --mixed: Mantiene los archivos modificados, pero los elimina del stage.
+- --hard: Elimina todos los cambios no confirmados.
+El uso de git reset debe hacerse con precaución, especialmente con la opción --hard, ya que los cambios descartados no se pueden recuperar fácilmente.
+
 ## GIT HEAD
 
 Saca un archivo del commit
