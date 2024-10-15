@@ -391,4 +391,119 @@ Merge con master de un fork
     git merge upstream/master
 ```
 
+## Revert
+
+El comando git revert se utiliza para deshacer los cambios introducidos por un commit específico, creando un nuevo commit que revierta esos cambios. A diferencia de git reset, que borra el historial de cambios, git revert mantiene el historial intacto, lo que es útil cuando trabajas con un equipo y no quieres eliminar los cambios ya compartidos.
+
+```bash
+git revert <hash_del_commit>
+```
+
+### Pasos para realizar un git revert
+
+#### Obtén el hash del commit a revertir
+
+Para encontrar el hash del commit que deseas revertir, puedes usar el comando:
+
+```bash
+git log
+```
+
+Esto mostrará el historial de commits con sus hashes. El hash es una cadena alfanumérica que identifica de forma única cada commit.
+
+#### Revertir el commit
+
+Una vez que tienes el hash del commit, puedes ejecutar el comando git revert seguido del hash del commit que deseas deshacer.
+
+```bash
+git revert <hash_del_commit>
+```
+
+Por ejemplo, si el hash del commit es ***abc1234***, ejecuta:
+
+```bash
+git revert abc1234
+```
+
+***Esto creará un nuevo commit que revierte los cambios realizados por el commit especificado***.
+
+#### Resolver conflictos (si los hay)
+
+Si el commit que intentas revertir entra en conflicto con otros cambios, Git te pedirá que resuelvas esos conflictos antes de completar el revert. Una vez resueltos los conflictos, añade los cambios con git add y finaliza el revert con un commit.
+
+```bash
+git add <archivo_resuelto>
+git revert --continue
+```
+
+#### Comprobar el historial
+
+Después de realizar el git revert, puedes ver el nuevo commit en el historial con:
+
+```bash
+git log
+```
+
+Verás un nuevo commit que revertirá los cambios del commit original, pero mantendrá el historial intacto.
+
+##### Ejemplo práctivo
+
+Imagina que hiciste un commit con el hash abc1234, pero te das cuenta de que cometiste un error y deseas revertir ese commit.
+
+```bash
+# Ver el historial de commits para obtener el hash del commit
+git log
+
+# Revertir el commit con el hash `abc1234`
+git revert abc1234
+```
+
+> Esto creará un nuevo commit que deshará los cambios realizados por ***abc1234***, pero sin eliminar el commit original del historial.
+
+### Revertir un merge
+
+Si deseas revertir una fusión de ramas, debes especificar qué padre del merge quieres mantener utilizando la opción **-m**:
+
+```bash
+git revert -m 1 <hash_del_merge_commit>
+```
+
+Donde **-m 1** indica que estás revirtiendo la fusión manteniendo los cambios de la primera rama (normalmente, main o master).
+
+En resumen, ***git revert es una manera segura de deshacer cambios en un repositorio, ya que no altera el historial, sino que crea un nuevo commit que deshace los cambios no deseados***.
+
+## cherry-pick
+
+El comando git cherry-pick **permite aplicar los cambios de un commit específico a la rama actual**. Es útil cuando deseas tomar uno o varios commits seleccionados de otra rama sin fusionar la rama completa.
+
+A diferencia de otros comandos como git merge o git rebase, git cherry-pick solo copia el contenido de un commit específico y lo aplica como un nuevo commit en la rama actual, manteniendo intacta la historia del repositorio.
+
+### Pasos para usar git cherry-pick
+
+Obtener el hash del commit que deseas aplicar:
+
+Para encontrar el commit que quieres "recoger", utiliza:
+
+```bash
+git log
+```
+
+Esto mostrará el historial de commits con sus hashes. El hash es una cadena alfanumérica que identifica cada commit de manera única.
+
+Seleccionar y aplicar el commit:
+
+Una vez que tengas el hash del commit que deseas aplicar, puedes ejecutar:
+
+```bash
+git cherry-pick <hash_del_commit>
+```
+
+Por ejemplo, si el hash del commit es **abc1234**, usarías:
+
+```bash
+git cherry-pick abc1234
+```
+
+***Esto aplicará los cambio de ese commit a la rama en la que estás trabajando actualmente, creando un nuevo commit con los mismos cambios***.
+
 </div>
