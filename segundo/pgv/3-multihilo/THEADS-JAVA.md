@@ -396,6 +396,7 @@ public class EjemploSynchronized {
 
 > **Verifica que la salida es**:El valor final de la cuenta es: 2000.
 
+[SEMÁFOROS EN JAVA](SEMAFOROS-JAVA.md)
 
 ## Licencia 📄
 

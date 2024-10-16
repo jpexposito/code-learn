@@ -33,7 +33,12 @@ Aunque ___los hilos se ejecutan en el contexto de un proceso, cada uno tiene su 
 >
 >Sin embargo, los hilos deben coordinarse para el acceso a los contenidos de la memoria y a los ficheros, lo cual hace que esa coordinación y sincronización sea la parte complicada de uso.
 
-[Hilos en Java](HILOS-JAVA.md)
+Veremos:
+
+- [Hilos en Java](HILOS-JAVA.md)
+- [THEADS-JAVA](THEADS-JAVA.md)
+- [SEMÁFOROS EN JAVA](SEMAFOROS-JAVA.md)
+- [THREAD-POOLS EN JAVA](THREADPOOLS-JAVA.md)
 
 ## Licencia 📄
 

@@ -114,6 +114,8 @@ El resultado sería algo como lo siguiente:
 Trabajador 1 esperando para acceder al recurso... Trabajador 2 esperando para acceder al recurso... Trabajador 3 esperando para acceder al recurso... Trabajador 1 ha obtenido acceso al recurso. Trabajador 2 ha obtenido acceso al recurso. Trabajador 3 ha obtenido acceso al recurso. Trabajador 4 esperando para acceder al recurso... Trabajador 5 esperando para acceder al recurso... Trabajador 1 ha terminado y libera el recurso. Trabajador 4 ha obtenido acceso al recurso. Trabajador 2 ha terminado y libera el recurso. Trabajador 5 ha obtenido acceso al recurso. Trabajador 3 ha terminado y libera el recurso.
 ```
 
+  [THREAD-POOLS EN JAVA](THREADPOOLS-JAVA.md)
+
 ## Licencia 📄
 
 Este proyecto está bajo la Licencia (Apache 2.0) - mira el archivo [LICENSE.md](../../../LICENSE) para detalles
