@@ -164,13 +164,11 @@ public double getRadio () { // Devuelve el valor del atributo radio
 
 ## toString
 
-El método toString de un objeto, retorna la representación de un objeto en formato cadena, pero este método hace parte de la clase padre Object, la cual, se llama en forma **implícita** cuando el objeto se utiliza en donde se espera un objeto String (por ejemplo, cuando printf imprime en pantalla el objeto como un String, usando el especificador de formato %s, o cuando el objeto se concatena con un objeto String mediante el operador +). Pero además, el método toString se puede llamar de manera **explícita**,  sobreescribir dicho método de la clase Object, en otra clase cualquiera y así darle el formato deseado a la representación del objeto de dicha clase.
+El método toString de un objeto, retorna la representación de un objeto en formato cadena(**texto**), pero este método hace parte de la clase padre Object, la cual, se llama en forma **implícita** cuando el objeto se utiliza en donde se espera un objeto String (por ejemplo, cuando printf imprime en pantalla el objeto como un String, usando el especificador de formato %s, o cuando el objeto se concatena con un objeto String mediante el operador +). Pero además, el método toString se puede llamar de manera **explícita**,  sobreescribir dicho método de la clase Object, en otra clase cualquiera y así darle el formato deseado a la representación del objeto de dicha clase.
 
-Ejemplo utilizando los atributos comunes de una clase llamada Persona:
+Ejemplo utilizando los atributos comunes de una clase llamada `Persona`:
 
 ```java
-
-
 public class Persona {
 
   private String nombre;
@@ -214,8 +212,189 @@ public class Persona {
   }
 
 }
-
 ```
+
+## equals
+
+El método `equals()` en Java es utilizado para comparar si dos objetos son equivalentes en términos de su contenido. Por defecto, el método `equals()` es ***heredado de la clase base Object***, y su *implementación por defecto* ***compara las referencias de los objetos (es decir, si ambos objetos son la misma instancia en la memoria)***.
+
+Sin embargo, en la mayoría de los casos, esta comparación de referencias no es suficiente. Por ejemplo, si tienes dos objetos con el mismo contenido pero son instancias diferentes, ***querrás compararlos basándote en sus valores internos, no en sus referencias en memoria***. Para lograr esto, se sobrescribe el método equals() en clases personalizadas.
+
+### 
+Sobrescribiendo equals() en Java
+Para sobrescribir correctamente el método `equals()`, es importante seguir algunas convenciones:
+
+- `Simetría`: Si a.equals(b) es true, entonces b.equals(a) también debe ser true.
+Reflexividad: Cualquier objeto debe ser igual a sí mismo, es decir, a.equals(a) debe ser true.
+- `Consistencia`: Si los atributos usados en la comparación no cambian, varias invocaciones de equals() deben devolver el mismo resultado.
+- `No nulo`: La comparación de cualquier objeto con null debe devolver false, es decir, a.equals(null) debe ser false.
+
+### Un ejemplo
+
+```java
+/**
+ * La clase Coche representa un vehículo con marca, modelo, anio y matrícula.
+ */
+public class Coche {
+    private String marca;
+    private String modelo;
+    private int anio;          // Atributo que representa el anio del coche
+    private String matricula;  // Atributo que representa la matrícula del coche
+
+    /**
+     * Constructor para inicializar un objeto Coche con los atributos especificados.
+     *
+     * @param marca     La marca del coche.
+     * @param modelo    El modelo del coche.
+     * @param anio      El anio de fabricación del coche.
+     * @param matricula La matrícula única del coche.
+     */
+    public Coche(String marca, String modelo, int anio, String matricula) {
+        this.marca = marca;
+        this.modelo = modelo;
+        this.anio = anio;
+        this.matricula = matricula;
+    }
+
+    /**
+     * Obtiene la marca del coche.
+     *
+     * @return La marca del coche.
+     */
+    public String getMarca() {
+        return marca;
+    }
+
+    /**
+     * Establece la marca del coche.
+     *
+     * @param marca La nueva marca del coche.
+     */
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    /**
+     * Obtiene el modelo del coche.
+     *
+     * @return El modelo del coche.
+     */
+    public String getModelo() {
+        return modelo;
+    }
+
+    /**
+     * Establece el modelo del coche.
+     *
+     * @param modelo El nuevo modelo del coche.
+     */
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    /**
+     * Obtiene el anio de fabricación del coche.
+     *
+     * @return El anio de fabricación del coche.
+     */
+    public int getAnio() {
+        return anio;
+    }
+
+    /**
+     * Establece el anio de fabricación del coche.
+     *
+     * @param anio El nuevo anio del coche.
+     */
+    public void setAnio(int anio) {
+        this.anio = anio;
+    }
+
+    /**
+     * Obtiene la matrícula del coche.
+     *
+     * @return La matrícula del coche.
+     */
+    public String getMatricula() {
+        return matricula;
+    }
+
+    /**
+     * Establece la matrícula del coche.
+     *
+     * @param matricula La nueva matrícula del coche.
+     */
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
+    /**
+     * Sobrescribe el método equals para comparar coches basados en su matrícula.
+     *
+     * @param obj El objeto a comparar con el coche actual.
+     * @return true si las matrículas son iguales, de lo contrario false.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        // Verifica si el objeto comparado es la misma instancia
+        if (this == obj) {
+            return true;
+        }
+
+        // Verifica si el objeto es nulo o no es de la misma clase
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        // Convertimos el objeto a tipo Coche para comparar
+        Coche otroCoche = (Coche) obj;
+
+        // Comparamos solo por la matrícula, ya que es única
+        return this.matricula.equals(otroCoche.matricula);
+    }
+
+    /**
+     * Sobrescribe el método toString para representar la información del coche
+     * en formato legible por humanos.
+     *
+     * @return Una cadena de texto que representa al coche.
+     */
+    @Override
+    public String toString() {
+        return "Coche [Marca: " + marca + ", Modelo: " + modelo + ", Anio: " + anio + ", Matrícula: " + matricula + "]";
+    }
+}
+```
+
+#### Utilizamos la clase
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Coche coche1 = new Coche("Toyota", "Corolla", 2022, "ABC123");
+        Coche coche2 = new Coche("Toyota", "Corolla", 2022, "ABC123");
+        Coche coche3 = new Coche("Honda", "Civic", 2021, "XYZ789");
+
+        // Comparando coche1 y coche2
+        System.out.println(coche1.equals(coche2));  // true, porque tienen la misma matrícula
+
+        // Comparando coche1 y coche3
+        System.out.println(coche1.equals(coche3));  // false, porque tienen matrículas diferentes
+
+        // Imprimiendo los detalles de coche1
+        System.out.println(coche1.toString());
+    }
+}
+```
+
+## ¿Qué es @Override en Java?
+
+`@Override` es una anotación en Java que se utiliza para indicar que un método de una clase está **sobrescribiendo (overriding)** un método de su **superclase** (una clase de la que está *heredando*) o de una interfaz que la clase está implementando. Esta anotación no es estrictamente obligatoria, pero su uso es altamente recomendado porque le dice al compilador que verifique si realmente se está sobrescribiendo un método existente.
+
+### Propósito de @Override
+
+- `Claridad`: Hace explícito que un método está sobrescribiendo uno de la superclase o interfaz, lo que mejora la legibilidad del código.
+- `Verificación en tiempo de compilación`: Si cometes un error en la firma del método (nombre, tipo de retorno, parámetros) mientras intentas sobrescribirlo, el compilador generará un error. Sin la anotación, podrías estar creando un nuevo método sin darte cuenta.
 
 ## Printf
 
