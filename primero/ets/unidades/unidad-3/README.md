@@ -127,17 +127,17 @@ Cliente         Sistema         Base de Datos
    | Solicitar página web             |
    |-------------->|                  |
    |                |                 |
-   |      Consultar datos              |
+   |      Consultar datos             |
    |---------------------->|          |
    |                |                 |
-   |      Respuesta con datos          |
+   |      Respuesta con datos         |
    |<----------------------|          |
    |                |                 |
-   |  Generar respuesta                |
+   |  Generar respuesta               |
    |<--------------|                  |
    |                |                 |
    | Mostrar página                   |
-   |<----------------------------------|
+   |<---------------------------------|
 ```
 
 #### Explicación
@@ -169,7 +169,7 @@ Cliente         Sistema         Base de Datos
 ```plaintext
 Objeto1              Objeto2               Objeto3
    |                    |                     |
-   |--(1) Solicitar --->|                      |
+   |--(1) Solicitar --->|                     |
    |                    |                     |
    |                    |--(2) Consultar ---> |
    |                    |                     |
