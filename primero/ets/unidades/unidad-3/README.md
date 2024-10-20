@@ -8,7 +8,7 @@
 
 2. **Diagramas de Comportamiento**
    - Representan el comportamiento dinámico del sistema.
-   - Algunos de estos diagramas son: ___Diagrama de Casos de Uso, Diagrama de Secuencia___, Diagrama de Colaboración, Diagrama de Actividad, Diagrama de Estado.
+   - Algunos de estos diagramas son: ___Diagrama de Casos de Uso, Diagrama de Secuencia___, Diagrama de Colaboración, __Diagrama de Actividad__, Diagrama de Estado.
 
 ---
 
