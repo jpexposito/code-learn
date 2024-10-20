@@ -1,4 +1,4 @@
-# <img src=../../../../images/computer.png width="40"> Code & Learn (Entornos de Desarroll: Elaboración de diagramas de comportamiento)
+# <img src=../../../../images/computer.png width="40"> Code & Learn (Entornos de Desarrollo: Elaboración de diagramas de comportamiento)
 
 ## Tipos de Diagramas UML
 
