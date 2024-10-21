@@ -63,14 +63,11 @@
 
 #### Ejemplos
 
-<img src=images/diagrama-caso-uso.png width="200">
+<img src=images/diagrama-caso-uso.png width="300">
 
+<img src=images/diagrama-caso-uso-1.png width="300">
 
-<img src=images/diagrama-caso-uso-1.png width="200">
-
-<img src=images/diagrama-caso-uso-2.png width="200">
-
-<img src=images/diagrama-caso-uso-3.png width="200">
+<img src=images/diagrama-caso-uso-3.png width="300">
 
 > ***Para realizar los digramas de casos de uso utilizaremos [https://app.diagrams.net/](https://app.diagrams.net/)***
 
@@ -96,6 +93,7 @@
   - Los Usuarios no tienen permisos para acceder a la gestión interna del sistema.
 </details>
 
+### [Especificación de los Casos de Uso](casos-de-uso/ESPECIFICACION.md)
 
 ## 2. Diagrama de Secuencia
 
