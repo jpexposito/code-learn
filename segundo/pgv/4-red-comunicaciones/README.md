@@ -2,7 +2,7 @@
 
 # <img src=../../../images/computer.png width="40"> Code & Learn (Programación de Servicios)
 
-## ## ¿Qué trataremos en la unidad?
+## ¿Qué trataremos en la unidad?
 
 <div align="center">
 
