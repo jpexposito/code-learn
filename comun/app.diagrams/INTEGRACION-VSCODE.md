@@ -68,4 +68,8 @@ Este plugin es ideal para proyectos colaborativos en los que se necesite crear y
 
 Con estos pasos, podrás crear y mantener diagramas de Diagrams.net (Draw.io) de manera efectiva directamente en VSCode.
 
+### Ayuda
+
+- [Drawio embebido en vscode](https://www.drawio.com/blog/embed-diagrams-vscode)
+
 </div>
