@@ -1,6 +1,6 @@
-<img src=../../../../../images/computer.png width="40"> Code & Learn (Entornos de Desarrollo: Especificación de los casos de uso)
-
 <div align="justify">
+
+<img src=../../../../../images/computer.png width="40"> Code & Learn (Entornos de Desarrollo: Especificación de los casos de uso)
 
 ## Introducción
 

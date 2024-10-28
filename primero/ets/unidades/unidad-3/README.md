@@ -95,6 +95,8 @@
 
 ### [Especificación de los Casos de Uso](casos-de-uso/ESPECIFICACION.md)
 
+### [Ejemplo](casos-de-uso/EJEMPLO.md).
+
 ## 2. Diagrama de Secuencia
 
 ### Campo de Aplicación
