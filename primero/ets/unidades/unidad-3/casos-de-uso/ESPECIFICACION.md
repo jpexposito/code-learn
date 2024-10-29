@@ -62,7 +62,6 @@ Lo más importante de los casos de uso es su descripción, mucho más que los di
 
 Aunque hay descripciones de media página, y algunas de __30__, es más habitual que ocupen entre __5 y 15__ páginas.
 
-
 |  Actor | XXX (Nombre del Actor) |
 |---|---|
 | Descripción  | _Breve descripción del actor_  |
@@ -78,6 +77,23 @@ Aunque hay descripciones de media página, y algunas de __30__, es más habitual
 | _Nombre_  | _Descripción_  | _Tipo_ |
 | | |
 
+
+```plaintext
+|  Actor | XXX (Nombre del Actor) |
+|---|---|
+| Descripción  | _Breve descripción del actor_  |
+| Características  | _Características que describen al actor_ |
+| Relaciones | _Relaciones que tiene con otros actores. Básicamente cuando realiza las mismas acciones que otro actor._  |
+| Referencias | _Que casos de uso realiza_ |   
+|  Notas |  _Notas adicionales_ |
+| Autor  | _Quien desarrolla la especificación del actor_ |
+|Fecha | _Fecha de la especificación_ |
+
+|  Atributo |||
+|---|---|---|
+| _Nombre_  | _Descripción_  | _Tipo_ |
+| | |
+```
 
 ___El diagrama de CU no debe reflejar ni el flujo de control ni el flujo de datos, sino de asociaciones que son canales de comunicación.___
 
@@ -115,6 +131,21 @@ ___El diagrama de CU no debe reflejar ni el flujo de control ni el flujo de dato
   | Autor  | _Quien desarrolla la especificación del actor_ |
   |Fecha | _Fecha de la especificación_ |
 
+
+```plaintext
+|  Caso de Uso	CU | XXX  |
+  |---|---|
+  | Fuentes  | _Documento que sustenta el caso de uso_  |
+  | Actor  |  _Actores que participan en el caso de uso_ |
+  | Descripción | _Descripción del caso de uso_  |
+  | Flujo básico | _Descripción paso a paso de la ejecución. (1->2->3.)_ |
+  | Pre-condiciones | _Que debe ocurrir con anterioridad_  |  
+  | Post-condiciones  | _Que debe ocurrir con posterioridad_  |  
+  |  Requerimientos | _Que debe de exister para que el caso de uso se ejecute. Ej: Tarjeta de crédito_  |
+  |  Notas |  _Notas adicionales_ |
+  | Autor  | _Quien desarrolla la especificación del actor_ |
+  |Fecha | _Fecha de la especificación_ |
+```
 
 ## Ejemplos de especificación de Casos de Uso
 
