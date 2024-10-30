@@ -62,6 +62,8 @@ En una aplicación que siga el modelo de la arquitectura cliente-servidor existe
 - Si el ***cliente es también multihilo*** mucho mejor. Así, éste podrá estar atento a lo que el servidor le diga y a lo que el usuario quiera hacer en todo momento.
 - Las conexiones realizadas necesitan conocer **IP** o ***url*** y **puerto** para establecerse, aunque el puerto a veces no se indique si se conoce de antemano por la aplicación cliente ***(well known ports)*** como ocurre, por ejemplo, cuando solicitamos una ***URL*** desde el navegador (no hace falta indicar el puerto de conexión).
 
+[Sockets en Java](RC-1.md).
+
 ## Licencia 📄
 
 Este proyecto está bajo la Licencia (Apache 2.0) - mira el archivo [LICENSE.md](../../../LICENSE) para detalles
