@@ -1,4 +1,4 @@
-# <img src=../../../../images/computer.png width="40"> Code & Learn (Programación: Estructuras Condicionales en Java (if, if else, if else if y switch)
+# <img src=../../../../images/coding-book.png width="40"> Code & Learn (Programación: Estructuras Condicionales en Java (if, if else, if else if y switch)
 
 En Java, el flujo de ejecución es lineal, ejecutándose línea por línea en el orden en que aparece. Sin embargo, es fundamental tener sentencias para controlar el flujo de ejecución. Las estructuras condicionales permiten ejecutar partes del código según se cumplan ciertas condiciones. En Java, las estructuras condicionales básicas son:
 

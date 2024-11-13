@@ -1,6 +1,6 @@
 <div align="justify">
 
-# <img src=../../../images/computer.png width="40"> Code & Learn (Programación de Servicios)
+# <img src=../../../images/coding-book.png width="40"> Code & Learn (Programación de Servicios)
 
 ## Concurrencia
 

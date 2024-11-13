@@ -1,6 +1,6 @@
 <div align="justify">
 
-# <img src=../../../../images/computer.png width="40"> Code & Learn (Trabajo con elementos y ordenación)
+# <img src=../../../../images/coding-book.png width="40"> Code & Learn (Trabajo con elementos y ordenación)
 
 Supongamos que tenemos 5 números, puedes utilizar un enfoque simple de comparación e intercambio. Aquí tienes un ejemplo en Java:
 

@@ -1,6 +1,6 @@
 <div align="justify">
 
-# <img src=../../images/computer.png width="40"> Code & Learn (Integración de VSCODE con Diagrams.net (Draw.io)
+# <img src=../../images/coding-book.png width="40"> Code & Learn (Integración de VSCODE con Diagrams.net (Draw.io)
 
 Integración de Diagrams.net (Draw.io) en Visual Studio Code
 

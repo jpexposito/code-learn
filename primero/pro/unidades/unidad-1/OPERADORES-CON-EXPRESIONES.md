@@ -1,6 +1,6 @@
 <div align="justify">
 
-# <img src=../../../../images/computer.png width="40"> Code & Learn (Operadores y Expresiones en Java)
+# <img src=../../../../images/coding-book.png width="40"> Code & Learn (Operadores y Expresiones en Java)
 
 En Java, los operadores son símbolos especiales que realizan operaciones en uno o más operandos. Las expresiones son combinaciones de variables, valores y operadores que producen un resultado. Aquí tienes una explicación de los operadores más comunes en Java y cómo se utilizan en expresiones.
 

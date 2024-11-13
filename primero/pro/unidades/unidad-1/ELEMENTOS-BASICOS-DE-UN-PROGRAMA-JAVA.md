@@ -1,6 +1,6 @@
 <div align="justify">
 
-# <img src=../../../../images/computer.png width="40"> Code & Learn (Elementos básicos de un programa Java)
+# <img src=../../../../images/coding-book.png width="40"> Code & Learn (Elementos básicos de un programa Java)
 
 - [Estructura de un programa Java](ESTRUCTURA-DE-UN-PROGRAMA-JAVA.md).
 - [Variables y operadores](VARIABLES-Y-OPERADORES.md).

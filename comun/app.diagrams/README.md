@@ -1,6 +1,6 @@
 <div align="justify">
 
-# <img src=../../images/computer.png width="40"> Code & Learn (Integración de GitHub con Diagrams.net (Draw.io)
+# <img src=../../images/coding-book.png width="40"> Code & Learn (Integración de GitHub con Diagrams.net (Draw.io)
 
 Sigue estos pasos para integrar GitHub con [Diagrams.net (Draw.io)](https://app.diagrams.net/) y guardar, sincronizar y gestionar tus diagramas directamente en un repositorio de GitHub. Esta integración permite mantener los diagramas actualizados en el repositorio y colaborar fácilmente en proyectos.
 

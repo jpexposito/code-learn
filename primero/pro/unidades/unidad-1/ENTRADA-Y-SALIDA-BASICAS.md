@@ -1,6 +1,6 @@
 <div align="justify">
 
-# <img src=../../../../images/computer.png width="40"> Code & Learn (Entrada y salida básicas)
+# <img src=../../../../images/coding-book.png width="40"> Code & Learn (Entrada y salida básicas)
 
 En este apatado vamos a aprender a interactuar con el usuario final. En primer lugar, veremos cómo imprimir valores en la pantalla mediante diferentes instrucciones y, a continuación, veremos cómo recopilar información del teclado y convertirla al tipo de dato adecuado.
 

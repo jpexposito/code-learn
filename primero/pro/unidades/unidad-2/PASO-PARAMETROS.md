@@ -1,6 +1,6 @@
 <div align="justify">
 
-# <img src=../../../../images/computer.png width="40"> Code & Learn (Paso de Parámetros en Java)
+# <img src=../../../../images/coding-book.png width="40"> Code & Learn (Paso de Parámetros en Java)
 
 En Java, los métodos son bloques de código que realizan una tarea específica y pueden ser llamados desde otras partes del programa. Los métodos permiten modularizar y reutilizar código de manera eficiente.
 

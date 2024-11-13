@@ -1,6 +1,6 @@
 <div align="justify">
 
-# <img src=../../../../images/computer.png width="40"> Code & Learn (Clase String en Java)
+# <img src=../../../../images/coding-book.png width="40"> Code & Learn (Clase String en Java)
 
 La clase `String` en Java es inmutable y proporciona muchos __métodos útiles__ para manipular cadenas de caracteres. Algunos de los métodos más importantes son:
 

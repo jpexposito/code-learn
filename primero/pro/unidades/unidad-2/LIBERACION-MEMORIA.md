@@ -1,6 +1,6 @@
 <div align="justify">
 
-# <img src=../../../../images/computer.png width="40"> Code & Learn (Destrucción de Objetos y Liberación de Memoria en Java)
+# <img src=../../../../images/coding-book.png width="40"> Code & Learn (Destrucción de Objetos y Liberación de Memoria en Java)
 
 En Java, la gestión de memoria es manejada automáticamente por el __recolector de basura (garbage collector)__. Los desarrolladores __NO__ necesitan preocuparse explícitamente por la liberación de memoria, como en lenguajes de bajo nivel. Sin embargo, entender cómo funciona el proceso puede ser beneficioso. Aquí hay una descripción general:
 

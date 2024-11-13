@@ -1,6 +1,6 @@
 <div align="justify">
 
-# <img src=../../../../images/computer.png width="40"> Code & Learn (Clase Integer en Java)
+# <img src=../../../../images/coding-book.png width="40"> Code & Learn (Clase Integer en Java)
 
 La clase `Integer` en Java es una **clase envolvente** para el tipo primitivo `int`. Se utiliza para encapsular un valor primitivo en un objeto, lo que permite tratar los enteros como objetos en contextos donde los tipos primitivos no son aceptados (como en colecciones como `List`, `Set`, o `Map`).
 

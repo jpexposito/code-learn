@@ -1,6 +1,6 @@
 <div align="justify">
 
-# <img src=../../../../images/computer.png width="40"> Code & Learn (Métodos Estáticos en Java)
+# <img src=../../../../images/coding-book.png width="40"> Code & Learn (Métodos Estáticos en Java)
 
 En Java, un método estático es un método que pertenece a la clase en lugar de a una instancia específica de la clase. Esto significa que puedes llamar a un método estático sin necesidad de crear una instancia de la clase.
 

@@ -1,6 +1,6 @@
 <div align="justify">
 
-<img src=../../../../../images/computer.png width="40"> Code & Learn (Entornos de Desarrollo: Diagrama de Casos de Uso - Sistema de Biblioteca)
+<img src=../../../../../images/coding-book.png width="40"> Code & Learn (Entornos de Desarrollo: Diagrama de Casos de Uso - Sistema de Biblioteca)
 
 **Descripción**: El sistema de biblioteca permite a los usuarios buscar y solicitar préstamos de libros, y al personal de la biblioteca gestionar dichos préstamos. Además, el sistema puede enviar notificaciones y recordatorios de devolución cuando el préstamo está próximo a vencer, utilizando una relación de **inclusión** (`<<include>>`) y de **extensión** (`<<extend>>`).
 

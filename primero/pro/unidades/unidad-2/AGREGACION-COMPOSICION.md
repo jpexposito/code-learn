@@ -1,6 +1,6 @@
 <div align="justify">
 
-# <img src=../../../../images/computer.png width="40"> Code & Learn (Agregación y Composición en Programación Orientada a objetos)
+# <img src=../../../../images/coding-book.png width="40"> Code & Learn (Agregación y Composición en Programación Orientada a objetos)
 
 En Java, la __agregación y la composición__ son dos formas de __establecer relaciones entre clases y objetos__. Ambos son __mecanismos fundamentales__ para la construcción de __estructuras de datos complejas__.
 

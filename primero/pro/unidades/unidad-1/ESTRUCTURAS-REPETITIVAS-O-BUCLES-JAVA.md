@@ -1,4 +1,4 @@
-# <img src=../../../../images/computer.png width="40"> Code & Learn (Programación: Estructuras Repetitivas en Java (for/while/...)
+# <img src=../../../../images/coding-book.png width="40"> Code & Learn (Programación: Estructuras Repetitivas en Java (for/while/...)
 
 Los bucles, iteraciones o sentencias repetitivas modifican el flujo secuencial de un programa permitiendo la ejecución reiterada de una sentencia o sentencias. En Java hay tres tipos diferentes de bucles: for, while y do-while.
 

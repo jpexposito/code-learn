@@ -1,6 +1,6 @@
 <div align="justify">
 
-# <img src=../../../../images/computer.png width="40"> Code & Learn (Definición de Clases en Java)
+# <img src=../../../../images/coding-book.png width="40"> Code & Learn (Definición de Clases en Java)
 
 Una **clase** en Java es una plantilla que define la estructura y el comportamiento de los objetos que se crearán a partir de ella. Las clases encapsulan datos y métodos que operan sobre esos datos, permitiendo la creación de objetos que representan entidades del mundo real o conceptos abstractos en un programa.
 

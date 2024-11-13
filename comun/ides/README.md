@@ -1,6 +1,6 @@
 <div align="justify">
 
-# <img src=.../../../../images/computer.png width="40"> Code & Learn (IDE´s - VSCODE)
+# <img src=.../../../../images/coding-book.png width="40"> Code & Learn (IDE´s - VSCODE)
 
 ## VSCODE
 

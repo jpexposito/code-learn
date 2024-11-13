@@ -1,4 +1,4 @@
-# <img src=../../../../images/computer.png width="40"> Code & Learn (Programación: Introducción a la Programación)
+# <img src=../../../../images/coding-book.png width="40"> Code & Learn (Programación: Introducción a la Programación)
 
 ## Elementos de un programa informático
 

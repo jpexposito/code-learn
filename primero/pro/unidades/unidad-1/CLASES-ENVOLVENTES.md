@@ -1,6 +1,6 @@
 <div align="justify">
 
-# <img src=../../../../images/computer.png width="40"> Code & Learn (Clases envolventes)
+# <img src=../../../../images/coding-book.png width="40"> Code & Learn (Clases envolventes)
 
 Para cada uno de los tipos de datos primitivos existen una clase de envoltura asociada:
 

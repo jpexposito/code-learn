@@ -1,6 +1,6 @@
 <div align="justify">
 
-# <img src=../../../../images/computer.png width="40"> Code & Learn (Clases envolventes)
+# <img src=../../../../images/coding-book.png width="40"> Code & Learn (Clases envolventes)
 
 # Clases Envolventes en Java
 

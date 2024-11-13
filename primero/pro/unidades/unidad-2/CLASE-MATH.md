@@ -1,6 +1,6 @@
 <div align="justify">
 
-# <img src=../../../../images/computer.png width="40"> Code & Learn (Clase Math en Java)
+# <img src=../../../../images/coding-book.png width="40"> Code & Learn (Clase Math en Java)
 
 
 La clase `Math` en Java proporciona métodos estáticos para realizar operaciones matemáticas comunes, como exponentes, raíces, logaritmos, funciones trigonométricas y más. Esta clase no puede ser instanciada porque todos sus métodos son estáticos.

@@ -1,6 +1,6 @@
 <div align="justify">
 
-# <img src=../../../../images/computer.png width="40"> Code & Learn (Tipos de datos básicos)
+# <img src=../../../../images/coding-book.png width="40"> Code & Learn (Tipos de datos básicos)
 
 En secciones anteriores hemos hablado sobre variables. Hemos aprendido que podemos usarlas para almacenar valores, y que estos valores pueden ser de diferentes tipos. En esta sección vamos a aprender sobre los tipos de datos básicos que proporciona Java y cómo podemos usarlos para almacenar valores en nuestros programas.
 

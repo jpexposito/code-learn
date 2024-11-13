@@ -1,6 +1,6 @@
 <div align="justify">
 
-# <img src=../../../images/computer.png width="40"> Code & Learn (Atrapafichas)
+# <img src=../../../images/coding-book.png width="40"> Code & Learn (Atrapafichas)
 
 `Descripción`:
 **Atrapafichas** es un juego de estrategia y rapidez donde múltiples jugadores compiten por capturar un número limitado de fichas. Cada jugador debe apresurarse para atrapar una ficha antes de que se agoten, ya que solo unos pocos podrán salir victoriosos. El juego simula una situación de competencia en tiempo real, donde los jugadores deben coordinarse, ser rápidos y aprovechar las oportunidades antes que los demás.
