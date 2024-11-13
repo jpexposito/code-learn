@@ -17,6 +17,13 @@
 - [Introducción a Kubernetes]()
 -->
 
+## Nomenclatura
+
+A lo largo de este curso se utilizarán distintos símbolos para distinguir elementos importantes dentro del contenido. Estos símbolos son:
+
+- 📖 **Importante**
+- ❕ **Atención**
+- 💬 **Interesante**
 
 ## Bibliografía
 

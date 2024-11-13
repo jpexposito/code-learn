@@ -4,66 +4,27 @@
 
 | <img src=../images/logo-docker.png width="40"> | **Índice**                        |
 |--------------------------------|-----------------------------------|
- 1                              | [Introducción](#introduccion)                                                                   |
-| 2                              | [Conceptos previos](#conceptos-previos)                                                         |
-| 2.1                            | - [Virtualización](#virtualizacion)                                                             |
-| 2.2                            | - [¿Qué es una máquina virtual?](#que-es-una-maquina-virtual)                                   |
-| 2.3                            | - [¿Qué es una máquina virtual de proceso?](#que-es-una-maquina-virtual-de-proceso)             |
-| 2.4                            | - [¿Qué es un emulador?](#que-es-un-emulador)                                                   |
-| 2.5                            | - [¿Qué es un hipervisor?](#que-es-un-hipervisor)                                               |
-| 3                              | [Contenedores](#contenedores)                                                                   |
-| 3.1                            | - [¿Qué son los contenedores?](#que-son-los-contenedores)                                       |
-| 3.2                            | - [Analogía con contenedores de transporte marítimo](#analogia-con-contenedores-de-transporte-maritimo) |
-| 3.3                            | - [Contenedores para desarrollo y despliegue de aplicaciones](#contenedores-para-desarrollo-y-despliegue-de-aplicaciones) |
-| 3.4                            | - [Contenedores para despliegue de servicios](#contenedores-para-despliegue-de-servicios)       |
-| 3.5                            | - [Ventajas e inconvenientes del uso de contenedores](#ventajas-e-inconvenientes-del-uso-de-contenedores) |
-| 3.6                            | - [¿Cuándo es adecuado usar contenedores?](#cuando-es-adecuado-usar-contenedores)               |
-| 4                              | [Contenedores en sistemas Linux](#contenedores-en-sistemas-linux)                               |
-| 5                              | [Contenedores Docker](#contenedores-docker)                                                     |
+| 1                              | [Introducción](1-introducción)                                                                   |
+| 2                              | [Conceptos previos](#2-conceptos-previos)                                                         |
+| 2.1                            | - [Virtualización](#21-virtualización)                                                             |
+| 2.2                            | - [¿Qué es una máquina virtual?](#22-qué-es-una-máquina-virtual)                                   |
+| 2.3                            | - [¿Qué es una máquina virtual de proceso?](#23-qué-es-una-máquina-virtual-de-proceso)             |
+| 2.4                            | - [¿Qué es un emulador?](#24-qué-es-un-emulador)                                                   |
+| 2.5                            | - [¿Qué es un hipervisor?](#25-qué-es-un-hipervisor)                                               |
+| 3                              | [Contenedores](#3-contenedores)                                                                   |
+| 3.1                            | - [¿Qué son los contenedores?](#31-qué-son-los-contenedores)                                       |
+| 3.2                            | - [Analogía con contenedores de transporte marítimo](#32-analogía-con-contenedores-de-transporte-marítimo) |
+| 3.3                            | - [Contenedores para desarrollo y despliegue de aplicaciones](#33-contenedores-para-desarrollo-y-despliegue-de-aplicaciones) |
+| 3.4                            | - [Contenedores para despliegue de servicios](#34-contenedores-para-despliegue-de-servicios)       |
+| 3.5                            | - [Ventajas e inconvenientes del uso de contenedores](#35-ventajas-e-inconvenientes-del-uso-de-contenedores) |
+| 3.6                            | - [¿Cuándo es adecuado usar contenedores?](#36-cuándo-es-adecuado-usar-contenedores)               |
+| 4                              | [Contenedores en sistemas Linux](#4-contenedores-en-sistemas-linux)                              |
+| 4.1                            | - [¿Es nuevo el concepto de entornos privados en sistemas Unix?](#41-es-nuevo-el-concepto-de-entornos-privados-en-sistemas-unix) |
+| 4.3                            | - [¿Cómo funcionan los contenedores modernos en Linux? ](#43-cómo-funcionan-los-contenedores-modernos-en-linux) |
+| 5                              | [Contenedores Docker](#5-contenedores-docker)                                                    |
+| 5.1                            | - [¿Qué es Docker?](#51-qué-es-docker)                                                          |
 | 6                              | [Conclusión](#conclusion)                                                                       |
-| 7                              | [Bibliografía](#bibliografia)                                                                   |
-| 8                              | [Licencias de elementos externos utilizados](#licencias-de-elementos-externos-utilizados)       |
 
-
-## Nomenclatura
-
-A lo largo de este tema se utilizarán distintos símbolos para distinguir elementos importantes dentro del contenido. Estos símbolos son:
-
-- 📖 **Importante**
-- ❕ **Atención**
-- 💬 **Interesante**
-
----
-
-## Índice
-
-- [ Code \& Learn (“”)](#-code--learn-)
-  - [Nomenclatura](#nomenclatura)
-  - [Índice](#índice)
-  - [1. Introducción](#1-introducción)
-  - [2. Conceptos Previos](#2-conceptos-previos)
-    - [2.1 Virtualización](#21-virtualización)
-    - [2.2 ¿Qué es una máquina virtual?](#22-qué-es-una-máquina-virtual)
-    - [2.3 ¿Qué es una máquina virtual de proceso?](#23-qué-es-una-máquina-virtual-de-proceso)
-    - [2.4 ¿Qué es un emulador?](#24-qué-es-un-emulador)
-    - [2.5 ¿Qué es un hipervisor?](#25-qué-es-un-hipervisor)
-  - [3. Contenedores](#3-contenedores)
-    - [3.1 ¿Qué son los contenedores?](#31-qué-son-los-contenedores)
-    - [3.2 Analogía con contenedores de transporte marítimo](#32-analogía-con-contenedores-de-transporte-marítimo)
-    - [3.3 Contenedores para desarrollo y despliegue de aplicaciones](#33-contenedores-para-desarrollo-y-despliegue-de-aplicaciones)
-    - [3.4 Contenedores para despliegue de servicios](#34-contenedores-para-despliegue-de-servicios)
-    - [3.5 Ventajas e inconvenientes del uso de contenedores](#35-ventajas-e-inconvenientes-del-uso-de-contenedores)
-    - [3.6 ¿Cuándo es adecuado usar contenedores?](#36-cuándo-es-adecuado-usar-contenedores)
-  - [4. Contenedores en sistemas Linux](#4-contenedores-en-sistemas-linux)
-    - [4.1 ¿Es nuevo el concepto de entornos privados en sistemas Unix?](#41-es-nuevo-el-concepto-de-entornos-privados-en-sistemas-unix)
-    - [4.2 Sistemas privados modernos en Linux: contenedores](#42-sistemas-privados-modernos-en-linux-contenedores)
-    - [4.3 ¿Cómo funcionan los contenedores modernos en Linux?](#43-cómo-funcionan-los-contenedores-modernos-en-linux)
-  - [5. Contenedores Docker](#5-contenedores-docker)
-    - [5.1 ¿Qué es Docker?](#51-qué-es-docker)
-  - [6. Conclusión](#6-conclusión)
-  - [Licencia 📄](#licencia-)
-
----
 
 ## 1. Introducción
 
