@@ -1,6 +1,6 @@
 <div align="justify">
 
-# <img src=.../../../../../images/coding-book.png width="40"> Code & Learn (“”)
+# <img src=.../../../../../images/coding-book.png width="40"> Code & Learn ( Introducción a los contenedores y a Docker”)
 
 | <img src=../images/logo-docker.png width="40"> | **Índice**                        |
 |--------------------------------|-----------------------------------|
