@@ -67,6 +67,12 @@ Los contenedores son una forma de virtualización que, en lugar de emular un sis
 
 > **Nota:** Esto implica que no se pueden ejecutar contenedores en sistemas operativos diferentes al de la máquina anfitrión sin virtualización adicional.
 
+*La siguiente imagen puede ayudarnos a entender el concepto de contenedor.*
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/0/0a/Docker-containerized-and-vm-transparent-bg.png">
+
+*A la derecha observamos el funcionamiento de un hipervisor, encargado de virtualizar el hardware y* ***donde cada máquina virtual tiene su propio sistema operativo***. *A la izquierda, observamos un sistema de contenedores, donde* ***no existe esa virtualización del hardware y cada contenedor es un entorno privado***.
+
 ### 3.2 Analogía con contenedores de transporte marítimo
 
 Para entender los contenedores, es útil compararlos con los contenedores de transporte marítimo, que deben cumplir con estándares para ser transportados, pero la carga en su interior puede variar. Los contenedores virtuales también deben cumplir estándares para funcionar en diferentes entornos.
@@ -77,9 +83,20 @@ Los contenedores facilitan el desarrollo, distribución y despliegue de aplicaci
 
 > 💬 **Interesante:** Muchos sistemas de CI/CD (Continuous Integration/Continuous Delivery) utilizan contenedores.
 
+<img src="https://miro.medium.com/v2/resize:fit:936/1*LPKv8WUeZTLdOqANWkdIuQ.png">
+
+
 ### 3.4 Contenedores para despliegue de servicios
 
 Otro uso importante de los contenedores es en el despliegue de servidores (web, correo, bases de datos, DNS, etc.). Los contenedores permiten mantener configuraciones de servidores que se pueden replicar en distintos entornos, como local o en la nube.
+
+Además de las ventajas anteriormente citadas de mantener versiones de software, los
+contenedores nos permiten unificar configuraciones de servidores en local, incluso involucrando a
+distintos servicios en distintos contenedores, de forma que al desplegarlos en la nube, funcionen
+exactamente igual que en las pruebas realizadas localmente.
+
+❕ ​ Atención: ​ “En mi máquina funcionaba … falla solo al subirlo al servidor … ” ​. El uso de
+contenedores contribuye a que esta situación desaparezca 🙂
 
 ### 3.5 Ventajas e inconvenientes del uso de contenedores
 
