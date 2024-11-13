@@ -16,6 +16,13 @@
 <!--
 - [Introducción a Kubernetes]()
 -->
+
+
+## Bibliografía
+
+1. [WizardZines “How containers work”](https://wizardzines.com/zines/containers/)
+2. [Docker Docs](https://docs.docker.com/)
+
 ## Licencia 📄
 
 Este proyecto está bajo la Licencia (Apache 2.0) - mira el archivo [LICENSE.md](../../LICENSE) para detalles.
