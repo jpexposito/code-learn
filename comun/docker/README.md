@@ -4,13 +4,15 @@
 
 ## ¿Qué vamos a aprender?
 
-- [Introducción a los contenedores y a Docker](ud-1)
-- [Instalación de Docker](ud-2)
-- [Principales acciones con Docker](ud-3)
-- [Gestión de imagenes en Docker](ud-4)
-- [Redes y volúmenes en Docker](ud-5)
-- [Docker Compose](ud-6)
-- [Utilidades para gestionar Docker](ud-7)
+| <img src=images/logo-docker.png width="40"> | **Índice**              |
+|-------------------------|-------------------------|
+| 1                       |  [Introducción a los contenedores y a Docker](ud-1)
+| 2                       |  [Instalación de Docker](ud-2)
+| 3                       |  [Principales acciones con Docker](ud-3)
+| 4                       |  [Gestión de imagenes en Docker](ud-4)
+| 5                       |  [Redes y volúmenes en Docker](ud-5)
+| 6                       |  [Docker Compose](ud-6)
+| 7                       |  [Utilidades para gestionar Docker](ud-7)
 <!--
 - [Introducción a Kubernetes]()
 -->
