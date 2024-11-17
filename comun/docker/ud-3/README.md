@@ -382,8 +382,6 @@ También, en el momento de la creación de imágenes, se puede establecer variab
 
 [1] Docker Docs <https://docs.docker.com/> 
 
-![imagen licencia](../images/licencia.png)
-
 ## Licencia 📄
 
 Este proyecto está bajo la Licencia (Apache 2.0) - mira el archivo [LICENSE.md](../../LICENSE) para detalles.
