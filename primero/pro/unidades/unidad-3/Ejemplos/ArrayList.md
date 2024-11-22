@@ -1,6 +1,4 @@
-<div align="justify">
-
-# Ejemplos de trabajo con Collection (ArrayList)
+# <img src=../../../../../images/coding-book.png width="40"> Code & Learn (Ejemplos de trabajo con Collection (ArrayList)
 
 ## Almacenar y Manipular Elementos de Tipo String
 
@@ -139,5 +137,9 @@ public class EjemploArrayListIterador {
     }
 }
 ```
+
+## Licencia 📄
+
+Este proyecto está bajo la Licencia (Apache 2.0) - mira el archivo [LICENSE.md](../../../../../../LICENSE) para detalles.
 
 </div>

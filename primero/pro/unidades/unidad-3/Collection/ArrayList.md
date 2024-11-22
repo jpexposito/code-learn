@@ -89,6 +89,53 @@ while (iterador.hasNext()) {
 }
 ```
 
+## Comparación de uso entre `ArrayList` y Array en Java
+
+| **Operación**               | **Ejemplo con ArrayList**                                      | **Ejemplo con Array**                                 |
+|-----------------------------|---------------------------------------------------------------|------------------------------------------------------|
+| **Declaración**             | `ArrayList<Integer> list = new ArrayList<>();`                | `int[] array = new int[5];`                         |
+| **Añadir un elemento**      | `list.add(10);`                                               | `array[0] = 10;`                                    |
+| **Acceder a un elemento**   | `int val = list.get(0);`                                      | `int val = array[0];`                               |
+| **Modificar un elemento**   | `list.set(0, 20);`                                            | `array[0] = 20;`                                    |
+| **Eliminar un elemento**    | `list.remove(0);`                                             | No permitido (requiere crear un nuevo array)        |
+| **Tamaño de la colección**  | `int size = list.size();`                                     | `int length = array.length;`                        |
+| **Buscar un elemento**      | `boolean contains = list.contains(10);`                      | Iteración manual para buscar elementos              |
+| **Limpiar la colección**    | `list.clear();`                                               | Crear un nuevo array vacío                          |
+| **Iteración**               | ```java                                                     | ```java                                            |
+|                             | for (int val : list) { System.out.println(val); }            | for (int val : array) { System.out.println(val); } |
+|                             | ```                                                          | ```                                               |
+| **Convertir a Array**       | `Integer[] arr = list.toArray(new Integer[0]);`               | No necesita conversión (ya es un array)            |
+| **Ventaja clave**           | Redimensionamiento dinámico y métodos utilitarios integrados  | Manejo más rápido y sencillo de datos fijos         |
+
+## Ejemplo Detallado
+
+| **Código con ArrayList**                                                                                  | **Código con Array**                                                                                   |
+|-----------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
+| ```java                                                                                                   | ```java                                                                                              |
+| import java.util.ArrayList;                                                                               | public class ArrayExample {                                                                          |
+| public class ArrayListExample {                                                                           |     public static void main(String[] args) {                                                         |
+|     public static void main(String[] args) {                                                              |         int[] array = new int[3];                                                                    |
+|         ArrayList<Integer> list = new ArrayList<>();                                                      |                                                                                                      |
+|         // Añadir elementos                                                                              |         // Añadir elementos                                                                          |
+|         list.add(10);                                                                                     |         array[0] = 10;                                                                               |
+|         list.add(20);                                                                                     |         array[1] = 20;                                                                               |
+|                                                                                                           |                                                                                                      |
+|         // Acceder y modificar                                                                           |         // Acceder y modificar                                                                       |
+|         System.out.println("Elemento en índice 1: " + list.get(1));                                       |         System.out.println("Elemento en índice 1: " + array[1]);                                     |
+|         list.set(1, 30);                                                                                  |         array[1] = 30;                                                                               |
+|                                                                                                           |                                                                                                      |
+|         // Eliminar elementos                                                                            |         // No se puede eliminar directamente                                                        |
+|         list.remove(0);                                                                                   |                                                                                                      |
+|                                                                                                           |                                                                                                      |
+|         // Iterar                                                                                        |         // Iterar                                                                                    |
+|         for (int val : list) {                                                                            |         for (int val : array) {                                                                      |
+|             System.out.println("Valor: " + val);                                                         |             System.out.println("Valor: " + val);                                                     |
+|         }                                                                                                |         }                                                                                           |
+|     }                                                                                                    |     }                                                                                               |
+| }                                                                                                        | }                                                                                                   |
+| ```                                                                                                      | ```                                                                                                 |
+
+
 ## Licencia 📄
 
 Este proyecto está bajo la Licencia (Apache 2.0) - mira el archivo [LICENSE.md](../../../../../../../../../LICENSE) para detalles.

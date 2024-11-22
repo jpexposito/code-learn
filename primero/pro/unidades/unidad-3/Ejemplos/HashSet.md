@@ -1,6 +1,6 @@
 <div align="justify">
 
-# Ejemplos de trabajo con Collection (HashSet)
+# <img src=../../../../../images/coding-book.png width="40"> Code & Learn (Ejemplos de trabajo con Collection (Ejemplos de trabajo con Collection (HashSet)
 
 ## Agregar Alumnos al Registro
 
@@ -214,5 +214,10 @@ public class Ejercicio10 {
     }
 }
 ```
+
+## Licencia 📄
+
+Este proyecto está bajo la Licencia (Apache 2.0) - mira el archivo [LICENSE.md](../../../../../../LICENSE) para detalles.
+
 
 </div>

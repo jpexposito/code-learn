@@ -1,5 +1,7 @@
 <div align="justify">
 
+# <img src=../../../../../images/coding-book.png width="40"> Code & Learn (Maps)
+
 # Mapas
 
 Un mapa en Java es una interfaz que representa una colección de pares __clave-valor__, donde cada __clave es única__ y se __asigna a un único valor__. La principal característica de los mapas es que __NO permiten claves duplicadas__.

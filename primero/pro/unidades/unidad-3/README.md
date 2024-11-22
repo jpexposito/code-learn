@@ -68,8 +68,10 @@ __Map__ es la __interfaz__ principal para los __mapas__.
 _HashMap_, _Hashtable_, _LinkedHashMap_, _TreeMap_, y _IdentityHashMap_ son __IMPLEMENTACIONES ESPECÍFICAS__ de la interfaz __Map__.
 Es importante destacar que _Hashtable_ es una implementación más antigua y está sincronizada, lo que significa que es segura para operaciones en __entornos concurrentes__ pero puede tener un rendimiento inferior en comparación con las implementaciones no sincronizadas más modernas, como HashMap.
 
-- [Creación de arrays](Creacion-de-arrays.md)
-- [Colecciones](Collection/README.md)
+- [Creación de arrays](CREACION-DE-ARRAYS.md)
+- [Colecciones](collection/README.md)
+  - [ArrayList](collection/ARRAYLIST.md)
+    - [Ejemplo](ejemplos/ARRAYLIST.md)
 - [Maps](Map/README.md)
 
 ## Licencia 📄
