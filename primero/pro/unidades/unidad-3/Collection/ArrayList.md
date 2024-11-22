@@ -1,6 +1,6 @@
 <div align="justify">
 
-# ArrayList
+# <img src=../../../../../images/coding-book.png width="40"> Code & Learn (ArrayList)
 
 ## Método más utilizados
 
@@ -88,4 +88,9 @@ while (iterador.hasNext()) {
     System.out.println(elemento);
 }
 ```
+
+## Licencia 📄
+
+Este proyecto está bajo la Licencia (Apache 2.0) - mira el archivo [LICENSE.md](../../../../../../../../../LICENSE) para detalles.
+
 </div>

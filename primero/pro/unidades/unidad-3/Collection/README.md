@@ -1,6 +1,6 @@
 <div align="justify">
 
-# Colecciones
+# <img src=../../../../../images/coding-book.png width="40"> Code & Learn (Colecciones)
 
 Java proporciona una amplia variedad de estructuras de datos a través del framework de Colecciones __(Collections Framework)__. Estas __colecciones__ facilitan el _almacenamiento, manipulación y gestión de grupos de objetos_. Las principales interfaces y clases relacionadas con colecciones en Java se encuentran en el paquete __java.util__.
 
@@ -155,5 +155,9 @@ Un mapa en Java es una interfaz que representa una colección de pares __clave-v
 - **remove(Object key):** Elimina la clave y su valor asociado del mapa.
 - **containsKey(Object key):** Verifica si el mapa contiene la clave especificada.
 - **containsValue(Object value):** Verifica si el mapa contiene el valor especificado.
+
+## Licencia 📄
+
+Este proyecto está bajo la Licencia (Apache 2.0) - mira el archivo [LICENSE.md](../../../../LICENSE) para detalles.
 
 </div>
