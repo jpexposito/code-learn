@@ -1,4 +1,0 @@
-
-<div align="justify">
-
-</div>
