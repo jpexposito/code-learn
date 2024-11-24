@@ -109,33 +109,39 @@ while (iterador.hasNext()) {
 
 ## Ejemplo Detallado
 
-| **Código con ArrayList**                                                                                  | **Código con Array**                                                                                   |
-|-----------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
-| ```java                                                                                                   | ```java                                                                                              |
-| import java.util.ArrayList;                                                                               | public class ArrayExample {                                                                          |
-| public class ArrayListExample {                                                                           |     public static void main(String[] args) {                                                         |
-|     public static void main(String[] args) {                                                              |         int[] array = new int[3];                                                                    |
-|         ArrayList<Integer> list = new ArrayList<>();                                                      |                                                                                                      |
-|         // Añadir elementos                                                                              |         // Añadir elementos                                                                          |
-|         list.add(10);                                                                                     |         array[0] = 10;                                                                               |
-|         list.add(20);                                                                                     |         array[1] = 20;                                                                               |
-|                                                                                                           |                                                                                                      |
-|         // Acceder y modificar                                                                           |         // Acceder y modificar                                                                       |
-|         System.out.println("Elemento en índice 1: " + list.get(1));                                       |         System.out.println("Elemento en índice 1: " + array[1]);                                     |
-|         list.set(1, 30);                                                                                  |         array[1] = 30;                                                                               |
-|                                                                                                           |                                                                                                      |
-|         // Eliminar elementos                                                                            |         // No se puede eliminar directamente                                                        |
-|         list.remove(0);                                                                                   |                                                                                                      |
-|                                                                                                           |                                                                                                      |
-|         // Iterar                                                                                        |         // Iterar                                                                                    |
-|         for (int val : list) {                                                                            |         for (int val : array) {                                                                      |
-|             System.out.println("Valor: " + val);                                                         |             System.out.println("Valor: " + val);                                                     |
-|         }                                                                                                |         }                                                                                           |
-|     }                                                                                                    |     }                                                                                               |
-| }                                                                                                        | }                                                                                                   |
-| ```                                                                                                      | ```                                                                                                 |
+
+```java
+
+import java.util.ArrayList;
+
+public class ArrayListExample {
+    public static void main(String[] args) {
+        List<Integer> lista = new ArrayList<>();
+        
+        // incluir elementos
+        lista.add(10);
+        lista.add(20);
+        
+        // Acceder y modificar
+        System.out.println("Elemento en índice 1: " + list.get(1));
+        lista.set(1, 30);
+        
+        // Eliminar elementos
+        lista.remove(0);
+        
+        // Iterar
+        for (int val : list) {
+            System.out.println("Valor: " + val);
+        }
+
+        //Optimo
+        System.out.println("Forma Óptima: " + lista.toString());
+        ;
+    }
+}
 
 
+```                                                                                              
 ## Licencia 📄
 
 Este proyecto está bajo la Licencia (Apache 2.0) - mira el archivo [LICENSE.md](../../../../../../../../../LICENSE) para detalles.
