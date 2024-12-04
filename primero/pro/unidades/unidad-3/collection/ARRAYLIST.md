@@ -89,6 +89,26 @@ while (iterador.hasNext()) {
 }
 ```
 
+Un **iterador** en Java es un objeto que permite recorrer una colección de elementos, como una lista o un conjunto, de una manera controlada y uniforme. Los iteradores pertenecen a la interfaz `Iterator` y proporcionan métodos para navegar por los elementos de la colección sin exponer los detalles internos de su implementación.
+
+La interfaz `Iterator` está definida en el paquete `java.util` y proporciona tres métodos principales:
+
+- **`hasNext()`**: Devuelve `true` si hay más elementos en la colección.
+- **`next()`**: Devuelve el siguiente elemento de la colección.
+- **`remove()`**: Elimina el último elemento devuelto por el iterador (opcional y depende de la implementación).
+
+### Similitudes y diferencias entre Iterador, `for` y `foreach`
+
+| **Característica**           | **Iterador**                                                                                     | **for tradicional**                                              | **foreach (for-each)**                                           |
+|-------------------------------|--------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|------------------------------------------------------------------|
+| **Propósito**                | Navegar manualmente por una colección, con mayor control sobre la operación (como eliminación). | Recorrer elementos usando un índice explícito.                   | Recorrer elementos de una colección de forma sencilla y legible.|
+| **Flexibilidad**             | Permite operaciones avanzadas como eliminar mientras se recorre la colección.                   | Se basa en índices, limitado a estructuras indexadas.             | No permite modificar la colección directamente.                 |
+| **Uso**                      | Adecuado para colecciones como listas, conjuntos y mapas.                                       | Adecuado para arrays o listas indexadas.                         | Ideal para iterar sobre cualquier colección de forma simple.    |
+| **Necesidad de índice**      | No requiere índices, ya que navega internamente.                                                | Necesita índices.                                                | No necesita índices.                                            |
+| **Legibilidad**              | Más detallado pero menos legible que `foreach`.                                                 | Menos legible que `foreach`.                                     | Más legible y conciso.                                          |
+| **Eliminación de elementos** | Permite eliminar elementos de la colección durante la iteración.                                | No permite eliminar elementos.                                   | No permite eliminar elementos.                                 |
+
+
 ## Comparación de uso entre `ArrayList` y Array en Java
 
 | **Operación**               | **Ejemplo con ArrayList**                                      | **Ejemplo con Array**                                 |
