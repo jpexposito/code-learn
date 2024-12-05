@@ -24,6 +24,8 @@ Colección ordenada que __PERMITE__ elementos duplicados.
 Colección que __NO PERMITE__ elementos duplicados. __NO GARANTIZA__ un orden específico.
 >Nota: __Implementaciones notables: HashSet, TreeSet, y LinkedHashSet__.
 
+- [HashSet](HASHSET.md)
+
 #### Queue
 
 Colección diseñada para mantener una secuencia específica para insertar y acceder a los elementos.
