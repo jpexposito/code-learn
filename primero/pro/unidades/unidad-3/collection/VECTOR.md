@@ -6,7 +6,7 @@ En Java, un **Vector** es una clase de la `colección` que implementa una estruc
 
 1. **Es sincronizado (Thread-safe):** Esto significa que los métodos de la clase `Vector` están sincronizados, lo que permite que varios hilos accedan al mismo objeto `Vector` de manera segura. Sin embargo, esto puede tener un impacto negativo en el rendimiento en escenarios de un solo hilo.
 
-> Se suelen utilizar en escenarios me mucha carga.
+> Se suelen utilizar en escenarios de mucha carga.
 
 2. **Capacidad dinámica:** Un `Vector` puede cambiar su tamaño dinámicamente para acomodar más elementos, eliminando la necesidad de declarar una capacidad fija al momento de crearlo.
 
