@@ -96,9 +96,9 @@
 
 ## Conclusión
 
-Spring es un framework versátil y robusto que ha evolucionado para cubrir una amplia gama de necesidades en el desarrollo de aplicaciones Java. Su modularidad, compatibilidad y extensibilidad lo convierten en una solución ideal para proyectos de cualquier tamaño, desde pequeñas aplicaciones hasta sistemas empresariales complejos. 
+Spring es un framework versátil y robusto que ha evolucionado para cubrir una amplia gama de necesidades en el desarrollo de aplicaciones Java. Su modularidad, compatibilidad y extensibilidad lo convierten en una solución ideal para proyectos de cualquier tamaño, desde pequeñas aplicaciones hasta sistemas empresariales complejos.
 
-
+> [Ejemplo Spring Rest](SPRING-REST.md).
 
 </div>
 

@@ -125,7 +125,7 @@ Los servicios web son una forma de comunicación entre aplicaciones distribuidas
 
 En resumen, SOAP y REST son herramientas poderosas, pero cada una es adecuada para diferentes necesidades. REST es generalmente preferido por su simplicidad y rendimiento, mientras que SOAP es más adecuado para entornos empresariales con requisitos complejos.
 
-> [Spring](SPRING.md.md).
+> [Spring](SPRING.md).
 
 ## Licencia 📄
 
