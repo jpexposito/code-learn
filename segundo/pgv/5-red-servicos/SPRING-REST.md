@@ -276,7 +276,9 @@ spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
 spring.jpa.hibernate.ddl-auto = update
 ```
 
-> La implementación completa del servicio se encuentra en la [siguiente url](https://github.com/jpexposito/spring-boot-persistence-h2).
+> La implementación completa del servicio se encuentra en las siguientes url:
+> - [Servicio](https://github.com/jpexposito/spring-boot-persistence-h2).
+> - [Clente Servicio](https://github.com/jpexposito/spring-boot-persistence-h2-client).
 
 ## Licencia 📄
 
