@@ -1,9 +1,10 @@
-# <img src=../images/coding-book.png width="40"> Code & Learn (Primero).
-
-_Descripción general del enfoque del repositorio_
+# <img src=../images/coding-book.png width="40"> Code & Learn (Primero)
 
 ## Asignaturas
 
+- [Programación](pro/)
+- [Entornos de desarrollo](ets/)
+- [Base de datos](bae/)
 
 ## Licencia 📄
 

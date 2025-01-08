@@ -1,19 +1,19 @@
 # Code & Learn <img src=images/coding-book.png width="40">
 
-_Descripción general del enfoque del repositorio_
+Este repositorio está diseñado para ser un recurso completo y actualizado para la enseñanza de los ciclos formativos de Grado Superior en Desarrollo de Aplicaciones Multiplataforma (DAM) y Desarrollo de Aplicaciones Web (DAW). Contiene una amplia variedad de materiales didácticos, ejemplos prácticos, ejercicios, proyectos y recursos adicionales, con el objetivo de apoyar tanto a profesores como a estudiantes en su aprendizaje y enseñanz
 
 ## Comenzando 🚀
 
-_Estas instrucciones te permitirán obtener una._
+El respositorio se encuentra estructurado por cursos:
 
+- [Primero](primero/)
+- [Segundo](segundo/)
 
 ### Pre-requisitos 📋
 
--java 17
-
-```code
-java -version
-```
+- Java 17
+- Sqlite3
+- Ganas y trabajo
 
 ## Autor ✒️
 
