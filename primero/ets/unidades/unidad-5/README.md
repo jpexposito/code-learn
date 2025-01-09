@@ -1,6 +1,6 @@
 <div align="justify">
 
-# Diagramas de Páquetes
+# <img src=../../../../images/coding-book.png width="40"> Code & Learn (Entornos de Desarrollo: Elaboración de Paquetes)
 
 ## ¿Qué son los Diagramas de Paquetes?
 
@@ -175,5 +175,8 @@ A continuación se muestra, a modo de ejemplo, un diagrama de paquetes de una ap
 >__Nota__: __mermaid__ no soporta diagrama de paquetes pero puedes simularlo de la siguiente forma.
 ---
 
+## Licencia 📄
+
+Este proyecto está bajo la Licencia (Apache 2.0) - mira el archivo [LICENSE.md](../../LICENSE.md) para detalles.
 
 </div>
