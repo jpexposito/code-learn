@@ -1,3 +1,5 @@
+<div align="justify">
+
 # <img src=../../../../images/coding-book.png width="40"> Code & Learn (Programación: Sistema de Ficheros)
 
 ## Manejo de Archivos en Java
@@ -235,3 +237,5 @@ public class FilePropertiesDemo {
 Este texto explica cómo interactuar con archivos en Java utilizando la clase `File`. Se detallan los constructores y métodos más comunes de esta clase, que permiten verificar propiedades de los archivos, como su existencia, permisos de lectura y escritura, y si es un directorio o archivo, entre otros. Además, se describe cómo crear un archivo si no existe.
 
 La clase `File` es una herramienta indispensable para gestionar archivos en Java, y comprender sus métodos permite desarrollar aplicaciones que manejen eficientemente el sistema de archivos.
+
+</div>
