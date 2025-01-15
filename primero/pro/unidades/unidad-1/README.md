@@ -176,7 +176,6 @@ Antes de empezar con Java, es necesario tener claros algunos conceptos sobre los
 - [Estructuras condicionales en java](ESTRUCTURAS-CONDICIONALES-JAVA.md)
 - [Cómo escribir código limpio](COMO-ESCRIBIR-CODIGO-LIMPIO.md).
 
-
 ## Licencia 📄
 
-Este proyecto está bajo la Licencia (Apache 2.0) - mira el archivo [LICENSE.md](../LICENSE.md) para detalles
+Este proyecto está bajo la Licencia (Apache 2.0) - mira el archivo [LICENSE.md](../LICENSE.md) para detalles.
