@@ -107,6 +107,55 @@ try {
 }
 ```
 
+## Bloque `finally`
+
+El bloque `finally` es una sección opcional que puedes incluir después de un bloque `try-catch`. Este bloque **siempre se ejecutará** independientemente de si se lanza o no una excepción. Es útil para realizar tareas de limpieza o liberar recursos que deben ejecutarse sin importar si hubo o no una excepción (por ejemplo, cerrar archivos o conexiones a bases de datos).
+
+El bloque `finally` se ejecuta después del bloque `try` y `catch`, incluso si hay un `return` dentro del `try` o `catch`. Esto garantiza que el código de limpieza siempre se ejecute.
+
+```java
+try {
+    // Código que puede generar una excepción
+} catch (TipoDeExcepcion e) {
+    // Código para manejar la excepción
+} finally {
+    // Código que siempre se ejecutará
+}
+```
+
+### Ejemplo de uso
+
+Un ejemplo de uso es el siguiente:
+
+```java
+public void ejemploFinally() {
+    try {
+        // Intentamos dividir entre 0
+        int resultado = 10 / 0;  // Esto lanza una ArithmeticException
+    } catch (ArithmeticException e) {
+        // Capturamos y manejamos la excepción
+        System.out.println("Error: No se puede dividir entre cero.");
+    } finally {
+        // Este bloque siempre se ejecuta
+        System.out.println("Este bloque siempre se ejecuta, independientemente de lo que ocurra.");
+    }
+}
+```
+
+### Características del Bloque `finally`
+
+- **Ejecución garantizada**: El bloque `finally` se ejecutará siempre, ya sea que ocurra una excepción o no.
+- **Liberación de recursos**: Es útil para liberar recursos, como cerrar archivos, conexiones a bases de datos o liberar memoria, ya que se asegura de que estos recursos se liberen al final de la ejecución, sin importar si hubo o no una excepción.
+- **Flujo de control**: Aunque el bloque `finally` se ejecuta incluso si ocurre una excepción, no puede evitar que la excepción se propague si no se maneja correctamente en el bloque `catch`.
+
+## Consideraciones Importantes
+
+- Si el bloque `try` no lanza ninguna excepción, el bloque `catch` se omite, pero el bloque `finally` se ejecutará de todas maneras.
+- Si no hay ninguna excepción, el flujo de control sigue normalmente al finalizar el bloque `finally`.
+- Si el bloque `finally` contiene un `return`, este valor puede sobrescribir cualquier valor de retorno previamente definido en el bloque `try` o `catch`. Sin embargo, se recomienda tener precaución al usar `return` en el bloque `finally`.
+
+> *El uso de bloques `try-catch` junto con el bloque `finally` es fundamental para manejar excepciones de manera eficaz en Java. El bloque `finally` garantiza que las tareas de limpieza se realicen siempre, independientemente de si ocurrió una excepción. Esto permite que las aplicaciones sean más robustas y resilientes frente a errores, mejorando la gestión de recursos y evitando posibles fugas de recursos.*
+
 ### Palabra clave throws
 
 La palabra clave `throws` se utiliza en la declaración de un método para indicar que el método puede generar una o más excepciones. Si un método puede generar una excepción comprobada, debe declararla utilizando `throws`.
