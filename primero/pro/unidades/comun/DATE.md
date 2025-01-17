@@ -2,11 +2,32 @@
 
 # <img src=../../../../images/coding-book.png width="40"> Code & Learn (DATE)
 
-# Documentación de Trabajo con Fechas en Java
+## `Date` en Java
+
+La clase `Date` pertenece al paquete `java.util` y representa un instante específico en el tiempo, con precisión hasta los milisegundos. Originalmente, `Date` era la clase principal para representar fechas en Java, pero tiene varios inconvenientes, como el manejo implícito de horas y la falta de claridad en la API para trabajar solo con fechas.
+
+Aunque sigue siendo válida, la clase `Date` ha sido reemplazada en gran medida por la nueva API de fechas y horas de Java 8 (`java.time`), que es más flexible y segura para trabajar con fechas y horas.
+
+## Características de 
+
+`Date`:
+
+- Representa un **instante específico en el tiempo** (fecha y hora), almacenado en milisegundos desde la **época Unix** (1 de enero de 1970).
+- La clase es **mutable**, lo que significa que su estado puede cambiar después de ser creada.
+- Utiliza **milisegundos** como unidad de tiempo.
+- Es **no segura para hilos**, lo que significa que no puede ser usada de manera concurrente sin protección adicional.
+- **Métodos obsoletos** como `getYear()`, `getMonth()`, `getDate()`, etc., que no son recomendados para su uso.
+
+### Ejemplo básico
+
+```java
+    fechaActual = new Date();
+    System.out.println("Fecha actual: " + fechaActual);
+```
 
 En Java, el manejo de fechas y horas es un aspecto esencial para muchas aplicaciones. A partir de **Java 8**, se introdujo el paquete `java.time`, el cual proporciona una nueva API para trabajar con fechas y tiempos de manera más eficiente y sencilla. Esta documentación cubre las principales clases y métodos para trabajar con fechas en Java, desde la manipulación básica hasta las operaciones avanzadas.
 
-## 1. Importación de Clases
+## Importación de Clases
 
 Para utilizar las funcionalidades de fechas y tiempos, es necesario importar las clases adecuadas del paquete `java.time`.
 
@@ -29,20 +50,40 @@ import java.time.format.DateTimeFormatter;
 - **`ZoneId`**: Representa una zona horaria.
 - **`ZonedDateTime`**: Fecha y hora con zona horaria.
 
-## 2. Creación de Fechas y Horas
+## Creación de Fechas y Horas
 
 ### `LocalDate`
 
 Permite crear una fecha con año, mes y día.
 
 ```java
+LocalDate fechaActual = LocalDate.now();
+        System.out.println("Fecha actual: " + fechaActual);
 ```
 
+# Diferencias entre `Date` y `LocalDate`
+
+A continuación se presentan las principales diferencias entre la clase `Date` (de `java.util`) y la clase `LocalDate` (de `java.time`):
+
+| Característica            | `Date`                                         | `LocalDate`                                    |
+|---------------------------|-----------------------------------------------|------------------------------------------------|
+| **Paquete**               | `java.util`                                   | `java.time`                                    |
+| **Tipo de dato**          | Representa una **fecha y hora** (con precisión en milisegundos). | Representa solo una **fecha** (sin hora).      |
+| **Precisión**             | Precisión de **milisegundos**, incluye fecha y hora. | Precisión de **días** (solo la parte de la fecha). |
+| **Mutabilidad**           | **Mutable**, su estado puede modificarse después de ser creado. | **Inmutable**, su valor no puede cambiar después de ser creado. |
+| **Operaciones de fecha**  | Necesita clases adicionales como `Calendar` o `SimpleDateFormat` para manipular fechas. | Tiene métodos integrados como `plusDays()`, `minusDays()`, `isBefore()`, `isAfter()`, etc., para manipular fechas. |
+| **Formato y conversión**  | Requiere el uso de `SimpleDateFormat` o `DateFormat` para convertir entre cadenas y objetos `Date`. | Usa `DateTimeFormatter` para formatear y convertir fechas fácilmente. |
+| **Soporte de zona horaria**| No maneja zonas horarias directamente, utiliza `TimeZone` o `Calendar` para manejar la zona horaria. | No tiene concepto de zona horaria, solo maneja la fecha (año, mes, día). |
+| **Propósito principal**   | Representa un punto en el tiempo, incluyendo la fecha y la hora. | Representa solo una fecha sin hora, útil para aplicaciones que solo necesitan la fecha (por ejemplo, cumpleaños, días de eventos). |
+| **Compatibilidad**        | Antigua y parte de la API clásica, en desuso para algunas tareas debido a su diseño. | Introducida en Java 8, es parte de la nueva API de fechas y horas (`java.time`), recomendada para nuevas aplicaciones. |
+| **Métodos obsoletos**     | Contiene métodos obsoletos como `getYear()`, `getMonth()`, `getDate()`, etc. | No tiene métodos obsoletos y proporciona una API moderna y segura para trabajar con fechas. |
+
 ### `LocalTime`
+
 Permite crear una hora con horas y minutos (opcionalmente con segundos y nanosegundos).
 
 ```java
-LocalDate fecha = LocalDate.of(2025, 1, 9);  // Anioo, Mes, Dia
+LocalDate fecha = LocalDate.of(2025, 1, 9);  // Anio, Mes, Dia
 System.out.println("Fecha: " + fecha);
 ```
 
@@ -68,7 +109,7 @@ Representa un punto específico en el tiempo, generalmente utilizado para medici
     System.out.println("Instant actual: " + ahora);
 ```
 
-## 3. Operaciones con Fechas y Horas
+## Operaciones con Fechas y Horas
 
 ### Sumar y Restar Fechas
 
@@ -89,7 +130,7 @@ Representa un punto específico en el tiempo, generalmente utilizado para medici
 
 - **`Period.between()`**: Calcula la diferencia entre dos fechas en términos de años, meses y días.
 
-## 4. Formateo y Análisis de Fechas
+## Formateo y Análisis de Fechas
 
 ### Formatear Fechas
 
@@ -106,7 +147,7 @@ Representa un punto específico en el tiempo, generalmente utilizado para medici
 
 - **`parse()`**: Convierte una cadena de texto en una fecha utilizando un formato específico.
 
-## 5. Uso de `Instant` y `Duration`
+## Uso de `Instant` y `Duration`
 
 ### `Instant`
 
@@ -116,7 +157,7 @@ Representa un instante en el tiempo (usualmente en milisegundos o nanosegundos d
 
 Permite calcular la duración entre dos instantes. Puede expresar la duración en segundos o en fracciones de segundo.
 
-## 6. Manejo de Zonas Horarias
+## Manejo de Zonas Horarias
 
 ### `ZonedDateTime`
 
@@ -126,7 +167,7 @@ Representa una fecha y hora con información de zona horaria.
 
 - **`withZoneSameInstant()`**: Convierte una fecha y hora a otra zona horaria, manteniendo el mismo instante.
 
-## 7. Consideraciones Importantes
+## Consideraciones Importantes
 
 - **Inmutabilidad**: Las clases de `java.time` son inmutables. Esto significa que en lugar de modificar un objeto existente, se crea un nuevo objeto con el cambio deseado.
 - **Manejo de fechas y tiempos locales**: Las clases `LocalDate`, `LocalTime` y `LocalDateTime` no manejan zonas horarias. Para gestionar zonas horarias, se debe usar `ZonedDateTime`.
