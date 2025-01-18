@@ -71,8 +71,8 @@ A continuación se presentan las principales diferencias entre la clase `Date` (
 | **Tipo de dato**          | Representa una **fecha y hora** (con precisión en milisegundos). | Representa solo una **fecha** (sin hora).      |
 | **Precisión**             | Precisión de **milisegundos**, incluye fecha y hora. | Precisión de **días** (solo la parte de la fecha). |
 | **Mutabilidad**           | **Mutable**, su estado puede modificarse después de ser creado. | **Inmutable**, su valor no puede cambiar después de ser creado. |
-| **Operaciones de fecha**  | Necesita clases adicionales como `Calendar` o `SimpleDateFormat` para manipular fechas. | Tiene métodos integrados como `plusDays()`, `minusDays()`, `isBefore()`, `isAfter()`, etc., para manipular fechas. |
-| **Formato y conversión**  | Requiere el uso de `SimpleDateFormat` o `DateFormat` para convertir entre cadenas y objetos `Date`. | Usa `DateTimeFormatter` para formatear y convertir fechas fácilmente. |
+| **Operaciones de fecha**  | Necesita clases adicionales como `Calendar` o [SimpleDateFormat](SIMPLEDATEFORMAT.md) para manipular fechas. | Tiene métodos integrados como `plusDays()`, `minusDays()`, `isBefore()`, `isAfter()`, etc., para manipular fechas. |
+| **Formato y conversión**  | Requiere el uso de `SimpleDateFormat` o `DateFormat` para convertir entre cadenas y objetos `Date`. | Usa [DateTimeFormatter](DateTimeFormatter) para formatear y convertir fechas fácilmente. |
 | **Soporte de zona horaria**| No maneja zonas horarias directamente, utiliza `TimeZone` o `Calendar` para manejar la zona horaria. | No tiene concepto de zona horaria, solo maneja la fecha (año, mes, día). |
 | **Propósito principal**   | Representa un punto en el tiempo, incluyendo la fecha y la hora. | Representa solo una fecha sin hora, útil para aplicaciones que solo necesitan la fecha (por ejemplo, cumpleaños, días de eventos). |
 | **Compatibilidad**        | Antigua y parte de la API clásica, en desuso para algunas tareas debido a su diseño. | Introducida en Java 8, es parte de la nueva API de fechas y horas (`java.time`), recomendada para nuevas aplicaciones. |
