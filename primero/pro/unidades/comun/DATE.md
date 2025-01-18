@@ -196,6 +196,11 @@ Representa una fecha y hora con información de zona horaria.
 
 La API `java.time` introducida en Java 8 proporciona una manera robusta, sencilla y eficiente de trabajar con fechas y horas. Permite realizar cálculos, comparaciones, análisis y formateos de manera muy flexible y con un enfoque orientado a objetos. Se recomienda siempre utilizar estas nuevas clases en lugar de las antiguas `Date` y `Calendar`, que tienen algunas limitaciones y comportamientos inesperados.
 
+## Ejemplos
+
+Pulsa el siguiente [enlace](https://www.w3schools.com/java/java_date.asp) para ver y practicar algunos ejemplos.
+
+
 ## Licencia 📄
 
 Este proyecto está bajo la Licencia (Apache 2.0) - mira el archivo [LICENSE.md](../../../../LICENSE) para detalles
