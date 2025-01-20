@@ -58,7 +58,7 @@ Regla 12: La regla de la no subversión. | a) La base de datos no permitirá que
 
 <br>
 <div align="center"> 
-  <img src="../images/9.png" width="250">
+  <img src="images/laptos.drawio.png" width="250">
   <h5>Entidad "laptops"</h5>
 </div>
 <br>
@@ -73,7 +73,7 @@ Especiales (almacenados y derivados)| Que puedes representarse con líneas punte
 
 <br>
 <div align="center"> 
-  <img src="../images/10.png" width="250">
+  <img src="images/laptos-propiedades.drawio.png" width="250">
   <h5>Atributos de la entidad "laptops"</h5>
 </div>
 <br>
@@ -84,34 +84,31 @@ Especiales (almacenados y derivados)| Que puedes representarse con líneas punte
 
 <br>
 <div align="center"> 
-  <img src="../images/11.png" width="250">
-  <h5>Atributo llave "Student id"</h5>
+  <img src="images/laptos-tabla.drawio.png" width="250">
+  <h5>Atributo llave "num-serie"</h5>
 </div>
-<br>
 
-> Finalmente debemos conocer que las entidades pueden ser <br>
-> -Entidades fuertes: Son entidades que pueden sobrevivir por si solo. Al leer la tabla sabes que son las entidades (se encierra en un recuadro). <br>
-> -Entidades débiles: No puede existir sin una entidad fuerte. Al leer la tabla no puedes saber que son las entidades (se encierra en un recuadro doble). En esto podemos diferenciar 2 subtipos: las **Identidades Débiles por Identidad** (no se diferencian entre sí más que por la clave de su identidad fuerte) y las **Identidades Débiles por Existencia** (que se les asigna una clave propia, pero su existencia sigue siendo dependiente de una fuerte).
+> Finalmente debemos conocer que las entidades pueden ser:
 
-<br>
+- __Entidades fuertes__: Son entidades que pueden sobrevivir por si solo. Al leer la tabla sabes que son las entidades (se encierra en un recuadro).
+- __Entidades débiles__: No puede existir sin una entidad fuerte. Al leer la tabla no puedes saber que son las entidades (se encierra en un recuadro doble). En esto podemos diferenciar 2 subtipos: las __Identidades Débiles por Identidad__ (no se diferencian entre sí más que por la clave de su identidad fuerte) y las __Identidades Débiles por Existencia__ (que se les asigna una clave propia, pero su existencia sigue siendo dependiente de una fuerte).
+
 <div align="center"> 
   <img src="../images/12.png" width="350">
   <h5>Resumen representativo de entidades y atributos</h5>
 </div>
-<br>
 
 ## Entidades del Platziblog
 
 > Durante el curso desarrollares un proyecto completo de inicio a fin basandonos en un Platziblog. Este proyecto nos presenta un contexto familiar y nos representará retos muy interesantes. <br>
-> -Primer paso: Identificar las entidades.
-<br>
-<div align="center"> 
-  <img src="../images/13.webp" width="350">
-  <h5>Las Entidades del Platziblog</h5>
-</div>
-<br>
+- Primer paso: Identificar las entidades.
 
-> Segundo paso: Pensar en los atributos.
+
+  <div align="center"> 
+    <img src="../images/13.webp" width="350">
+    <h5>Las Entidades del Platziblog</h5>
+  </div>
+- Segundo paso: Pensar en los atributos.
 <br>
 <div align="center"> 
   <img src="../images/14.png" width="350">
@@ -132,12 +129,10 @@ Especiales (almacenados y derivados)| Que puedes representarse con líneas punte
 > Las relaciones, clasifcamente son representadas por un rombo. Sirven para poder ligar o unir nuestras diferentes entidades. Por convención las relaciones son verbos que conectan entidades. <br>
 > *NOTA:Los atributos multivaluados (ejm. discos duros),pueden relacionarse de diversas formas con el resto de entidades. Por ello, se suele convertilos a entidad separadas, a este proceso de se le denomina "normalizar" (se explicará luego).*
 
-<br>
 <div align="center"> 
-  <img src="../images/16.png" width="350">
+  <img src="images/laptos-relacion-disco.drawio.png" width="350">
   <h5> Atributos de entidad "Usuarios"</h5>
 </div>
-<br>
 
 > Y para comprender mejor cuántos de un lado pertenecen a cuántos del otro lado, surge el concepto de **CARDINALIDAD**. La cual es una propiedad de las relaciones que indica la cantidad y correspondencia con la que puede estar relacionada una entidad. 
 
@@ -199,9 +194,8 @@ Muchas-Muchas (N:N) | Las entidades de ambas relaciones pueden asociarse con var
   <h5> Diagrama E:R de Platziblog </h5>
 </div>
 
-> Debemos recordar que existen varios métodos para representar una misma relación. A estos diversos metodos se les conoce como: **Diagramming Convention Techniques**
+> Debemos recordar que existen varios métodos para representar una misma relación. A estos diversos metodos se les conoce como: __Diagramming Convention Techniques__
 
-<br>
 <div align="center"> 
   <img src="../images/22.png" width="450">
   <h5> Diagramming Convention Techniques </h5>
@@ -209,7 +203,7 @@ Muchas-Muchas (N:N) | Las entidades de ambas relaciones pueden asociarse con var
 
 ### Tipos de datos y constraints
 
-Para llevar a la práctica un diagrama debemos ir más allá y darle detalle con parámetros, convirtiendo nuestro Diagrama ER en un Diagrama Físico, pero para poder desarrollarlo primero debemos comprende 2 conceptos: **los tipos de datos** y **los constraints**
+Para llevar a la práctica un diagrama debemos ir más allá y darle detalle con parámetros, convirtiendo nuestro Diagrama ER en un Diagrama Físico, pero para poder desarrollarlo primero debemos comprende 2 conceptos: __los tipos de datos__ y __los constraints__.
 
 #### Datos de texto
 
@@ -229,6 +223,7 @@ Smallint | Subtipo de integer, nos para declarar números muy pequeños (99 o me
 Decimal (n, s) y Numeric (n, s) | Tienen dos parámetros (n y s, en este ejemplo). La primera entrada es para números enteros, y la segunda entrada es para números decimales. Nos sirve para hacer operaciones mas precisas.
 
 #### Datos de fecha y hora
+
 > Esta clase de tipos de datos es muy peculiar ya que nos ayuda internamente a tener una bitácora de nuestra base de datos.
 
 Datos de fecha y hora | Descripción
@@ -244,13 +239,13 @@ Datos lógicos | Descripción
 ------------- | -------------
 Booleano | Este solo puede tener dos valores, funciona como un tipo de dato binario. Es usado de manera discriminatoria para hacer validaciones.
 
-<br>
 <div align="center"> 
   <img src="../images/23.png" width="450">
   <h5> Tipos de datos </h5>
 </div>
 
 #### Los constraints
+
 > Por su lado los contraints o restricciones son los tipos de reglas que vas a permitir que tenga tu base de datos. Y son:
 
 Constraints | Descripción
