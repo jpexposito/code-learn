@@ -101,28 +101,26 @@ Especiales (almacenados y derivados)| Que puedes representarse con líneas punte
 ## Entidades del Platziblog
 
 > Durante el curso desarrollares un proyecto completo de inicio a fin basandonos en un Platziblog. Este proyecto nos presenta un contexto familiar y nos representará retos muy interesantes. <br>
+
 - Primer paso: Identificar las entidades.
-
-
   <div align="center"> 
-    <img src="../images/13.webp" width="350">
+    <img src="images/entidades.drawio.png" >
     <h5>Las Entidades del Platziblog</h5>
   </div>
 - Segundo paso: Pensar en los atributos.
 <br>
 <div align="center"> 
-  <img src="../images/14.png" width="350">
+  <img src="images/post.drawio.png" width="350">
   <h5> Atributos de entidad "Posts"</h5>
 </div>
 <br>
 <div align="center"> 
-  <img src="../images/15.png" width="350">
+  <img src="images/usuarios.drawio.png" width="350">
   <h5> Atributos de entidad "Usuarios"</h5>
 </div>
 <br>
 
 > Una recomendación importante que es que no utilicemos el correo del usuario como id. Es mejor generar un id independiente para cada usuario puesto que a pesar de que email es único, limitará la identificación cuando el usuario quiera cambiar su email.
-
 
 ## Relaciones
 
@@ -131,7 +129,7 @@ Especiales (almacenados y derivados)| Que puedes representarse con líneas punte
 
 <div align="center"> 
   <img src="images/laptos-relacion-disco.drawio.png" width="350">
-  <h5> Atributos de entidad "Usuarios"</h5>
+  <h5> Relacion entre Lapto y Disco Duro</h5>
 </div>
 
 > Y para comprender mejor cuántos de un lado pertenecen a cuántos del otro lado, surge el concepto de **CARDINALIDAD**. La cual es una propiedad de las relaciones que indica la cantidad y correspondencia con la que puede estar relacionada una entidad. 
@@ -264,6 +262,7 @@ Index | Se crea por columna, su función es hacer búsquedas con mayor rapidez. 
   <h5> Los constraints </h5>
 </div>
 
+<!--
 ### La Normalización
 
 > El proceso de normalización es un estándar que consiste, básicamente, en un proceso de conversión de las relaciones entre las entidades. Es útil para separar la información, minimizar la redundancia de los datos, para que la actualización de los datos sea más sencilla y la integridad de los datos se conserve. Esto obedece a las 12 reglas de Codd y nos permiten separar componentes en la base de datos. Identificamos para ello 4 reglas denominadas **Formas normales**.
@@ -311,6 +310,7 @@ Cuarta forma normal (4FN) | **Cumple 1FN, 2FN, 3FN y los campos multivaluados se
 
 > *NOTA 01: Al normalizar aunque parezca que la información se multiplicó, en realidad la descompusimos de manera que a un sistema le sea fácil de reconocer y mantener la consistencia de los datos.* <br>
 > *NOTA 02: Algunos autores precisan una 5FN que hace referencia a que después de realizar esta normalización a través de uniones (JOIN) permita regresar a la data original de la cual partió.*
+-->
 
 
 </div>
