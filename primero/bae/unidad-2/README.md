@@ -58,7 +58,7 @@ Regla 12: La regla de la no subversión. | a) La base de datos no permitirá que
 
 <br>
 <div align="center"> 
-  <img src="images/laptos.drawio.png" width="250">
+  <img src="images/laptos.drawio.png" width="400">
   <h5>Entidad "laptops"</h5>
 </div>
 <br>
@@ -73,7 +73,7 @@ Especiales (almacenados y derivados)| Que puedes representarse con líneas punte
 
 <br>
 <div align="center"> 
-  <img src="images/laptos-propiedades.drawio.png" width="250">
+  <img src="images/laptos-propiedades.drawio.png" width="400">
   <h5>Atributos de la entidad "laptops"</h5>
 </div>
 <br>
@@ -84,7 +84,7 @@ Especiales (almacenados y derivados)| Que puedes representarse con líneas punte
 
 <br>
 <div align="center"> 
-  <img src="images/laptos-tabla.drawio.png" width="250">
+  <img src="images/laptos-tabla.drawio.png" width="400">
   <h5>Atributo llave "num-serie"</h5>
 </div>
 
