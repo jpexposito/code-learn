@@ -35,9 +35,7 @@ import java.io.File;
 
 public class EjemploFilePathname {
     public static void main(String[] args) {
-        // Crea un objeto File que representa un archivo.
         File archivo = new File("C:/ejemplos/archivo.txt");
-
         // Verifica si el archivo existe
         if (archivo.exists()) {
             System.out.println("El archivo existe.");
@@ -207,9 +205,9 @@ public class FilePropertiesDemo {
                 boolean esDirectorio = archivo.isDirectory();
                 System.out.println("Es un directorio: " + esDirectorio);
 
-                // Obtenemos el tamaño del archivo en bytes
+                // Obtenemos el tamanio del archivo en bytes
                 long tamanoArchivo = archivo.length();
-                System.out.println("Tamaño del archivo: " + tamanoArchivo + " bytes");
+                System.out.println("Tamanio del archivo: " + tamanoArchivo + " bytes");
 
             } else {
                 // Si el archivo no existe, mostramos un mensaje
@@ -237,5 +235,197 @@ public class FilePropertiesDemo {
 Este texto explica cómo interactuar con archivos en Java utilizando la clase `File`. Se detallan los constructores y métodos más comunes de esta clase, que permiten verificar propiedades de los archivos, como su existencia, permisos de lectura y escritura, y si es un directorio o archivo, entre otros. Además, se describe cómo crear un archivo si no existe.
 
 La clase `File` es una herramienta indispensable para gestionar archivos en Java, y comprender sus métodos permite desarrollar aplicaciones que manejen eficientemente el sistema de archivos.
+
+## Operaciojnes básicas sobre ficheros en Java
+
+Esta documentación cubre la implementación de un `CRUD básico (Crear, Leer, Actualizar, Eliminar)` para manejar ficheros de texto en Java utilizando la API de `java.io`.
+
+### Introducción
+
+En Java, el manejo de ficheros es esencial para persistir datos. La manipulación de ficheros se puede realizar utilizando clases como `File`, `BufferedReader`, `BufferedWriter`, `FileReader`, y `FileWriter`. Este CRUD básico permite gestionar registros dentro de un fichero de texto.
+
+### Operaciones básicas
+
+El CRUD consta de cuatro operaciones principales:
+
+1. **Crear**: Añadir nuevos registros al fichero.
+2. **Leer**: Leer y mostrar el contenido del fichero.
+3. **Actualizar**: Modificar registros existentes en el fichero.
+4. **Eliminar**: Eliminar registros específicos del fichero.
+
+El fichero utilizado será de tipo texto (`archivo.txt`), y todas las operaciones se realizarán sobre él.
+
+#### Crear (Create)
+
+La operación de **crear** se utiliza para agregar nuevos registros al final de un fichero existente. Si el fichero no existe, se crea uno nuevo. Los registros se añaden de manera secuencial.
+
+- **Objetivo**: Añadir un nuevo registro al fichero.
+- **Herramientas**: `FileWriter`, `BufferedWriter`
+- **Modo de apertura**: Se utiliza el modo de **append** para que los nuevos registros se añadan al final del archivo sin sobrescribir los existentes.
+
+```java
+public static void create(String data) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("archivo.txt", true))) {
+            writer.write(data);
+            writer.newLine(); // Añadir una nueva línea después del registro
+            System.out.println("Registro agregado.");
+        } catch (IOException e) {
+            System.out.println("Error al escribir en el archivo: " + e.getMessage());
+        }
+    }
+    
+    public static void main(String[] args) {
+        create("Nuevo registro: Juan, 25 años");
+    }
+```
+
+##### Explicación:
+
+- Usamos `BufferedWriter` para escribir en el fichero.
+- El archivo se abre en modo `append (true)`, lo que asegura que los registros se añaden al final del archivo.
+
+#### Leer (Read)
+
+La operación de **leer** permite obtener el contenido completo de un fichero. Se lee línea por línea para mostrar todo el texto almacenado.
+
+- **Objetivo**: Leer el contenido del fichero y mostrarlo por consola o utilizarlo en el programa.
+- **Herramientas**: `FileReader`, `BufferedReader`
+- **Modo de apertura**: El fichero se abre en modo **lectura**.
+
+```java
+public static void read() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("archivo.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo: " + e.getMessage());
+        }
+    }
+
+    public static void main(String[] args) {
+        read();
+    }
+```
+
+##### Explicación:
+
+- Usamos `BufferedReader` para leer línea por línea el contenido del fichero.
+
+#### Actualizar (Update)
+
+La operación de **actualizar** modifica registros específicos dentro del fichero. Para ello, se lee todo el contenido, se realizan las modificaciones necesarias y luego se sobrescribe el fichero original con los datos actualizados.
+
+- **Objetivo**: Modificar un registro o parte del contenido del fichero.
+- **Herramientas**: `BufferedReader`, `BufferedWriter`, `FileReader`, `FileWriter`
+- **Modo de apertura**: Se crea un fichero temporal donde se escriben los datos modificados, y luego el fichero original es reemplazado por el archivo temporal.
+
+```java
+public static void update(String oldData, String newData) {
+        File file = new File("data.txt");
+        File tempFile = new File("temp.txt");
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file));
+             BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile))) {
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.equals(oldData)) {
+                    writer.write(newData);  // Reemplazar la línea
+                } else {
+                    writer.write(line);  // Copiar la línea tal cual
+                }
+                writer.newLine();
+            }
+
+            // Reemplazar el archivo original con el archivo temporal
+            if (file.delete()) {
+                tempFile.renameTo(file);
+                System.out.println("Archivo actualizado.");
+            } else {
+                System.out.println("Error al eliminar el archivo original.");
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error al actualizar el archivo: " + e.getMessage());
+        }
+    }
+
+    public static void main(String[] args) {
+        update("Juan, 25 años", "Juan, 26 años");  // Actualizar registro específico
+    }
+```
+
+##### Explicación:
+
+- Creamos un `archivo temporal` donde escribimos el contenido actualizado.
+- Después de escribir todo el contenido, `eliminamos el archivo original y renombramos el archivo temporal`.
+
+#### Eliminar (Delete)
+
+La operación de **eliminar** elimina un registro específico del fichero. Al igual que la operación de actualización, se lee todo el contenido, se omite la línea que se desea eliminar, y luego se sobrescribe el fichero original con los datos restantes.
+
+- **Objetivo**: Eliminar un registro específico del fichero.
+- **Herramientas**: `BufferedReader`, `BufferedWriter`, `FileReader`, `FileWriter`
+- **Modo de apertura**: Se crea un fichero temporal donde se copian los datos restantes, y luego el fichero original es reemplazado por el archivo temporal.
+
+```java
+public static void delete(String dataToDelete) {
+        File file = new File("data.txt");
+        File tempFile = new File("temp.txt");
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file));
+             BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile))) {
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (!line.equals(dataToDelete)) {  // Excluir la línea a eliminar
+                    writer.write(line);
+                    writer.newLine();
+                }
+            }
+
+            if (file.delete()) {
+                tempFile.renameTo(file);
+                System.out.println("Registro eliminado.");
+            } else {
+                System.out.println("Error al eliminar el archivo original.");
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error al eliminar el registro: " + e.getMessage());
+        }
+    }
+
+    public static void main(String[] args) {
+        delete("Juan, 26 años");  // Eliminar un registro específico
+    }
+```
+
+##### Explicación
+
+- Creamos un archivo `temporal` donde `copiamos todo el contenido excepto el registro que deseamos eliminar`.
+- Posteriormente, `eliminamos el archivo original y renombramos el archivo temporal`.
+
+## Consideraciones
+
+### Manejo de Excepciones
+
+Es fundamental manejar correctamente las excepciones cuando se trabaja con ficheros, ya que las operaciones de entrada y salida pueden fallar debido a varios factores, como:
+
+- Permisos de archivo insuficientes.
+- El archivo no existe o está bloqueado por otro proceso.
+- Errores de espacio en disco o problemas de hardware.
+
+El uso de bloques `try-catch-finally` garantiza que los recursos (como los lectores y escritores de ficheros) se cierren correctamente, incluso si ocurre una excepción.
+
+### Rendimiento
+
+Las operaciones de lectura y escritura en ficheros pueden ser costosas en términos de rendimiento, especialmente con ficheros grandes. En estos casos, el enfoque basado en ficheros podría no ser la mejor opción. Para grandes volúmenes de datos, se recomienda considerar el uso de bases de datos o estructuras de almacenamiento más eficientes.
+
+### Codificación de Caracteres
+
+Cuando se trabaja con ficheros de texto, es importante asegurarse de que la codificación de caracteres sea la adecuada, especialmente si el fichero contiene caracteres especiales o multilingües. UTF-8 es una codificación que lo garantiza.
 
 </div>
