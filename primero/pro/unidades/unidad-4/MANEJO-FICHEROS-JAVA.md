@@ -264,8 +264,8 @@ La operación de **crear** se utiliza para agregar nuevos registros al final de 
 - **Modo de apertura**: Se utiliza el modo de **append** para que los nuevos registros se añadan al final del archivo sin sobrescribir los existentes.
 
 ```java
-public static void create(String data) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("archivo.txt", true))) {
+public static void create(String data,File file) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
             writer.write(data);
             writer.newLine(); // Añadir una nueva línea después del registro
             System.out.println("Registro agregado.");
@@ -275,11 +275,11 @@ public static void create(String data) {
     }
     
     public static void main(String[] args) {
-        create("Nuevo registro: Juan, 25 años");
+        create("Juan, 25 años", archivo);
     }
 ```
 
-##### Explicación:
+##### Explicación
 
 - Usamos `BufferedWriter` para escribir en el fichero.
 - El archivo se abre en modo `append (true)`, lo que asegura que los registros se añaden al final del archivo.
@@ -293,8 +293,8 @@ La operación de **leer** permite obtener el contenido completo de un fichero. S
 - **Modo de apertura**: El fichero se abre en modo **lectura**.
 
 ```java
-public static void read() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("archivo.txt"))) {
+public static void read(File file) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 System.out.println(line);
@@ -305,11 +305,11 @@ public static void read() {
     }
 
     public static void main(String[] args) {
-        read();
+        read(archivo);
     }
 ```
 
-##### Explicación:
+##### Explicación
 
 - Usamos `BufferedReader` para leer línea por línea el contenido del fichero.
 
@@ -322,42 +322,41 @@ La operación de **actualizar** modifica registros específicos dentro del fiche
 - **Modo de apertura**: Se crea un fichero temporal donde se escriben los datos modificados, y luego el fichero original es reemplazado por el archivo temporal.
 
 ```java
-public static void update(String oldData, String newData) {
-        File file = new File("data.txt");
-        File tempFile = new File("temp.txt");
+public static void update(String oldData, String newData, File file) {
+    File tempFile = new File("temp.txt");
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(file));
-             BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile))) {
+    try (BufferedReader reader = new BufferedReader(new FileReader(file));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile))) {
 
-            String line;
-            while ((line = reader.readLine()) != null) {
-                if (line.equals(oldData)) {
-                    writer.write(newData);  // Reemplazar la línea
-                } else {
-                    writer.write(line);  // Copiar la línea tal cual
-                }
-                writer.newLine();
-            }
-
-            // Reemplazar el archivo original con el archivo temporal
-            if (file.delete()) {
-                tempFile.renameTo(file);
-                System.out.println("Archivo actualizado.");
+        String line;
+        while ((line = reader.readLine()) != null) {
+            if (line.equals(oldData)) {
+                writer.write(newData);  // Reemplazar la línea
             } else {
-                System.out.println("Error al eliminar el archivo original.");
+                writer.write(line);  // Copiar la línea tal cual
             }
-
-        } catch (IOException e) {
-            System.out.println("Error al actualizar el archivo: " + e.getMessage());
+            writer.newLine();
         }
-    }
 
-    public static void main(String[] args) {
-        update("Juan, 25 años", "Juan, 26 años");  // Actualizar registro específico
+        // Reemplazar el archivo original con el archivo temporal
+        if (file.delete()) {
+            tempFile.renameTo(file);
+            System.out.println("Archivo actualizado.");
+        } else {
+            System.out.println("Error al eliminar el archivo original.");
+        }
+
+    } catch (IOException e) {
+        System.out.println("Error al actualizar el archivo: " + e.getMessage());
     }
+}
+
+public static void main(String[] args) {
+    update("Juan, 25 años", "Juan, 26 años", archivo);  // Actualizar registro específico
+}
 ```
 
-##### Explicación:
+##### Explicación
 
 - Creamos un `archivo temporal` donde escribimos el contenido actualizado.
 - Después de escribir todo el contenido, `eliminamos el archivo original y renombramos el archivo temporal`.
@@ -371,36 +370,35 @@ La operación de **eliminar** elimina un registro específico del fichero. Al ig
 - **Modo de apertura**: Se crea un fichero temporal donde se copian los datos restantes, y luego el fichero original es reemplazado por el archivo temporal.
 
 ```java
-public static void delete(String dataToDelete) {
-        File file = new File("data.txt");
-        File tempFile = new File("temp.txt");
+public static void delete(String dataToDelete,File file) {
+    File tempFile = new File("temp.txt");
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(file));
-             BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile))) {
+    try (BufferedReader reader = new BufferedReader(new FileReader(file));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile))) {
 
-            String line;
-            while ((line = reader.readLine()) != null) {
-                if (!line.equals(dataToDelete)) {  // Excluir la línea a eliminar
-                    writer.write(line);
-                    writer.newLine();
-                }
+        String line;
+        while ((line = reader.readLine()) != null) {
+            if (!line.equals(dataToDelete)) {  // Excluir la línea a eliminar
+                writer.write(line);
+                writer.newLine();
             }
-
-            if (file.delete()) {
-                tempFile.renameTo(file);
-                System.out.println("Registro eliminado.");
-            } else {
-                System.out.println("Error al eliminar el archivo original.");
-            }
-
-        } catch (IOException e) {
-            System.out.println("Error al eliminar el registro: " + e.getMessage());
         }
-    }
 
-    public static void main(String[] args) {
-        delete("Juan, 26 años");  // Eliminar un registro específico
+        if (file.delete()) {
+            tempFile.renameTo(file);
+            System.out.println("Registro eliminado.");
+        } else {
+            System.out.println("Error al eliminar el archivo original.");
+        }
+
+    } catch (IOException e) {
+        System.out.println("Error al eliminar el registro: " + e.getMessage());
     }
+}
+
+public static void main(String[] args) {
+    delete("Juan, 26 años", archivo);  // Eliminar un registro específico
+}
 ```
 
 ##### Explicación
