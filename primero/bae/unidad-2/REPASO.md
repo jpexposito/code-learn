@@ -1,53 +1,117 @@
 <div align="justify">
 
-# <img src=../../../images/coding-book.png width="40"> Code & Learn (TIPOS DE RELACIONES)
+# <img src=../../../images/coding-book.png width="40"> Code & Learn (RESUMEN E/R)
 
-# 1. Relación Uno a Uno (1:1)
+## 1. Entidad
 
-**Descripción**: En una relación uno a uno, un registro de una tabla está relacionado con un solo registro en otra tabla.  
+Una **entidad** representa un objeto o concepto del mundo real sobre el que se almacena información. Cada entidad tiene atributos que la describen.
 
-**Ejemplo**: Un empleado puede tener solo un pasaporte y cada pasaporte está asociado con un solo empleado.
+### Ejemplo:
+En un sistema de gestión de biblioteca, algunas entidades podrían ser:
+- `Libro`
+- `Autor`
+- `Miembro`
+- `Prestamo`
 
-## 2. Relación Uno a Muchos (1:N)
+### Documentación:
 
-**Descripción**: En una relación uno a muchos, un registro de una tabla está relacionado con múltiples registros en otra tabla, pero un registro en la segunda tabla solo puede estar asociado con un solo registro en la primera tabla.  
+#### Entidad: **Libro**
+- **Descripción**: Representa un libro en la biblioteca.
+- **Atributos**:
+  - `ISBN` (clave primaria)
+  - `Título`
+  - `Autor`
+  - `Fecha_de_publicación`
+  - `Número_de_páginas`
+  - `Género`
 
-**Ejemplo**: Un autor puede escribir muchos libros, pero cada libro tiene un solo autor.
+## 2. Atributos
 
-## 3. Relación Muchos a Muchos (N:M)
+Los **atributos** son las características que describen una entidad. Cada entidad puede tener uno o más atributos, que pueden clasificarse en los siguientes tipos:
 
-**Descripción**: En una relación muchos a muchos, múltiples registros en una tabla pueden estar relacionados con múltiples registros en otra tabla.  
+- **Atributos simples**: No se pueden dividir. Ejemplo: `Nombre`, `Fecha de nacimiento`.
+- **Atributos compuestos**: Se pueden descomponer. Ejemplo: `Dirección` (compuesta de `Calle`, `Ciudad`, `Código postal`).
+- **Atributos multivaluados**: Pueden tener más de un valor. Ejemplo: `Teléfonos` (una persona puede tener varios números).
+- **Atributos derivados**: Son calculados a partir de otros. Ejemplo: `Edad` (calculado a partir de la fecha de nacimiento).
 
-**Ejemplo**: Un estudiante puede estar inscrito en varios cursos, y un curso puede tener varios estudiantes inscritos.
+## 3. Relaciones
 
-## 4. Relación Uno a Muchos con Atributos en la Relación
+Las **relaciones** entre entidades representan cómo las entidades se conectan o interactúan entre sí. Las relaciones pueden ser de varios tipos:
 
-**Descripción**: Una relación uno a muchos en la que la tabla intermedia (la que une las dos entidades) contiene atributos adicionales, es decir, la relación tiene más información asociada.  
+### Tipos de Relaciones:
 
-**Ejemplo**: Un cliente puede realizar múltiples compras, y cada compra tiene información adicional como la fecha y el total gastado.
+- **Relación uno a uno (1:1)**: Un registro en una entidad está asociado a un solo registro en otra entidad.
+  - Ejemplo: Cada `Empleado` tiene un `Oficina` asignada.
+  
+- **Relación uno a muchos (1:N)**: Un registro en una entidad puede estar asociado a muchos registros en otra entidad.
+  - Ejemplo: Un `Autor` puede escribir muchos `Libros`.
+  
+- **Relación muchos a muchos (N:M)**: Muchos registros de una entidad pueden estar asociados a muchos registros de otra entidad.
+  - Ejemplo: Un `Estudiante` puede tomar varios `Cursos`, y un `Curso` puede ser tomado por varios `Estudiantes`.
 
-## 5. Relación Muchos a Muchos con Atributos en la Relación
+### Documentación de Relaciones:
 
-**Descripción**: Similar a la relación muchos a muchos, pero en este caso, la tabla intermedia contiene atributos adicionales.  
+#### Relación: **Autor-Escribe-Libro**
 
-**Ejemplo**: Un estudiante puede inscribirse en varios cursos, y un curso puede tener varios estudiantes. La relación también incluye la fecha de inscripción y el grado obtenido en cada curso.
+- **Entidades involucradas**: `Autor` y `Libro`
+- **Cardinalidad**: Un `Autor` puede escribir varios `Libros`, pero cada `Libro` es escrito por un único `Autor` (1:N).
 
-## 6. Relación Recursiva (Relación de Auto-relación)
+## 4. Clave Primaria (PK)
 
-**Descripción**: Una relación recursiva ocurre cuando una entidad está relacionada consigo misma.  
+La **clave primaria** es un atributo o conjunto de atributos que identifican de manera única a cada instancia de una entidad. Es fundamental para garantizar la integridad de los datos.
 
-**Ejemplo**: Un empleado puede tener a otros empleados a su cargo. En este caso, la entidad "Empleado" tiene una relación recursiva.
+### Ejemplo:
 
-## 7. Herencia (Especialización o Generalización)
+En la entidad `Libro`, el atributo `ISBN` puede ser la clave primaria.
 
-**Descripción**: La herencia es un tipo de relación que refleja una jerarquía entre entidades, donde una entidad más general se divide en entidades más específicas (especialización) o donde varias entidades específicas se unifican en una entidad más general (generalización).  
+## 5. Clave Foránea (FK)
 
-**Ejemplo**: Los vehículos pueden tener una entidad "Vehículo" general, y luego pueden especializarse en "Coche", "Moto" y "Camión", que tienen atributos adicionales específicos.
+La **clave foránea** es un atributo que establece una relación entre dos entidades. Es un atributo en una entidad que hace referencia a la clave primaria de otra entidad.
 
-## 8. Relación de Clave Compuesta
+### Ejemplo:
 
-**Descripción**: Cuando una relación entre dos tablas involucra más de una columna de clave primaria para identificar de manera única la relación entre los registros.  
+En la entidad `Prestamo`, el atributo `ID_Miembro` es una clave foránea que hace referencia a la entidad `Miembro`.
 
-**Ejemplo**: Una tabla que relacione estudiantes y cursos, donde la combinación del ID de estudiante y el ID de curso forma una clave compuesta.
+## 6. Diagrama ER
+
+El **Diagrama Entidad-Relación (ER)** es una representación gráfica de las entidades, atributos y relaciones en un sistema. Es útil para visualizar las conexiones y asegurarse de que el modelo sea coherente y completo.
+
+### Símbolos Comunes:
+
+- Rectángulos: Representan **entidades**.
+- Elipses: Representan **atributos**.
+- Rombo: Representa una **relación**.
+- Líneas: Representan las **conexiones** entre entidades, atributos y relaciones.
+
+## 7. Reglas de Negocio
+
+Las **reglas de negocio** son restricciones o condiciones que deben cumplirse en el sistema de base de datos, relacionadas con las entidades y sus interacciones.
+
+### Ejemplo:
+
+Un `Miembro` no puede realizar un `Prestamo` si ya tiene un libro prestado que no ha devuelto.
+
+## Ejemplo de Modelo ER para una Biblioteca
+
+### 1. Entidades:
+
+- **Libro**:
+  - Atributos: `ISBN`, `Título`, `Autor`, `Fecha_publicación`
+  
+- **Miembro**:
+  - Atributos: `ID_Miembro`, `Nombre`, `Correo`, `Teléfono`
+  
+- **Prestamo**:
+  - Atributos: `ID_Prestamo`, `Fecha_Prestamo`, `Fecha_Devolucion`
+
+### 2. Relaciones:
+
+- Un `Miembro` puede realizar varios `Prestamos` (1:N).
+- Un `Libro` puede estar asociado a muchos `Prestamos` (1:N).
+
+### 3. Cardinalidades:
+
+- **Miembro** (1) → **Prestamo** (N)
+- **Libro** (1) → **Prestamo** (N)
 
 </div>
