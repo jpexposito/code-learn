@@ -8,6 +8,18 @@ Las **clases abstractas** en Java son clases que no pueden ser instanciadas dire
 
 Una **clase abstracta** es una clase que puede contener tanto métodos abstractos (métodos sin implementación) como métodos concretos (métodos con implementación). No se puede instanciar directamente una clase abstracta, pero puede ser utilizada como una clase base para otras clases que la extienden.
 
+```java
+public abstract class Animal {
+    // Metodo abstracto (sin implementación)
+    public abstract void hacerSonido();
+
+    // Metodo concreto (con implementación)
+    public void dormir() {
+        System.out.println("El animal está durmiendo.");
+    }
+}
+```
+
 ## **2. Características de una Clase Abstracta**
 
 - **Métodos Abstractos**: Una clase abstracta puede declarar métodos abstractos, que son métodos sin cuerpo. Las subclases que heredan de la clase abstracta deben proporcionar una implementación de estos métodos.
@@ -21,6 +33,36 @@ Una **clase abstracta** es una clase que puede contener tanto métodos abstracto
 - **Reutilización de Código**: Puedes proporcionar una implementación común para métodos que serán compartidos por todas las subclases. Esto reduce la duplicación de código.
 - **Flexibilidad**: Permiten que las subclases puedan sobrescribir solo los métodos que necesiten modificar, mientras mantienen la funcionalidad común proporcionada por la clase abstracta.
 - **Encapsulamiento y Herencia**: Permiten encapsular comportamientos comunes en una jerarquía de clases, lo que facilita la organización y el mantenimiento del código.
+
+```java
+public class Perro extends Animal {
+    @Override
+    public void hacerSonido() {
+        System.out.println("Guau");
+    }
+}
+
+public class Gato extends Animal {
+    @Override
+    public void hacerSonido() {
+        System.out.println("Miau");
+    }
+}
+```
+
+```java
+public class Principal {
+    public static void main(String[] args) {
+        Animal perro = new Perro();
+        perro.hacerSonido();  // Output: Guau
+        perro.dormir();       // Output: El animal está durmiendo.
+
+        Animal gato = new Gato();
+        gato.hacerSonido();   // Output: Miau
+        gato.dormir();        // Output: El animal está durmiendo.
+    }
+}
+```
 
 ## **4. Diferencias entre Clases Abstractas e Interfaces**
 
