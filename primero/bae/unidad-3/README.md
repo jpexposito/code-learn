@@ -95,7 +95,7 @@ Todas las entidades del ejemplo anterior generan tabla. En concreto, la entidad 
 
 Siempre generan tabla. Se crea una tabla que incorpora como __claves ajenas o foráneas FK (Foreign Key)__ _cada una de las claves de las entidades que participan en la relación_. __La clave principal de esta nueva tabla está compuesta por dichos campos__. _Es importante resaltar que_ __NO__ _se trata de 2 claves primarias, sino de_ __una clave primaria compuesta por 2 campos__. Si hay atributos propios, pasan a la tabla de la relación. Se haría exactamente igual si hubiera participaciones mínimas 0. Orden de los atributos en las claves compuestas: Se deben poner a la izquierda todos los atributos que forman la clave. El orden de los atributos que forman la clave vendrá determinado por las consultas que se vayan a realizar. Las tuplas de la tabla suelen estar ordenadas siguiendo como índice la clave. Por tanto, conviene poner primero aquel/los atributos por los que se va a realizar la consulta.
 
-##### Ejemplo
+##### Ejemplo de relaciones N:M
 
 Realicemos el paso a tablas de la relación __N:M__ entre __MÓDULO (1,n)__ y __ALUMNO (1,n)__. _Este tipo de relación siempre genera tabla y los atributos de la relación, pasan a la tabla que ésta genera_.
 
@@ -103,7 +103,7 @@ Realicemos el paso a tablas de la relación __N:M__ entre __MÓDULO (1,n)__ y __
 <img src="img/tema2-051.webp" width="450px"/>
 </div>
 
-### Relaciones 1:N:
+### Relaciones 1:N
 
 Por lo general no generan tabla. Se dan 2 casos.
 
@@ -111,7 +111,7 @@ Por lo general no generan tabla. Se dan 2 casos.
 
 Si la entidad del lado __«1»__ presenta participación __(0,1)__, entonces _se crea una nueva tabla para la relación que incorpora como claves ajenas las claves de ambas entidades_. La clave principal de la relación será sólo la clave de la entidad del lado __«N»__.
 
-##### Ejemplo
+##### Ejemplo relaciones 1:N caso 1
 
 Realicemos el paso a tablas de la relación __1:N entre PROFESOR (1,n) y EMPRESA (0,1)__. Como en el lado __«1»__ encontramos participación mínima 0, se generará una nueva tabla.
 
@@ -123,7 +123,7 @@ Realicemos el paso a tablas de la relación __1:N entre PROFESOR (1,n) y EMPRESA
 
 Para el resto de situaciones, la entidad del lado __«N»__ recibe como clave ajena la clave de la entidad del lado __«1»__. Los atributos propios de la relación pasan a la tabla donde se ha incorporado la clave ajena.
 
-##### Ejemplo
+##### Ejemplo relaciones 1:N caso 2
 
 Realicemos el paso a tablas de la relación __1:N__ entre MÓDULO __(1,1)__ y TEMA __(1,n)__. Como __NO__ hay participación mínima __«0»__ en el lado 1, no genera tabla y la clave principal del lado __«1»__ pasa como foránea al lado __«n»__.
 
@@ -135,11 +135,11 @@ Realicemos el paso a tablas de la relación __1:N__ entre MÓDULO __(1,1)__ y TE
 
 Por lo general no generan tabla. Se dan 3 casos:
 
-#### Caso 1
+#### Caso 1 Relaciones 1:1
 
 Si las dos entidades participan con participación __(0,1)__, entonces se crea una nueva tabla para la relación.
 
-##### Ejemplo
+##### Ejemplo relaciones 1:1 caso 1
 
 No se presenta ninguna situación así en el esquema estudiado. Una situación donde puede darse este caso es en HOMBRE __(0,1)__ se casa con MUJER __(0,1)__. _Es similar al caso 1_ del apartado anterior en relaciones __1:N__, aunque en este caso debemos establecer una restricción de valor único para FK2.
 
@@ -147,11 +147,11 @@ No se presenta ninguna situación así en el esquema estudiado. Una situación d
 <img src="img/tema2-055.webp" width="400px"/>
 </div>
 
-#### Caso 2
+#### Caso 2 Relaciones 1:1
 
 Si alguna entidad, _pero no las dos_, participa con participación mínima 0 __(0,1)__, entonces se pone _la clave ajena_ en dicha entidad, para evitar en lo posible, los valores nulos.
 
-#### Caso 3
+#### Caso 3 Relaciones 1:1
 
 Si tenemos una relación __1:1__ y __ninguna__ tiene participación _mínima 0_, elegimos la clave principal de una de ellas y la introducimos como clave clave ajena en la otra tabla. Se elegirá una u otra forma en función de como se quiera organizar la información para facilitar las consultas. Los atributos propios de la relación pasan a la tabla donde se introduce la clave ajena.
 
@@ -167,7 +167,7 @@ Realicemos el paso a tablas de la relación 1:1 entre ALUMNO (1,1) y BECA (0,1).
 
 Relaciones de dependencia en existencia: Se comportan como una __1:N normal__. _La clave principal del lado 1 pasa al lado «N» como foránea (hacia adonde apunta la flecha)_.
 
-#### Ejemplo
+#### Ejemplo relaciones de dependencia
 
 No encontramos ningún ejemplo, reseñado como tal, en el supuesto anterior. Ahora bien, se comportan en el paso a tablas como cualquier otra relación 1:N. Sólo se tendría en cuenta, el hecho de ser débil en existencia para en el momento de creación de la BD, imponer que al borrar una ocurrencia en el lado «1», se borren las asociadas en el lado «n».
 
@@ -175,7 +175,7 @@ No encontramos ningún ejemplo, reseñado como tal, en el supuesto anterior. Aho
 
 Por lo general no generan tablas, porque __suelen ser 1:1 o 1:N__. Como en toda relación 1:N, La clave de la entidad fuerte debe introducirse en la tabla de la entidad débil como foránea y, además en este caso, formar parte de la clave de ésta. En las entidades débiles, la clave de la entidad fuerte debe ir la primera y, a continuación, los discriminadores de la débil.
 
-#### Ejemplo
+#### Ejemplo relaciones de dependencia en identificación
 
 Realicemos el paso a tablas de la relación débil en identificación entre CURSO Y GRUPO.
 
@@ -187,7 +187,7 @@ Realicemos el paso a tablas de la relación débil en identificación entre CURS
 
 Siempre generan tabla. Las claves principales de las entidades que participan en la relación pasan a la nueva tabla como claves foráneas. Y solo las de los lados «n» forman la principal. Si hay atributos propios de la relación, estos se incluyen en esa tabla.
 
-#### Ejemplo
+#### Ejemplo relaciones de grado 3
 
 No encontramos ningún ejemplo de relación de más de grado 2 en el supuesto anterior. Se verán cuando aparezcan en algún ejercicio.
 
@@ -196,7 +196,7 @@ No encontramos ningún ejemplo de relación de más de grado 2 en el supuesto an
 Relaciones __reflexivas o recursivas__
 generan tabla o no en función de la cardinalidad. Si es __1:1__, _no genera tabla_. En la entidad se introduce dos veces la clave, una como clave principal y otra como clave ajena. Se suele introducir una modificación en el nombre por diferenciarlas. Si es __1:N__, se puede generar tabla o no. Si hubiese participación 0 en el lado 1, obligatoriamente se generaría tabla. Si es N:N, la relación genera tabla.
 
-#### Ejemplo
+#### Ejemplo relaciones reflexivas
 
 Realicemos el paso a tablas de la relación reflexiva de ALUMNO. Como no tiene participación mínima __«0»__ en el lado __1___, no genera tabla. La clave principal de ALUMNOS, volverá a aparecer en ALUMNOS como clave foránea, igual que en cualquier relación 1:N. Ahora bien, como no puede haber dos campos con el mismo nombre en la misma tabla, deberemos cambiar un poco el nombre de la clave principal, para que haga referencia al papel que ocupa como clave foránea.
 
@@ -211,7 +211,7 @@ Realicemos el paso a tablas de la relación reflexiva de ALUMNO. Como no tiene p
 Las relaciones jerárquicas son un caso especial. Se pueden dar algunas guías que sirvan de referencia, pero en la mayoría de los casos, va a depender del problema concreto. Estas guías son: Se creará una tabla para la entidad supertipo. A no ser que tenga tan pocos atributos que dejarla sea una complicación. Si la entidad subtipo no tiene atributos y no está relacionada con ninguna otra entidad, desaparece. Si la entidad subtipo tiene algún atributo, se crea una tabla. Si no tiene clave propia, hereda la de la entidad supertipo. Si la relación es exclusiva, el atributo que genera la jerarquía se incorpora en la tabla de la entidad supertipo. Si se ha creado una tabla por cada una de las entidades subtipo, no es necesario incorporar dicho atributo 
 a la entidad supertipo.
 
-#### Ejemplo
+#### Ejemplo Jerarquías
 
 No encontramos ningún ejemplo de relación de jerarquía 2 en el supuesto anterior. Su paso a tablas, se verán en cuando aparezcan en los ejemplos concretos.
 
