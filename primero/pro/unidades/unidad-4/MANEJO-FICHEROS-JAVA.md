@@ -397,7 +397,7 @@ public static void delete(String dataToDelete,File file) {
 }
 
 public static void main(String[] args) {
-    delete("Juan, 26 años", archivo);  // Eliminar un registro específico
+    delete("Juan, 26 años", archivo); 
 }
 ```
 
