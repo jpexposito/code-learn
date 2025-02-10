@@ -7,36 +7,69 @@
 El **Diagrama de Secuencia** en UML es un tipo de diagrama conductual que se utiliza para representar la interacción entre objetos o componentes de un sistema a lo largo del tiempo. Este diagrama muestra cómo los objetos interactúan entre sí enviándose mensajes de un lado a otro, y cómo esos mensajes se suceden en el tiempo.
 
 ## Propósito
+
 El objetivo principal del diagrama de secuencia es ilustrar el flujo de control de un sistema en términos de las interacciones entre los objetos, y cómo esos objetos se comunican entre sí para realizar una tarea o proceso específico.
 
 ## Componentes de un Diagrama de Secuencia
 
-1. **Objetos (o instancias)**: Los objetos involucrados en la secuencia se representan como rectángulos en la parte superior del diagrama. Cada objeto es mostrado como una "línea de vida" (línea vertical) que indica su existencia durante la interacción.
+<!--
 
-2. **Líneas de vida**: Las líneas de vida son líneas verticales que se dibujan debajo de cada objeto y muestran su existencia en el tiempo. Las líneas de vida son activadas por la llegada de un mensaje.
+| Elemento               | Descripción |
+|------------------------|-------------|
+| **📌 Actores** | Representan entidades externas que interactúan con el sistema (usuarios, otros sistemas). Se colocan generalmente en el lado izquierdo del diagrama. |
+| **🟦 Objetos** | Instancias de clases que participan en la secuencia. Se representan con un rectángulo con el nombre del objeto y su clase subrayados. |
+| **📊 Líneas de vida** | Representan la existencia de un objeto o actor durante la interacción. Son líneas verticales que muestran el tiempo de vida de cada objeto. |
+| **📏 Cuadros de activación** | Indican el período en que un objeto realiza una acción. Se representan con un rectángulo estrecho sobre la línea de vida. |
+| **🔄 Autollamadas** | Si un objeto envía un mensaje a sí mismo, se usa una flecha que regresa al mismo objeto. Se emplea para representar recursión o llamadas internas. |
 
-3. **Mensajes**: Los mensajes son flechas horizontales que se dibujan entre las líneas de vida de los objetos. Estos mensajes representan la comunicación entre objetos. Los mensajes pueden ser sincrónicos (esperan una respuesta) o asincrónicos (no esperan respuesta inmediata).
+## 📩 Tipos de Mensajes
 
-4. **Actores**: Los actores representan entidades externas (como usuarios o sistemas) que interactúan con los objetos del sistema. Se representan en el lado izquierdo del diagrama.
+| Tipo de Mensaje          | Descripción |
+|-------------------------|-------------|
+| **➡ Mensaje Sincrónico** | Representa una llamada de función en la que el remitente espera una respuesta antes de continuar. Se representa con una flecha de línea sólida y punta cerrada. |
+| **↗ Mensaje Asincrónico** | Representa una comunicación en la que el remitente no espera una respuesta inmediata. Se representa con una flecha de línea sólida con punta abierta. |
+| **↩ Retornos** | Representan respuestas a mensajes enviados. Se dibujan con una línea de puntos y una flecha en dirección al remitente del mensaje. |
+| **❌ Mensaje Eliminado** | Indica la destrucción de un objeto durante la secuencia. Se representa con una "X" en la línea de vida del objeto. |
 
-5. **Activaciones**: Las activaciones son representadas por barras rectangulares que aparecen sobre la línea de vida de un objeto, indicando cuando un objeto está ejecutando una acción o proceso debido a un mensaje recibido.
+## 🔄 Fragmentos Combinados
 
-6. **Retornos**: Los retornos son flechas punteadas que indican la respuesta de un objeto a un mensaje recibido. A menudo se usan para mostrar el resultado de una operación o método.
+| Fragmento Combinado     | Descripción |
+|------------------------|-------------|
+| **🔁 Loop (Bucle)** | Representa una repetición de acciones dentro de un rango de condiciones. Se encierra en un rectángulo con la etiqueta `loop`. |
+| **⚖ Alt (Alternativa)** | Representa una estructura de decisión tipo `if-else`. Se encierra en un rectángulo con la etiqueta `alt` y se divide en dos secciones. |
+| **🔀 Par (Paralelo)** | Representa ejecución paralela de acciones. Se usa la etiqueta `par` dentro del fragmento. |
+| **🔂 Opcional** | Representa un bloque opcional (`if` simple). Se etiqueta como `opt` y contiene una condición. |
+-->
 
-## 🛠 **Componentes y Símbolos Básicos**
 
-En un diagrama de secuencia UML, encontramos los siguientes elementos:
+| Elemento               | Imagen | Descripción |
+|------------------------|--------|-------------|
+| **📌 Actores** | ![Actores](https://upload.wikimedia.org/wikipedia/commons/d/dd/Uml-UseCase-Akteur.svg) | Representan entidades externas que interactúan con el sistema (usuarios, otros sistemas). Se colocan generalmente en el lado izquierdo del diagrama. |
+| **🟦 Objetos** | ![Objetos](https://upload.wikimedia.org/wikipedia/commons/0/0f/UML_Object.svg) | Instancias de clases que participan en la secuencia. Se representan con un rectángulo con el nombre del objeto y su clase subrayados. |
+| **📊 Líneas de vida** | ![Línea de Vida](https://upload.wikimedia.org/wikipedia/commons/7/7f/UML_Lifeline.svg) | Representan la existencia de un objeto o actor durante la interacción. Son líneas verticales que muestran el tiempo de vida de cada objeto. |
+| **📏 Cuadros de activación** | ![Activación](https://upload.wikimedia.org/wikipedia/commons/a/a3/UML_Sequence_Activation.svg) | Indican el período en que un objeto realiza una acción. Se representan con un rectángulo estrecho sobre la línea de vida. |
+| **🔄 Autollamadas** | ![Autollamada](https://upload.wikimedia.org/wikipedia/commons/8/88/UML_Self-Message.svg) | Si un objeto envía un mensaje a sí mismo, se usa una flecha que regresa al mismo objeto. Se emplea para representar recursión o llamadas internas. |
 
-- **📌 Actores**: Entidades externas que interactúan con el sistema (usuarios, otros sistemas).
-- **🟦 Objetos**: Instancias de clases que participan en la secuencia.
-- **📊 Líneas de vida**: Representan la existencia de un objeto o actor durante la interacción.
-- **📩 Mensajes**: Comunicaciones entre objetos que indican la invocación de métodos o señales.
-  - **Mensajes sincrónicos**: Se representan con una flecha sólida de una línea de vida a otra.
-  - **Mensajes asincrónicos**: Se representan con una flecha con una línea en el extremo.
-- **📏 Cuadros de activación**: Indican el período en que un objeto realiza una acción.
-- **📦 Fragmentos combinados**: Permiten representar estructuras condicionales o paralelas en la interacción.
-- **Retornos**: Se representan con flechas punteadas de la línea de vida de un objeto hacia otra, indicando el retorno de un valor o resultado.
-- **Autollamadas**: Si un objeto envía un mensaje a sí mismo, se usa una flecha que regresa al mismo objeto.
+## 📩 Tipos de Mensajes
+
+| Tipo de Mensaje          | Imagen | Descripción |
+|-------------------------|--------|-------------|
+| **➡ Mensaje Sincrónico** | ![Mensaje Sincrónico](https://upload.wikimedia.org/wikipedia/commons/7/75/UML_SynchronousMessage.svg) | Representa una llamada de función en la que el remitente espera una respuesta antes de continuar. Se representa con una flecha de línea sólida y punta cerrada. |
+| **↗ Mensaje Asincrónico** | ![Mensaje Asincrónico](https://upload.wikimedia.org/wikipedia/commons/e/ed/UML_Sequence_Messages.svg) | Representa una comunicación en la que el remitente no espera una respuesta inmediata. Se representa con una flecha de línea sólida con punta abierta. |
+| **↩ Retornos** | ![Retornos](https://upload.wikimedia.org/wikipedia/commons/d/db/UML_Return.svg) | Representan respuestas a mensajes enviados. Se dibujan con una línea de puntos y una flecha en dirección al remitente del mensaje. |
+| **❌ Mensaje Eliminado** | ![Objeto Destruido](https://upload.wikimedia.org/wikipedia/commons/d/d3/UML_Sequence_Destruction.svg) | Indica la destrucción de un objeto durante la secuencia. Se representa con una "X" en la línea de vida del objeto. |
+
+## 🔄 Fragmentos Combinados
+
+| Fragmento Combinado     | Imagen | Descripción |
+|------------------------|--------|-------------|
+| **🔁 Loop (Bucle)** | ![Loop](https://upload.wikimedia.org/wikipedia/commons/1/16/UML_Sequence_Loop.svg) | Representa una repetición de acciones dentro de un rango de condiciones. Se encierra en un rectángulo con la etiqueta `loop`. |
+| **⚖ Alt (Alternativa)** | ![Alternativa](https://upload.wikimedia.org/wikipedia/commons/3/30/UML_CombinedFragment.svg) | Representa una estructura de decisión tipo `if-else`. Se encierra en un rectángulo con la etiqueta `alt` y se divide en dos secciones. |
+| **🔀 Par (Paralelo)** | ![Paralelo](https://upload.wikimedia.org/wikipedia/commons/3/30/UML_CombinedFragment.svg) | Representa ejecución paralela de acciones. Se usa la etiqueta `par` dentro del fragmento. |
+| **🔂 Opcional** | ![Opción](https://upload.wikimedia.org/wikipedia/commons/3/30/UML_CombinedFragment.svg) | Representa un bloque opcional (`if` simple). Se etiqueta como `opt` y contiene una condición. |
+
+📌 **Nota**: Las imágenes utilizadas provienen de [Wikimedia Commons](https://commons.wikimedia.org/wiki/Category:UML_sequence_diagrams).
+
 ---
 
 ## 🖥 **Ejemplo de Diagrama de Secuencia**
