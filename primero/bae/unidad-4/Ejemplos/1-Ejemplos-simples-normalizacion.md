@@ -11,7 +11,7 @@ Las tablas deben satisfacer ciertos criterios:
 
 Hemos de prestar atensión a las propiedades __multivaluadas y las compuestas__.
 
-## Personas que poseen teéfonos
+## Personas que poseen teléfonos
 
 Se trata del caso (**Valores Atómicos**).
 
