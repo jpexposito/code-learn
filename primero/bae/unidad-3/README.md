@@ -1,6 +1,6 @@
 <div align="justify">
 
-# MODELO RELACIONAL
+# <img src=../../../images/coding-book.png width="40"> Code & Learn (Modelo Relacional)
 
 ## Introducción
 

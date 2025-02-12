@@ -1,6 +1,6 @@
 <div align="justify">
 
-# INTRODUCCIÓN-A-LAS-BASES-DE-DATOS-RELACIONALES
+# <img src=../../../images/coding-book.png width="40"> Code & Learn (Introducción a las bases de Datos Relacionales)
 
 - Índice:
   - [Historia de las RDB](#Historia-de-las-RDB)

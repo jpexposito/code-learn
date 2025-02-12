@@ -1,6 +1,6 @@
 <div align="justify">
 
-# CONCEPTOS BÁSICOS Y CONTEXTO HISTÓRICO
+# <img src=../../../images/coding-book.png width="40"> Code & Learn (Conceptos Básicos y Contexto Historico)
 
 - Índice:
   - [Historia del almacenamiento de la información](#Historia-del-almacenamiento-de-la-información)

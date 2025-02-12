@@ -44,20 +44,20 @@ El objetivo principal del diagrama de secuencia es ilustrar el flujo de control 
 
 | Elemento               | Imagen | Descripción |
 |------------------------|--------|-------------|
-| **📌 Actores** | ![Actores](https://upload.wikimedia.org/wikipedia/commons/d/dd/Uml-UseCase-Akteur.svg) | Representan entidades externas que interactúan con el sistema (usuarios, otros sistemas). Se colocan generalmente en el lado izquierdo del diagrama. |
-| **🟦 Objetos** | ![Objetos](https://upload.wikimedia.org/wikipedia/commons/0/0f/UML_Object.svg) | Instancias de clases que participan en la secuencia. Se representan con un rectángulo con el nombre del objeto y su clase subrayados. |
-| **📊 Líneas de vida** | ![Línea de Vida](https://upload.wikimedia.org/wikipedia/commons/7/7f/UML_Lifeline.svg) | Representan la existencia de un objeto o actor durante la interacción. Son líneas verticales que muestran el tiempo de vida de cada objeto. |
-| **📏 Cuadros de activación** | ![Activación](https://upload.wikimedia.org/wikipedia/commons/a/a3/UML_Sequence_Activation.svg) | Indican el período en que un objeto realiza una acción. Se representan con un rectángulo estrecho sobre la línea de vida. |
-| **🔄 Autollamadas** | ![Autollamada](https://upload.wikimedia.org/wikipedia/commons/8/88/UML_Self-Message.svg) | Si un objeto envía un mensaje a sí mismo, se usa una flecha que regresa al mismo objeto. Se emplea para representar recursión o llamadas internas. |
+| **📌 Actores** | ![Actores](img/actor.drawio.png) | Representan entidades externas que interactúan con el sistema (usuarios, otros sistemas). Se colocan generalmente en el lado izquierdo del diagrama. |
+| **🟦 Objetos** | ![Objetos](img/objeto.drawio.png) | Instancias de clases que participan en la secuencia. Se representan con un rectángulo con el nombre del objeto y su clase subrayados. |
+| **📊 Líneas de vida** | ![Línea de Vida](img/linea-vida.drawio.png) | Representan la existencia de un objeto o actor durante la interacción. Son líneas verticales que muestran el tiempo de vida de cada objeto. |
+| **📏 Cuadros de activación** | ![Activación](img/cuadro-activacion.drawio.png) | Indican el período en que un objeto realiza una acción. Se representan con un rectángulo estrecho sobre la línea de vida. |
+| **🔄 Autollamadas** | ![Autollamada](img/auto-llamada.drawio.png) | Si un objeto envía un mensaje a sí mismo, se usa una flecha que regresa al mismo objeto. Se emplea para representar recursión o llamadas internas. |
 
 ## 📩 Tipos de Mensajes
 
 | Tipo de Mensaje          | Imagen | Descripción |
 |-------------------------|--------|-------------|
-| **➡ Mensaje Sincrónico** | ![Mensaje Sincrónico](https://upload.wikimedia.org/wikipedia/commons/7/75/UML_SynchronousMessage.svg) | Representa una llamada de función en la que el remitente espera una respuesta antes de continuar. Se representa con una flecha de línea sólida y punta cerrada. |
-| **↗ Mensaje Asincrónico** | ![Mensaje Asincrónico](https://upload.wikimedia.org/wikipedia/commons/e/ed/UML_Sequence_Messages.svg) | Representa una comunicación en la que el remitente no espera una respuesta inmediata. Se representa con una flecha de línea sólida con punta abierta. |
-| **↩ Retornos** | ![Retornos](https://upload.wikimedia.org/wikipedia/commons/d/db/UML_Return.svg) | Representan respuestas a mensajes enviados. Se dibujan con una línea de puntos y una flecha en dirección al remitente del mensaje. |
-| **❌ Mensaje Eliminado** | ![Objeto Destruido](https://upload.wikimedia.org/wikipedia/commons/d/d3/UML_Sequence_Destruction.svg) | Indica la destrucción de un objeto durante la secuencia. Se representa con una "X" en la línea de vida del objeto. |
+| **➡ Mensaje Sincrónico** | ![Mensaje Sincrónico](img/mensaje-sincrono.drawio.png) | Representa una llamada de función en la que el remitente espera una respuesta antes de continuar. Se representa con una flecha de línea sólida y punta cerrada. |
+| **↗ Mensaje Asincrónico** | ![Mensaje Asincrónico](mensaje-asincrono.drawio.png) | Representa una comunicación en la que el remitente no espera una respuesta inmediata. Se representa con una flecha de línea sólida con punta abierta. |
+| **↩ Retornos** | ![Retornos](mensaje-asincrono.drawio.png) | Representan respuestas a mensajes enviados. Se dibujan con una línea de puntos y una flecha en dirección al remitente del mensaje. |
+| **❌ Mensaje Eliminado** | ![Objeto Destruido](mensaje-asincrono.drawio.png) | Indica la destrucción de un objeto durante la secuencia. Se representa con una "X" en la línea de vida del objeto. |
 
 ## 🔄 Fragmentos Combinados
 
