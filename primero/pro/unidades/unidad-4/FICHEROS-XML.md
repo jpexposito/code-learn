@@ -8,6 +8,126 @@
 
 `XML (eXtensible Markup Language)` es un formato de texto ampliamente utilizado para `almacenar y transportar datos`. A continuación, se presentan los conceptos sobre cómo trabajar con archivos XML.
 
+## 🏗 **Elementos Principales de un Archivo XML**
+
+### 1️⃣ **Declaración XML**
+
+- Es la primera línea del archivo y define la versión y codificación del documento.
+- No es obligatoria, pero se recomienda incluirla.
+
+### 2️⃣ **Elemento Raíz**
+
+- Es el **elemento principal** que contiene todos los demás elementos del XML.
+- Un documento XML **debe tener un único elemento raíz**.
+
+### 3️⃣ **Elementos o Nodos**
+
+- Representan los datos y pueden contener otros elementos anidados.
+- Se escriben con **etiquetas de apertura y cierre**.
+
+### 4️⃣ **Atributos**
+
+- Se usan para almacenar información adicional dentro de las etiquetas.
+- Se definen en la etiqueta de apertura y **no pueden contener múltiples valores**.
+
+### 5️⃣ **Comentarios**
+
+- Permiten agregar notas dentro del XML sin afectar su estructura.
+- Se escriben entre `<!--` y `-->`.
+
+### 6️⃣ **Datos de Texto**
+
+- Son los valores almacenados dentro de un elemento.
+- XML diferencia entre **elementos** y **contenido de texto**.
+
+### 7️⃣ **Espacios de Nombres (Namespaces)**
+
+- Se usan para evitar conflictos de nombres cuando se combinan diferentes XML.
+- Se declaran con `xmlns`.
+
+### 8️⃣ **CData (Character Data)**
+
+- Se usa para incluir datos que no deben ser interpretados como XML.
+- Se encierra entre `<![CDATA[ ... ]]>`.
+
+```xml
+<!-- Yo soy un comentario -->
+<!-- Tipo documento y codificacion -->
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Elemento raiz -->
+<empresa>
+    <!-- Elemento nodo de tipo empleado -->
+    <empleado id="1">
+              <!-- Propiedad del nodo (di) -->      
+        <nombre>Juan</nombre>
+               <!-- Nodo hijo de empleado --> 
+        <edad>30</edad>
+    </empleado>
+    <empleado id="2">
+        <nombre>María</nombre>
+        <edad>25</edad>
+    </empleado>
+</empresa>
+```
+
+## 📌 ¿Qué es el DOM en XML?
+
+El **DOM (Document Object Model)** es una representación estructurada en memoria de un documento XML en forma de **árbol jerárquico**. Permite a los programas acceder, modificar y manipular la estructura y contenido del XML de manera programática.
+
+### 🏗 Características del DOM en XML
+
+- **Estructura en árbol:** Cada nodo representa un elemento, atributo o texto dentro del XML.
+- **Acceso y manipulación:** Se pueden recorrer, leer, modificar o eliminar nodos de XML.
+- **Interfaz estandarizada:** Definida por el **W3C**, compatible con varios lenguajes ___(JavaScript, Python, Java, etc.)___.
+- **Carga completa en memoria:** Todo el documento se almacena en memoria, lo que facilita la manipulación pero puede ser costoso en términos de recursos si el XML es muy grande.
+
+### 🌳 Estructura del DOM en XML
+
+Dado el siguiente XML:
+
+```xml
+<empresa>
+    <empleado id="1">
+        <nombre>Juan</nombre>
+        <edad>30</edad>
+    </empleado>
+    <empleado id="2">
+        <nombre>María</nombre>
+        <edad>25</edad>
+    </empleado>
+</empresa>
+´´´
+
+El DOM lo representaría como un árbol de nodos:
+
+```bash
+Raíz: empresa
+ ├── Nodo: empleado (id="1")
+ │   ├── Nodo: nombre → "Juan"
+ │   ├── Nodo: edad → "30"
+ ├── Nodo: empleado (id="2")
+     ├── Nodo: nombre → "María"
+     ├── Nodo: edad → "25"
+```
+
+### Ejemplo de Uso
+
+En javascript
+
+```js
+let xmlDoc = new DOMParser().parseFromString(xmlString, "text/xml");
+let nombre = xmlDoc.getElementsByTagName("nombre")[0].textContent;
+console.log(nombre);
+// Output: Juan
+```
+
+### 📌 Aplicaciones del DOM en XML
+
+- Manipulación de XML en navegadores.
+- Interacción con APIs basadas en XML.
+- Procesamiento de ___datos estructurados en servidores___.
+
 ### Conceptos Básicos
 
 - `Lectura de XML`: Proceso de analizar un archivo XML y extraer información de sus nodos y atributos.
