@@ -270,6 +270,56 @@ public class ModificarXML {
 }
 ```
 
+```java
+ublic class AgregarElementoXML {
+    public static void main(String[] args) {
+        try {
+            String archivoXML = "empresa.xml";
+
+            List<Map<String, String>> empleadosNuevos = Arrays.asList(
+                Map.of("id", "3", "nombre", "Carlos", "edad", "28"),
+                Map.of("id", "4", "nombre", "Lucía", "edad", "32")
+            );
+
+
+            File file = new File(archivoXML);
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(file);
+
+            Element root = doc.getDocumentElement();
+
+            for (Map<String, String> empleado : empleadosNuevos) {
+                Element empleadoElement = doc.createElement("empleado");
+                empleadoElement.setAttribute("id", empleado.get("id"));
+
+                Element nombre = doc.createElement("nombre");
+                nombre.setTextContent(empleado.get("nombre"));
+                empleadoElement.appendChild(nombre);
+
+                Element edad = doc.createElement("edad");
+                edad.setTextContent(empleado.get("edad"));
+                empleadoElement.appendChild(edad);
+
+                root.appendChild(empleadoElement);
+            }
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(new File(archivoXML));
+            transformer.transform(source, result);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
 ## Explicación de los Elementos Clave en la Manipulación de Archivos XML en Java
 
 A continuación, te explico los elementos clave de programación a tener en cuenta para manipular archivos XML en Java. El código se divide en tres secciones: __Lectura__, __Escritura__, y __Modificación__ de archivos XML.
