@@ -41,7 +41,12 @@ Tanto los flujos de **caracteres** como los de **bytes** proporcionan una forma 
 
 <img src="images/java-io-streams-classification.png" width="400">
 
->[Manejo de ficheros en Java](MANEJO-FICHEROS-JAVA.md)
+## Índice
+
+- [Csv/Xml/Json](CSV-XML-JSON.md)
+- [Manejo de ficheros en Java (Csv)](MANEJO-FICHEROS-JAVA.md)
+- [Manejo de ficheros en Java (Xml)](FICHEROS-XML.md)
+- [Manejo de ficheros en Java (Json)](FICHEROS-JSON.md)
 
 ## Licencia 📄
 
