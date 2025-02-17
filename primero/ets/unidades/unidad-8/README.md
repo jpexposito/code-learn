@@ -1,6 +1,6 @@
 <div align="justify">
 
-# Diseño y realización de pruebas
+# <img src=../../../../images/coding-book.png width="40"> Code & Learn (Entornos de Desarrollo - Diseño y realización de pruebas)
 
 Los diferentes tipos de testing en el desarrollo de software
 En esta sección vamos a ver qué tipos de testing existen con relación al desarrollo de software.
