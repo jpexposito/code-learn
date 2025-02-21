@@ -238,6 +238,6 @@ public class Car { ... }
 
 ## Referencias
 
-[www.baeldung.com](https://www.baeldung.com/jackson-object-mapper-tutorial)
+- [www.baeldung.com](https://www.baeldung.com/jackson-object-mapper-tutorial)
 
 </div>
