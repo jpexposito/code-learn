@@ -161,15 +161,16 @@ La estructura base de una aplicación JavaFX.
 | `Scene`            | Contenedor para los nodos y elementos visuales de la aplicación. | [Scene](https://openjfx.io/javadoc/21/javafx.scene/javafx/scene/Scene.html) |
 | `Application`      | Clase base para la creación de aplicaciones JavaFX. | [Application](https://openjfx.io/javadoc/21/javafx.application/javafx/application/Application.html) |
 
----
-
-Para más información, visita la [documentación oficial de JavaFX](https://openjfx.io/).
-
 ## Trabajo en Proyectos
 
 Para la realización de proyectos basado en **javafx**, vamos a trabajar con **maven** para la inyección de librerias y **Scenebuilder** para definir los elemenos de una forma gráfica.
 
 - [Scenebuilder.md](SCENEBUILDER.md).
 - [Mi](PROYECTO-MAVEN.md).
+
+## Referencias
+
+- [Documentación oficial](https://openjfx.io/).
+- [Documentación y ejemplos](https://jrjimenezreyes.github.io/apuntesJavaFX/)
 
 </div>
