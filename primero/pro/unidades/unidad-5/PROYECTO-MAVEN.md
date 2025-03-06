@@ -115,22 +115,105 @@ Como podemos observar, la clase **es.ies.puerto.PrincipalApplication** es la cla
 
 ## Estructura de dependencias de responsabilidad
 
+### Modelo
+
+- Representa los datos y la lógica de negocio.
+- Puede incluir clases que gestionan acceso a bases de datos, cálculos, etc.
+- No tiene ninguna referencia a **JavaFX**.
+
+```java
+public class Usuario {
+    private String nombre;
+    private int edad;
+
+    public Usuario(String nombre, int edad) {
+        this.nombre = nombre;
+        this.edad = edad;
+    }
+
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+
+    public int getEdad() { return edad; }
+    public void setEdad(int edad) { this.edad = edad; }
+}
+```
+
+### Vista (View)
+
+- Es el archivo FXML o el código en Java que define la interfaz gráfica.
+- No contiene lógica de negocio, solo la estructura visual.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controlador.UsuarioController">
+    <Label text="Nombre:"/>
+    <TextField fx:id="nombreField"/>
+    <Label text="Edad:"/>
+    <TextField fx:id="edadField"/>
+    <Button text="Mostrar" onAction="#mostrarUsuario"/>
+</VBox>
+```
+
+### Controlador (Controller)
+
+- Se encarga de manejar la interacción del usuario.
+- Usa los datos del Modelo y los actualiza en la Vista.
+- Se conecta con los elementos del FXML.
+
+```java
+package controlador;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
+import modelo.Usuario;
+
+public class UsuarioController {
+    @FXML private TextField nombreField;
+    @FXML private TextField edadField;
+
+    public void mostrarUsuario() {
+        String nombre = nombreField.getText();
+        int edad = Integer.parseInt(edadField.getText());
+
+        Usuario usuario = new Usuario(nombre, edad);
+        System.out.println("Usuario: " + usuario.getNombre() + ", Edad: " + usuario.getEdad());
+    }
+}
+```
+
+En JavaFX, el **FXML** define la interfaz gráfica, mientras que el **Controlador** gestiona la lógica de la aplicación. La relación entre ambos se establece a través de `fx:controller` y la vinculación de elementos con `@FXML`.
+
+## ⚡ Interacción entre FXML y el Controlador
+
+1. **El FXML define la interfaz** con etiquetas XML.
+2. **El Controlador maneja eventos** en respuesta a interacciones del usuario.
+3. **`fx:controller` enlaza el FXML con su Controlador**.
+4. **Los elementos de la UI se vinculan con `@FXML`** en el controlador para manipularlos desde el código.
+
+---
+
+## Arquitectura y responsabilidades
+
 ```mermaid
 graph TD;
-    Vista(UI) -->|Solicita datos| Controlador;
-    Controlador -->|Obtiene datos| Modelo;
+    Vista["🖥️ Vista (JavaFX)"] -->|Solicita datos| Controlador["🎮 Controlador"];
+    Controlador -->|Obtiene datos| Modelo["🗄️ Modelo"];
     Modelo -->|Devuelve datos| Controlador;
-    Controlador -->|Actualiza| Vista(UI);
-    
-    subgraph JavaFX
-        Vista(UI)
+    Controlador -->|Actualiza UI| Vista;
+
+    subgraph "🔥 JavaFX"
+        Vista
     end
 
-    subgraph Lógica de Negocio
+    subgraph "🛠️ Lógica de Negocio"
         Modelo
     end
 
-    subgraph Controlador
+    subgraph "🧩 Controlador"
         Controlador
     end
 ```
