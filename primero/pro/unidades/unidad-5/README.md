@@ -165,8 +165,8 @@ La estructura base de una aplicación JavaFX.
 
 Para la realización de proyectos basado en **javafx**, vamos a trabajar con **maven** para la inyección de librerias y **Scenebuilder** para definir los elemenos de una forma gráfica.
 
-- [Scenebuilder.md](SCENEBUILDER.md).
-- [Mi](PROYECTO-MAVEN.md).
+- [Scenebuilder](SCENEBUILDER.md).
+- [Mi proyecto java/maven](PROYECTO-MAVEN.md).
 
 ## Referencias
 
