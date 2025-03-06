@@ -113,4 +113,26 @@ El plugin que es más importante es el siguiente:
 
 Como podemos observar, la clase **es.ies.puerto.PrincipalApplication** es la clase principal **(Contiene el Main)**, y lanza la aplicación.
 
+## Estructura de dependencias de responsabilidad
+
+```mermaid
+graph TD;
+    Vista(UI) -->|Solicita datos| Controlador;
+    Controlador -->|Obtiene datos| Modelo;
+    Modelo -->|Devuelve datos| Controlador;
+    Controlador -->|Actualiza| Vista(UI);
+    
+    subgraph JavaFX
+        Vista(UI)
+    end
+
+    subgraph Lógica de Negocio
+        Modelo
+    end
+
+    subgraph Controlador
+        Controlador
+    end
+```
+
 </div>

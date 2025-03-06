@@ -236,6 +236,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Car { ... }
 ```
 
+
+<div style="width: 300px; background: red;">
+  <div style="width: 30%; background: green; height: 20px;"></div>
+</div>
+
+
 ## Referencias
 
 - [www.baeldung.com](https://www.baeldung.com/jackson-object-mapper-tutorial)
