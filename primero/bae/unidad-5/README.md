@@ -6,7 +6,6 @@
 <img src="img/ddlydml.png" width="500px"/>
 </div>
 
-
 ## DDL (Data Definition Language - Lenguaje de Definición de Datos)
 
 - **Propósito:** Define y modifica la estructura de la base de datos.

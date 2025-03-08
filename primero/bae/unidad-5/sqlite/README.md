@@ -1,12 +1,16 @@
 <div align="justify">
 
-# <img src=../../../../images/coding-book.png width="40"> Code & Learn (SQL - Comandos básicos: Funciones básicas en SQL)
+# <img src=../../../../images/coding-book.png width="40"> Code & Learn (SQL - Sentencias SQL a través de ejemplos)
 
 <div align="center">
 <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/0*YRLPcqx9hsm4JT87.png" width="400px"/>
 </div>
 
 ## Según el tipo de Lenguaje en BBDD (DDL, DML, DCL y TCL))
+
+<div align="center">
+<img src="../img/ddlydml.png" width="500px"/>
+</div>
 
 ### 5.1: Lenguaje de Definición de Datos (DDL - Data Definition Language)
 
