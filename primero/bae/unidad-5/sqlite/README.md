@@ -6,11 +6,69 @@
 <img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/0*YRLPcqx9hsm4JT87.png" width="400px"/>
 </div>
 
-# Consultas Básicas a través de ejemplos
+## Según el tipo de Lenguaje en BBDD (DDL, DML, DCL y TCL))
+
+### 5.1: Lenguaje de Definición de Datos (DDL - Data Definition Language)
+
+#### 📌 Sentencias principales
+
+- `CREATE DATABASE` – Creación de bases de datos](01-Comandos-basicos.md).
+- [`CREATE TABLE` – Creación de tablas](01_crear_borrar_tabla.md).
+- `ALTER TABLE` – Modificación de la estructura de una tabla.
+- `DROP DATABASE` – Eliminación de una base de datos.
+- [`DROP TABLE` – Eliminación de una tabla](01_crear_borrar_tabla.md).
+- `TRUNCATE TABLE` – Vaciar una tabla sin eliminar su estructura.
+- Restricciones: `PRIMARY KEY`, `FOREIGN KEY`, `UNIQUE`, `NOT NULL`, `CHECK`.
+
+### Apartado 5.2: Consultas sobre una tabla (DQL - Data Query Language)
+
+#### 📌 Sentencias principales
+
+- [`SELECT` – Consulta de datos en una tabla](02_insert_select.md).
+- [`WHERE` – Filtrado de registros](03_where.md).
+- [`ORDER BY` – Ordenación de resultados](13_order_by.md).
+- [`DISTINCT` – Eliminación de duplicados](24_distinct.md).
+- `LIMIT` – Restricción de filas en la consulta.
+
+### Apartado 5.3: Consultas sobre varias tablas – Composición interna y cruzada
+
+#### 📌 Sentencias principales
+
+- [`INNER JOIN` – Combinación de registros relacionados en dos tablas](26_inner_join_.md).
+
+### Apartado 5.4: Consultas sobre varias tablas – Composición externa
+
+#### 📌 Sentencias principales
+
+- [`LEFT JOIN` – Devuelve todos los registros de la tabla izquierda y los coincidentes de la derecha](27_left_join.md).
+- [`RIGHT JOIN` – Devuelve todos los registros de la tabla derecha y los coincidentes de la izquierda](28_right_join.md).
+- [`FULL OUTER JOIN` – Devuelve todos los registros de ambas tablas, con o sin coincidencias].
+
+### Apartado 5.5: Consultas resumen (Funciones Agregadas y Agrupaciones)
+
+#### 📌 Sentencias principales
+
+- [`COUNT()` – Contar registros](19_count.md).
+- [`SUM()` – Sumar valores de una columna](14_operadores_logicos.md).
+- [`AVG()` – Calcular el promedio de valores](14_operadores_logicos.md).
+- [`MAX()` / `MIN()` – Obtener el valor máximo y mínimo].14_operadores_logicos.md).
+- [`GROUP BY` – Agrupar registros según un criterio](22_group_by.md).
+- [`HAVING` – Filtrar resultados después de una agrupación](23_having.md).
+
+### Apartado 5.6: Subconsultas (Subqueries)
+
+#### 📌 Sentencias principales
+
+- [Subconsultas en `SELECT`](02_insert_select.md).
+- [Subconsultas en `WHERE`](03_where.md).
+- [Subconsultas en `HAVING`](23_having.md).
+- [Uso de `EXISTS`](17_exists.md) e [`IN`](17_in.md).
+
+## Consultas Básicas a través de ejemplos
 
 - [Consultas Básicas a través de clausulas](consultas-basicas-clausulas.md).
 
-# Comandos Básicos de SQLite a través de ejemplos
+## Comandos Básicos de SQLite a través de ejemplos
 
 - [Importante - Comandos Meta](comandos_sqlite.md).
 - [Tipos de Datos](00_tipos_basicos.md).
@@ -48,5 +106,6 @@
   - [Cláusula Right Join](28_right_join_.md).
   - [Cláusula where y join, semejanzas y diferencias](30_where_join.md).
 - [Subconsultas](29_sub_consultas.md).
+
 
 </div>

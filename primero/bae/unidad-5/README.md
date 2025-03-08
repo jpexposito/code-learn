@@ -81,9 +81,9 @@ Estos lenguajes SQL proporcionan las herramientas necesarias para administrar y 
 | --                       | Comentario de una sola línea.                                          |
 | /* ... */                | Comentario de varias líneas.   
 
-Indice:
-- [Primeros pasos en SQL](sqlite/README.md).
-  - 
+## Indice
+
+- [Trabajando con sql en Sqlite](sqlite/README.md).
 - [Resumen Sentencias SQL](RESUMEN-SETENCIAS.md)
 
 </div>
