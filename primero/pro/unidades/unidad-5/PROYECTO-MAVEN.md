@@ -218,4 +218,12 @@ graph TD;
     end
 ```
 
+## Comandos Maven
+
+Para lanzar nuestra app en maven debemos ejecutar el siguiente código:
+
+```code
+mvn clean javafx:run
+```
+
 </div>
