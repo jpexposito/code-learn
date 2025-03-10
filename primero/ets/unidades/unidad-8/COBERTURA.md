@@ -1,6 +1,6 @@
 <div align="justify">
 
-# Cobertura de Código
+# <img src=../../../../images/coding-book.png width="40"> Code & Learn (Entornos de Desarrollo - Cobertura de código)
 
 La _cobertura de código_ __(code coverage)__ es una __métrica que indica qué parte del código__ fuente de un programa ha sido ejecutada durante la ejecución de un conjunto de __test__. Es una herramienta que ayuda a medir la eficacia de las pruebas y proporciona información sobre qué porcentaje del código está siendo validado por los tests.
 

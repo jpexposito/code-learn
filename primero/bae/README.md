@@ -5,11 +5,19 @@ Este repositorio está diseñado para ser un recurso educativo sobre **bases de 
 ## Unidades
 
 - [Unidad 1: Introducción a las Bases de Datos](unidad-1/)
-- [Unidad 2](unidad-X/)
-- [Unidad 3](unidad-X/)
-- [Unidad 4](unidad-X/)
-- [Unidad 5](unidad-X/)
-
+- [Unidad 2:Modelo Entidad/Relación](unidad-2/)
+- [Unidad 3:Modelo Relacional](unidad-3/)
+- [Unidad 4: Normalización de BBDD](unidad-4/)
+- [Unidad 5: Lenguage de Definición/Consula/Manipulación](unidad-5/)
+  - [5.1: Lenguaje de Definición de Datos (DDL - Data Definition Language](unidad-5/sqlite/)
+  - [5.2: Consultas sobre una tabla (DQL - Data Query Language](unidad-5/sqlite/)
+  - [5.3: Consultas sobre varias tablas – Composición interna y cruzada](unidad-5/sqlite/)
+  - [5.4: Consultas sobre varias tablas – Composición externa](unidad-5/sqlite/)
+  - [5.5: Consultas resumen (Funciones Agregadas y Agrupaciones](unidad-5/sqlite/)
+  - [5.6: Subconsultas (Subqueries)](unidad-5/sqlite/)
+- [Unidad 6:X](unidad-x/)
+- [Unidad 7:X](unidad-x/)
+  
 ## Requisitos
 
 - Conocimiento básico de programación.
