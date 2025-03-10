@@ -2,7 +2,7 @@
 
 # <img src=../../../../images/coding-book.png width="40"> Code & Learn (Entornos de Desarrollo - Integración Continua)
 
-<img src="images/metodologia-agil.png" width="400" >
+<img src="images/metodologia-agile.png" width="500" >
 
 ## ¿Qué son las Metodologías Ágiles?
 Las metodologías ágiles son un conjunto de principios y prácticas para el desarrollo de software que enfatizan la flexibilidad, la colaboración y la entrega rápida de productos funcionales. Estas metodologías buscan adaptarse a cambios en los requisitos y fomentar una comunicación continua entre los miembros del equipo.
