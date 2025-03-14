@@ -5,15 +5,18 @@
 <img src="images/ci-cd-diagram.png" width="400" >
 
 ## ¿Qué es la Integración Continua?
+
 La Integración Continua (CI, por sus siglas en inglés) es una práctica de desarrollo de software en la que los desarrolladores integran su código en un repositorio compartido con frecuencia. Cada integración se verifica mediante una compilación automatizada y pruebas para detectar errores lo antes posible.
 
 ## Beneficios de la Integración Continua
+
 - **Detección temprana de errores**: Al integrar y probar código con frecuencia, los errores se identifican rápidamente.
 - **Mayor calidad del software**: La automatización de pruebas garantiza un código más estable y funcional.
 - **Reducción del tiempo de entrega**: Facilita un flujo de desarrollo más ágil y predecible.
 - **Facilita la colaboración**: Permite que varios desarrolladores trabajen en un mismo proyecto sin conflictos de integración.
 
 ## Flujo de Trabajo en CI
+
 1. **Código en Repositorio**: Los desarrolladores suben cambios a un sistema de control de versiones (Git, SVN, etc.).
 2. **Servidor de Integración Continua**: Un servidor (Jenkins, GitHub Actions, GitLab CI/CD, Travis CI) detecta los cambios.
 3. **Construcción Automatizada**: Se compila el código y se generan artefactos.
@@ -22,7 +25,9 @@ La Integración Continua (CI, por sus siglas en inglés) es una práctica de des
 6. **Implementación (Opcional)**: Si todo es exitoso, se puede desplegar automáticamente en un entorno de prueba o producción.
 
 ## Herramientas de Integración Continua
+
 Algunas herramientas populares para CI incluyen:
+
 - **Jenkins**: Plataforma de automatización open-source.
 - **GitHub Actions**: Integrado con GitHub para CI/CD.
 - **GitLab CI/CD**: Integración nativa en GitLab.
@@ -30,6 +35,7 @@ Algunas herramientas populares para CI incluyen:
 - **CircleCI**: Plataforma optimizada para despliegues rápidos.
 
 ## Ejemplo de Configuración en GitHub Actions
+
 ```yaml
 name: CI Pipeline
 
