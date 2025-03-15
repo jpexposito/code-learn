@@ -368,7 +368,7 @@ module com.ejemplo.app {
     // Permitir acceso a los controladores desde FXMLLoader
     opens com.ejemplo.controladores to javafx.fxml;
 
-    // Exportar paquetes para que otros módulos puedan usarlos
+    // Exportar paquetes para que otros modulos puedan usarlos
     exports com.ejemplo;
     exports com.ejemplo.modelo;
 
