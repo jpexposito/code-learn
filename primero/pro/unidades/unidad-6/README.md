@@ -4,7 +4,7 @@
 
 # Uso Avanzado de Clases en Java
 
-<img src=images/uso-avanzado.png width="40">
+<img src=images/uso-avanzado.png width="400">
 
 El uso avanzado de clases en Java permite implementar funcionalidades poderosas y flexibles. A través de conceptos como **recursividad**, **expresiones regulares** y **enumerados**, se pueden resolver problemas complejos de manera eficiente y estructurada. A continuación, se describen estos conceptos y cómo se aplican en la programación orientada a objetos en Java.
 
@@ -26,8 +26,14 @@ Un **enum** en Java es un tipo de clase especial que representa un conjunto de c
 
 - [Un poco de clases enumeradas](ENUMERADOS.md).
 
+## 4. Internacionalización (.properties)
+
+Los archivos **`.properties`** en Java se utilizan para almacenar configuraciones en un formato clave-valor. Son ampliamente usados para **configuración de aplicaciones**, **internacionalización (i18n)** y **almacenamiento de datos ligeros**.
+
+- [Fichero de propiedades](FICHEROS-PROPERTIES.md).
+
 ## Conclusión
 
-El uso avanzado de clases en Java, con herramientas como **recursividad**, **expresiones regulares** y **enumerados**, permite a los programadores escribir código más eficiente, legible y mantenible. Estos conceptos son fundamentales para resolver una variedad de problemas complejos y estructurar aplicaciones más robustas y escalables.
+El uso avanzado de clases en Java, con herramientas como **recursividad**, **expresiones regulares** y **enumerados, o la lectura de ficheros de propiedades**, permite a los programadores escribir código más eficiente, legible y mantenible. Estos conceptos son fundamentales para resolver una variedad de problemas complejos y estructurar aplicaciones más robustas y escalables.
 
 </div>
