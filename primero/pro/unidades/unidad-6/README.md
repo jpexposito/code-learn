@@ -2,8 +2,6 @@
 
 # <img src=../../../../images/coding-book.png width="40"> Code & Learn (Programación: Uso Avanzado de clases)
 
-# Uso Avanzado de Clases en Java
-
 <img src=images/uso-avanzado.png width="400">
 
 El uso avanzado de clases en Java permite implementar funcionalidades poderosas y flexibles. A través de conceptos como **recursividad**, **expresiones regulares** y **enumerados**, se pueden resolver problemas complejos de manera eficiente y estructurada. A continuación, se describen estos conceptos y cómo se aplican en la programación orientada a objetos en Java.
