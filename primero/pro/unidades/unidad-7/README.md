@@ -1,7 +1,7 @@
 <div align="justify">
 
 <div align="center">
-<img src="img/database.png" with="200px">
+<img src="img/bbdd-sql.jpg" with="200px">
 </div>
 
 # Almacenamiento de datos

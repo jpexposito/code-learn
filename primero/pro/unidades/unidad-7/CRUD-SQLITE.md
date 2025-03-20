@@ -2,7 +2,7 @@
 
 # <img src=../../../../images/coding-book.png width="40"> Code & Learn (Programación: Almacenamiento de datos en BBDD)
 
-![](./img/bbdd-sql.jpg)
+![](./img/logo.jpg)
 
 ## ¿Que es SQLite?
 
