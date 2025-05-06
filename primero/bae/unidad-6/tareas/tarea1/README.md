@@ -39,6 +39,7 @@ inscripción).
 
 - [Índices en MySql](https://dev.mysql.com/doc/refman/8.0/en/mysql-indexes.html).
 - [Índices en SQLite3](https://www.sqlitetutorial.net/sqlite-index/).
+- [Vistas en SQLite3](https://sqlite.org/lang_createview.html).
 - [Apuntes sobre índices](../../Indices.md).
 
 </div>
