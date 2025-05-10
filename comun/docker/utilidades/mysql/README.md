@@ -2,13 +2,13 @@
 
 <div align="justify">
 
-# <img src=../../../../../../images/coding-book.png width="40"> Code & Learn ("Comandos comunes en Docker")
+# <img src=../../../../../images/coding-book.png width="40"> Code & Learn ("Comandos comunes en Docker")
 
 Este repositorio contiene una configuración de Docker Compose para configurar contenedores de MySQL y phpMyAdmin. Te permite gestionar fácilmente tu base de datos MySQL usando phpMyAdmin.
 
 ## Prerrequisitos
 
-- Docker: Asegúrate de tener Docker instalado en tu sistema. Puedes descargarlo e instalarlo desde [aquí](https://www.docker.com/get-started).
+- Docker: Asegúrate de tener Docker instalado en tu sistema. Puedes descargarlo e instalarlo desde [aquí](https://www.docker.com/get-started). En caso de no tenerlo sigue los siguientes [pasos](https://docs.docker.com/compose/install/),
 
 ## Uso
 
