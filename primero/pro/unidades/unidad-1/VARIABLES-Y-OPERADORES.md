@@ -179,7 +179,7 @@ Tenga en cuenta que estas reglas no se aplican si utilizamos el operador de incr
 ```java
 a++;
 ++a;
-````
+```
 
 > Ejercicio 2: Determine el valor final de resultla variable después de ejecutar todas estas instrucciones:
 

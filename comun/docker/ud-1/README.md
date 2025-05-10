@@ -85,7 +85,6 @@ Los contenedores facilitan el desarrollo, distribución y despliegue de aplicaci
 
 <img src="https://miro.medium.com/v2/resize:fit:936/1*LPKv8WUeZTLdOqANWkdIuQ.png">
 
-
 ### 3.4 Contenedores para despliegue de servicios
 
 Otro uso importante de los contenedores es en el despliegue de servidores (web, correo, bases de datos, DNS, etc.). Los contenedores permiten mantener configuraciones de servidores que se pueden replicar en distintos entornos, como local o en la nube.
@@ -101,11 +100,13 @@ contenedores contribuye a que esta situación desaparezca 🙂
 ### 3.5 Ventajas e inconvenientes del uso de contenedores
 
 **Ventajas:**
+
 - Ocupan menos espacio que las máquinas virtuales tradicionales.
 - Ejecución rápida y cercana a la velocidad nativa.
 - Soporte por parte de grandes empresas de software.
 
 **Inconvenientes:**
+
 - Menor rendimiento en comparación con un sistema real.
 - Gestión tediosa de datos persistentes.
 - Mayormente se operan vía línea de comandos.
@@ -113,6 +114,7 @@ contenedores contribuye a que esta situación desaparezca 🙂
 ### 3.6 ¿Cuándo es adecuado usar contenedores?
 
 Los contenedores son útiles en los siguientes contextos:
+
 - **Para usuarios:** cuando se desea probar rápidamente un servicio.
 - **Para desarrolladores:** cuando se quiere desarrollar y desplegar sin problemas de configuración.
 - **Para pruebas:** crear entornos de prueba variados.
@@ -125,6 +127,7 @@ Los contenedores son útiles en los siguientes contextos:
 ### 4.1 ¿Es nuevo el concepto de entornos privados en sistemas Unix?
 
 No es algo nuevo. Existen conceptos previos, como:
+
 - **Chroot (Unix):** [Chroot en Wikipedia](https://es.wikipedia.org/wiki/Chroot)
 - **Jail (FreeBSD):** [FreeBSD jail en Wikipedia](https://es.wikipedia.org/wiki/FreeBSD_jail)
 

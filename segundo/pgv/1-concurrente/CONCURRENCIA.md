@@ -144,7 +144,7 @@ Sin embargo, en un código como el siguiente el órden en el que se ejecuten las
 x = 1;
 y = 2;
 z = 3;
-````
+```
 
 >💡 A.J. Bernstein definió unas condiciones para determinar si dos conjuntos de instrucciones Si y Sj se pueden ejecutar concurrentemente.
 

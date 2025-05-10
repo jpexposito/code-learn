@@ -46,7 +46,7 @@ Creamos una base de datos. Si todavía estás en el programa de sqlite3, sal con
 
 ```sql
 sqlite3 comment_section.db
-````
+```
 
 Esto creará un archivo de base de datos __comment_section.db__ en el directorio de trabajo actual.
 
@@ -61,7 +61,7 @@ CREATE TABLE comments (
     email TEXT NOT NULL,
     website_url TEXT NULL,
     comment TEXT NOT NULL );
- ````
+ ```
 
 __NOT NULL__ asegura que el valor particular no se deja en blanco en un registro. __PRIMARY KEY y AutoIncrement__ elaboran el atributo __post_id__.
 
@@ -89,7 +89,7 @@ Para mostrar los atributos de la columna, escribe:
 
 ```sql
  .headers ON
-````
+```
  
 Para mostrar las filas en el estilo de columna, escribe .mode column.
 Introduce de nuevo __SELECT__ y compara el resultado.

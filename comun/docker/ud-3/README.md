@@ -81,11 +81,11 @@ La  descripción  completa  del  comando  “docker  run”  la  podéis  encont
 
 Comentaremos  a  lo  largo  de  esta  unidad  algunas  de  sus  opciones  básicas  más importantes. Además en futuras unidades, ampliaremos los conocimientos sobre este comando. 
 
-### 5.2. Creando contenedores sin arrancarlos 
+### 5.2. Creando contenedores sin arrancarlos
 
 Para  crear  un  contenedor  sin arrancarlo (recordamos, ***“docker run”*** crea y arranca), existe el comando  ***“docker  create”***.  La  descripción  completa  del  comando  ***“docker  create”***  la  podéis encontrar en <https://docs.docker.com/engine/reference/commandline/create/> 
 
-### 5.3. Repasando caso práctico “Hello World” 
+### 5.3. Repasando caso práctico “Hello World”
 
 En  anteriores  unidades  propusimos  un sencillo caso práctico para comprobar que funcionaba Docker usando el siguiente comando: 
 

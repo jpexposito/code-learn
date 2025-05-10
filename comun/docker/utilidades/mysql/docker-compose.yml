@@ -1,0 +1,40 @@
+version: '3.7'
+
+services:
+  db:
+    image: mysql:latest
+    container_name: mysql_container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: bae           # Contraseña root personalizada
+      MYSQL_DATABASE: bae-database        # Nombre de la base de datos
+      MYSQL_USER: bae                     # Usuario normal
+      MYSQL_PASSWORD: bae                 # Contraseña del usuario normal
+    volumes:
+      - ./mysql_data:/var/lib/mysql       # Persistencia de datos en host
+    ports:
+      - "3309:3306"                       # Puerto externo 3309 -> interno 3306
+    networks:
+      - db-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin_container
+    restart: always
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db                        # Nombre del servicio MySQL
+      MYSQL_ROOT_PASSWORD: bae            # Debe coincidir con MYSQL_ROOT_PASSWORD del servicio db
+    ports:
+      - "8099:80"                         # Puerto externo 8099 -> interno 80
+    networks:
+      - db-network
+
+networks:
+  db-network:
+    driver: bridge
+
+volumes:
+  mysql_data:                             # Volumen con nombre para mejor gestión
+    driver: local

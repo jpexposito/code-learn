@@ -40,7 +40,7 @@ Luego __MyClass.class__ se generará. Este es el archivo compilado que se puede 
 
 ```java
 java MyClass
-````
+```
 
 Después de ejecutar este programa, veremos un mensaje de __“Hola”__ en la pantalla.
 
