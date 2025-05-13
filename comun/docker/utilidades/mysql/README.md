@@ -1,8 +1,6 @@
-# MySQL y phpMyAdmin con Docker Compose
-
 <div align="justify">
 
-# <img src=../../../../../images/coding-book.png width="40"> Code & Learn ("Comandos comunes en Docker")
+# <img src=../../../../images/coding-book.png width="40"> Code & Learn ("MySQL y phpMyAdmin con Docker Compose")
 
 Este repositorio contiene una configuración de Docker Compose para configurar contenedores de MySQL y phpMyAdmin. Te permite gestionar fácilmente tu base de datos MySQL usando phpMyAdmin.
 
@@ -26,7 +24,14 @@ Este repositorio contiene una configuración de Docker Compose para configurar c
     docker-compose up -d
     ```
 
-    Este comando iniciará los contenedores de MySQL y phpMyAdmin en modo desatendido, lo que significa que se ejecutarán en segundo plano.
+    > **MAC**: en sus últimas versiones
+
+    ```bash
+        docker compose up  -d
+    ```
+   
+
+Este comando iniciará los contenedores de MySQL y phpMyAdmin en modo desatendido, lo que significa que se ejecutarán en segundo plano.
 
 4. Accede a phpMyAdmin desde tu navegador web ingresando a `http://localhost:8099`. Puedes iniciar sesión usando las credenciales root de MySQL que proporcionaste.
 
