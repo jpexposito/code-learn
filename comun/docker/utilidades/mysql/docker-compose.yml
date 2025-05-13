@@ -7,7 +7,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: bae           # Contraseña root personalizada
-      MYSQL_DATABASE: bae-database       # Nombre de la base de datos
+      MYSQL_DATABASE: bae       # Nombre de la base de datos
       MYSQL_USER: bae                    # Usuario normal
       MYSQL_PASSWORD: bae                # Contraseña del usuario normal
     volumes:
