@@ -1,6 +1,6 @@
 <div align="justify">
 
-# Funciones en MySQL
+# <img src=../../../images/coding-book.png width="40"> Funciones en MySQL
 
 Como se ha explicado, [los procedimientos](procedimientos.md) permiten tener funcionalidades del lado de la __BBDD__ (MySQL) en lugar de de procesar los datos con algún lenguaje del lado del servidor, como __PHP/Java/etc__ .Tiene la ventaja de que viaja menos información de la base de datos al servidor web, con el consiguiente aumento del rendimiento y que estas funciones harán que podamos atacar la base de datos desde cualquier otro lenguaje __.NET/Python__, como  sin tener que volver a procesar los datos otra vez.
 

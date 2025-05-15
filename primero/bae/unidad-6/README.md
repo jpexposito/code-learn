@@ -47,7 +47,9 @@ Los elementos a tener en cuenta en la optimización de una base de datos son:
    - Realiza ajustes continuos en función de los cambios en la carga de trabajo y los patrones de acceso a los datos.
 
 En esta unidad vamos a tratar con dos elementos:
+
 - [Índices en Base de Datos](Indices.md).
-- [Vistas en Base de datos](Vistas.md)
+- [Vistas en Base de datos](Vistas.md).
+- [Ejemplo guiado y explicado](ejemplo-guiado/INDICE-VISTAS-1.md).
 
 </div>

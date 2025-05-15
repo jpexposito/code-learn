@@ -158,7 +158,6 @@ Limpiar la base de datos o ajustar el diseño si los índices ya no son necesari
 - Liberación de recursos del sistema  
 - Reducción de sobrecarga en inserciones o actualizaciones si los índices eran innecesarios
 
-
 ### ❓ Preguntas teóricas sobre Índices en MySQL en un posible examen (reflexiona)
 
 1. **¿Qué es un índice en MySQL y para qué se utiliza principalmente?**

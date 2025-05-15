@@ -1,6 +1,6 @@
- <div align="justify">
+<div align="justify">
 
-# Lo Básico en Programación SQL
+# <img src=../../../images/coding-book.png width="40"> Lo Básico en Programación SQL
 
 SQL (Structured Query Language) es un lenguaje de programación utilizado para interactuar con bases de datos relacionales. Aunque principalmente se utiliza para consultar y manipular datos, también proporciona características de programación para realizar tareas más complejas.
 

@@ -1,6 +1,6 @@
 <div align="justify">
 
-# Trigers en MySQL
+# <img src=../../../images/coding-book.png width="40"> Trigers en MySQL
 
 <div align="center">
 <img src="https://dinahosting.com/blog/upload/2022/04/triggers.jpg" width="500px"/>

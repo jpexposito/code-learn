@@ -1,6 +1,6 @@
 <div align="justify">
 
-# Procedimientos en MySQL
+# <img src=../../../images/coding-book.png width="40"> Procedimientos en MySQL
 
 En esta unidad vamos a estudiar los procedimientos que son objetos que contienen código SQL y se almacenan asociados a una base de datos. El resumen sería:
 
