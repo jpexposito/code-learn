@@ -122,10 +122,6 @@ En pseudocódigo se definen indicando su tipo y nombre, y se les puede asignar u
 entero edad ← 25
 ```
 
-+---------+
-| edad=25 |
-+---------+
-
 ### 9.2 Condiciones
 
 Las **estructuras condicionales** permiten que un algoritmo tome decisiones.  
