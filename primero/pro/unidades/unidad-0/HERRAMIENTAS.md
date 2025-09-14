@@ -15,7 +15,9 @@ Permiten escribir y organizar el código de manera eficiente.
 - **IDE (Integrated Development Environment)**: PyCharm, Eclipse, NetBeans, IntelliJ IDEA.  
 
 <img src=images/ides.png width="100">
+
 <br>
+
 <img src=images/ides2.png width="300">
 
 ---

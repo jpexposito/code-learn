@@ -2,7 +2,7 @@
 
 # <img src=../../../../images/coding-book.png width="40"> Code & Learn (Introducción a la programación. Algoritmia)
 
-## Introducción
+## 1. Introducción
 
 La programación es el arte y la ciencia de dar instrucciones a un ordenador para que realice tareas específicas. A través de ella podemos resolver problemas, automatizar procesos y crear aplicaciones que mejoran la vida cotidiana. Para entenderla, es necesario conocer no solo los lenguajes, sino también los paradigmas, fases y técnicas que intervienen en el desarrollo de software.
 
@@ -18,6 +18,8 @@ Todo proceso de programación nace de un problema que se quiere resolver. El pro
 
 Un **algoritmo** es un conjunto ordenado y finito de pasos que resuelven un problema.  
 Un **programa** es la implementación de ese algoritmo en un lenguaje de programación para que el ordenador lo ejecute.
+
+<img src=images/programas.png width="300">
 
 ### 2.3 ¿En qué consiste la programación?
 
