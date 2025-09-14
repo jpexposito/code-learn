@@ -2,6 +2,8 @@
 
 ## Unidades
 
+- [Unidad 0](unidades/unidad-0/README.md)
+  - [Herramientas](unidades/unidad-0/HERRAMIENTAS.md)
 - [Unidad 1](unidades/unidad-1/README.md)
 - [Unidad 2](unidades/unidad-2/README.md)
 - [Unidad 3](unidades/unidad-3/README.md)
