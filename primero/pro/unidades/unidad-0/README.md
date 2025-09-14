@@ -10,16 +10,16 @@ La programación es el arte y la ciencia de dar instrucciones a un ordenador par
 
 ## 2. Programas y programación
 
-#### 2.1 Buscando una solución
+### 2.1 Buscando una solución
 
 Todo proceso de programación nace de un problema que se quiere resolver. El programador debe analizarlo, comprenderlo y diseñar una estrategia para solucionarlo de forma eficiente y clara.
 
-#### 2.2 Algoritmos y programas
+### 2.2 Algoritmos y programas
 
 Un **algoritmo** es un conjunto ordenado y finito de pasos que resuelven un problema.  
 Un **programa** es la implementación de ese algoritmo en un lenguaje de programación para que el ordenador lo ejecute.
 
-#### 2.3 ¿En qué consiste la programación?
+### 2.3 ¿En qué consiste la programación?
 
 La programación consiste en traducir ideas y soluciones en instrucciones precisas que una máquina pueda entender. Implica lógica, creatividad, disciplina y un enfoque sistemático.
 
@@ -27,81 +27,155 @@ La programación consiste en traducir ideas y soluciones en instrucciones precis
 
 ## 3. Paradigmas de la programación
 
-Los paradigmas son estilos o enfoques de programación. Algunos de los más importantes son:
+Un **paradigma de programación** es un estilo o modelo que define la forma en que los programadores estructuran y organizan su código.  
+Cada paradigma responde a diferentes necesidades y proporciona herramientas conceptuales distintas para resolver problemas.
 
-- **Programación estructurada**: basada en bloques, secuencias, bucles y condiciones.
-- **Programación orientada a objetos**: utiliza clases, objetos, herencia y encapsulación.
-- **Programación funcional**: se centra en funciones matemáticas y evita estados mutables.
-- **Programación lógica**: se basa en reglas y hechos para deducir soluciones.
+- **Programación estructurada**  
+  Se basa en dividir el código en bloques secuenciales que utilizan estructuras de control como **condiciones** y **bucles**.  
+  Elimina el uso excesivo del "goto" de los primeros lenguajes, mejorando la claridad.  
+  *Ejemplo:* dividir un programa en funciones como `calcularSuma()` o `mostrarResultado()`.
+
+- **Programación orientada a objetos (POO)**  
+  Representa entidades del mundo real como **objetos** que tienen **atributos** (datos) y **métodos** (acciones).  
+  Se apoya en principios como:  
+  - *Encapsulación*: ocultar detalles internos.  
+  - *Herencia*: reutilizar código de clases existentes.  
+  - *Polimorfismo*: usar métodos con el mismo nombre que se comportan diferente.  
+  *Ejemplo:* Una clase `Vehiculo` con subclases `Auto` y `Moto`.
+
+- **Programación funcional**  
+  Basada en la idea matemática de funciones.  
+  Evita modificar variables globales y estados, promoviendo código más seguro y predecible.  
+  *Ejemplo:* En Python, usar funciones puras como `map()`, `filter()` o `reduce()`.
+
+- **Programación lógica**  
+  Se basa en reglas y hechos para que la máquina deduzca soluciones por sí misma.  
+  Usada en inteligencia artificial y resolución de problemas complejos.  
+  *Ejemplo:* En Prolog, definir hechos como `padre(juan, maria).` y reglas para consultar parentescos.
 
 ---
 
 ## 4. Fases de la programación
 
-Las fases principales son:
+Desarrollar un programa requiere seguir fases bien estructuradas:  
 
-1. Análisis del problema.  
-2. Diseño del algoritmo.  
-3. Codificación en un lenguaje.  
-4. Prueba y depuración.  
-5. Documentación.  
-6. Mantenimiento y mejora.
+1. **Análisis del problema**  
+   - Identificar lo que se desea resolver.  
+   - Determinar entradas (datos iniciales) y salidas (resultados esperados).  
+
+2. **Diseño del algoritmo**  
+   - Plasmar la solución paso a paso en forma de **pseudocódigo** o **diagramas de flujo**.  
+
+3. **Codificación en un lenguaje**  
+   - Traducir el algoritmo al lenguaje elegido (Python, C, Java, etc.).  
+
+4. **Prueba y depuración**  
+   - Ejecutar el programa para detectar errores (bugs).  
+   - Ajustar y corregir hasta lograr la funcionalidad deseada.  
+
+5. **Documentación**  
+   - Explicar el código, decisiones de diseño y cómo usar el programa.  
+   - Facilita la comprensión a otros programadores.  
+
+6. **Mantenimiento y mejora**  
+   - Actualizar el software para añadir funciones, optimizar rendimiento o corregir fallos futuros.  
 
 ---
 
 ## 5. Ciclo de vida del software
 
-El ciclo de vida describe todo el proceso desde que surge la necesidad hasta que el software deja de usarse:
+El **ciclo de vida** de un software describe todas las etapas desde que se concibe hasta que deja de usarse:  
 
-1. Análisis de requisitos.  
-2. Diseño.  
-3. Implementación.  
-4. Pruebas.  
-5. Implantación.  
-6. Mantenimiento.  
+1. **Análisis de requisitos**  
+   - Reunir información del cliente o usuario final.  
+   - Documentar qué se espera que haga el software.  
+
+2. **Diseño**  
+   - Crear diagramas y arquitecturas.  
+   - Definir cómo interactúan los módulos.  
+
+3. **Implementación (programación)**  
+   - Escribir el código siguiendo el diseño.  
+
+4. **Pruebas**  
+   - Validar que cumple con los requisitos.  
+   - Hacer pruebas unitarias, de integración y de aceptación.  
+
+5. **Implantación**  
+   - Instalar el sistema en el entorno real.  
+   - Capacitar a los usuarios finales.  
+
+6. **Mantenimiento**  
+   - Corregir errores que aparezcan.  
+   - Adaptar el software a nuevas necesidades o entornos tecnológicos.  
 
 ---
 
 ## 6. Técnicas de programación
 
-Algunas técnicas empleadas para mejorar el desarrollo son:
+Son estrategias que ayudan a programar de manera más eficiente:  
 
-- **Programación modular**: dividir el programa en partes pequeñas y manejables.  
-- **Programación estructurada**: usar estructuras de control claras.  
-- **Programación orientada a objetos**: modelar con clases y objetos.  
-- **Programación ágil**: aplicar metodologías iterativas y colaborativas.  
+- **Programación modular**  
+  - Dividir un sistema grande en módulos más pequeños e independientes.  
+  - Cada módulo se encarga de una tarea específica.  
+
+- **Programación estructurada**  
+  - Uso de estructuras claras como secuencia, selección y repetición.  
+  - Permite un flujo lógico más fácil de entender y depurar.  
+
+- **Programación orientada a objetos**  
+  - Ideal para proyectos grandes y escalables.  
+  - Facilita la reutilización del código y la abstracción de datos.  
+
+- **Programación ágil**  
+  - Basada en ciclos cortos de desarrollo (sprints).  
+  - Promueve la colaboración con el cliente y la adaptación a cambios.  
+  - Metodologías como **Scrum** o **Kanban** son comunes.  
 
 ---
 
 ## 7. Fases en la creación de un programa
 
-1. Planteamiento del problema.  
-2. Diseño de la solución.  
-3. Elección del lenguaje.  
-4. Codificación.  
-5. Verificación y pruebas.  
-6. Documentación.  
-7. Distribución y mantenimiento.  
+La **creación de un programa** sigue un flujo ordenado:  
+
+1. **Planteamiento del problema**: definir con claridad qué se desea resolver.  
+2. **Diseño de la solución**: crear algoritmos, diagramas de flujo o pseudocódigo.  
+3. **Elección del lenguaje**: seleccionar el más adecuado según el proyecto (ej. C para sistemas, Python para ciencia de datos).  
+4. **Codificación**: traducir el diseño al lenguaje elegido.  
+5. **Verificación y pruebas**: comprobar que funciona correctamente y cumple requisitos.  
+6. **Documentación**: explicar funciones, uso y estructura del programa.  
+7. **Distribución y mantenimiento**: entregar el software y garantizar su funcionamiento a lo largo del tiempo.  
 
 ---
 
 ## 8. Lenguajes de programación
 
-#### 8.1 Lenguaje máquina
+Los lenguajes son herramientas que permiten expresar algoritmos en instrucciones que entiende la computadora. Se dividen en distintos niveles:  
 
-Es el lenguaje binario (0s y 1s) que entiende directamente la computadora. Es difícil para los humanos pero esencial para el hardware.
+### 8.1 Lenguaje máquina
+
+- Compuesto exclusivamente por **ceros y unos** (binario).  
+- Directamente entendido por la CPU.  
+- Muy eficiente pero impracticable para el ser humano.  
 
 #### 8.2 Lenguaje ensamblador
 
-Es una representación simbólica del lenguaje máquina. Usa mnemónicos para simplificar la programación a bajo nivel.
+- Usa **mnemónicos** para representar instrucciones de máquina.  
+- Depende del tipo de procesador (x86, ARM, etc.).  
+- Ejemplo: `MOV AX, 5` para mover el valor 5 al registro AX.  
 
 #### 8.3 Lenguajes compilados
 
-El código fuente se traduce completamente a lenguaje máquina antes de ejecutarse. Ejemplos: C, C++ o Rust.
+- El programa se **traduce completo** a lenguaje máquina mediante un compilador antes de ejecutarse.  
+- Ofrecen gran velocidad en ejecución.  
+- Ejemplos: **Java,C, C++, Rust, Go**.  
 
 #### 8.4 Lenguajes interpretados
 
-El código se traduce y ejecuta línea por línea en tiempo real. Ejemplos: ***Java,Python, JavaScript o PHP***.
+- Se **ejecutan línea a línea** mediante un intérprete.  
+- Permiten gran flexibilidad y rapidez en el desarrollo.  
+- Más lentos que los compilados, pero ideales para scripting y aplicaciones dinámicas.  
+- Ejemplos: **Python, JavaScript, PHP, Ruby**.  
 
 ---
 
