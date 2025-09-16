@@ -163,7 +163,7 @@ public class TestClass {
 > ___¿Qué valor tendrá x tras ejecutar el método parallel?___
 
   <details>
-      <summary>PULSA PARA VER LA SOLUCIÓN</summary>
+      <summary>EJEMPLO</summary>
   </br>
 
 ```java
@@ -251,7 +251,7 @@ public class TestClass {
  </details>
 
   <details>
-      <summary>POM.XML</summary>
+      <summary>POM.XML EJEMPLO</summary>
   </br>
 
 ```xml

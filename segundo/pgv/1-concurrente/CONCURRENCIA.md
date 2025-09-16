@@ -218,6 +218,77 @@ Y ahora aplicarlas entre cada par de sentencias
 - E(S3) ∩ L(S4) = {c} ≠ ∅ E(S3) ∩ E(S4) = ∅
 > NO se pueden ejecutar concurrentemente
 
+#### 🍳 Concurrencia vs Paralelismo explicado de otra forma
+
+#### 🖥️ Ordenador monoprocesador
+
+Imagina que tienes un **solo CPU**.  
+Empiezas a **cocinar**, dejas la olla hirviendo (el proceso entra en **espera**), y en ese tiempo el sistema cambia de tarea y se pone a **lavar la ropa**.  
+
+👉 Esto es **concurrencia**:  
+
+- Da la **sensación** de que todo ocurre al mismo tiempo.  
+- En realidad, el procesador va **alternando** entre las tareas.  
+
+---
+
+#### 🖥️🖥️ Ordenador multiprocesador
+
+Ahora imagina que tienes **2 CPUs**.  
+Mientras **un núcleo cocina**, el **otro núcleo lava la ropa** de forma simultánea.  
+
+👉 Esto es **paralelismo**:  
+
+- Las tareas se ejecutan **realmente al mismo tiempo**.  
+- Cada procesador trabaja en paralelo en una tarea distinta.  
+
+<details>
+    <summary>EJEMPLO</summary>
+</br>
+
+```java
+package formacion.paralelismo;
+
+public class ConcurrenciaVsParalelismo {
+    public static void main(String[] args) throws InterruptedException {
+        Runnable cocinar = () -> {
+            for (int i = 1; i <= 5; i++) {
+                System.out.println("Cocinando paso " + i);
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException ignored) {}
+            }
+        };
+
+        Runnable lavar = () -> {
+            for (int i = 1; i <= 5; i++) {
+                System.out.println("Lavando paso " + i);
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException ignored) {}
+            }
+        };
+
+        System.out.println("=== SECUENCIAL ===");
+        cocinar.run();
+        lavar.run();
+
+        System.out.println("=== CONCURRENTE/PARALELO ===");
+        Thread t1 = new Thread(cocinar);
+        Thread t2 = new Thread(lavar);
+        t1.start();
+        t2.start();
+        t1.join();
+        t2.join();
+    }
+}
+
+```
+
+</br>
+</details>
+
+
 [Procesos-so](PROCESOS-SO.md)
 
 ## Licencia 📄
