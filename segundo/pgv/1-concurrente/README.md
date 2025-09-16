@@ -162,6 +162,186 @@ public class TestClass {
 >
 > ___¿Qué valor tendrá x tras ejecutar el método parallel?___
 
+  <details>
+      <summary>PULSA PARA VER LA SOLUCIÓN</summary>
+  </br>
+
+```java
+package formacion.paralelismo;
+
+import java.util.concurrent.ThreadLocalRandom;
+
+public class TestClass {
+    int x;
+
+    public void testMethod1() {
+        for (int i = 1; i <= 5; i++) {
+            x++;
+            /**
+            try {
+                Thread.sleep(ThreadLocalRandom.current().nextInt(1, 6));
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+             **/
+        }
+    }
+
+    public void testMethod2() {
+        for (int j = 1; j <= 5; j++) {
+            x++;
+            /**
+            try {
+                Thread.sleep(ThreadLocalRandom.current().nextInt(1, 6));
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+             **/
+        }
+    }
+
+    public void sequential() {
+        x = 0;
+        testMethod1();
+        testMethod2();
+        System.out.println("Secuencial -> x = " + x);
+    }
+
+    public void parallel() {
+        x = 0;
+
+        Thread t1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                testMethod1();
+            }
+        });
+
+        Thread t2 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                testMethod2();
+            }
+        });
+
+        t1.start();
+        t2.start();
+
+        try {
+            t1.join();
+            t2.join();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
+        System.out.println("Paralelo -> x = " + x);
+    }
+
+    public static void main(String[] args) {
+        TestClass obj = new TestClass();
+        obj.sequential();
+        obj.parallel();
+    }
+}
+
+```
+
+  </br>
+
+ </details>
+
+  <details>
+      <summary>POM.XML</summary>
+  </br>
+
+```xml
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.paralelismi</groupId>
+  <artifactId>mi-proyecto</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <javafx.version>21</javafx.version>
+    <junit.version>5.9.2</junit.version>
+    <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+    <sqlite-jdbc.version>3.45.2.0</sqlite-jdbc.version>
+  </properties>
+
+  <dependencies>
+    <!-- JUnit 5: API y motor -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- Plugin de compilador -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven-compiler-plugin.version}</version>
+        <configuration>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.target}</target>
+        </configuration>
+      </plugin>
+
+      <!-- Plugin de tests (Surefire para JUnit 5) -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0-M7</version>
+      </plugin>
+
+      <!-- Plugin de cobertura JaCoCo -->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.10</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>report</id>
+            <phase>test</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+
+```
+  
+  </br>
+
+ </details>
+
 > 📅 Reseña histórica
 >
 > La naturaleza y los modelos de interacción entre procesos de un programa concurrente fueron estudiados y descritos por Dijkstra (1968), Brinch Hansen (1973) y Hoare (1974).
