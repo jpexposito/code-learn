@@ -46,10 +46,13 @@ for ($i = 1; $i <= 5; $i++) {
 
 ---
 
-## 🗓️ Funciones y Arrays
+
+## 🧩 Funciones con Parámetros Opcionales
+
+En PHP, las funciones pueden tener **parámetros opcionales** con valores por defecto.  
+Si no se pasa el argumento al llamar a la función, se usará ese valor por defecto.
 
 ### Ejemplo
-
 ```php
 <?php
 // Función con parámetro opcional
@@ -57,22 +60,76 @@ function saludar($nombre = "Invitado") {
     return "Hola, $nombre";
 }
 
-echo saludar("Ana");
-echo saludar();
-
-// Arrays
-$numeros = [1, 2, 3];
-array_push($numeros, 4);
-
-foreach ($numeros as $n) {
-    echo $n;
-}
-
-// Array asociativo
-$persona = ["nombre" => "Ana", "edad" => 25];
-echo $persona["nombre"];
+echo saludar("Ana");      // Hola, Ana
+echo saludar();           // Hola, Invitado
 ?>
 ```
+
+---
+
+## 🧩 Arrays en PHP
+
+Los **arrays** permiten almacenar varios valores en una sola variable.  
+Pueden ser **indexados** (con índices numéricos) o **asociativos** (con claves personalizadas).
+
+### Ejemplo de arrays indexados
+```php
+<?php
+$numeros = [1, 2, 3];
+array_push($numeros, 4); // añade un 4 al final
+
+foreach ($numeros as $n) {
+    echo $n . " ";   // 1 2 3 4
+}
+?>
+```
+
+### Ejemplo de arrays asociativos
+```php
+<?php
+$persona = ["nombre" => "Ana", "edad" => 25];
+echo $persona["nombre"]; // Ana
+echo $persona["edad"];   // 25
+?>
+```
+
+---
+
+## 🧩 Bucle `while`
+
+El bucle `while` ejecuta un bloque de código **mientras** la condición sea verdadera.
+
+### Ejemplo
+```php
+<?php
+$contador = 1;
+
+while ($contador <= 5) {
+    echo "Número: $contador\n";
+    $contador++;
+}
+?>
+```
+📌 Este ejemplo imprime los números del 1 al 5.
+
+---
+
+## 🧩 Bucle `do...while` (equivalente a *repeat-until*)
+
+El bucle `do...while` ejecuta el bloque **al menos una vez**, y después evalúa la condición.
+
+### Ejemplo
+```php
+<?php
+$contador = 1;
+
+do {
+    echo "Número: $contador\n";
+    $contador++;
+} while ($contador <= 5);
+?>
+```
+📌 Este ejemplo también imprime los números del 1 al 5, pero garantiza **al menos una ejecución** aunque la condición no se cumpla al inicio.
 
 ---
 
