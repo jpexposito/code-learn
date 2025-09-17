@@ -1,18 +1,8 @@
-<div align="justify">
-
-# <img src=../../images/coding-book.png width="40"> Code & Learn (Php en 5 días)
+# <img src="../../images/coding-book.png" width="40"> Code & Learn (Php en 5 días)
 
 ## 🗓️ Introducción y Sintaxis Básica
 
-### Conceptos
-
-- PHP es un lenguaje interpretado que se ejecuta en el **servidor**.  
-- Se utiliza para generar páginas web dinámicas.  
-- Archivos terminan en `.php`.  
-- Las variables comienzan siempre con `$`.  
-- Soporta varios tipos de datos: `string`, `int`, `float`, `bool`, `array`, `object`, `null`.  
-- Las **constantes** se definen con `define()`.  
-- Se pueden escribir **comentarios** de una línea (`//`, `#`) o varias líneas (`/* ... */`).
+### Ejemplo
 
 ```php
 <?php
@@ -34,26 +24,23 @@ echo PI;
 
 ## 🗓️ Operadores y Control de Flujo
 
-### Conceptos
-
-- **Operadores**: aritméticos, comparación, lógicos y asignación.  
-- **Condicionales**: permiten ejecutar bloques de código dependiendo de condiciones (`if`, `else`, `elseif`, `switch`).  
-- **Bucles**: permiten repetir código (`while`, `do-while`, `for`, `foreach`).  
+### Ejemplo
 
 ```php
-``php
 <?php
-echo "¡Hola, mundo!";
+$numero = 10;
 
-$nombre = "Ana";
-$edad = 25;
-$altura = 1.70;
-$activo = true;
+if ($numero > 0) {
+    echo "El número es positivo";
+} elseif ($numero == 0) {
+    echo "El número es cero";
+} else {
+    echo "El número es negativo";
+}
 
-echo "Soy $nombre y tengo $edad años.";
-
-define("PI", 3.1416);
-echo PI;
+for ($i = 1; $i <= 5; $i++) {
+    echo "Iteración $i\n";
+}
 ?>
 ```
 
@@ -61,49 +48,40 @@ echo PI;
 
 ## 🗓️ Funciones y Arrays
 
-### Conceptos
-
-- Una **función** es un bloque de código reutilizable.  
-- Se pueden definir funciones con parámetros opcionales y valores por defecto.  
-- También se pueden usar funciones con **parámetros variables** (`...$args`).  
-- **Arrays**:  
-  - Indexados: usan índices numéricos.  
-  - Asociativos: usan claves con nombres.  
-  - Multidimensionales: contienen arrays dentro de otros arrays.  
-- Funciones útiles para arrays: `count()`, `array_push()`, `array_merge()`, `in_array()`, `array_map()`.
+### Ejemplo
 
 ```php
-``php
 <?php
-echo "¡Hola, mundo!";
+// Función con parámetro opcional
+function saludar($nombre = "Invitado") {
+    return "Hola, $nombre";
+}
 
-$nombre = "Ana";
-$edad = 25;
-$altura = 1.70;
-$activo = true;
+echo saludar("Ana");
+echo saludar();
 
-echo "Soy $nombre y tengo $edad años.";
+// Arrays
+$numeros = [1, 2, 3];
+array_push($numeros, 4);
 
-define("PI", 3.1416);
-echo PI;
+foreach ($numeros as $n) {
+    echo $n;
+}
+
+// Array asociativo
+$persona = ["nombre" => "Ana", "edad" => 25];
+echo $persona["nombre"];
 ?>
-```  
+```
 
 ---
 
 ## 🗓️ Manejo de Formularios y Archivos
 
-### Conceptos
+### Ejemplo
 
-- Los **formularios HTML** permiten enviar datos a PHP mediante `GET` o `POST`.  
-- PHP puede acceder a esos datos con `$_GET` o `$_POST`.  
-- Manejo de archivos:  
-  - `file_put_contents()` y `file_get_contents()` para escribir/leer de forma rápida.  
-  - `fopen()`, `fwrite()`, `fread()`, `fclose()` para mayor control.  
-  - Modos de apertura: `"r"`, `"w"`, `"a"`, `"r+"`, etc.  
-
-```php
-//creacion del formulario
+```html
+<!-- formulario HTML -->
 <form method="post" action="procesar.php">
   Nombre: <input type="text" name="nombre">
   <input type="submit">
@@ -111,25 +89,19 @@ echo PI;
 ```
 
 ```php
-// proceso el formulario (procesar.php)
+// procesar.php
 <?php
-$nombre = $_POST["nombre"];
+$nombre = $_POST["nombre"] ?? "Invitado";
 echo "Hola, $nombre";
 ?>
 ```
 
 ```php
-//ficheros
+// manejo de ficheros
 <?php
 file_put_contents("archivo.txt", "Hola mundo\n");
 
 echo file_get_contents("archivo.txt");
-
-$file = fopen("archivo.txt", "r");
-while (!feof($file)) {
-    echo fgets($file);
-}
-fclose($file);
 
 $file = fopen("archivo.txt", "a");
 fwrite($file, "Nueva línea\n");
@@ -139,20 +111,11 @@ fclose($file);
 
 ---
 
-## 🗓️ Introducción a Bases de Datos (MySQL con PDO)
+## 🗓️ Bases de Datos con PDO (MySQL)
 
-### Conceptos
-
-- **PDO (PHP Data Objects)** permite conectarse a distintas bases de datos con una misma interfaz.  
-- Operaciones CRUD:  
-  - **Create** → insertar registros.  
-  - **Read** → consultar registros.  
-  - **Update** → modificar registros.  
-  - **Delete** → eliminar registros.  
-- Uso de **sentencias preparadas** (`prepare`, `execute`) evita inyecciones SQL.  
+### Ejemplo
 
 ```php
-
 <?php
 try {
     $pdo = new PDO("mysql:host=localhost;dbname=escuela", "root", "");
@@ -162,30 +125,26 @@ try {
     echo "Error: " . $e->getMessage();
 }
 
-$sql = "CREATE TABLE IF NOT EXISTS alumnos (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(50),
-    edad INT
-)";
-$pdo->exec($sql);
-
+// Insertar
 $sql = "INSERT INTO alumnos (nombre, edad) VALUES (:nombre, :edad)";
 $stmt = $pdo->prepare($sql);
 $stmt->execute(["nombre" => "Ana", "edad" => 20]);
 
+// Leer
 $sql = "SELECT * FROM alumnos";
 foreach ($pdo->query($sql) as $fila) {
     echo $fila["nombre"] . " - " . $fila["edad"] . "<br>";
 }
 
+// Actualizar
 $sql = "UPDATE alumnos SET edad = :edad WHERE nombre = :nombre";
 $stmt = $pdo->prepare($sql);
 $stmt->execute(["edad" => 21, "nombre" => "Ana"]);
 
+// Eliminar
 $sql = "DELETE FROM alumnos WHERE nombre = :nombre";
 $stmt = $pdo->prepare($sql);
 $stmt->execute(["nombre" => "Ana"]);
 ?>
 ```
-
 </div>
