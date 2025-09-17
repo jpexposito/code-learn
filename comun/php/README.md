@@ -204,4 +204,56 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute(["nombre" => "Ana"]);
 ?>
 ```
+
+## 📚 Referencias
+
+A continuación tienes enlaces a la documentación oficial de PHP, con ejemplos prácticos de cada uno de los temas vistos en **Code & Learn (PHP en 5 días)**:
+
+### 🔹 Introducción y Sintaxis Básica
+
+- [PHP Manual – Sintaxis básica](https://www.php.net/manual/es/language.basic-syntax.php)
+- [PHP Manual – echo / print](https://www.php.net/manual/es/function.echo.php)
+
+### 🔹 Operadores y Control de Flujo
+
+- [PHP Manual – Operadores](https://www.php.net/manual/es/language.operators.php)  
+- [PHP Manual – Estructuras de control](https://www.php.net/manual/es/language.control-structures.php)  
+- Ejemplos: `if`, `else`, `elseif`, `switch`, `for`, `foreach`, `while`, `do...while`.
+
+### 🔹 Funciones
+
+- [PHP Manual – Funciones](https://www.php.net/manual/es/language.functions.php)  
+- [PHP Manual – Argumentos de funciones](https://www.php.net/manual/es/functions.arguments.php)  
+- Incluye ejemplos de parámetros opcionales y paso por referencia.
+
+### 🔹 Arrays
+
+- [PHP Manual – Arrays](https://www.php.net/manual/es/language.types.array.php)  
+- [PHP Manual – Funciones de Arrays](https://www.php.net/manual/es/ref.array.php)  
+- Ejemplos de arrays indexados, asociativos y multidimensionales.
+
+### 🔹 Bucles
+
+- [PHP Manual – while](https://www.php.net/manual/es/control-structures.while.php)  
+- [PHP Manual – do...while](https://www.php.net/manual/es/control-structures.do.while.php)  
+- [PHP Manual – for](https://www.php.net/manual/es/control-structures.for.php)  
+- [PHP Manual – foreach](https://www.php.net/manual/es/control-structures.foreach.php)  
+
+### 🔹 Manejo de Formularios
+
+- [PHP Manual – Superglobals](https://www.php.net/manual/es/language.variables.superglobals.php)  
+- [PHP Manual – $_GET](https://www.php.net/manual/es/reserved.variables.get.php)  
+- [PHP Manual – $_POST](https://www.php.net/manual/es/reserved.variables.post.php)  
+
+### 🔹 Manejo de Archivos
+
+- [PHP Manual – Manejo de archivos](https://www.php.net/manual/es/book.filesystem.php)  
+- Funciones clave: [`fopen`](https://www.php.net/manual/es/function.fopen.php), [`fwrite`](https://www.php.net/manual/es/function.fwrite.php), [`fread`](https://www.php.net/manual/es/function.fread.php), [`fclose`](https://www.php.net/manual/es/function.fclose.php).  
+
+### 🔹 Bases de Datos con PDO
+
+- [PHP Manual – PDO](https://www.php.net/manual/es/book.pdo.php)  
+- [PHP Manual – PDO::prepare](https://www.php.net/manual/es/pdo.prepare.php)  
+- [PHP Manual – PDOStatement::execute](https://www.php.net/manual/es/pdostatement.execute.php)  
+
 </div>
