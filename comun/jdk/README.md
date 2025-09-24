@@ -1,148 +1,147 @@
 <div align="justify">
 
-# <img src=.../../../../images/coding-book.png> width="40"> Code & Learn (JDK)
+# ![logo](../../../images/coding-book.png) Code & Learn (JDK)
 
-## Open-Jdk
+## OpenJDK 17
 
-<div align="center">
+![OpenJDK logo](images/open-jdk-logo.png)
 
-<img src=images/open-jdk-logo.png width="400">
-</div>
+---
 
 ### Introducción
 
-Java sin dudas es un lenguaje de programación que es utilizado para diversos propósitos y es un complemento casi esencial para la ejecución y funcionamiento de diversas herramientas, la instalación de java es prácticamente una tarea esencial después de haber realizado la instalación de este.
+Java es un lenguaje de programación usado para múltiples propósitos.  
+Para compilar y ejecutar aplicaciones modernas usaremos **OpenJDK 17 (LTS)**.  
+A continuación, verás una guía sencilla para instalarlo en Linux y Windows, verificar la instalación y (si hace falta) configurar variables de entorno.
 
-Es por ello que en esta ocasión compartiré con ustedes una sencilla guía de como instalar __OpenJDK(Java)__ en nuestro sistema con el JDK el cual es un entorno de desarrollo y el entorno de ejecución JRE.
+---
 
-#### ¿Cómo instalar Java en linux desde repositorios?
+## Instalación en Linux (Ubuntu/Debian)
 
-Lo primero debemos de actualizar el sistema con:
+### 1) Actualiza índices y instala JDK 17
 
-```
-  sudo apt-get update
-```
-
-e instalamos Java con este comando:
-
-```
-  sudo apt-get install default-jdk
+```bash
+sudo apt update
+sudo apt install -y openjdk-17-jdk
 ```
 
-comprobamos que tenemos instalado Java en nuestro sistema solo debemos de ejecutar:
-```
-  java --version
-```
+### 2) Verifica la instalación
 
-#### ¿Cómo instalar una versión específica de Java?
-
-Para instalar Ubuntu Java Open JDK ("la que utilizaremos en 1º").
- - OpenJDK:
-   - 11
-   ```
-   sudo apt install openjdk-11-jdk
-   ```
-    - 9
-   ```
-   sudo apt install openjdk-9-jdk
-   ```
-    - 8
-   ```
-   sudo apt install openjdk-8-jdk
-   ```
-La versión que se debe de trabajar es la versión 8. Para ello verificaremos la versión de java que se esta ejecutando con la sentencia:
-
-```console
-  java --version
-```
-En caso que no se ejecuta la versión 8 se debe configurar las variables de entorno.
-
-#### Configuración de las variables de entorno
-
- El siguiente paso consiste en establecer  las variables de entorno. Es necesario porque cuando se usa Java, Linux necesita saber dónde está ubicado el programa para ejecutarlo y qué versión de Java usar de forma predeterminada. Para modificar esto, usaremos el editor de texto nano. Primero, abra el archivo en Nano.
-
-#### Listar la versiones de OpenJDK instaladas
-
- Ejecuta el siguiente comando para verificar que se han descargado las diferentes versiones de OpenJDK.
-
-```console
- ls /usr/lib/jvm
+```bash
+java -version
+javac -version
 ```
 
-#### Actualización de las variables de entorno
+Deberías ver algo como:
+```
+openjdk version "17.0.x" ...
+```
 
- Edita y modifica el fichero profile, con los comandos:
+### 3) (Opcional) Listar versiones instaladas
 
-```console
+```bash
+ls /usr/lib/jvm
+```
+
+### 4) (Opcional) Seleccionar JDK por defecto si tienes varias versiones
+
+```bash
 sudo update-alternatives --config java
-```
- y selecciona la version _8_.
-
- Otra opción es : añadir el siguiente código:
-
-```console
-# Java version
-JAVA_HOME=/usr/lib/jvm/_____openJdk_____
-PATH=$PATH:$HOME/bin:$JAVA_HOME/bin
-export JAVA_HOME
-export JRE_HOME
-export PATH
+sudo update-alternatives --config javac
 ```
 
- en
+Elige la opción que apunte a **java-17**.
 
-```console
-/etc/profile.d/java.sh
+### 5) (Opcional) Configurar variables de entorno
+
+En la mayoría de casos no es necesario porque `update-alternatives` ya deja todo listo.  
+Si tu herramienta requiere `JAVA_HOME`, añade este script:
+
+Edita (como root) `/etc/profile.d/java.sh` y pega:
+
+```bash
+# Java 17 - JAVA_HOME y PATH
+# Ubuntu/Debian (x64):
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+export PATH="$PATH:$JAVA_HOME/bin"
 ```
-Haga que el script sea ejecutable con chmod:
 
-```console
+Guarda, haz ejecutable y recarga:
+
+```bash
 sudo chmod +x /etc/profile.d/java.sh
-```
-
-Finalmente, cargue las variables de entorno usando el comando de source
-
-```console
 source /etc/profile.d/java.sh
 ```
 
-#### Instalación de OpenJDK en Windows y Linux
+> En Fedora/RHEL suele ser:
+> ```bash
+> export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
+> export PATH="$PATH:$JAVA_HOME/bin"
+> ```
 
-#### Instalación en Windows
+---
 
-#### Paso 1: Descarga OpenJDK
-1. Ve a la página oficial de [AdoptOpenJDK](https://adoptopenjdk.net/) o [OpenJDK](https://jdk.java.net/).
-2. Selecciona la versión de OpenJDK que deseas instalar (por ejemplo, OpenJDK 11 o 17).
-3. Descarga el instalador para **Windows** en formato `.msi` o `.zip`.
+## Instalación en Windows
 
-#### Paso 2: Instala OpenJDK
+### Opción A) Instalador gráfico (recomendado)
 
-- Si descargaste el archivo `.msi`:
-  1. Ejecuta el instalador.
-  2. Sigue las instrucciones y selecciona la ruta donde instalar OpenJDK.
-  
-- Si descargaste el archivo `.zip`:
-  1. Descomprime el archivo en una carpeta (por ejemplo, `C:\OpenJDK`).
+1. Descarga un JDK 17 confiable, por ejemplo [Eclipse Temurin (Adoptium)](https://adoptium.net/) o [OpenJDK](https://jdk.java.net/17/).
+2. Ejecuta el instalador (`.msi`) y completa los pasos (deja la ruta por defecto).
 
-#### Paso 3: Configura las variables de entorno
+### Opción B) Gestor de paquetes
 
-1. Abre **Panel de Control** > **Sistema** > **Configuración avanzada del sistema**.
+- **winget**:
+  ```powershell
+  winget install EclipseAdoptium.Temurin.17.JDK
+  ```
+- **chocolatey**:
+  ```powershell
+  choco install temurin17-jdk
+  ```
 
-2. Haz clic en **Variables de entorno**.
+### Verificar la instalación
 
-3. En **Variables del sistema**, busca `Path` y haz clic en **Editar**.
-   - Añade la ruta al directorio `bin` de OpenJDK (por ejemplo, `C:\OpenJDK\bin`).
-4. Crea una nueva variable de entorno llamada `JAVA_HOME`:
-   - Valor: la ruta donde instalaste OpenJDK (por ejemplo, `C:\OpenJDK`).
+Abre **CMD** o **PowerShell** y ejecuta:
 
-### Paso 4: Verifica la instalación
-1. Abre **CMD** o **PowerShell**.
-2. Ejecuta:
-   ```bash
-   java -version
-   javac -version
+```powershell
+java -version
+javac -version
+```
 
+Deberías ver `version "17.0.x"`.
 
-</div>
+### (Opcional) Configurar variables de entorno
+
+Si alguna herramienta te pide `JAVA_HOME`:
+
+1. **Panel de control** → **Sistema** → **Configuración avanzada del sistema** → **Variables de entorno**.
+2. En **Variables del sistema**:
+   - Crea `JAVA_HOME` con la ruta del JDK, por ejemplo:  
+     `C:\Program Files\Eclipse Adoptium\jdk-17`
+   - Edita `Path` y añade:  
+     `C:\Program Files\Eclipse Adoptium\jdk-17in`
+
+Cierra y vuelve a abrir la terminal para que tome efecto.
+
+---
+
+## Comandos útiles de comprobación
+
+```bash
+# Mostrar ruta real del binario en Linux
+which java
+readlink -f "$(which java)"
+
+# Mostrar JAVA_HOME (si lo configuraste)
+echo $JAVA_HOME
+```
+
+---
+
+## Notas finales
+
+- Con **OpenJDK 17** tendrás soporte LTS y compatibilidad con la mayoría de herramientas modernas.
+- No es necesario definir `JRE_HOME`; el JDK ya incluye el entorno de ejecución.
+
 
 </div>
