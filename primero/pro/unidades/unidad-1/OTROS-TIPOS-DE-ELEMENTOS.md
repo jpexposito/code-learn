@@ -14,7 +14,6 @@ public class OrdenarNumeros {
         int num4 = 20;
         int num5 = 40;
 
-        // Ordenamos los números
         if (num1 > num2) { 
             int temp = num1;
             num1 = num2;
@@ -66,28 +65,26 @@ public class OrdenarNumeros {
             num2 = temp;
         }
 
-        // Mostramos los números ordenados
         System.out.println("Números ordenados: " + num1 + ", " + num2 + ", " + num3 + ", " + num4 + ", " + num5);
     }
 }
-
 ```
 
-# Arrays Unidimensionales
+## Arrays Unidimensionales
 
 Un array es una estructura para guardar un conjunto de objetos de la misma clase. Se accede a cada elemento individual del array mediante un número entero denominado __índice (index en inglés)__. __0__ es el índice del primer elemento y __n-1__ es el índice del último elemento, siendo __n__, la dimensión del array.
 
 Para declarar un array se usa la siguiente sintaxis:
 
-```
+```java
 tipo_de_dato[] nombre_del_array;
 ```
+
 Para declarar y inicializar un array en Java, puedes hacerlo de la siguiente manera:
 
 | Tipo de Dato | Nombre del Array | Tamaño del Array | Elementos |
 |--------------|-------------------|-------------------|-----------|
 | int          | numeros           | 4                 | [2, -4, 15, -25] |
-
 
 Por, ejemplo, para declarar un array de enteros escribimos lo siguiente:
 
@@ -117,14 +114,12 @@ numeros[2] = 15;
 numeros[3] = -25;
 ```
 
-
- Índice | Valor |
+| Índice | Valor |
 |-------|-------|
 | 0     | 2 |
 | 1     | -4 |
 | 2     | 15 |
 | 3     | -25 |
-
 
 Los arrays se pueden declarar, crear e inicializar en una misma línea, de la siguiente manera:
 
@@ -145,21 +140,18 @@ Un array tiene la propiedad __length__, que retorna su número de elementos.
 
 Veamos algunos ejemplos:
 
-1. Inicializar y Acceder a Elementos en un Array:
+### Inicializar y Acceder a Elementos en un Array
 
 ```java
 public class EjemploArrays {
 
     public static void main(String[] args) {
-        // Inicializar un array de enteros
         int[] numeros = {10, 20, 30, 40, 50};
 
-        // Acceder a elementos del array
         System.out.println("El primer elemento es: " + numeros[0]);
         System.out.println("El segundo elemento es: " + numeros[1]);
     }
 }
-
 ```
 
 > __Importante__: Definicimos un array de tamaño __5__ (__lenght__).
@@ -178,22 +170,19 @@ El primer elemento es: 10
 El segundo elemento es: 20
 ```
 
-2. Recorrer un Array con un Bucle:
+### Recorrer un Array con un Bucle
 
 ```java
 public class EjemploArrays {
 
     public static void main(String[] args) {
-        // Inicializar un array de cadenas
         String[] nombres = {"Juan", "María", "Carlos", "Elena"};
 
-        // Recorrer el array e imprimir los elementos
         for (String nombre : nombres) {
             System.out.println("Nombre: " + nombre);
         }
     }
 }
-
 ```
 
 > __Importante__: Definicimos un array de tamaño __4__ (__lenght__).
@@ -218,7 +207,7 @@ Nombre: Carlos
 Nombre: Elena
 ```
 
-3. Encontrar el Valor Máximo en un Array:
+### Encontrar el Valor Máximo en un Array:
 
 ```java
 public class EjemploArrays {
@@ -236,19 +225,19 @@ public class EjemploArrays {
         System.out.println("El valor máximo es: " + maximo);
     }
 }
-
 ```
 
 > __Importante__: Definicimos un array de tamaño __4__ (__lenght__).
 Donde los valores son: __30,10__,... .
 
 El algoritmo realiza:
+
 - Fija un valor máximo al inicio, cuyo valor es primer elemento del array (__30__).
 - Comenzamos recorriendo el array en la posición __1__, y no en la __0__, dado que es el valor máquino y no tiene sentido __->__ (__30 = 30__).
 - Si el elmento que se hace refrencia a través del __índice__ es mayor que el __máximo__ en ese momento, se actualiza.
 - El __máximo__ se encuentra en cunado el __índice__ vale __2__ y se hace referencia al valor _50_ -> __(numeros[2] = 50)__.
 
-4. Copiar un Array a Otro:
+### Copiar un Array a Otro
 
 ```java
 public class EjemploArrays {
@@ -257,19 +246,16 @@ public class EjemploArrays {
         int[] original = {1, 2, 3, 4, 5};
         int[] copia = new int[original.length];
 
-        // Copiar elementos del array original a la copia
         for (int i = 0; i < original.length; i++) {
             copia[i] = original[i];
         }
 
-        // Imprimir la copia
         System.out.println("Copia del array original:");
         for (int elemento : copia) {
             System.out.print(elemento + " ");
         }
     }
 }
-
 ```
 
 > __Importante__: Definicimos un array de tamaño __4__ (__lenght__).
@@ -290,17 +276,13 @@ for (int i = 0; i < original.length; i++) {
 
 copia el contenido de un array en el otro.
 
-
-5. Copiar un Array en orden inverso:
+### Copiar un Array en orden inverso:
 
 ```java
-// Array original
 int[] arrayOriginal = {1, 2, 3, 4, 5};
 
-// Array destino
 int[] arrayInverso = new int[arrayOriginal.length];
 
-// Copiar en orden inverso
 for (int i = 0; i < arrayOriginal.length; i++) {
     arrayInverso[i] = arrayOriginal[arrayOriginal.length - 1 - i];
 }
@@ -309,7 +291,6 @@ for (int i = 0; i < arrayOriginal.length; i++) {
 | Array Original | Array Inverso |
 |----------------|---------------|
 | `[1, 2, 3, 4, 5]` | `[0, 0, 0, 0, 0]` |
-
 
 _Iterando sobre el array original en orden inverso_:
 
@@ -328,9 +309,7 @@ arrayInverso[3] = arrayOriginal[1] => [__5, 4, 3, 2__, 0]
 - Para __i = 4__:
 arrayInverso[4] = arrayOriginal[0] => [__5, 4, 3, 2, 1__]
 
-
-6. Ordenar un Array:
-
+### Ordenar un Array:
 
 ```java
 import java.util.Arrays;
@@ -340,17 +319,14 @@ public class EjemploArrays {
     public static void main(String[] args) {
         int[] numeros = {30, 10, 50, 20, 40};
 
-        // Ordenar el array
         Arrays.sort(numeros);
 
-        // Imprimir el array ordenado
         System.out.println("array ordenado:");
         for (int numero : numeros) {
             System.out.print(numero + " ");
         }
     }
 }
-
 ```
 
 > __Importante__: Definicimos un array de tamaño __4__ (__lenght__).
@@ -369,10 +345,8 @@ public class EjemploBubbleSort {
     public static void main(String[] args) {
         int[] numeros = {30, 10, 50, 20, 40};
 
-        // Llamamos a la función de ordenación
         bubbleSort(numeros);
 
-        // Imprimimos el array ordenado
         System.out.println("array ordenado:");
         for (int numero : numeros) {
             System.out.print(numero + " ");
@@ -384,7 +358,6 @@ public class EjemploBubbleSort {
         for (int i = 0; i < n-1; i++) {
             for (int j = 0; j < n-i-1; j++) {
                 if (arr[j] > arr[j+1]) {
-                    // Intercambiar arr[j] y arr[j+1]
                     int temp = arr[j];
                     arr[j] = arr[j+1];
                     arr[j+1] = temp;
@@ -458,7 +431,7 @@ Para recorrer una matriz bidimensional, utilizamos dos bucles for. El primer buc
 // Tenemos el iterados i para las filas
 for (int i = 0; i < matriz.length; i++) {
     //Tenemos el iterador j para las columnas
-    for (int j = 0; j < matriz[i].length; j++) {
+    for (int j = 0; j < matriz[i].length; j++){
         System.out.print(matriz[i][j] + " ");
     }
     //Salta de fila
@@ -487,7 +460,7 @@ tipoDato[][][] nombreMatriz = new tipoDato[numCapas][numFilas][numColumnas];
 
 Donde __tipoDato__ es el tipo de datos que contendrá la matriz, __nombreMatriz__ es el nombre de la matriz, __numCapas__ es el número de capas, __numFilas__ es el número de filas y __numColumnas__ es el número de columnas.
 
-#### Ejemplo de Matriz Tridimensional
+### Ejemplo de Matriz Tridimensional
 
 Supongamos que queremos crear una matriz tridimensional de enteros de __2x3x2__ e _inicializarla con algunos valores_.
 
@@ -512,11 +485,11 @@ Capa 2:
 
 La matriz matriz es de tipo int, tiene _2 capas, 3 filas y 2 columnas__, y está inicializada con los valores del __1 al 12__ distribuidos en las __capas, filas y columnas__.
 
-#### Acceso a Elementos de una Matriz Tridimensional:
+### Acceso a Elementos de una Matriz Tridimensional
 
 ```java
 int elemento = matriz[1][2][0]; // Esto asignaría el valor 11 a la variable "elemento"
-``` 
+```
 
 #### Modificación de Elementos de una Matriz
 
