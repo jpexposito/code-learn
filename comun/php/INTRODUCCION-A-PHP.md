@@ -430,9 +430,88 @@ Este operador sirve para comparar dos variables:
 - __($a y $b) y devolverá -1 si $a es < $b, 0 cuando sean iguales y 1 cuando $a sea mayor que $b.
 - __??__ uno o el otro (PHP 7, operador coalescente)
 
-> El operador de fusión de null __(??)__ se ha añadido como aliciente sintáctico para el caso
-común de la necesidad de utilizar un operador ternario junto con  isset().  Devuelve su primer
-operando si existe y no es NULL; de lo contrario devuelve su segundo operando.
+> El operador de fusión de null __(??)__ se ha añadido como aliciente sintáctico para el caso común de la necesidad de utilizar un operador ternario junto con  isset().  Devuelve su primer operando si existe y no es NULL; de lo contrario devuelve su segundo operando.
+
+## Comillas dobles
+
+Si usamos comillas dobles para delimitar cadenas de PHP haremos que el lenguaje se
+comporte de una manera más "inteligente". Lo más destacado es que las variables que coloquemos
+dentro de las cadenas se sustituirán por los valores. Ej:
+
+```php
+<?php
+    $nombre = "Riquelme";
+    echo "hola amigo $nombre";
+?>
+```
+
+Observando la salida vemos que con __comillas dobles__ nos ha interpretado el contenido de la variable en el __mensaje en pantalla__.
+
+## Uso de llaves
+
+Tratar de interpretar dentro de comillas dobles un array asociativo _( índice alfanumérico al estilo de mapa )  puede generar problemas que se resuelven mediante llaves __{__ __}__.
+
+```php
+<?php
+    $array = array('uno' => 1, 'dos' => 2, 'tres' => 40, 'cuatro' => 55);
+    $cadena = "La posición 'tres' contiene el dato {$array['tres']}";
+    echo $cadena;
+?>
+```
+
+## Comillas simples
+
+Al usar comillas simples ya no se trata de obtener el contenido. Ahora volcará el texto literal que hemos escrito.
+
+```php
+<?php
+    $nombre = "Ronaldo";
+    echo 'hola amigo $nombre';
+?>
+```
+
+Observar  que  si  estamos  introduciendo  un  texto  que  no  queremos  que  interprete  los
+contenidos de variables nos interesa más hacer uso de las comillas simples ya que el intérprete no tendrá gasto computacional tratando de sustituir variables por su valor.
+
+## Caracteres de escape 
+
+Para incluir el símbolo __\$__, la contrabarra y otros caracteres utilizados por el lenguaje dentro de las cadenas y no confundirlos se usan los caracteres de escape.
+Para insertar un caracter de escape tenemos que indicarlo comenzando con el símbolo de la contrabarra (barra invertida) y luego el del caracter de escape que deseemos usar.
+Los caracteres de escape disponibles dependen del tipo de literal de cadena que estemos
+usando. En el  caso de las cadenas con comillas dobles se permiten muchos más caracteres de escape. Los encuentras en la siguiente tabla: 
+
+>> INTRODUCIR TABLA
+
+Estos cambios de línea y tabulaciones tienen únicamente efecto en el código y no en el texto ejecutado por el navegador. En otras palabras, si queremos que nuestro texto ejecutado cambie de
+línea hemos de introducir un echo "__\<br>__" y no “__\n__”
+
+## Variables de variables
+
+Observar lo siguiente:  
+
+```php
+$variable='dato';
+$dato = 5;
+```
+
+Ahora mismo ya no debiéramos tener dudas que lo anterior hace referencia al nombre de dos variables. Una variable llamada: __\$variable__ que almacena la palabra: dato y otra variable llamada: __\$dato__   que almacena el número __5__. Ahora bien, _¿ cómo interpretar la siguiente expresión en el contexto anterior?_
+
+```php
+${$variable}
+```
+
+Pues bien, primero se transforma la parte interior:  __\$variable__ y se obtiene la palabra dato. Así que nos encontramos con:   __\$dato__ y esa variable sabemos que tiene el valor __5__.
+
+>__Nota__: no es necesario poner las llaves en el ejemplo anterior.
+Prueba el siguiente código:
+
+```php
+<?php
+    $variable = 'dato';
+    $dato = 5; 
+    echo $$variable.'<br>';
+?>
+```
 
 ## 📚 Referencias
 
