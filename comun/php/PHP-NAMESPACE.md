@@ -34,6 +34,7 @@ include 'archivo2.php';
 // Error: Cannot redeclare class Usuario
 $u = new Usuario();
 ```
+
 ---
 
 ## Ejemplo con namespace (solución)
@@ -69,6 +70,7 @@ $u1->saludar();  // Hola desde App\Modelo\Usuario
 $u2 = new App\Controller\Usuario();
 $u2->saludar();  // Hola desde App\Controller\Usuario
 ```
+
 ---
 
 ## Alias con `use`
@@ -91,7 +93,8 @@ $u2->saludar();
 
 - **PHP puro:**  
   No es obligatorio. Puedes declarar un namespace cualquiera, sin importar en qué carpeta esté el archivo.  
-  ___Pero esto puede volver tu proyecto difícil de mantener__.
+  
+  ___Pero esto puede volver tu proyecto difícil de mantener___.
 
 - **Buenas prácticas / Composer (PSR-4):**  
   Lo recomendado (y prácticamente necesario si usas **Composer**) es que el namespace coincida con la estructura de carpetas.  
@@ -389,6 +392,25 @@ Presentation  →  Application  →  Domain  →  (interfaces)  ←  Infrastruct
 | Orquestación | — | Aplicación | App\Application\ServicioPartida | `nueva()`, `probar()`, `estado()` |
 | Control de flujo/UI | `echo` | Presentación | App\Presentation\ControladorPartida | `demo()`/`handle()` |
 
+La estructura quedará como sigue: 
+
+```code
+src/
+├── Application/
+│   └── ServicioPartida.php
+├── Domain/
+│   ├── EstadoPartida.php
+│   ├── PalabraSecreta.php
+│   └── Partida.php
+├── Domain/
+│   └── Repository/
+│       └── RepositorioPartida.php
+├── Infrastructure/
+│   └── RepositorioPartidaArchivo.php
+└── Presentation/
+    └── ControladorPartida.php
+```
+
 ---
 
 <details>
@@ -423,9 +445,7 @@ namespace App\Domain {
 
     final class Partida
     {
-        /** @var string[] */
         private array $aciertos = [];
-        /** @var string[] */
         private array $fallos = [];
         private EstadoPartida $estado;
 
@@ -439,7 +459,6 @@ namespace App\Domain {
         public function estado(): EstadoPartida { return $this->estado; }
         public function mascara(): string { return $this->palabra->revelar($this->aciertos); }
         public function intentosRestantes(): int { return $this->maxIntentos - count($this->fallos); }
-        /** @return string[] */
         public function fallos(): array { return $this->fallos; }
 
         public function probarLetra(string $letra): bool
@@ -590,8 +609,7 @@ namespace App\Presentation {
     use App\Application\ServicioPartida;
 
     /**
-     * Controlador mínimo de ejemplo (sin HTTP real).
-     * Solo muestra cómo orquestar llamadas desde "presentación".
+     * Controlador de la partida. Solo muestra cpmo orquestar llamadas desde "presentacion".
      */
     final class ControladorPartida
     {
@@ -627,44 +645,7 @@ namespace App\Presentation {
 
 A continuación tienes enlaces a la documentación oficial de PHP, con ejemplos prácticos de cada uno de los temas vistos en **Code & Learn (PHP en 5 días)**:
 
-### 🔹 Introducción y Sintaxis Básica
-
-- [PHP Manual – Sintaxis básica](https://www.php.net/manual/es/language.basic-syntax.php)
-- [PHP Manual – echo / print](https://www.php.net/manual/es/function.echo.php)
-
-### 🔹 Operadores y Control de Flujo
-
-- [PHP Manual – Operadores](https://www.php.net/manual/es/language.operators.php)  
-- [PHP Manual – Estructuras de control](https://www.php.net/manual/es/language.control-structures.php)  
-- Ejemplos: `if`, `else`, `elseif`, `switch`, `for`, `foreach`, `while`, `do...while`.
-
-### 🔹 Funciones
-
-- [PHP Manual – Funciones](https://www.php.net/manual/es/language.functions.php)  
-- [PHP Manual – Argumentos de funciones](https://www.php.net/manual/es/functions.arguments.php)  
-- Incluye ejemplos de parámetros opcionales y paso por referencia.
-
-### 🔹 Arrays
-
-- [PHP Manual – Arrays](https://www.php.net/manual/es/language.types.array.php)  
-- [PHP Manual – Funciones de Arrays](https://www.php.net/manual/es/ref.array.php)  
-- Ejemplos de arrays indexados, asociativos y multidimensionales.
-
-### 🔹 Bucles
-
-- [PHP Manual – while](https://www.php.net/manual/es/control-structures.while.php)  
-- [PHP Manual – do...while](https://www.php.net/manual/es/control-structures.do.while.php)  
-- [PHP Manual – for](https://www.php.net/manual/es/control-structures.for.php)  
-- [PHP Manual – foreach](https://www.php.net/manual/es/control-structures.foreach.php)  
-
-### 🔹 Manejo de Formularios
-
-- [PHP Manual – Superglobals](https://www.php.net/manual/es/language.variables.superglobals.php)  
-- [PHP Manual – $_GET](https://www.php.net/manual/es/reserved.variables.get.php)  
-- [PHP Manual – $_POST](https://www.php.net/manual/es/reserved.variables.post.php)  
-
-### 🔹 Manejo de Archivos
-
+- [PHP Manual – namespaces](https://www.php.net/manual/en/language.namespaces.php)
 - [PHP Manual – Manejo de archivos](https://www.php.net/manual/es/book.filesystem.php)  
 - Funciones clave: [`fopen`](https://www.php.net/manual/es/function.fopen.php), [`fwrite`](https://www.php.net/manual/es/function.fwrite.php), [`fread`](https://www.php.net/manual/es/function.fread.php), [`fclose`](https://www.php.net/manual/es/function.fclose.php).  
 
