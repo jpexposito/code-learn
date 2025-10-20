@@ -107,7 +107,7 @@ try (DirectoryStream<Path> stream = Files.newDirectoryStream(root, "*.{json,xml}
 
 ## 📦 Modelo de datos y serialización (Jackson JSON & XML)
 
-**`Note.java` (POJO con validación):**
+**`Note.java` (Bean (clase) con validación):**
 
 ```java
 package com.docencia.files.model;
