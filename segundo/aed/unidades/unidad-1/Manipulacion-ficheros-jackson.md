@@ -130,22 +130,6 @@ public class Note {
 }
 ```
 
-**Configuración de Jackson (opcional):**
-
-```java
-@Bean
-ObjectMapper jsonMapper() {
-  return new ObjectMapper()
-      .findAndRegisterModules(); // fechas, etc.
-}
-
-@Bean
-XmlMapper xmlMapper() {
-  XmlMapper xm = new XmlMapper();
-  xm.findAndRegisterModules();
-  return xm;
-}
-```
 
 ## 🧮 Conversión entre formatos (JSON ⇄ XML)
 
@@ -177,107 +161,338 @@ public class FormatConverter {
 }
 ```
 
-## 🗃️ Repositorio de ficheros y CRUD
+### Repositorios (JSON/XML)
 
-**`FileNoteRepository.java`:**
-
+#### `NoteRepository.java`
 ```java
-package com.docencia.files.repo;
+package com.formacion.files;
 
-import com.docencia.files.model.Note;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import java.io.IOException;
-import java.nio.file.*;
-import java.util.*;
-import java.util.stream.Stream;
+import java.util.List;
 
-public class FileNoteRepository {
-  private final Path root;
-  private final ObjectMapper json;
-  private final XmlMapper xml;
-  private final String defaultExt; // "json" o "xml"
-
-  public FileNoteRepository(Path root, ObjectMapper json, XmlMapper xml, String defaultExt) throws IOException {
-    this.root = root; this.json = json; this.xml = xml; this.defaultExt = defaultExt;
-    Files.createDirectories(root);
-  }
-
-  private Path pathOf(String id, String ext) { return root.resolve(id + "." + ext); }
-
-  public boolean exists(String id) throws IOException {
-    try (Stream<Path> s = Files.list(root)) {
-      return s.anyMatch(p -> p.getFileName().toString().matches(id + "\\\\.(json|xml)$"));
-    }
-  }
-
-  public Note findById(String id) throws IOException {
-    Path pJson = pathOf(id, "json");
-    Path pXml  = pathOf(id, "xml");
-    if (Files.exists(pJson)) return json.readValue(Files.readString(pJson), Note.class);
-    if (Files.exists(pXml))  return xml.readValue(Files.readString(pXml), Note.class);
-    throw new NoSuchFileException("Note " + id + " not found");
-  }
-
-  public List<Note> findAll() throws IOException {
-    List<Note> out = new ArrayList<>();
-    try (DirectoryStream<Path> ds = Files.newDirectoryStream(root, "*.{json,xml}")) {
-      for (Path p : ds) {
-        String name = p.getFileName().toString();
-        if (name.endsWith(".json")) out.add(json.readValue(Files.readString(p), Note.class));
-        else out.add(xml.readValue(Files.readString(p), Note.class));
-      }
-    }
-    return out;
-  }
-
-  public Note save(Note n, Optional<String> extOpt) throws IOException {
-    String ext = extOpt.orElse(defaultExt);
-    Path p = pathOf(n.getId(), ext);
-    String payload = ext.equals("json") ? json.writeValueAsString(n) : xml.writeValueAsString(n);
-    Files.writeString(p, payload, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
-    return n;
-  }
-
-  public void delete(String id) throws IOException {
-    Files.deleteIfExists(pathOf(id, "json"));
-    Files.deleteIfExists(pathOf(id, "xml"));
-  }
+public interface NoteRepository {
+    Note save(Note note);            // crea/actualiza por id
+    List<Note> findById(String id);  // devuelve 0..1 elementos
+    List<Note> findAll();
+    boolean deleteById(String id);
 }
 ```
 
-## 🧠 Servicio y controlador (Spring)
-
-**`NoteService.java`:**
-
+#### `JsonNoteRepository.java`
 ```java
-package com.docencia.files.service;
+package com.formacion.files;
 
-import com.docencia.files.model.Note;
-import com.docencia.files.repo.FileNoteRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
+
 import java.io.IOException;
+import java.nio.file.*;
+import java.util.*;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
+@Repository
+@Qualifier("jsonNoteRepo")
+public class JsonNoteRepository implements NoteRepository {
+
+    private final Path path;
+    private final ObjectMapper mapper;
+    private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
+
+    public JsonNoteRepository(StorageProperties props) {
+        this.path = Paths.get(props.getJsonPath());
+        this.mapper = new ObjectMapper().registerModule(new JavaTimeModule());
+        ensureFile();
+    }
+
+    @Override
+    public Note save(Note note) {
+        lock.writeLock().lock();
+        try {
+            List<Note> all = readAllInternal();
+            if (note.getId() == null || note.getId().isBlank()) {
+                note.setId(UUID.randomUUID().toString());
+            }
+            all.removeIf(n -> Objects.equals(n.getId(), note.getId()));
+            all.add(note);
+            writeAllInternal(all);
+            return note;
+        } finally {
+            lock.writeLock().unlock();
+        }
+    }
+
+    @Override
+    public List<Note> findById(String id) {
+        lock.readLock().lock();
+        try {
+            return readAllInternal().stream()
+                    .filter(n -> Objects.equals(n.getId(), id))
+                    .findFirst().map(List::of)
+                    .orElseGet(List::of);
+        } finally {
+            lock.readLock().unlock();
+        }
+    }
+
+    @Override
+    public List<Note> findAll() {
+        lock.readLock().lock();
+        try {
+            return Collections.unmodifiableList(readAllInternal());
+        } finally {
+            lock.readLock().unlock();
+        }
+    }
+
+    @Override
+    public boolean deleteById(String id) {
+        lock.writeLock().lock();
+        try {
+            List<Note> all = readAllInternal();
+            boolean removed = all.removeIf(n -> Objects.equals(n.getId(), id));
+            if (removed) writeAllInternal(all);
+            return removed;
+        } finally {
+            lock.writeLock().unlock();
+        }
+    }
+
+    // ------- helpers -------
+    private void ensureFile() {
+        try {
+            Files.createDirectories(path.getParent());
+            if (!Files.exists(path)) {
+                writeAllInternal(new ArrayList<>());
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("No se pudo inicializar el fichero JSON", e);
+        }
+    }
+
+    private List<Note> readAllInternal() {
+        try {
+            if (!Files.exists(path) || Files.size(path) == 0) return new ArrayList<>();
+            Note[] arr = mapper.readValue(Files.readAllBytes(path), Note[].class);
+            return new ArrayList<>(Arrays.asList(arr));
+        } catch (IOException e) {
+            throw new RuntimeException("Error leyendo JSON", e);
+        }
+    }
+
+    private void writeAllInternal(List<Note> items) {
+        try {
+            byte[] bytes = mapper.writerWithDefaultPrettyPrinter().writeValueAsBytes(items);
+            Files.write(path, bytes,
+                    StandardOpenOption.CREATE,
+                    StandardOpenOption.TRUNCATE_EXISTING,
+                    StandardOpenOption.WRITE);
+        } catch (IOException e) {
+            throw new RuntimeException("Error escribiendo JSON", e);
+        }
+    }
+}
+```
+
+#### `XmlNoteRepository.java`
+```java
+package com.formacion.files;
+
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
+
+import java.io.IOException;
+import java.nio.file.*;
+import java.util.*;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
+@Repository
+@Qualifier("xmlNoteRepo")
+public class XmlNoteRepository implements NoteRepository {
+
+    private final Path path;
+    private final XmlMapper mapper;
+    private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
+
+    public XmlNoteRepository(StorageProperties props) {
+        this.path = Paths.get(props.getXmlPath());
+        this.mapper = (XmlMapper) new XmlMapper().registerModule(new JavaTimeModule());
+        ensureFile();
+    }
+
+    @Override
+    public Note save(Note note) {
+        lock.writeLock().lock();
+        try {
+            List<Note> all = readAllInternal();
+            if (note.getId() == null || note.getId().isBlank()) {
+                note.setId(UUID.randomUUID().toString());
+            }
+            all.removeIf(n -> Objects.equals(n.getId(), note.getId()));
+            all.add(note);
+            writeAllInternal(all);
+            return note;
+        } finally {
+            lock.writeLock().unlock();
+        }
+    }
+
+    @Override
+    public List<Note> findById(String id) {
+        lock.readLock().lock();
+        try {
+            return readAllInternal().stream()
+                    .filter(n -> Objects.equals(n.getId(), id))
+                    .findFirst().map(List::of)
+                    .orElseGet(List::of);
+        } finally {
+            lock.readLock().unlock();
+        }
+    }
+
+    @Override
+    public List<Note> findAll() {
+        lock.readLock().lock();
+        try {
+            return Collections.unmodifiableList(readAllInternal());
+        } finally {
+            lock.readLock().unlock();
+        }
+    }
+
+    @Override
+    public boolean deleteById(String id) {
+        lock.writeLock().lock();
+        try {
+            List<Note> all = readAllInternal();
+            boolean removed = all.removeIf(n -> Objects.equals(n.getId(), id));
+            if (removed) writeAllInternal(all);
+            return removed;
+        } finally {
+            lock.writeLock().unlock();
+        }
+    }
+
+    // ------- helpers -------
+    private void ensureFile() {
+        try {
+            Files.createDirectories(path.getParent());
+            if (!Files.exists(path)) {
+                writeAllInternal(new ArrayList<>());
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("No se pudo inicializar el fichero XML", e);
+        }
+    }
+
+    private List<Note> readAllInternal() {
+        try {
+            if (!Files.exists(path) || Files.size(path) == 0) return new ArrayList<>();
+            NoteStore store = mapper.readValue(Files.readAllBytes(path), NoteStore.class);
+            return new ArrayList<>(store.getItems());
+        } catch (IOException e) {
+            throw new RuntimeException("Error leyendo XML", e);
+        }
+    }
+
+    private void writeAllInternal(List<Note> items) {
+        try {
+            NoteStore store = new NoteStore(items);
+            byte[] bytes = mapper.writerWithDefaultPrettyPrinter().writeValueAsBytes(store);
+            Files.write(path, bytes,
+                    StandardOpenOption.CREATE,
+                    StandardOpenOption.TRUNCATE_EXISTING,
+                    StandardOpenOption.WRITE);
+        } catch (IOException e) {
+            throw new RuntimeException("Error escribiendo XML", e);
+        }
+    }
+}
+```
+
+### Router de repositorios
+
+#### `RoutedNoteRepository.java`
+```java
+package com.formacion.files;
+
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
-import java.util.Optional;
 
+@Primary
+@Repository
+public class RoutedNoteRepository {
+
+    private final NoteRepository jsonRepo;
+    private final NoteRepository xmlRepo;
+
+    public RoutedNoteRepository(@Qualifier("jsonNoteRepo") NoteRepository jsonRepo,
+                                @Qualifier("xmlNoteRepo") NoteRepository xmlRepo) {
+        this.jsonRepo = jsonRepo;
+        this.xmlRepo = xmlRepo;
+    }
+
+    private NoteRepository select(FileFormat format) {
+        return (format == FileFormat.XML) ? xmlRepo : jsonRepo;
+    }
+
+    public Note save(Note note, FileFormat format) {
+        return select(format).save(note);
+    }
+
+    public List<Note> findById(String id, FileFormat format) {
+        return select(format).findById(id); // 0..1 elementos
+    }
+
+    public List<Note> findAll(FileFormat format) {
+        return select(format).findAll();
+    }
+
+    public boolean deleteById(String id, FileFormat format) {
+        return select(format).deleteById(id);
+    }
+}
+```
+
+### Servicio
+
+#### `NoteService.java`
+```java
+package com.formacion.files;
+
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
 public class NoteService {
-  private final FileNoteRepository repo;
 
-  public NoteService(FileNoteRepository repo) { this.repo = repo; }
+    private final RoutedNoteRepository repo;
 
-  public Note create(Note n, String format) throws IOException {
-    if (repo.exists(n.getId())) throw new IllegalStateException("ID repetido");
-    return repo.save(n, Optional.ofNullable(format));
-  }
+    public NoteService(RoutedNoteRepository repo) {
+        this.repo = repo;
+    }
 
-  public Note update(Note n, String format) throws IOException {
-    return repo.save(n, Optional.ofNullable(format));
-  }
+    public Note crear(Note note, FileFormat formato) {
+        return repo.save(note, formato);
+    }
 
-  public Note get(String id) throws IOException { return repo.findById(id); }
+    public List<Note> obtenerPorId(String id, FileFormat formato) {
+        return repo.findById(id, formato); // lista vacía o de 1 elemento
+    }
 
-  public List<Note> all() throws IOException { return repo.findAll(); }
+    public List<Note> listar(FileFormat formato) {
+        return repo.findAll(formato);
+    }
 
-  public void delete(String id) throws IOException { repo.delete(id); }
+    public boolean eliminar(String id, FileFormat formato) {
+        return repo.deleteById(id, formato);
+    }
 }
 ```
 
