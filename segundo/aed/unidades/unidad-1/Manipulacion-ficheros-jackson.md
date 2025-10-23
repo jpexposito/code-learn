@@ -65,7 +65,6 @@ src/
  └─ test/java/... (tests)
 ```
 
-
 ## 📁 Clases para gestión de ficheros y directorios (java.nio.file)
 
 Clases clave y ejemplos:
