@@ -35,9 +35,9 @@ Aunque ___los hilos se ejecutan en el contexto de un proceso, cada uno tiene su 
 Veremos:
 
 - [Hilos en Java](HILOS-JAVA.md)
-- [THEADS-JAVA](THEADS-JAVA.md)
-- [SEMÁFOROS EN JAVA](SEMAFOROS-JAVA.md)
-- [THREAD-POOLS EN JAVA](THREADPOOLS-JAVA.md)
+- [Theads en Java](THEADS-JAVA.md)
+- [Semáforos en Java](SEMAFOROS-JAVA.md)
+- [Theads pools en Java](THREADPOOLS-JAVA.md)
 
 ## Licencia 📄
 
