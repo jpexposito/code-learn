@@ -1,7 +1,6 @@
 <div align="justify">
 
-# <img src=../../../images/coding-book.png width="40"> Code & Learn (Proramación Multihilo
-)
+# <img src=../../../images/coding-book.png width="40"> Code & Learn (Proramación Multihilo)
 
 <div align="center">
 
