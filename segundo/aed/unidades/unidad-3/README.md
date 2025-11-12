@@ -3,7 +3,7 @@
 # <img src=../../../../images/coding-book.png width="40"> Code & Learn (ORDBMS y BBDD orientadas a objetos)
 
 <div align="center">
-    <img src=images/spring-data-jpa.png width="300">
+    <img src=images/spring-java-relacional-objetos.png width="300">
 </div>
 
 ## Introducción
@@ -233,6 +233,11 @@ Trabajas con tus **clases de dominio** sin mapeo tabular.
 - Necesitas **transacciones largas** y **versionado** de objetos.
 
 > En la práctica, muchas apps usan ORDBMS + ORM (JPA/Hibernate) para acercarse a la naturalidad OO manteniendo SQL detrás.
+
+
+<div align="center">
+    <img src=images/relacional-objetos.png width="300">
+</div>
 
 ## 5) Recuerda
 
