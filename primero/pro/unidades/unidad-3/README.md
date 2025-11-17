@@ -2,7 +2,7 @@
 
 # <img src=../../../../images/coding-book.png width="40"> Code & Learn (Desarrollo y organización de clases)
 
-En esta unidad se consolida la **creación de clases** y su **organización** en proyectos `Java`. Se aplican principios de **visibilidad**, **encapsulación** y **uso de librerías**, preparando el terreno para **herencia**, **modularidad** y buenas prácticas de diseño. Con Java 17 (LTS) incorporamos, además, **records** para modelos inmutables, **clases selladas (sealed)** para controlar jerarquías y **pattern matching para `instanceof`** para código más claro.
+En esta unidad se consolida la **creación de clases** y su **organización** en proyectos `Java`. Se aplican principios de **visibilidad**, **encapsulación** y **uso de librerías**, preparando el terreno para **herencia**, **modularidad** y buenas prácticas de diseño. Trabajaremos con **Java 17 (LTS)** como versión base del lenguaje.
 
 ---
 
@@ -16,7 +16,7 @@ En esta unidad se consolida la **creación de clases** y su **organización** en
 | 4 | **Métodos** y estado: inmutabilidad parcial, `final`, contratos básicos. | Tests simples con `main`. |
 | 5 | **Static**: campos y métodos estáticos, factorías y utilidades. | `Validador` estático. |
 | 6 | **Herencia** y **sobrescritura** (`@Override`), composición vs herencia. | `Empleado` ← `Persona`. |
-| 7 | **Java 17**: **records** (datos inmutables) y **clases selladas (sealed)** para jerarquías controladas. | Mini-ejercicios. |
+| 7 | **Interfaces**: contratos, implementación múltiple, polimorfismo y separación de responsabilidades. | Mini-ejercicios con interfaces. |
 | 8 | **Colecciones** (List, Set, Map), genéricos, `equals/hashCode/toString`, comparadores. | Ejercicios de colecciones. |
 | 9 | **Paquetes y librerías**: creación de **JAR**, reutilización; estructura Maven/Gradle (visión). | Librería `com.docencia.util`. |
 
@@ -24,7 +24,7 @@ En esta unidad se consolida la **creación de clases** y su **organización** en
 
 ## 🧠 Concepto + 🎯 Ejemplo por sesión
 
-> La idea es **aprender el concepto** y **aterrizarlo** con un ejemplo pequeñito que puedas ejecutar. Todos los fragmentos son compatibles con **Java 17**.
+> La idea es **aprender el concepto** y **aterrizarlo** con un ejemplo pequeñito que puedas ejecutar. Todos los fragmentos son compatibles con **Java 17**.
 
 ### 1) Anatomía de una clase, paquetes y convenciones
 
@@ -98,7 +98,7 @@ public class CuentaBancaria {
   public CuentaBancaria(String iban) {
     this(iban, 0.0);
   }     
-  
+
   public CuentaBancaria(String iban, double saldo) {
     if (iban == null || iban.isBlank()) throw new IllegalArgumentException("iban");
     if (saldo < 0) {
@@ -151,7 +151,7 @@ public static void main(String[] args) {
 public final class Validador {
   private Validador() {}
   public static boolean esIban(String iban) {
-    return iban != null && iban.matches("[A-Z]{2}\\d{2}.*");
+    return iban != null && iban.matches("[A-Z]{2}\d{2}.*");
   }
 }
 
@@ -180,53 +180,82 @@ class Persona {
 
 class Empleado extends Persona {
   private double salario;
-  @Override public String toString() { /* añade info del salario */       return super.toString(); 
+  @Override public String toString() { /* añade info del salario */       
+    return super.toString(); 
   }
 }
 ```
 
 ---
 
-### 7) Java 17: `record` (inmutable) y clases selladas (`sealed`)
+### 7) Interfaces: contratos y polimorfismo
 
-**Concepto:** un **record** define datos **inmutables** con `equals/hashCode/toString` automáticos. Las **clases selladas** controlan **quién** puede heredar. Con **pattern matching** para `instanceof` el código se lee solo.  
-**Ejemplo:** `Money` como `record` y jerarquía `Notificacion` sellada.
+**Concepto:** una **interface** define un conjunto de métodos que una clase se compromete a implementar. Sirve como **contrato**: cualquier clase que implemente la interfaz debe proporcionar ese comportamiento. Permiten **polimorfismo** (mismo tipo abstracto, distintas implementaciones) y favorecen un diseño **desacoplado**, donde el código depende de *qué hace* algo, no de *cómo* está implementado. Una clase puede implementar varias interfaces.
+
+**Ejemplo:** interfaz `Notificacion` con dos implementaciones (`Email` y `Sms`) y un método que trabaja con la interfaz sin importar el tipo concreto.
 
 ```java
-public record Money(double amount, String currency) {
-  public Money {
-    if (amount < 0) {
-      throw new IllegalArgumentException();
-    } 
-    if (currency == null || currency.length() != 3) {
-      throw new IllegalArgumentException();
-    } 
-  }
-}
-
-public sealed interface Notificacion permits Email, Sms {
+public interface Notificacion {
   String destino();
+  String mensaje();
+  void enviar();
 }
-public final class Email implements Notificacion {
-  /* ... */
-  public String destino(){ 
-    return "..."; 
-  } 
-}
-public non-sealed class Sms implements Notificacion {
-  /* permite más subclases */
-  public String destino(){
-    return "...";
+
+public class Email implements Notificacion {
+  private final String destino;
+  private final String asunto;
+  private final String cuerpo;
+
+  public Email(String destino, String asunto, String cuerpo) {
+    this.destino = destino;
+    this.asunto = asunto;
+    this.cuerpo = cuerpo;
+  }
+
+  @Override public String destino() { return destino; }
+
+  @Override public String mensaje() {
+    return asunto + ": " + cuerpo;
+  }
+
+  @Override
+  public void enviar() {
+    System.out.println("Enviando EMAIL a " + destino + " -> " + mensaje());
   }
 }
 
-static void enviar(Notificacion notificacion) {
-  if (notificacion instanceof Email email) {
-    System.out.println("Email a " + email.destino());
+public class Sms implements Notificacion {
+  private final String destino;
+  private final String texto;
+
+  public Sms(String destino, String texto) {
+    this.destino = destino;
+    this.texto = texto;
   }
-  else if (notificacion instanceof Sms sms){
-    System.out.println("SMS a " + sms.destino());
-  } 
+
+  @Override public String destino() { return destino; }
+
+  @Override public String mensaje() { return texto; }
+
+  @Override
+  public void enviar() {
+    System.out.println("Enviando SMS a " + destino + " -> " + mensaje());
+  }
+}
+
+public class Notificador {
+  public static void enviar(Notificacion notificacion) {
+    // Polimorfismo: puede ser Email, Sms o cualquier otra implementación futura
+    notificacion.enviar();
+  }
+
+  public static void main(String[] args) {
+    Notificacion n1 = new Email("ada@ejemplo.com", "Hola", "Bienvenida al curso");
+    Notificacion n2 = new Sms("+34123456789", "Tu código es 1234");
+
+    enviar(n1);
+    enviar(n2);
+  }
 }
 ```
 
