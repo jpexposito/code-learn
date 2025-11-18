@@ -8,8 +8,8 @@
 
 ## 1. Introducción
 
-Cuando programamos en Java, trabajamos con **objetos** (`Note`, `User`, `Pedido`, ...).  
-Cuando guardamos datos de forma permanente, lo hacemos en una **base de datos relacional**, que almacena **tablas y filas**.
+Cuando programamos en Java, trabajamos con **objetos** (`Note`, `Persona`, `User`, `Pedido`, ...).  
+Cuando guardamos datos de forma permanente, normalmente lo hacemos en una **base de datos relacional**, que almacena **tablas y filas**.
 
 El problema clásico:
 
@@ -43,6 +43,8 @@ Con JDBC tú haces todo:
 - Lees el resultado y lo conviertes a objetos Java.
 - Cierras los recursos.
 
+En los ejemplos de esta unidad usaremos una entidad sencilla `Note`, pero podríamos usar igual `Persona`, `Pedido`, etc.
+
 ### 2.1 Ejemplo de entidad de dominio en Java
 
 ```java
@@ -50,11 +52,11 @@ public class Note {
     private String id;
     private String title;
     private String content;
-    // Recuerda contructores/ getters, setters, equals y toString()
+    // Recuerda constructores / getters, setters, equals y toString()
 }
 ```
 
-### 2.2 Tabla en la base de datos
+### 2.2 Tabla en la base de datos (SQLite / H2 / cualquier relacional)
 
 ```sql
 CREATE TABLE notes (
@@ -64,7 +66,8 @@ CREATE TABLE notes (
 );
 ```
 
-> **Extensión de las bbdd en sqlite**: La extensión en la bbdd es *sqlite* o *db*.
+> **Extensión típica para SQLite**: `.sqlite` o `.db`.  
+> En H2 se suele usar un fichero `.mv.db` o una BBDD en memoria (`jdbc:h2:mem:testdb`).
 
 ### 2.3 Guardar una nota con JDBC
 
@@ -76,7 +79,7 @@ import java.sql.PreparedStatement;
 public class NoteJdbcBasico {
 
     public void save(Note note) throws Exception {
-        
+
         Connection conn = DriverManager.getConnection(
             "jdbc:sqlite:notes.db"
         );
@@ -96,7 +99,7 @@ public class NoteJdbcBasico {
 }
 ```
 
-> **Note**: Este código se mejora no subiendo la Exception, añadiendo un try .. catch y un finalize para acegurarnos que cerramos la conexión a la bbdd
+> **Mejorable**: no deberíamos propagar `Exception` sin más, ni olvidarnos de `try/catch` o `try-with-resources` para asegurar que cerramos la conexión incluso si hay error.
 
 ### 2.4 Leer una nota por id con JDBC
 
@@ -134,10 +137,10 @@ public class NoteJdbcExample {
 ### 2.5 Qué aprendemos aquí
 
 - Tú controlas completamente el SQL.
-- Tú haces el mapeo manual columna->campo.
+- Tú haces el mapeo manual columna → campo.
 - Tú gestionas la conexión y el cierre.
 
-Funciona. Es estándar. Pero empieza a cansar en cuanto tienes 5 o más tablas.
+Funciona. Es estándar. Pero empieza a cansar en cuanto tienes 5 o más tablas y relaciones.
 
 ---
 
@@ -150,7 +153,7 @@ Solución clásica: crear una **capa de acceso a datos**, normalmente llamada `D
 La idea:
 
 - Definir una interfaz clara con las operaciones que necesitas.
-- Escribir una implementación que sabe hablar con la base de datos.
+- Escribir una implementación que sabe hablar con la base de datos (con JDBC, por ejemplo).
 
 ### 3.1 Interfaz de repositorio
 
@@ -169,8 +172,8 @@ public interface NoteRepository {
 }
 ```
 
-> **Esta interfaz dice**: "esto es lo que el resto de la aplicación puede hacer con las notas".  
-No dice *cómo* se hace (SQL, Hibernate, memoria, etc.), sólo *qué* se puede hacer.
+> Esta interfaz dice: “esto es lo que el resto de la aplicación puede hacer con las notas”.  
+> No dice *cómo* se hace (SQL, Hibernate, memoria, etc.), sólo *qué* se puede hacer.
 
 ### 3.2 Implementación JDBC del repositorio
 
@@ -265,7 +268,6 @@ public class NoteRepositoryJdbc implements NoteRepository {
 
             ps.executeUpdate();
             ps.close();
-
             return note;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -282,7 +284,6 @@ public class NoteRepositoryJdbc implements NoteRepository {
 
             int deleted = ps.executeUpdate();
             ps.close();
-
             return deleted > 0;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -294,8 +295,7 @@ public class NoteRepositoryJdbc implements NoteRepository {
 Esto ya está mucho mejor organizado:
 
 - Todo el SQL vive en una clase.
-- El resto del proyecto sólo habla con `NoteRepository`, sin saber si por debajo hay SQLite, Postgres, etc.
-
+- El resto del proyecto sólo habla con `NoteRepository`, sin saber si por debajo hay SQLite, H2, Postgres, etc.
 
 ---
 
@@ -304,17 +304,17 @@ Esto ya está mucho mejor organizado:
 Con JDBC + repositorios manuales, hay varios dolores:
 
 1. Mucho código repetido:
-   - Abrir conexión, crear `PreparedStatement`, mapear columnas → objetos...
+   - Abrir conexión, crear `PreparedStatement`, mapear columnas ↔ objetos...
 2. Mantenimiento costoso:
    - Si cambias una columna en BBDD, tienes que revisar a mano cada SQL.
 3. Relaciones complejas:
-   - ¿Qué pasa cuando `Note` está relacionada con `User`, `Tag`, `Attachment`, etc.?  
-     Acabas haciendo `JOIN` cada dos por tres.
+   - Cuando `Note` está relacionada con `User`, `Tag`, `Attachment`, etc.  
+     acabas haciendo `JOIN` constantemente.
 4. Transacciones:
-   - ¿Qué si necesitas guardar varias cosas juntas de forma atómica?
-   - Tienes que manejar `conn.setAutoCommit(false)` / `commit()` / `rollback()` tú mismo.
+   - Si necesitas guardar varias cosas juntas de forma atómica:
+     `conn.setAutoCommit(false)` / `commit()` / `rollback()` lo gestionas tú.
 
-> **Solución:** Para aliviar este dolor aparece el ORM.
+> **Solución**: Para aliviar este dolor aparece el ORM.
 
 ---
 
@@ -322,15 +322,24 @@ Con JDBC + repositorios manuales, hay varios dolores:
 
 ### 5.1 Qué es un ORM
 
-Un **ORM (Object-Relational Mapper)** automatiza el mapeo "objeto ↔ fila":
+Un **ORM (Object-Relational Mapper)** automatiza el mapeo **objeto ↔ fila**:
 
 - Tú defines tus entidades con anotaciones.
 - El framework genera el SQL y lo ejecuta.
 
-En Java el estándar para describir esta información es **JPA / Jakarta Persistence**.  
-La implementación más común es **Hibernate**.
+En Java el estándar es **JPA / Jakarta Persistence** (`jakarta.persistence.*`),  
+y la implementación más usada es **Hibernate**.
 
-### 5.2 Entidad JPA
+### 5.2 Recordatorio rápido: bases de datos relacionales
+
+- Datos en **tablas, filas y columnas**.
+- Esquema **fijo** definido con `CREATE TABLE`.
+- Soportan **joins** entre tablas.
+- Ejemplo:
+  - Tabla `personas` con columnas `id`, `nombre`, `edad`, `email`.
+  - Tabla `direcciones` con columnas `id`, `calle`, `ciudad`, `codigo_postal`, `pais`, `persona_id`.
+
+### 5.3 Entidad JPA básica
 
 ```java
 import jakarta.persistence.Entity;
@@ -342,10 +351,10 @@ import jakarta.persistence.Table;
 @Table(name = "notes")
 public class Note {
 
-    @Id //Recuerda que identifica la clave primaria
-    private String id; 
+    @Id // Identifica la clave primaria
+    private String id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 200)
     private String title;
 
     @Column(length = 4000)
@@ -357,57 +366,128 @@ public class Note {
 
 Con esto:
 
-- `@Entity` dice "esta clase se guarda en la base de datos".
+- `@Entity` dice “esta clase se guarda en la base de datos”.
 - `@Table` define el nombre de la tabla.
 - `@Id` marca la clave primaria.
 - `@Column` describe detalles de la columna.
 
 El ORM (Hibernate) podrá hacer `INSERT`, `SELECT`, `UPDATE`, `DELETE` sin que tú escribas SQL manual.
 
+### 5.4 Objetos embebidos: `@Embedded` y `@Embeddable`
 
-### 5.3 Relaciones entre entidades
-
-Ejemplo típico: muchas notas pertenecen al mismo usuario → `ManyToOne`.
+Ejemplo con `Persona` y `Direccion`:
 
 ```java
-import jakarta.persistence.*;
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Column;
 
-@Entity
-@Table(name = "app_user")
-public class User {
-
-    @Id
-    private String id;
-
-    private String username;
-    private String displayName;
+@Embeddable
+public class Direccion {
+    private String calle;
+    private String ciudad;
+    private String codigoPostal;
+    private String pais;
 }
 
 @Entity
-@Table(name = "notes")
-public class Note {
+@Table(name = "personas")
+public class Persona {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    private String title;
-    private String content;
+    @Column(nullable = false, length = 100)
+    private String nombre;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id") // FK en notes.user_id
-    private User author;
+    private Integer edad;
+
+    @Column(unique = true)
+    private String email;
+
+    @Embedded
+    private Direccion direccion;
 }
 ```
 
-> **Explicación**: El ORM entiende esa relación, sabe que `notes.user_id` apunta a `app_user.id`, y puede cargar el `author` de una `Note` automáticamente.
+En la tabla `personas` tendremos columnas `calle`, `ciudad`, `codigo_postal`, `pais` además de las de `Persona`.
+
+### 5.5 Relaciones entre entidades
+
+Ejemplo típico: una persona tiene muchos pedidos → `OneToMany` / `ManyToOne`.
+
+```java
+import jakarta.persistence.*;
+import java.util.List;
+
+@Entity
+@Table(name = "personas")
+public class Persona {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String nombre;
+
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Pedido> pedidos;
+}
+
+@Entity
+@Table(name = "pedidos")
+public class Pedido {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String descripcion;
+
+    @ManyToOne
+    @JoinColumn(name = "persona_id") // FK en pedidos.persona_id
+    private Persona persona;
+}
+```
+
+> El ORM entiende esta relación y puede cargar `pedido.getPersona()` o `persona.getPedidos()` sin que tengas que escribir los `JOIN` a mano.
 
 ---
 
 ## 6. Spring Data JPA: repositorios declarativos
 
-Spring Data JPA da todavía un paso más: ya no escribes ni la clase repositorio.
+Spring Data JPA da todavía un paso más: ya no escribes la clase repositorio “a mano”.
 
-Tú solo declaras una interfaz que **extiende** de `JpaRepository`, y Spring genera la implementación al arrancar.
+Tú solo declaras una **interfaz** que extiende `JpaRepository`, y Spring genera la implementación al arrancar.
+
+### 6.1 Dependencia básica (Maven)
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+```
+
+Ejemplo de configuración (H2 en memoria):
+
+```properties
+spring.datasource.url=jdbc:h2:mem:testdb
+spring.datasource.driver-class-name=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+```
+
+### 6.2 Repositorio de `Note` con Spring Data JPA
 
 ```java
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -429,19 +509,80 @@ public interface NoteRepositorySpringData extends JpaRepository<Note, String> {
 > - `existsById(id)`
 > - y cualquier método derivado del nombre como `findByTitle(...)`
 
-Ventajas:
+### 6.3 Repositorio de `Persona` con búsquedas personalizadas
 
-- Casi nada de SQL manual.
-- Menos código repetitivo.
-- Integración directa con Spring (inyección de dependencias, transacciones, etc.).
+```java
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import java.util.List;
+
+public interface PersonaRepository extends JpaRepository<Persona, Long> {
+
+    // Método derivado del nombre
+    List<Persona> findByNombreContainingIgnoreCase(String nombre);
+
+    List<Persona> findByEdadBetween(Integer min, Integer max);
+
+    // JPQL usando el campo embebido "direccion"
+    @Query("SELECT p FROM Persona p WHERE p.direccion.ciudad = :ciudad")
+    List<Persona> buscarPorCiudad(@Param("ciudad") String ciudad);
+
+    // Consulta SQL nativa
+    @Query(value = "SELECT * FROM personas WHERE email LIKE %:dominio%", nativeQuery = true)
+    List<Persona> buscarPorDominioEmail(@Param("dominio") String dominio);
+}
+```
+
+- Métodos derivados: `findBy...`, `countBy...`, `existsBy...`.
+- `@Query` puede usar **JPQL** o **SQL nativo** (`nativeQuery = true`).
+
+### 6.4 Auditoría con Spring Data
+
+Se pueden usar anotaciones para registrar automáticamente fechas de creación/modificación:
+
+```java
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.MappedSuperclass;
+import java.time.Instant;
+
+@MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
+public abstract class BaseAuditable {
+
+    @CreatedDate
+    private Instant creado;
+
+    @LastModifiedDate
+    private Instant modificado;
+}
+```
+
+Y activarlo en la aplicación:
+
+```java
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@EnableJpaAuditing
+@SpringBootApplication
+public class MiAplicacion {
+    // ...
+}
+```
 
 ---
 
 ## 7. Testing con base de datos de prueba
 
-Para estar seguros de que la persistencia funciona, se escriben **tests de integración** que usan una base de datos de prueba.
+Para estar seguros de que la persistencia funciona, se escriben **tests de integración** que usan una base de datos de prueba (normalmente H2 en memoria).
 
-En un proyecto Spring Boot esto suele verse así:
+Ejemplo con Spring Boot:
 
 ```java
 import org.junit.jupiter.api.BeforeEach;
@@ -454,7 +595,7 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-@ActiveProfiles("test") // usa la config application-test.yml/properties
+@ActiveProfiles("test") // usa application-test.yml/properties
 class NoteRepositoryIT {
 
     @Autowired
@@ -488,18 +629,18 @@ Detalles clave:
 - `@SpringBootTest` levanta el contexto de Spring completo.
 - `@ActiveProfiles("test")` hace que usemos una BBDD de pruebas, no la real.
 - `@Transactional` en los tests: cada test se ejecuta dentro de una transacción, y al terminar se hace **rollback** automático.
-  - Eso significa que los datos creados en un test no se quedan "sucios" para el siguiente test.
+  - Eso significa que los datos creados en un test no se quedan “sucios” para el siguiente test.
   - Cada test empieza en una base de datos limpia.
 
 ---
 
 ## 8. En resumen
 
-**Persistencia básica en Java** sigue normalmente este camino de madurez:
+La **persistencia básica en Java** suele seguir este camino de madurez:
 
 1. **JDBC puro**
    - Tú escribes SQL.
-   - Tú haces el mapeo ResultSet → objeto.
+   - Tú haces el mapeo `ResultSet → objeto`.
    - Máximo control, máximo trabajo.
 
 2. **DAO / Repository manual**
@@ -508,20 +649,21 @@ Detalles clave:
    - Todavía escribes SQL tú mismo.
 
 3. **ORM con JPA / Hibernate**
-   - Declaras entidades con anotaciones (`@Entity`, `@Id`, `@ManyToOne`, ...).
+   - Declaras entidades con anotaciones (`@Entity`, `@Id`, `@ManyToOne`, `@Embedded`, ...`).
    - El ORM genera el SQL y gestiona las relaciones.
    - Menos duplicación y menos riesgo de errores al mapear.
 
 4. **Spring Data JPA**
    - Declaras interfaces que extienden `JpaRepository`.
    - Spring crea las implementaciones CRUD y las consultas derivadas.
-   - Se integra con las transacciones y el ciclo de vida de Spring.
+   - Se integra con transacciones, validación, auditoría, etc.
 
 5. **Tests con base de datos de prueba**
    - `@SpringBootTest` levanta el contexto real.
    - `@Transactional` en los tests asegura rollback al final.
-   - Así cada test es independiente y repetible.
+   - Cada test es independiente y repetible.
 
-Este es el camino típico en proyectos modernos: se empieza entendiendo JDBC, se organiza en repositorios, y se termina usando JPA/Hibernate + Spring Data para ser mucho más productivos y seguros.
+El objetivo de este Code & Learn es que veas este viaje completo:  
+desde escribir `INSERT` y `SELECT` a mano, hasta trabajar casi solo con **clases Java, anotaciones y repositorios declarativos**.
 
 </div>
