@@ -1,5 +1,6 @@
 <div align="justify">
 
+
 # <img src=../../../../images/coding-book.png width="40"> Code & Learn (ORDBMS, OODBMS y NoSQL documental con Spring Data)
 
 <div align="center">
@@ -546,5 +547,7 @@ public class Direccion {
 <div align="center">
     <img src=images/relacional-objetos.png width="300">
 </div>
+
+> [Resumen](JPA-NO-SQLP.md).
 
 </div>
