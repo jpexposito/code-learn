@@ -79,6 +79,16 @@ Lo primero abordaremos los fundamentos teóricos necesarios para construir un se
      - **H2 Database**: Base de datos en memoria (opcional).
    - Descarga el proyecto generado y ábrelo en tu IDE.
 
+> Verifica que esta la dependencia de `spring-jpa` y la de `swagger`.
+
+```xml
+<dependency>
+   <groupId>org.springdoc</groupId>
+   <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+   <version>2.0.2</version>
+</dependency>
+```
+
 ---
 
 ### Paso 2: Definir el Modelo
