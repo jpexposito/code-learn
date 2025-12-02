@@ -1,0 +1,28 @@
+{
+  "name": "manual-typescript",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Material de apoyo y ejemplos para un manual introductorio de TypeScript en español.",
+  "scripts": {
+    "ejemplo:1": "ts-node ejemplos/01-tipos-basicos.ts",
+    "ejemplo:2": "ts-node ejemplos/02-tipos-compuestos.ts",
+    "ejemplo:3": "ts-node ejemplos/03-funciones.ts",
+    "ejemplo:4": "ts-node ejemplos/04-interfaces.ts",
+    "ejemplo:5": "ts-node ejemplos/05-clases.ts",
+    "ejemplo:6": "ts-node ejemplos/06-genericos.ts",
+    "ejemplo:7": "ts-node ejemplos/07-modulos.ts",
+    "ejemplo:8": "ts-node ejemplos/08-tipos-utilitarios.ts",
+    "ejemplo:9": "ts-node ejemplos/09-integracion-node.ts",
+    "ejemplo:10": "ts-node ejemplos/10-integracion-react-angular.ts",
+    "build": "tsc",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "ts-node": "^10.9.2",
+    "@types/node": "^20.0.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "@types/jest": "^29.5.0"
+  }
+}
