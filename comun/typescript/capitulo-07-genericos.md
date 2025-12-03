@@ -1,4 +1,6 @@
-# Capítulo 7: Genéricos (Generics)
+<div align="justify">
+
+# <img src=.../../../../images/coding-book.png width="40"> Code & Learn (Capítulo 7: Genéricos (Generics))
 
 Los **genéricos** permiten escribir código reutilizable que funciona con múltiples tipos, manteniendo el tipado fuerte.
 
@@ -138,3 +140,5 @@ La idea en los tres lenguajes es la misma:
 ---
 
 [⬅ Capítulo 6: Clases y Programación Orientada a Objetos en TypeScript](./capitulo-06-clases-y-poo.md) · [Ir al índice](./README.md) · [Capítulo 8: Módulos y organización del código ➡](./capitulo-08-modulos-y-configuracion.md)
+
+</div>

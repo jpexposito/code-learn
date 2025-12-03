@@ -1,4 +1,6 @@
-# Capítulo 5: Interfaces y tipos avanzados de objetos
+<div align="justify">
+
+# <img src=.../../../../images/coding-book.png width="40"> Code & Learn (Capítulo 5: Interfaces y tipos avanzados de objetos)
 
 ---
 
@@ -132,3 +134,5 @@ Esto hace que las interfaces en TypeScript se parezcan mucho a la idea de “duc
 ---
 
 [⬅ Capítulo 4: Funciones](./capitulo-04-funciones.md) · [Ir al índice](./README.md) · [Capítulo 6: Clases y Programación Orientada a Objetos en TypeScript ➡](./capitulo-06-clases-y-poo.md)
+
+</div>

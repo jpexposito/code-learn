@@ -1,4 +1,6 @@
-# Capítulo 3: Tipos compuestos
+<div align="justify">
+
+# <img src=.../../../../images/coding-book.png width="40"> Code & Learn (Capítulo 3: Tipos compuestos)
 
 ---
 
@@ -142,3 +144,5 @@ Puedes pensar en los tipos compuestos de TypeScript como una forma de expresar, 
 ---
 
 [⬅ Capítulo 2: Tipos básicos](./capitulo-02-tipos-basicos.md) · [Ir al índice](./README.md) · [Capítulo 4: Funciones ➡](./capitulo-04-funciones.md)
+
+</div>

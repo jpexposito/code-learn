@@ -1,4 +1,6 @@
-# Capítulo 2: Tipos básicos
+<div align="justify">
+
+# <img src=.../../../../images/coding-book.png width="40"> Code & Learn (Capítulo 2: Tipos básicos)
 
 En este capítulo veremos los tipos primitivos más importantes de TypeScript y cómo nos ayudan a evitar errores.
 
@@ -125,3 +127,5 @@ Otros tipos:
 ---
 
 [⬅ Capítulo 1: Introducción](./capitulo-01-introduccion.md) · [Ir al índice](./README.md) · [Capítulo 3: Tipos compuestos ➡](./capitulo-03-tipos-compuestos.md)
+
+</div>

@@ -1,4 +1,6 @@
-# Capítulo 10: Integración con proyectos reales y buenas prácticas
+<div align="justify">
+
+# <img src=.../../../../images/coding-book.png width="40"> Code & Learn (Capítulo 10: Integración con proyectos reales y buenas prácticas)
 
 ---
 
@@ -297,3 +299,5 @@ Estas referencias complementan el manual y muestran ejemplos más avanzados y es
 ---
 
 [⬅ Capítulo 9: Tipos utilitarios y características avanzadas](./capitulo-09-tipos-utilitarios-y-avanzados.md) · [Ir al índice](./README.md) · [Capítulo 11: Tests unitarios en TypeScript ➡](./capitulo-11-test-unitarios.md)
+
+</div>

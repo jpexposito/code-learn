@@ -1,4 +1,6 @@
-# Capítulo 8: Módulos y organización del código
+<div align="justify">
+
+# <img src=.../../../../images/coding-book.png width="40"> Code & Learn (Capítulo 8: Módulos y organización del código)
 
 ---
 
@@ -101,3 +103,5 @@ En TypeScript y JavaScript, los módulos se resuelven en tiempo de compilación/
 ---
 
 [⬅ Capítulo 7: Genéricos (Generics)](./capitulo-07-genericos.md) · [Ir al índice](./README.md) · [Capítulo 9: Tipos utilitarios y características avanzadas ➡](./capitulo-09-tipos-utilitarios-y-avanzados.md)
+
+</div>

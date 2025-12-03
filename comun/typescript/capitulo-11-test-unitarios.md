@@ -1,4 +1,6 @@
-# Capítulo 11: Tests unitarios en TypeScript
+<div align="justify">
+
+# <img src=.../../../../images/coding-book.png width="40"> Code & Learn (Capítulo 11: Tests unitarios en TypeScript)
 
 En este capítulo veremos los conceptos básicos de **tests unitarios** y cómo se suelen aplicar en proyectos TypeScript.
 
@@ -161,3 +163,5 @@ El comando `npm test` ejecutará Jest usando la configuración de `jest.config.c
 ---
 
 [⬅ Capítulo 10: Integración con proyectos reales y buenas prácticas](./capitulo-10-integracion-y-buenas-practicas.md) · [Ir al índice](./README.md)
+
+</div>

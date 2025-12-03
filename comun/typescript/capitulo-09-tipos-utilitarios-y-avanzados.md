@@ -1,4 +1,6 @@
-# Capítulo 9: Tipos utilitarios y características avanzadas
+<div align="justify">
+
+# <img src=.../../../../images/coding-book.png width="40"> Code & Learn (Capítulo 9: Tipos utilitarios y características avanzadas)
 
 ---
 
@@ -98,3 +100,5 @@ Puedes ver los tipos utilitarios como “**funciones sobre tipos**” que automa
 ---
 
 [⬅ Capítulo 8: Módulos y organización del código](./capitulo-08-modulos-y-configuracion.md) · [Ir al índice](./README.md) · [Capítulo 10: Integración con proyectos reales y buenas prácticas ➡](./capitulo-10-integracion-y-buenas-practicas.md)
+
+</div>

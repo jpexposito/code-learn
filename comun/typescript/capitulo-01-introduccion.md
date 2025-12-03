@@ -1,12 +1,27 @@
-# Capítulo 1: Introducción
+<div align="justify">
+
+# <img src=.../../../../images/coding-book.png width="40"> Code & Learn (Capítulo 1: Introducción)
 
 ## ¿Qué es TypeScript?
 
+<div align="center">
+  <img src="images/angular_ts_spring.png" width="300">
+</div>
+
 **TypeScript** es un superconjunto de JavaScript que añade **tipado estático** y otras características modernas
 (clases, interfaces, decoradores, etc.).  
-Se compila (transpila) a JavaScript estándar, por lo que puede ejecutarse en cualquier navegador o entorno que soporte JS.
+Se `compila` (transpila) a **JavaScript** estándar, por lo que puede ejecutarse en cualquier navegador o entorno que soporte **JS**.
 
 ### Ejemplo básico
+
+Crea una carpeta para ir practicando:
+
+```bash
+mkdir test-js
+npm init -y
+npm install --save-dev typescript ts-node
+npx tsc --init
+```
 
 ```ts
 // archivo: ejemplos/01-tipos-basicos.ts (primeros ejemplos)
@@ -18,6 +33,74 @@ for (let i = 0; i < veces; i++) {
 }
 ```
 
+> Guarda en un fichero ***ejempo-basico.ts***.
+
+
+> **TypeScript no se ejecuta directamente**. *Primero se traduce a JavaScript (compilar/transpilar), y luego ese JavaScript lo ejecuta Node.js*.
+
+Pasos:
+- `Compilar` tu `.ts` a `.js` con `tsc` (TypeScript compiler) o usar `ts-node`.
+- `Ejecutar` el `.js` (o el `.ts` directamente con `ts-node`) desde la terminal.
+
+```bash
+npx tsc ejempo-basico.ts
+```
+
+Esto debe de generar el fichero:
+
+```bash
+ejempo-basico.js
+```
+
+Con un código similar al siguiente:
+
+```js
+var mensaje = "Hola TypeScript";
+var veces = 3;
+for (var i = 0; i < veces; i++) {
+    console.log(mensaje);
+}
+```
+
+Ahora ejecutamos el fichero:
+
+```bash
+node ejemplo-basico.js
+```
+
+Con la salida esperada:
+
+```text
+Hola TypeScript
+Hola TypeScript
+Hola TypeScript
+```
+
+> *Intenta ejecutar ahora el .ts directamente*:
+
+```bash
+npx ts-node ejemplo-basico.ts
+```
+
+Realiza las siguientes modificaciones:
+
+```ts
+let mensaje: string = "Hola TypeScript";
+let veces: number = 3;
+
+for (let i = 0; i < veces; i++) {
+  console.log(mensaje);
+}
+```
+
+Ejecuta nuevamente:
+
+```bash
+npx ts-node ejemplo-basico.ts
+```
+
+> Si solo declaras variables y no haces console.log / alert / etc., no verás nada en consola aunque el programa se ejecute bien.
+
 Si intentas hacer algo como:
 
 ```ts
@@ -25,7 +108,7 @@ Si intentas hacer algo como:
 // mensaje = 42; // ❌ number no es asignable a string
 ```
 
-TypeScript te avisará en tiempo de compilación.
+> Recuerda que ***TypeScript*** *te avisará en tiempo de compilación*.
 
 ### Cambios propuestos
 
@@ -45,7 +128,7 @@ Algunas ventajas clave:
 
 ### Ejemplo comparativo
 
-JavaScript permite cosas así sin errores de compilación:
+***JavaScript*** permite cosas así sin errores de compilación:
 
 ```js
 // JavaScript puro
@@ -57,7 +140,7 @@ console.log(suma(1, 2));       // 3
 console.log(suma(1, "hola"));  // "1hola" (¿querías esto?)
 ```
 
-En TypeScript:
+En ***TypeScript***:
 
 ```ts
 function sumaTS(a: number, b: number): number {
@@ -70,7 +153,7 @@ console.log(sumaTS(1, 2));        // ✅ 3
 
 ### Cambios propuestos
 
-1. Intenta cambiar la firma de `sumaTS` para aceptar también `string` y observa cómo se complica el tipo de retorno.
+1. Intenta cambiar la función de `sumaTS` para aceptar también `string` y observa cómo se complica el tipo de retorno.
 2. Crea una función `multiplicaTS` que solo acepte `number` y prueba a pasarle valores incorrectos.
 
 ---
@@ -107,6 +190,8 @@ Esto generará un archivo JavaScript (por ejemplo `ejemplos/01-tipos-basicos.js`
 ```bash
 node ejemplos/01-tipos-basicos.js
 ```
+
+> Intenta ej
 
 #### 2. Compilar todo el proyecto con `tsconfig.json`
 
@@ -202,3 +287,5 @@ Muchos conceptos de TypeScript resultan más fáciles de entender si ya conoces 
 ---
 
 [Ir al índice](./README.md) · [Capítulo 2: Tipos básicos ➡](./capitulo-02-tipos-basicos.md)
+
+</div>

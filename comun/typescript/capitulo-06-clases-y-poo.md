@@ -1,4 +1,6 @@
-# Capítulo 6: Clases y Programación Orientada a Objetos en TypeScript
+<div align="justify">
+
+# <img src=.../../../../images/coding-book.png width="40"> Code & Learn (Capítulo 6: Clases y Programación Orientada a Objetos en TypeScript)
 
 ---
 
@@ -212,3 +214,5 @@ Diferencias clave:
 ---
 
 [⬅ Capítulo 5: Interfaces y tipos avanzados de objetos](./capitulo-05-interfaces-y-objetos-avanzados.md) · [Ir al índice](./README.md) · [Capítulo 7: Genéricos (Generics) ➡](./capitulo-07-genericos.md)
+
+</div>

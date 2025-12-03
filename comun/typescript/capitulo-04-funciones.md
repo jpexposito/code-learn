@@ -1,4 +1,6 @@
-# Capítulo 4: Funciones
+<div align="justify">
+
+# <img src=.../../../../images/coding-book.png width="40"> Code & Learn (Capítulo 4: Funciones)
 
 ---
 
@@ -154,3 +156,5 @@ La diferencia principal es que en TypeScript es muy habitual tratar las funcione
 ---
 
 [⬅ Capítulo 3: Tipos compuestos](./capitulo-03-tipos-compuestos.md) · [Ir al índice](./README.md) · [Capítulo 5: Interfaces y tipos avanzados de objetos ➡](./capitulo-05-interfaces-y-objetos-avanzados.md)
+
+</div>
