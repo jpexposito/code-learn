@@ -157,7 +157,7 @@ Si ves errores relacionados con módulos de Node (`fs`, `path`, etc.), verifica 
 npm install
 ```
 
-y que estás ejecutando los ejemplos desde la carpeta `manual-typescript`.
+y que estás ejecutando los ejemplos desde la carpeta `typescript`.
 
 ## Navegación por capítulos
 
