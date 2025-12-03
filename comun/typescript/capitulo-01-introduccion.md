@@ -36,7 +36,7 @@ for (let i = 0; i < veces; i++) {
 > Guarda en un fichero ***ejempo-basico.ts***.
 
 
-> **TypeScript no se ejecuta directamente**. *Primero se traduce a JavaScript (compilar/transpilar), y luego ese JavaScript lo ejecuta Node.js*.
+> **TypeScript no se ejecuta directamente**. *Primero se traduce a JavaScript (compilar/transforma), y luego ese JavaScript lo ejecuta Node.js*.
 
 Pasos:
 - `Compilar` tu `.ts` a `.js` con `tsc` (TypeScript compiler) o usar `ts-node`.
