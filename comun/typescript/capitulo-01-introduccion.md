@@ -5,12 +5,12 @@
 ## ¿Qué es TypeScript?
 
 <div align="center">
-  <img src="images/angular_ts_spring.png" width="300">
+  <img src="images/ts-js.png" width="300">
 </div>
 
 **TypeScript** es un superconjunto de JavaScript que añade **tipado estático** y otras características modernas
 (clases, interfaces, decoradores, etc.).  
-Se `compila` (transpila) a **JavaScript** estándar, por lo que puede ejecutarse en cualquier navegador o entorno que soporte **JS**.
+Se `compila` (trasforma) a **JavaScript** estándar, por lo que puede ejecutarse en cualquier navegador o entorno que soporte **JS**.
 
 ### Ejemplo básico
 

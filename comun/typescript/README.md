@@ -2,7 +2,11 @@
 
 A continuación vamos a ver un **manual introductorio de TypeScript**, con ejemplos prácticos y ejercicios cortos para practicar cada concepto.
 
-## Estructura del proyecto
+<div align="center">
+  <img src="images/angular-ts-js.png" width="400">
+</div>
+
+## Estructura de los apuntes
 
 ```text
 ├─ ejemplos/
