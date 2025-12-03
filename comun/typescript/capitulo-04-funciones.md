@@ -94,7 +94,7 @@ console.log(alCuadrado(4));     // 16
 
 ### Explicación
 
-La **sobrecarga de funciones** permite definir **múltiples firmas** para una misma función, con tipados distintos, pero una única implementación.
+La **sobrecarga de funciones** permite definir **una función** con tipados distintos, pero una única implementación.
 
 ### Ejemplo
 
