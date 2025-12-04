@@ -20,6 +20,7 @@ A continuación vamos a ver un **manual introductorio de TypeScript**, con ejemp
 │  ├─ 08-tipos-utilitarios.ts
 │  ├─ 09-integracion-node.ts
 │  └─ 10-integracion-react-angular.ts
+├─ capitulo-00-instalacion.md
 ├─ capitulo-01-introduccion.md
 ├─ capitulo-02-tipos-basicos.md
 ├─ capitulo-03-tipos-compuestos.md
@@ -161,6 +162,7 @@ y que estás ejecutando los ejemplos desde la carpeta `typescript`.
 
 ## Navegación por capítulos
 
+- [Capítulo 0: Instalación](./capitulo-00-instalacion.md)
 - [Capítulo 1: Introducción](./capitulo-01-introduccion.md)
 - [Capítulo 2: Tipos básicos](./capitulo-02-tipos-basicos.md)
 - [Capítulo 3: Tipos compuestos](./capitulo-03-tipos-compuestos.md)
