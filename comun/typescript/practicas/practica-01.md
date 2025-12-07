@@ -206,6 +206,20 @@ Si ves el mensaje en consola, tienes el entorno preparado.
      return tareas;
    }
    ```
+> **Problemas en los imports**: Si te encuentras problemas en los imports deberías de revisar `tsconfig.json`. El motivo es el siguiente: `TypeScript intenta comportarse como Node ESM, y ahí hay una regla importante:En ESM de Node, en los import relativos hay que poner la extensión del archivo (.js, .mjs, etc.)`. Por ese motivo debes de modificar el fichero a:
+
+```ts
+{
+  "compilerOptions": {
+    "target": "es2019",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "strict": true,
+    "jsx": "react-jsx",
+    "skipLibCheck": true
+  }
+}
+```
 
 2. Observa cómo se aplican aquí:
 
