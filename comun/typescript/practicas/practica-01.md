@@ -271,6 +271,53 @@ Si ves el mensaje en consola, tienes el entorno preparado.
    npx ts-node src/index.ts
    ```
 
+Debes de obtener una salida similar a la siguiente:
+
+```code
+Todas: [
+  {
+    id: 1,
+    titulo: 'Estudiar TypeScript',
+    descripcion: undefined,
+    completada: true
+  },
+  {
+    id: 2,
+    titulo: 'Hacer la tarea global',
+    descripcion: undefined,
+    completada: false
+  },
+  {
+    id: 3,
+    titulo: 'Descansar un rato',
+    descripcion: undefined,
+    completada: false
+  }
+]
+Pendientes: [
+  {
+    id: 2,
+    titulo: 'Hacer la tarea global',
+    descripcion: undefined,
+    completada: false
+  },
+  {
+    id: 3,
+    titulo: 'Descansar un rato',
+    descripcion: undefined,
+    completada: false
+  }
+]
+Completadas: [
+  {
+    id: 1,
+    titulo: 'Estudiar TypeScript',
+    descripcion: undefined,
+    completada: true
+  }
+]
+```
+
 3. Relaciona esto con los ejemplos de la documentación donde:
 
    - Tenías archivos como `usuario.ts`, `servicios/usuario.service.ts`, etc.
@@ -298,6 +345,15 @@ Si ves el mensaje en consola, tienes el entorno preparado.
    ```
 
    Esto generará los `.js` dentro de `dist/`.
+
+> Si no fuera así debes de completar el fichero:
+
+```code
+    "rootDir": "./src",
+    "outDir": "./dist",
+```
+
+Ya que por defecto o el cambio anterior no se ha modificado.
 
 2. Ejecuta la versión compilada:
 
@@ -372,7 +428,7 @@ Si ves el mensaje en consola, tienes el entorno preparado.
 - Capítulo de *“Testing en TypeScript”*.
 - Ejemplos de tests de funciones con `describe`, `it`/`test`, `expect`.
 
-> **Nota:** aquí debes adaptar los comandos y la configuración al framework de test que se use en tu manual (Jest, Vitest, etc.). El ejemplo de abajo supone Jest.
+> **Nota:** aquí debes adaptar los comandos y la configuración al framework de test que se use en esta documentación (Jest, Vitest, etc.). El ejemplo de abajo supone `Jest`.
 
 ### Pasos (ejemplo con Jest)
 
@@ -382,6 +438,8 @@ Si ves el mensaje en consola, tienes el entorno preparado.
    npm install --save-dev jest ts-jest @types/jest
    npx ts-jest config:init
    ```
+
+> Debe de crear el fichero `jest.config.js`.
 
 2. Crea un archivo de test (por ejemplo, `tests/tareas.test.ts`):
 
@@ -428,6 +486,22 @@ Si ves el mensaje en consola, tienes el entorno preparado.
    ```bash
    npx jest
    ```
+
+Debes de obtener algo similar a lo siguiente:
+
+```code
+ PASS  test/tareas.test.ts
+  Funciones de tareas
+    ✓ crearTarea crea una tarea no completada (1 ms)
+    ✓ completarTarea marca la tarea como completada
+    ✓ filtrarTareas filtra por completadas (1 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       3 passed, 3 total
+Snapshots:   0 total
+Time:        0.44 s
+```
+
 > Documenta en el README.md (markdown) como funciona a través de ejemplos y crea otros test.
 ---
 
@@ -482,7 +556,7 @@ Si ves el mensaje en consola, tienes el entorno preparado.
 
 ---
 
-## 8. ¿Qué deberías saber al final si lo has realizado tú y no la IA?
+## 8. ¿Qué deberías saber al final si lo has realizado tú y NO la IA?
 
 - **Tipos básicos e interfaces** → en `models.ts`.
 - **Funciones tipadas y arrays** → en `tareas.ts`.
