@@ -33,6 +33,20 @@ En este documento lo usaremos para exponer un **servicio SOAP (JAX‑WS)** dentr
 
 **Spring Boot** nos permite levantar rápidamente una aplicación Java con un servidor embebido (Tomcat/Jetty/Undertow) y auto‑configuración de muchos componentes, entre ellos el **starter de Apache CXF para JAX‑WS**: `cxf-spring-boot-starter-jaxws`.
 
+```xml
+<properties>
+		<cxf-spring-boot-starter-jaxws.version>4.1.4</cxf-spring-boot-starter-jaxws.version>
+</properties>
+
+<dependency>
+   <groupId>org.apache.cxf</groupId>
+   <artifactId>cxf-spring-boot-starter-jaxws</artifactId>
+   <version>${cxf-spring-boot-starter-jaxws.version}</version> 
+</dependency>
+```
+
+> **Nota**: Alinea la versión de cxf con la versión de **Tomcat** _(9/10)_, ya que es el servidor de aplicaciones que levanta ___Spring Boot___ en el entorno de desarrollo.
+
 ---
 
 ## **Arquitectura de un Servicio SOAP con CXF + Spring Boot**
