@@ -248,4 +248,4 @@ Algunas ideas para conectar este capítulo con la práctica:
 
 ---
 
-[⬅ Capítulo 11: Tests unitarios en TypeScript](./capitulo-11-test-unitarios.md)
+[⬅ Capítulo 11: Tests unitarios en TypeScript](./capitulo-11-test-unitarios.md) · [Ir al índice](./README.md) · [Capítulo 12: Consumo de base datos en TypeScript ➡](./capitulo-13-consumo-base-datos.md)

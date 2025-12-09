@@ -162,6 +162,6 @@ El comando `npm test` ejecutará Jest usando la configuración de `jest.config.c
 
 ---
 
-[⬅ Capítulo 10: Integración con proyectos reales y buenas prácticas](./capitulo-10-integracion-y-buenas-practicas.md) · [Ir al índice](./README.md)
+[⬅ Capítulo 10: Integración con proyectos reales y buenas prácticas](./capitulo-10-integracion-y-buenas-practicas.md) · [Ir al índice](./README.md) · [Capítulo 12: Consumo de servicios rest en typeSript ➡](./capitulo-12-consumo-servicios-rest.md)
 
 </div>
