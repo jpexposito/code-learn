@@ -1,6 +1,6 @@
 <div align="justify">
 
-# <img src=.../../../../../images/coding-book.png width="40"> Code & Learn (Práctica 1: Proyecto Tareas)
+# <img src=.../../../../../../images/coding-book.png width="40"> Code & Learn (Práctica 1: Proyecto Tareas)
 
 ## 1. Objetivo del ejercicio
 
