@@ -1,6 +1,6 @@
 <div align="justify">
 
-# <img src="images/coding-book.png" width="40"> Code & Learn (Práctica 3: Persistencia de tareas en SQLite3 con TypeScript)
+# <img src=.../../../../../images/coding-book.png width="40"> Code & Learn (Práctica 3: Persistencia de tareas en SQLite3 con TypeScript)
 
 Esta práctica es una **variante de la Práctica 2 (Consumo de servicios REST)**, pero ahora el objetivo es
 que tu aplicación de tareas **guarde y lea los datos desde una base de datos SQLite3**, en lugar de usar
