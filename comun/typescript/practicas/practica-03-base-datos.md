@@ -1,159 +1,389 @@
 <div align="justify">
 
-# <img src=.../../../../../images/coding-book.png width="40"> Code & Learn (Práctica 4: Doble persistencia de tareas (SQLite3 local + API REST remota con H2)).
+# <img src=.../../../../../images/coding-book.png width="40"> Code & Learn (Práctica 3: Persistencia de tareas en SQLite3 con TypeScript)
 
-## 1. Descripción general
-
-En esta práctica vas a construir un **mini gestor de tareas** que sea capaz de trabajar con **dos fuentes de datos**:
-
-1. Una **base de datos local SQLite3**, accesible directamente desde tu aplicación TypeScript (Node).
-2. Una **API REST remota** de tareas (por ejemplo, un backend en Spring Boot con base de datos **H2**).
-
-El objetivo es que tu aplicación:
-
-- Pueda **listar, crear, actualizar y borrar** tareas en **local** (SQLite3).
-- Pueda **listar, crear, actualizar y borrar** tareas en **remoto** (API REST/H2).
-- Tenga una **capa de servicio** que permita sincroniza elegir el **origen de datos** (local o remoto).
-- Incluya al menos una operación de **sincronización** entre remoto y local.
-
-La idea es simular una aplicación que funciona **offline/online**, o que mantiene una copia local de los datos del servidor.
+Esta práctica es una **variante de la Práctica 2 (Consumo de servicios REST)**, pero ahora el objetivo es
+que tu aplicación de tareas **guarde y lea los datos desde una base de datos SQLite3**, en lugar de usar
+solo memoria o `json-server`.
 
 ---
 
-## 2. Modelo de datos
+## 0. Preparación del proyecto
 
-Trabajarás con un modelo de tarea muy sencillo. Deberás definirlo en TypeScript mediante interfaces/tipos.  
-Como mínimo, una tarea tendrá:
+**Objetivo:** Partir de la Práctica 1/2 (mini gestor de tareas) o crear un proyecto equivalente,
+y prepararlo para usar SQLite3.
 
-- `id: number`
-- `titulo: string`
-- `descripcion?: string`
-- `completada: boolean`
+**De dónde viene en la documentación:**
 
----
+- Capítulos de *“Instalación y primeros pasos con TypeScript”*.
+- Capítulos donde se habla de organización por capas (modelo, servicio, infraestructura).
+- Práctica 1 y 2: estructura básica de proyecto `mini-gestor-tareas`.
 
-## 3. Requisitos técnicos
+### Pasos
 
-### 3.1. Proyecto TypeScript (Node)
+1. Si ya tienes la **Práctica 1** o la **Práctica 2** funcionando, úsala como base.  
+   Asegúrate de tener algo parecido a:
 
-Deberás crear (o reutilizar) un proyecto de TypeScript con:
+   - `src/models.ts` con la interfaz `Tarea`.
+   - `src/tareas.ts` o similar con lógica de negocio.
+   - `package.json`, `tsconfig.json`, etc.
 
-- `npm` / `package.json`.
-- `tsconfig.json` con salida a una carpeta `dist/` (u otra que elijas).
-- Scripts básicos para:
-  - Compilar (`npm run build`).
-  - Ejecutar el proyecto (`npm start` o similar).
-  - Opcionalmente, ejecutar directamente con `ts-node`.
+2. Si no tienes proyecto, crea uno nuevo:
 
-### 3.2. Base de datos local SQLite3
+   ```bash
+   mkdir mini-gestor-tareas-sqlite
+   cd mini-gestor-tareas-sqlite
+   npm init -y
+   npm install typescript ts-node --save-dev
+   npx tsc --init
+   ```
 
-- La base de datos se llamará, por ejemplo, `tareas.db`.
-- Debe contener una tabla `tareas` alineada con tu modelo TypeScript.
-- La aplicación será responsable de **asegurar que la tabla existe** (por ejemplo, ejecutando un `CREATE TABLE IF NOT EXISTS` al arrancar).
+3. Ajusta tu `tsconfig.json` (si hace falta) para que se parezca a:
 
-### 3.3. API REST remota (H2)
+   ```json
+   {
+     "compilerOptions": {
+       "target": "ES2019",
+       "module": "CommonJS",
+       "strict": true,
+       "esModuleInterop": true,
+       "outDir": "dist"
+     },
+     "include": ["src/**/*"]
+   }
+   ```
 
-Crea o completa el servicio rest en java crear y mantener un servicio rest en java que permita:
+4. En `src/models.ts` define (o comprueba que ya tienes) tu modelo de tareas:
 
-- Consumir una API REST de tareas (por ejemplo, una app Spring Boot con H2).
-- Utilizar endpoints del estilo:
+   ```ts
+   export interface Tarea {
+     id: number;
+     titulo: string;
+     descripcion?: string;
+     completada: boolean;
+   }
 
-  - `GET /api/tareas`
-  - `GET /api/tareas/{id}`
-  - `POST /api/tareas`
-  - `PUT /api/tareas/{id}`
-  - `DELETE /api/tareas/{id}`
+   export type IdTarea = number;
 
-Tu código **no accede directamente a H2**; lo hace a través del servicio REST.
-
----
-
-## 4. Estructura y capas mínimas
-
-Tu solución deberá estar organizada por **capas**, separando responsabilidades:
-
-1. **Modelo** (`models.ts` o similar)
-   - Interfaces y tipos (`Tarea`, `IdTarea`, etc.).
-
-2. **Persistencia local** (SQLite3)
-   - Un módulo tipo `repositorioTareasSqlite` (nombre orientativo).
-   - Encargado de realizar las operaciones CRUD contra la base de datos `tareas.db`.
-   - No debe contener lógica de negocio (solo acceso a datos).
-
-3. **Cliente REST remoto**
-   - Un módulo que encapsule el acceso a la API REST de tareas (por ejemplo, `apiTareasRemota`).
-   - Debe proporcionar funciones/métodos para:
-     - Obtener todas las tareas remotas.
-     - Obtener una tarea remota por id.
-     - Crear una tarea remota.
-     - Actualizar una tarea remota.
-     - Borrar una tarea remota.
-
-4. **Servicio de dominio con doble origen**
-   - Un módulo de **servicio** que reciba como dependencias:
-     - El repositorio local (SQLite).
-     - El cliente REST remoto (H2 vía API).
-   - Debe ofrecer métodos para:
-     - Listar tareas según un filtro (todas/pendientes/completadas) y un **origen** (`local` o `remoto`).
-     - Crear tareas en el origen indicado.
-     - (Opcional, pero recomendado) Actualizar y borrar tareas en el origen indicado.
-   - Debe incluir al menos una operación de **sincronización** de datos, por ejemplo:
-     - Sincronizar **del servidor remoto a la base local**.
-     - Estrategia simple aceptada: borrar todas las locales y volver a importarlas desde el servidor.
-
-5. **Punto de entrada / CLI simple**
-   - Un `index.ts` (u otro fichero equivalente) que:
-     - Instancie las dependencias.
-     - Ejecute un flujo de ejemplo, como:
-       - Mostrar tareas remotas.
-       - Sincronizar remoto → local.
-       - Mostrar tareas locales.
-       - Crear tareas en local y remoto, y mostrarlas.
+   export type FiltroTarea = "todas" | "pendientes" | "completadas";
+   ```
 
 ---
 
-## 5. Funcionalidades mínimas a implementar
+## 1. Instalar y preparar SQLite3
 
-### 5.1. Sobre SQLite3 (local)
+**Objetivo:** Instalar las dependencias necesarias y crear la base de datos `tareas.db`con la tabla `tareas`. 
 
-- Crear la base de datos si no existe.
-- Crear la tabla `tareas` si no existe.
-- Implementar operaciones:
-  - Insertar una nueva tarea.
-  - Listar todas las tareas.
-  - Buscar una tarea por id.
-  - Actualizar una tarea existente.
-  - Borrar una tarea por id.
+**De dónde viene en la documentación:**
 
-### 5.2. Sobre la API REST remota (H2)
+- Parte de Node / acceso a ficheros / módulos externos.
+- (Si tenéis apartado de BBDD, enlázalo aquí).
 
-- Implementar una capa cliente (con `fetch` u otra librería HTTP).
-- Implementar operaciones:
-  - Listar todas las tareas remotas.
-  - Obtener una tarea remota por id.
-  - Crear tareas remotas.
-  - Actualizar tareas remotas.
-  - Borrar tareas remotas.
+### 1.1. Instalar `better-sqlite3`
 
-### 5.3. Servicio de dominio con doble API
+Usaremos [`better-sqlite3`](https://github.com/WiseLibs/better-sqlite3) porque tiene una API
+sencilla y sin callbacks.
 
-- Diseñar una API de servicio que acepte un parámetro que indique el **origen de los datos** (`local` o `remoto`).
-- Delegar en el repositorio apropiado (local o remoto) según dicho parámetro.
-- Implementar al menos una operación de **sincronización remoto → local**, con la estrategia que acuerdes (documentándola en el README).
+1. Instala las dependencias:
+
+   ```bash
+   npm install better-sqlite3
+   npm install --save-dev @types/better-sqlite3
+   ```
+
+2. En `package.json`, añade un script para probar el proyecto:
+
+   ```json
+   {
+     "scripts": {
+       "start": "node dist/index.js",
+       "build": "tsc",
+       "dev": "ts-node src/index.ts"
+     }
+   }
+   ```
+
+   > Puedes adaptar estos scripts a cómo lo tengas en las prácticas anteriores.
+
+### 1.2. Crear la base de datos `tareas.db` y la tabla `tareas`
+
+Hay dos opciones:
+
+#### Opción A – Crear la tabla desde la propia aplicación
+
+Crearemos un módulo `src/db.ts` que:
+
+- Abra (o cree) el fichero `tareas.db`.
+- Ejecute un `CREATE TABLE IF NOT EXISTS` para asegurar que la tabla existe.
+
+```ts
+// src/db.ts
+import Database from "better-sqlite3";
+
+const DB_FILE = "tareas.db";
+
+let db: Database.Database | null = null;
+
+export function getDb(): Database.Database {
+  if (!db) {
+    db = new Database(DB_FILE);
+
+    db.exec(`
+      CREATE TABLE IF NOT EXISTS tareas (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        titulo TEXT NOT NULL,
+        descripcion TEXT,
+        completada INTEGER NOT NULL
+      )
+    `);
+  }
+
+  return db;
+}
+```
+
+#### Opción B – Crear la tabla desde la consola de sqlite3
+
+Si tienes instalado el binario `sqlite3`, puedes:
+
+```bash
+sqlite3 tareas.db
+```
+
+y dentro escribir:
+
+```sql
+CREATE TABLE tareas (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  titulo TEXT NOT NULL,
+  descripcion TEXT,
+  completada INTEGER NOT NULL
+);
+.exit
+```
+
+> En ambos casos, la tabla tendrá el mismo modelo que tu interfaz `Tarea` (booleans representados como `0`/`1`).
+
+Como última opción tendrás la bbdd creada y la puedes [descargas](files/tareas.db).
 
 ---
 
-## 6. Entregables
+## 2. Módulo repositorio: `src/repositorioTareasSqlite.ts`
 
-Deberás entregar:
+**Objetivo:** Encapsular todo el acceso a la base de datos en un módulo tipo “repositorio”.
 
-1. El proyecto completo (código TypeScript, `package.json`, `tsconfig.json`, etc.).
-2. Un fichero `README.md` en el que expliques:
-   - Cómo se ejecuta el proyecto.
-   - Cómo está organizada la estructura de carpetas.
-   - Qué endpoints remotos utilizas y cómo se configuran (URL base).
-   - Cómo funciona la sincronización remoto ↔ local (al menos remoto → local).
-3. Tests automáticos que verifiquen la lógica de tu servicio o repositorios.
+**De dónde viene en la documentación:**
+
+- Capítulos de organización por capas (repositorios).
+- Ejemplos de la Práctica 1 donde tenías funciones con arrays en memoria.
+
+### 2.1. Interfaz del repositorio
+
+Crea `src/repositorioTareasSqlite.ts` con **la interfaz** del repositorio y la implementación vacía
+(o con TODOs) para ir completando:
+
+```ts
+// src/repositorioTareasSqlite.ts
+import { getDb } from "./db";
+import { Tarea, IdTarea } from "./models";
+
+export class RepositorioTareasSqlite {
+
+  private db = getDb();
+
+  obtenerTodas(): Tarea[] {
+    // TODO: SELECT * FROM tareas
+    // Pista: this.db.prepare("SELECT id, titulo, descripcion, completada FROM tareas")
+    //       .all();
+    return [];
+  }
+
+  obtenerPorId(id: IdTarea): Tarea | undefined {
+    // TODO: SELECT ... WHERE id = ?
+    return undefined;
+  }
+
+  crear(titulo: string, descripcion?: string): Tarea {
+    // TODO:
+    // 1. INSERT INTO tareas (titulo, descripcion, completada) VALUES (?, ?, 0)
+    // 2. Recuperar el id generado (stmt.run().lastInsertRowid)
+    // 3. Devolver la tarea completa
+    throw new Error("No implementado");
+  }
+
+  actualizar(tarea: Tarea): Tarea | undefined {
+    // TODO:
+    // 1. UPDATE tareas SET titulo = ?, descripcion = ?, completada = ? WHERE id = ?
+    // 2. Comprobar cambios (stmt.changes)
+    // 3. Si no se actualiza ninguna fila, devolver undefined
+    // 4. Si se actualiza, devolver la tarea
+    throw new Error("No implementado");
+  }
+
+  borrar(id: IdTarea): boolean {
+    // TODO:
+    // 1. DELETE FROM tareas WHERE id = ?
+    // 2. Devolver true si se ha borrado 1 registro, false en otro caso
+    throw new Error("No implementado");
+  }
+}
+```
+
+**Detalles importantes:**
+
+- En SQLite, el campo `completada` es un `INTEGER` (0 o 1).  
+  Tendrás que convertir entre `boolean` ↔ `0/1` cuando leas/escribas:
+
+  ```ts
+  const completadaBool = fila.completada === 1;
+  const completadaInt = tarea.completada ? 1 : 0;
+  ```
+
+---
+
+## 3. Integrar el repositorio con la lógica de negocio
+
+**Objetivo:** Que el resto de tu código (CLI, UI, etc.) use el repositorio SQLite en lugar
+de arrays en memoria.
+
+**De dónde viene en la documentación:**
+
+- Capítulos donde separas dominio / servicio / infraestructura.
+- Práctica 1: funciones de gestión de tareas en memoria.
+
+### 3.1. Servicio de tareas basado en el repositorio
+
+Si en la Práctica 1 tenías un módulo tipo `src/servicioTareas.ts` que trabajaba con arrays, ahora puedes crear uno nuevo que reciba un repositorio como dependencia:
+
+```ts
+// src/servicioTareas.ts
+import { Tarea, IdTarea, FiltroTarea } from "./models";
+import { RepositorioTareasSqlite } from "./repositorioTareasSqlite";
+
+export class ServicioTareas {
+  constructor(private repo: RepositorioTareasSqlite) {}
+
+  listar(filtro: FiltroTarea): Tarea[] {
+    const todas = this.repo.obtenerTodas();
+    switch (filtro) {
+      case "pendientes":
+        return todas.filter((t) => !t.completada);
+      case "completadas":
+        return todas.filter((t) => t.completada);
+      case "todas":
+      default:
+        return todas;
+    }
+  }
+
+  crear(titulo: string, descripcion?: string): Tarea {
+    if (!titulo || titulo.trim().length === 0) {
+      throw new Error("El título no puede estar vacío");
+    }
+    return this.repo.crear(titulo, descripcion);
+  }
+
+  // EJERCICIO: añade métodos para actualizar, borrar, marcar como completada, etc. Un CRUD de toda la vida
+}
+```
+
+### 3.2. Punto de entrada `src/index.ts`
+
+Crea un `index.ts` sencillo para probarlo:
+
+```ts
+// src/index.ts
+import { RepositorioTareasSqlite } from "./repositorioTareasSqlite";
+import { ServicioTareas } from "./servicioTareas";
+
+async function main() {
+  const repo = new RepositorioTareasSqlite();
+  const servicio = new ServicioTareas(repo);
+
+  console.log("Tareas actuales:");
+  console.log(servicio.listar("todas"));
+
+  console.log("Creando una nueva tarea...");
+  const nueva = servicio.crear("Aprender SQLite3 con TypeScript", "Práctica 3");
+  console.log("Tarea creada:", nueva);
+
+  console.log("Tareas tras la creación:");
+  console.log(servicio.listar("todas"));
+}
+
+main().catch((error) => {
+  console.error("Error en main:", error);
+});
+```
+
+Compila y ejecuta:
+
+```bash
+npx ts-node src/index.ts
+```
+
+Comprueba en la consola que:
+
+1. Al principio, la lista está vacía (o con las tareas que tú añadas manualmente en la BD).
+2. Después de crear, la nueva tarea aparece en la BD (puedes confirmarlo con el CLI de sqlite3).
+
+---
+
+## 4. (Opcional) Tests del repositorio sobre una base de datos de pruebas
+
+**Objetivo:** Aprender a testear código que accede a una BD sin machacar tu base real.
+
+**De dónde viene en la documentación:**
+
+- Capítulo de tests en TypeScript.
+- Ejemplos con Jest de la Práctica 1/2.
+
+### 4.1. Idea general
+
+1. Crear una base de datos **temporal** (por ejemplo, `:memory:` en SQLite o un fichero `test.db`).
+2. Inyectar esa conexión en el repositorio en lugar de usar `getDb()` global.
+
+Ejemplo de constructor alternativo:
+
+```ts
+// en RepositorioTareasSqlite
+constructor(db?: Database.Database) {
+  this.db = db ?? getDb();
+}
+```
+
+En tests, podrías hacer:
+
+```ts
+const dbTest = new Database(":memory:");
+dbTest.exec("CREATE TABLE tareas (...);");
+const repo = new RepositorioTareasSqlite(dbTest);
+```
+
+3. Escribir tests que:
+   - Creen registros.
+   - Los lean.
+   - Los actualicen.
+   - Los borren.
+   - Comprueben el comportamiento cuando el `id` no existe, etc.
+
+> Esta parte puede ser un “extra” para subir nota o para practicar más a fondo.
+
+---
+
+## 5. Qué deberías manejar al terminar la práctica
+
+Si has seguido todos los pasos y **has rellenado tú** los TODOs, deberías:
+
+- Ser capaz de **levantar una BD SQLite3** desde Node/TypeScript.
+- Crear la tabla `tareas` alineada con tu modelo TypeScript.
+- Escribir un **repositorio** que haga CRUD contra la BD usando SQL (SELECT, INSERT, UPDATE, DELETE).
+- Integrar ese repositorio con un **servicio de dominio** (`ServicioTareas`) que aplica reglas de negocio.
+- Probar el conjunto desde un `index.ts` o desde una interfaz (CLI, tests, etc.).
+- Entender la diferencia entre:
+  - La **capa de persistencia** (SQLite).
+  - La **capa de dominio/servicio** (reglas de negocio).
+  - La **capa de presentación** (CLI, REST, etc., si la añades).
 
 ¡Ya estás haciendo aplicaciones con base de datos real! Recuerda seguir sin la IA 🚀
 
