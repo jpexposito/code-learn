@@ -4,6 +4,10 @@
 
 La seguridad en **WServerSecurity** implica un conjunto de medidas y procedimientos destinados a proteger la infraestructura de servidores web contra amenazas y vulnerabilidades. Estas medidas buscan garantizar la disponibilidad, integridad y confidencialidad de los datos y servicios gestionados en el servidor.
 
+<div align="center">
+    <img src=images/soap_ws.png width="400">
+</div>
+
 ## Principales Elementos de Seguridad
 
 ### 1. **Autenticación y Control de Acceso**
