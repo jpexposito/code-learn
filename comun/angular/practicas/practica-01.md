@@ -42,7 +42,31 @@ Si todo está bien, verás la app en:
 
 > En Angular moderno (standalone), lo habitual es registrar `provideHttpClient()` en `src/main.ts`.
 
-Abre `src/main.ts` y asegúrate de tener algo parecido a esto:
+Abre `src/main.ts` tienes algo similar a esto:
+
+```ts
+import { Component, signal } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  imports: [RouterOutlet],
+  templateUrl: './app.html',
+  styleUrl: './app.css'
+})
+export class App {
+  protected readonly title = signal('gestor-tareas');
+}
+```
+
+debes de añadir:
+
+```ts
+import { bootstrapApplication } from '@angular/platform-browser';
+import { provideHttpClient } from '@angular/common/http';
+```
+
+> Si tienes referencias a `AppComponent` debes de crear los ficheros y relacionar:
 
 ```ts
 import { bootstrapApplication } from '@angular/platform-browser';
@@ -56,7 +80,45 @@ bootstrapApplication(AppComponent, {
 });
 ```
 
+
 > Si tu proyecto usa `AppModule`, alternativa: importar `HttpClientModule` en `app.module.ts`.
+
+> **Nota**: Si no existe _app.component.ts_. Debes de crear los ficheros app.component.ts, pp.component.css, y pp.component.html.
+
+### Ficheros app.component.*
+
+1) app.component.ts
+
+```ts
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  title = 'Recarga gestor-tareas';
+}
+```
+
+2) app.component.html
+
+```html
+<h1>{{ title }}</h1>
+<router-outlet></router-outlet>
+```
+
+3) app.component.css
+
+```css
+h1 {
+  font-family: system-ui, sans-serif;
+}
+```
 
 ---
 
@@ -75,11 +137,38 @@ src/app/
 
 ### 2.2. Generar componentes y servicio
 
+A continuación vamos a generar los componentes y los servicios.
+
 ```bash
 ng g c components/task-list
 ng g c components/task-form
 ng g s services/tasks-api
 ```
+
+Debemos de obtener una salida similar a:
+
+```bash
+CREATE src/app/components/task-form/task-form.spec.ts (546 bytes)
+CREATE src/app/components/task-form/task-form.ts (197 bytes)
+CREATE src/app/components/task-form/task-form.html (24 bytes)
+CREATE src/app/services/tasks-api.spec.ts (332 bytes)
+CREATE src/app/services/tasks-api.ts (113 bytes)
+```
+
+Y la estructura de directorios quedaría similar a :
+
+```text
+src/app/
+├─ components/
+│  ├─ task-list/
+│  └─ task-form/
+└─ services/
+   └─ tasks-api.service.ts
+```
+
+> **Nota**: Los comandos ***ng g ...*** se ejecutan en la raíz del proyecto, pero Angular siempre crea el código dentro de src/app.
+
+> **Cada componente**: _representa una parte concreta de la aplicación (una vista o un bloque de la vista)_.
 
 ---
 
@@ -99,6 +188,23 @@ export interface Task {
 
 export type NewTask = Omit<Task, 'id'>;
 ```
+
+> **Sintaxis typeScript**: Una interfaz que contiene las propiedades y un tipo que hace uso de esa interfaz.
+
+El modo de uso será:
+
+```ts
+const task1: Task = { id: 1, titulo: 'Estudiar Angular', completada: false };
+
+const task2: Task = { id: 2, titulo: 'Hacer ejercicio', descripcion: '30 min', completada: true };
+
+const nueva: NewTask = {
+  titulo: 'Comprar pan',
+  completada: false
+};
+// Crear una tarea pero sin el identificador id
+```
+
 
 ---
 
@@ -335,7 +441,7 @@ export class AppComponent {}
 
 ---
 
-## 🌐 8) Backend REST + Swagger + BBDD (referencia)
+## 🌐 8) Backend REST + Swagger + BBDD 
 
 Este README asume que tu backend ofrece:
 
