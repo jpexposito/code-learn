@@ -2,6 +2,12 @@
 
 # <img src=.../../../../images/coding-book.png width="40"> Code & Learn (10. Testing y calidad de código)
 
+
+<div align="center">
+  <img src=images/10-testing-calidad.png
+   width="350">
+</div>
+
 ## 10.1. Test de servicios
 
 Angular crea por defecto archivos `*.spec.ts` para tests unitarios (Jasmine).

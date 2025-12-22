@@ -1,182 +1,78 @@
 <div align="justify">
 
-# <img src=.../../../../../images/coding-book.png width="40"> Code & Learn (Práctica 1: Proyecto Tareas)
+# <img src=.../../../../../images/coding-book.png width="40"> Code & Learn (Práctica 1: Gestor de tareas con páginas, estilos y formulario (Angular moderno)
 
-Esta práctica guiada te permitirá **crear una aplicación Angular desde cero** y construir, paso a paso, una mini-app de **Tasks** con **CRUD** contra un **servicio REST**. La persistencia en **BBDD** se realiza en el **backend** (por ejemplo Spring Boot + H2), y Angular se limita a consumir la API REST.
+<div align="center">
+  <img src=../images/practicas/practica-01.png
+   width="350">
+</div>
 
----
+**Objetivo:** crear una aplicación Angular con varias páginas (routing), estilos y un formulario para **crear** y **eliminar** tareas (CRUD básico en memoria).
 
-## ✅ Requisitos
-
-- **Node.js 18+** (recomendado)
-- **npm**
-- **Angular CLI**
-- Un backend REST accesible (recomendado: `http://localhost:8080` con Swagger)
-
-### Instalar Angular CLI
-
-```bash
-npm i -g @angular/cli
-ng version
-```
+> Esta práctica está pensada para Angular CLI **21** con componentes **standalone**.
 
 ---
 
-## 🧱 0) Crear el proyecto Angular
+## 0) Requisitos
 
-### 0.1. Crear el proyecto
+- Node.js 22.x
+- Angular CLI 21.x
+- npm 10.x
+
+---
+
+## 1) Crear el proyecto
+
+En una carpeta fuera de cualquier workspace Angular:
 
 ```bash
-ng new gestor-tareas --routing --style=css
+ng new gestor-tareas
 cd gestor-tareas
 ng serve -o
 ```
 
-Si todo está bien, verás la app en:
-
-- `http://localhost:4200`
-
----
-
-## 🔌 1) Preparar HttpClient (para consumir REST)
-
-> En Angular moderno (standalone), lo habitual es registrar `provideHttpClient()` en `src/main.ts`.
-
-Abre `src/main.ts` tienes algo similar a esto:
-
-```ts
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-
-@Component({
-  selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.html',
-  styleUrl: './app.css'
-})
-export class App {
-  protected readonly title = signal('gestor-tareas');
-}
-```
-
-debes de añadir:
-
-```ts
-import { bootstrapApplication } from '@angular/platform-browser';
-import { provideHttpClient } from '@angular/common/http';
-```
-
-> Si tienes referencias a `AppComponent` debes de crear los ficheros y relacionar:
-
-```ts
-import { bootstrapApplication } from '@angular/platform-browser';
-import { provideHttpClient } from '@angular/common/http';
-import { provideRouter } from '@angular/router';
-import { AppComponent } from './app/app.component';
-import { routes } from './app/app.routes';
-
-bootstrapApplication(AppComponent, {
-  providers: [provideHttpClient(), provideRouter(routes)],
-});
-```
-
-
-> Si tu proyecto usa `AppModule`, alternativa: importar `HttpClientModule` en `app.module.ts`.
-
-> **Nota**: Si no existe _app.component.ts_. Debes de crear los ficheros app.component.ts, pp.component.css, y pp.component.html.
-
-### Ficheros app.component.*
-
-1) app.component.ts
-
-```ts
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-})
-export class AppComponent {
-  title = 'Recarga gestor-tareas';
-}
-```
-
-2) app.component.html
-
-```html
-<h1>{{ title }}</h1>
-<router-outlet></router-outlet>
-```
-
-3) app.component.css
-
-```css
-h1 {
-  font-family: system-ui, sans-serif;
-}
-```
+Opciones:
+- Styles: **CSS**
+- Routing: **Yes**
+- SSR: **No**
+- AI tools: **None**
 
 ---
 
-## 🧩 2) Crear estructura base (modelos, componentes y servicio)
+## 2) Generar componentes y servicio
 
-### 2.1. Crear carpetas
+Ejecuta los comandos desde la **raíz del proyecto** (donde está `angular.json`):
 
-Crea estas carpetas dentro de `src/app`:
+```bash
+ng g c pages/home
+ng g c pages/tasks
+ng g c pages/task-new
+ng g c shared/navbar
+
+ng g s services/tasks
+```
+
+Estructura resultante:
 
 ```text
 src/app/
-  models/
-  services/
-  components/
-```
-
-### 2.2. Generar componentes y servicio
-
-A continuación vamos a generar los componentes y los servicios.
-
-```bash
-ng g c components/task-list
-ng g c components/task-form
-ng g s services/tasks-api
-```
-
-Debemos de obtener una salida similar a:
-
-```bash
-CREATE src/app/components/task-form/task-form.spec.ts (546 bytes)
-CREATE src/app/components/task-form/task-form.ts (197 bytes)
-CREATE src/app/components/task-form/task-form.html (24 bytes)
-CREATE src/app/services/tasks-api.spec.ts (332 bytes)
-CREATE src/app/services/tasks-api.ts (113 bytes)
-```
-
-Y la estructura de directorios quedaría similar a :
-
-```text
-src/app/
-├─ components/
-│  ├─ task-list/
-│  └─ task-form/
+├─ pages/
+│  ├─ home/
+│  ├─ tasks/
+│  └─ task-new/
+├─ shared/
+│  └─ navbar/
 └─ services/
-   └─ tasks-api.service.ts
+   └─ tasks.service.ts
 ```
-
-> **Nota**: Los comandos ***ng g ...*** se ejecutan en la raíz del proyecto, pero Angular siempre crea el código dentro de src/app.
-
-> **Cada componente**: _representa una parte concreta de la aplicación (una vista o un bloque de la vista)_.
 
 ---
 
-## 🧠 3) Modelo TypeScript (Task)
+## 3) Crear el modelo Task
 
 Crea el archivo:
 
-📄 `src/app/models/task.ts`
+**`src/app/models/task.model.ts`**
 
 ```ts
 export interface Task {
@@ -189,296 +85,317 @@ export interface Task {
 export type NewTask = Omit<Task, 'id'>;
 ```
 
-> **Sintaxis typeScript**: Una interfaz que contiene las propiedades y un tipo que hace uso de esa interfaz.
-
-El modo de uso será:
-
-```ts
-const task1: Task = { id: 1, titulo: 'Estudiar Angular', completada: false };
-
-const task2: Task = { id: 2, titulo: 'Hacer ejercicio', descripcion: '30 min', completada: true };
-
-const nueva: NewTask = {
-  titulo: 'Comprar pan',
-  completada: false
-};
-// Crear una tarea pero sin el identificador id
-```
-
-
 ---
 
-## 🧾 4) Componente TaskForm (crear tareas)
+## 4) Routing: crear páginas
 
-### 4.1. Activar FormsModule (standalone)
-
-Edita:
-
-📄 `src/app/components/task-form/task-form.component.ts`
-
-```ts
-import { Component, EventEmitter, Output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import type { NewTask } from '../../models/task';
-
-@Component({
-  selector: 'app-task-form',
-  standalone: true,
-  imports: [FormsModule],
-  templateUrl: './task-form.component.html',
-})
-export class TaskFormComponent {
-  @Output() crear = new EventEmitter<NewTask>();
-
-  titulo: string = '';
-  descripcion: string = '';
-  error: string | null = null;
-
-  enviar(): void {
-    const t = this.titulo.trim();
-    if (!t) {
-      this.error = 'El título es obligatorio';
-      return;
-    }
-    this.error = null;
-
-    this.crear.emit({
-      titulo: t,
-      descripcion: this.descripcion.trim() || undefined,
-      completada: false,
-    });
-
-    this.titulo = '';
-    this.descripcion = '';
-  }
-}
-```
-
-Edita:
-
-📄 `src/app/components/task-form/task-form.component.html`
-
-```html
-<h3>Nueva tarea</h3>
-
-<p *ngIf="error" style="color: red">{{ error }}</p>
-
-<input [(ngModel)]="titulo" placeholder="Título" />
-<input [(ngModel)]="descripcion" placeholder="Descripción" />
-
-<button (click)="enviar()" [disabled]="titulo.trim().length === 0">Crear</button>
-```
-
----
-
-## 📋 5) Servicio REST (TasksApiService)
-
-Edita:
-
-📄 `src/app/services/tasks-api.service.ts`
-
-```ts
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import type { Observable } from 'rxjs';
-import type { Task, NewTask } from '../models/task';
-
-@Injectable({ providedIn: 'root' })
-export class TasksApiService {
-  private readonly baseUrl = 'http://localhost:8080/api/tasks';
-
-  constructor(private http: HttpClient) {}
-
-  getAll(): Observable<Task[]> {
-    return this.http.get<Task[]>(this.baseUrl);
-  }
-
-  create(t: NewTask): Observable<Task> {
-    return this.http.post<Task>(this.baseUrl, t);
-  }
-
-  update(t: Task): Observable<Task> {
-    return this.http.put<Task>(`${this.baseUrl}/${t.id}`, t);
-  }
-
-  delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
-  }
-}
-```
-
----
-
-## 🧩 6) Componente TaskList (listar + crear + update + delete)
-
-Edita:
-
-📄 `src/app/components/task-list/task-list.component.ts`
-
-```ts
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import type { Task, NewTask } from '../../models/task';
-import { TasksApiService } from '../../services/tasks-api.service';
-import { TaskFormComponent } from '../task-form/task-form.component';
-
-@Component({
-  selector: 'app-task-list',
-  standalone: true,
-  imports: [CommonModule, TaskFormComponent],
-  templateUrl: './task-list.component.html',
-})
-export class TaskListComponent implements OnInit {
-  tareas: Task[] = [];
-  cargando = false;
-  error: string | null = null;
-
-  constructor(private api: TasksApiService) {}
-
-  ngOnInit(): void {
-    this.cargar();
-  }
-
-  cargar(): void {
-    this.cargando = true;
-    this.error = null;
-
-    this.api.getAll().subscribe({
-      next: (t) => {
-        this.tareas = t;
-        this.cargando = false;
-      },
-      error: () => {
-        this.error = 'No se pudo cargar la lista de tareas';
-        this.cargando = false;
-      },
-    });
-  }
-
-  crear(nueva: NewTask): void {
-    this.api.create(nueva).subscribe({
-      next: () => this.cargar(),
-      error: () => (this.error = 'No se pudo crear la tarea'),
-    });
-  }
-
-  toggle(t: Task): void {
-    const actualizado: Task = { ...t, completada: !t.completada };
-    this.api.update(actualizado).subscribe({
-      next: () => this.cargar(),
-      error: () => (this.error = 'No se pudo actualizar la tarea'),
-    });
-  }
-
-  borrar(id: number): void {
-    this.api.delete(id).subscribe({
-      next: () => this.cargar(),
-      error: () => (this.error = 'No se pudo borrar la tarea'),
-    });
-  }
-
-  trackById(index: number, t: Task): number {
-    return t.id;
-  }
-}
-```
-
-Edita:
-
-📄 `src/app/components/task-list/task-list.component.html`
-
-```html
-<h2>Gestor de tareas</h2>
-
-<app-task-form (crear)="crear($event)"></app-task-form>
-
-<p *ngIf="cargando">Cargando...</p>
-<p *ngIf="error" style="color: red">{{ error }}</p>
-
-<p *ngIf="!cargando && tareas.length === 0">No hay tareas.</p>
-
-<ul>
-  <li *ngFor="let t of tareas; trackBy: trackById">
-    <input type="checkbox" [checked]="t.completada" (change)="toggle(t)" />
-    <strong>{{ t.titulo }}</strong>
-    <span *ngIf="t.descripcion"> — {{ t.descripcion }}</span>
-    <button (click)="borrar(t.id)">Borrar</button>
-  </li>
-</ul>
-```
-
----
-
-## 🧭 7) Routing + AppComponent (pantalla principal)
-
-Edita:
-
-📄 `src/app/app.routes.ts`
+Edita **`src/app/app.routes.ts`**:
 
 ```ts
 import { Routes } from '@angular/router';
-import { TaskListComponent } from './components/task-list/task-list.component';
+import { HomeComponent } from './pages/home/home.component';
+import { TasksComponent } from './pages/tasks/tasks.component';
+import { TaskNewComponent } from './pages/task-new/task-new.component';
 
-export const routes: Routes = [{ path: '', component: TaskListComponent }];
+export const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'tareas', component: TasksComponent },
+  { path: 'tareas/nueva', component: TaskNewComponent },
+  { path: '**', redirectTo: '' },
+];
 ```
 
-Edita:
+---
 
-📄 `src/app/app.component.ts`
+## 5) AppComponent: navbar + router-outlet
+
+En **`src/app/app.component.html`**:
+
+```html
+<app-navbar></app-navbar>
+
+<main class="container">
+  <router-outlet></router-outlet>
+</main>
+```
+
+En **`src/app/app.component.ts`** (importa RouterOutlet + NavbarComponent):
 
 ```ts
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { NavbarComponent } from './shared/navbar/navbar.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
-  template: `<router-outlet />`,
+  imports: [RouterOutlet, NavbarComponent],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
 })
 export class AppComponent {}
 ```
 
 ---
 
-## 🌐 8) Backend REST + Swagger + BBDD 
+## 6) Navbar con enlaces
 
-Este README asume que tu backend ofrece:
+**`src/app/shared/navbar/navbar.component.ts`**
 
-- REST: `http://localhost:8080/api/tasks`
-- Swagger UI: `http://localhost:8080/swagger-ui.html`
-- OpenAPI JSON: `http://localhost:8080/v3/api-docs`
+```ts
+import { Component } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
-> La BBDD (H2/SQLite/etc.) vive en el backend. Angular no accede a ella directamente.
+@Component({
+  selector: 'app-navbar',
+  standalone: true,
+  imports: [RouterLink, RouterLinkActive],
+  templateUrl: './navbar.component.html',
+  styleUrl: './navbar.component.css',
+})
+export class NavbarComponent {}
+```
 
-### Nota sobre CORS
-Si Angular (4200) y backend (8080) están separados, activa CORS en el backend:
+**`src/app/shared/navbar/navbar.component.html`**
 
-```java
-@CrossOrigin(origins = "http://localhost:4200")
-@RestController
-public class TaskController { ... }
+```html
+<nav class="nav">
+  <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+  <a routerLink="/tareas" routerLinkActive="active">Tareas</a>
+  <a routerLink="/tareas/nueva" routerLinkActive="active">Nueva tarea</a>
+</nav>
+```
+
+**`src/app/shared/navbar/navbar.component.css`**
+
+```css
+.nav { display: flex; gap: 12px; padding: 12px 16px; background: white; border-bottom: 1px solid #eee; }
+.nav a { text-decoration: none; color: #333; padding: 8px 10px; border-radius: 10px; }
+.nav a.active { background: #ffe6e6; color: #b71c1c; font-weight: 600; }
 ```
 
 ---
 
-## ▶️ 9) Ejecutar todo
+## 7) Estilos globales (mínimos)
 
-### 9.1. Levantar backend
-Arranca tu backend (Spring Boot, etc.) en `http://localhost:8080`.
+Edita **`src/styles.css`**:
 
-### 9.2. Levantar Angular
-
-```bash
-ng serve -o
+```css
+body { margin: 0; font-family: system-ui, sans-serif; background: #f6f7fb; }
+.container { max-width: 900px; margin: 0 auto; padding: 16px; }
+.card { background: white; border-radius: 12px; padding: 16px; box-shadow: 0 2px 12px rgba(0,0,0,.06); }
+.row { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn { border: 0; padding: 10px 12px; border-radius: 10px; cursor: pointer; }
+.btn-primary { background: #d32f2f; color: white; }
+.btn-ghost { background: transparent; border: 1px solid #ddd; }
+.input { width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid #ddd; }
+.error { color: #b71c1c; font-size: 0.9rem; margin-top: 6px; }
 ```
 
-- Abre `http://localhost:4200`
-- Deberías poder:
-  - listar tareas (GET)
-  - crear (POST)
-  - marcar completada (PUT)
-  - borrar (DELETE)
+---
 
+## 8) Servicio `TasksService` (en memoria)
+
+Edita **`src/app/services/tasks.service.ts`**:
+
+```ts
+import { Injectable } from '@angular/core';
+import { NewTask, Task } from '../models/task.model';
+
+@Injectable({ providedIn: 'root' })
+export class TasksService {
+  private tasks: Task[] = [
+    { id: 1, titulo: 'Instalar Angular', descripcion: 'CLI + Node', completada: false },
+    { id: 2, titulo: 'Crear primera página', completada: true },
+  ];
+  private nextId = 3;
+
+  list(): Task[] {
+    return this.tasks;
+  }
+
+  add(data: NewTask): Task {
+    const created: Task = { id: this.nextId++, ...data };
+    this.tasks = [created, ...this.tasks];
+    return created;
+  }
+
+  remove(id: number): void {
+    this.tasks = this.tasks.filter(t => t.id !== id);
+  }
+}
+```
+
+---
+
+## 9) Página Home
+
+**`src/app/pages/home/home.component.html`**
+
+```html
+<section class="card">
+  <h2>Bienvenido/a</h2>
+  <p>Esta app es un ejercicio de Angular moderno: páginas, estilos y formularios.</p>
+</section>
+```
+
+---
+
+## 10) Página Tareas (listar y eliminar)
+
+**`src/app/pages/tasks/tasks.component.ts`**
+
+```ts
+import { Component } from '@angular/core';
+import { TasksService } from '../../services/tasks.service';
+
+@Component({
+  selector: 'app-tasks',
+  standalone: true,
+  templateUrl: './tasks.component.html',
+  styleUrl: './tasks.component.css',
+})
+export class TasksComponent {
+  constructor(public tasksService: TasksService) {}
+
+  remove(id: number) {
+    this.tasksService.remove(id);
+  }
+}
+```
+
+**`tasks.component.html`**
+
+```html
+<section class="card">
+  <h2>Lista de tareas</h2>
+
+  @if (tasksService.list().length === 0) {
+    <p>No hay tareas todavía.</p>
+  } @else {
+    <ul class="list">
+      @for (t of tasksService.list(); track t.id) {
+        <li class="item">
+          <div>
+            <strong>{{ t.titulo }}</strong>
+            @if (t.descripcion) { <div class="muted">{{ t.descripcion }}</div> }
+          </div>
+
+          <button class="btn btn-ghost" (click)="remove(t.id)">Eliminar</button>
+        </li>
+      }
+    </ul>
+  }
+</section>
+```
+
+**`tasks.component.css`**
+
+```css
+.list { list-style: none; padding: 0; margin: 12px 0 0; }
+.item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-top: 1px solid #eee; }
+.muted { color: #666; font-size: .95rem; margin-top: 4px; }
+```
+
+---
+
+## 11) Página Nueva tarea (formulario reactivo)
+
+### 11.1 Importante: usar ReactiveFormsModule
+En el componente `TaskNewComponent` importamos `ReactiveFormsModule`.
+
+**`src/app/pages/task-new/task-new.component.ts`**
+
+```ts
+import { Component } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { TasksService } from '../../services/tasks.service';
+
+@Component({
+  selector: 'app-task-new',
+  standalone: true,
+  imports: [ReactiveFormsModule],
+  templateUrl: './task-new.component.html',
+  styleUrl: './task-new.component.css',
+})
+export class TaskNewComponent {
+  constructor(
+    private fb: FormBuilder,
+    private tasks: TasksService,
+    private router: Router
+  ) {}
+
+  form = this.fb.group({
+    titulo: ['', [Validators.required, Validators.minLength(3)]],
+    descripcion: [''],
+    completada: [false],
+  });
+
+  save() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+    this.tasks.add(this.form.getRawValue());
+    this.router.navigateByUrl('/tareas');
+  }
+}
+```
+
+**`task-new.component.html`**
+
+```html
+<section class="card">
+  <h2>Nueva tarea</h2>
+
+  <form (ngSubmit)="save()">
+    <label>
+      Título
+      <input class="input" formControlName="titulo" />
+    </label>
+
+    @if (form.controls.titulo.touched && form.controls.titulo.invalid) {
+      <div class="error">
+        El título es obligatorio y debe tener al menos 3 caracteres.
+      </div>
+    }
+
+    <label>
+      Descripción (opcional)
+      <input class="input" formControlName="descripcion" />
+    </label>
+
+    <label class="check">
+      <input type="checkbox" formControlName="completada" />
+      Completada
+    </label>
+
+    <div class="row">
+      <button class="btn btn-primary" type="submit">Guardar</button>
+      <button class="btn btn-ghost" type="button" (click)="router.navigateByUrl('/tareas')">Cancelar</button>
+    </div>
+  </form>
+</section>
+```
+
+**`task-new.component.css`**
+
+```css
+form { display: grid; gap: 12px; margin-top: 12px; }
+label { display: grid; gap: 6px; }
+.check { display: flex; align-items: center; gap: 8px; }
+```
+
+---
+
+## ✅ Ejercicios para entregar
+
+1. Cambia el tema de colores (fondo, navbar y botones).
+2. Añade validación: si hay descripción, mínimo 5 caracteres.
+3. Añade un botón “Marcar completada” en la lista.
+4. Crea una página “Acerca de” y añádela al router.
+
+---
 
 </div>

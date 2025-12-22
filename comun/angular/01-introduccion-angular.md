@@ -2,6 +2,10 @@
 
 # <img src=.../../../../images/coding-book.png width="40"> Code & Learn (1. Introducción a Angular)
 
+<div align="center">
+  <img src=images/1-introduccion.png width="350">
+</div>
+
 ## 1.1. ¿Qué es Angular?
 
 **Angular** es un framework para construir **Single Page Applications (SPA)**

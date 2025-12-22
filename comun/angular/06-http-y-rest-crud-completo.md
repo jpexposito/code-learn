@@ -1,80 +1,90 @@
 <div align="justify">
 
-# <img src=.../../../../images/coding-book.png width="40"> Code & Learn (6. HTTP y REST) 
+# <img src=.../../../../images/coding-book.png width="40"> Code & Learn (6. HTTP y REST: CRUD completo con Angular moderno)
 
-En este capítulo completamos el CRUD (Create, Read, Update, Delete) contra una API REST.
+<div align="center">
+  <img src=images/6-http-rest-crud.png
+   width="350">
+</div>
 
-## 6.1. Backend Spring Boot (resumen)
+En este tema aprenderás a consumir una API REST usando **HttpClient** en Angular **standalone** (CLI 21).
 
-Supondremos que tienes un backend con endpoints:
+---
 
-- `GET    /api/tasks`       → lista todas las tareas
-- `GET    /api/tasks/{id}`  → obtiene una tarea
-- `POST   /api/tasks`       → crea una tarea
-- `PUT    /api/tasks/{id}`  → reemplaza una tarea
-- `DELETE /api/tasks/{id}`  → elimina una tarea
+## 6.1. Activar HttpClient (Angular moderno)
 
-Controlador de ejemplo simplificado:
+En proyectos standalone **no importamos** `HttpClientModule` en un módulo.  
+En su lugar, activamos HTTP en `app.config.ts`:
 
-```java
-@RestController
-@RequestMapping("/api/tasks")
-@CrossOrigin(origins = "http://localhost:4200")
-public class TaskController {
-    // lista en memoria y métodos getAll, getById, create, update, delete...
-}
+```ts
+import { ApplicationConfig } from '@angular/core';
+import { provideRouter } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
+import { routes } from './app.routes';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideRouter(routes),
+    provideHttpClient(),
+  ],
+};
 ```
 
 ---
 
-## 6.2. Modelo de datos en Angular
+## 6.2. Modelo de datos: `Task` y `NewTask`
+
+Crea el modelo en `src/app/models/task.model.ts`:
 
 ```ts
-// src/app/tasks/task.model.ts
 export interface Task {
   id: number;
-  title: string;
-  description: string;
-  completed: boolean;
+  titulo: string;
+  descripcion?: string;
+  completada: boolean;
 }
+
+export type NewTask = Omit<Task, 'id'>;
 ```
+
+- `Task` representa una tarea **guardada** (tiene `id`).
+- `NewTask` representa una tarea **nueva** (sin `id`).
 
 ---
 
-## 6.3. Servicio `TaskApiService` completo
+## 6.3. Servicio API (CRUD) con HttpClient
+
+Crea el servicio en `src/app/services/tasks-api.service.ts`:
 
 ```ts
-// src/app/tasks/task-api.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Task } from './task.model';
+import { NewTask, Task } from '../models/task.model';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class TaskApiService {
+@Injectable({ providedIn: 'root' })
+export class TasksApiService {
   private readonly baseUrl = 'http://localhost:8080/api/tasks';
 
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<Task[]> {
+  list(): Observable<Task[]> {
     return this.http.get<Task[]>(this.baseUrl);
   }
 
-  getById(id: number): Observable<Task> {
+  get(id: number): Observable<Task> {
     return this.http.get<Task>(`${this.baseUrl}/${id}`);
   }
 
-  create(task: Omit<Task, 'id'>): Observable<Task> {
-    return this.http.post<Task>(this.baseUrl, task);
+  create(data: NewTask): Observable<Task> {
+    return this.http.post<Task>(this.baseUrl, data);
   }
 
-  update(id: number, task: Omit<Task, 'id'>): Observable<Task> {
-    return this.http.put<Task>(`${this.baseUrl}/${id}`, task);
+  update(task: Task): Observable<Task> {
+    return this.http.put<Task>(`${this.baseUrl}/${task.id}`, task);
   }
 
-  delete(id: number): Observable<void> {
+  remove(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }
@@ -82,94 +92,80 @@ export class TaskApiService {
 
 ---
 
-## 6.4. Usar el servicio en el listado (Read + Delete)
+## 6.4. Consumir el servicio desde un componente
 
-`TaskListComponent` ya usa `getAll()` y `delete()` en el ejemplo anterior.
-Lo importante es entender el flujo:
+Ejemplo: mostrar tareas en una página `TasksComponent`.
 
-- `ngOnInit` → `loadTasks()` → `taskApi.getAll().subscribe(...)`.
-- Botón “Eliminar” → `taskApi.delete(task.id).subscribe(...)` y después `loadTasks()`.
-
----
-
-## 6.5. Usar el servicio en el formulario (Create + Update)
-
-En `TaskFormComponent`:
-
-- Modo “crear”: sin `id` en la ruta → `create()`.
-- Modo “editar”: con `id` → primero `getById()` para rellenar el formulario, luego `update()`.
-
-Ejemplo parcial:
+> Nota: en este manual usamos un enfoque sencillo con `subscribe()`.  
+> Más adelante verás alternativas con `async` pipe.
 
 ```ts
-// src/app/tasks/task-form/task-form.component.ts
-mode: 'create' | 'edit' = 'create';
-taskId?: number;
+import { Component, OnInit } from '@angular/core';
+import { TasksApiService } from '../../services/tasks-api.service';
+import { Task } from '../../models/task.model';
 
-ngOnInit(): void {
-  const idParam = this.route.snapshot.paramMap.get('id');
-  if (idParam) {
-    this.mode = 'edit';
-    this.taskId = Number(idParam);
-    this.loadTask(this.taskId);
+@Component({
+  selector: 'app-tasks',
+  standalone: true,
+  templateUrl: './tasks.component.html',
+})
+export class TasksComponent implements OnInit {
+  tasks: Task[] = [];
+  loading = true;
+  error: string | null = null;
+
+  constructor(private api: TasksApiService) {}
+
+  ngOnInit(): void {
+    this.api.list().subscribe({
+      next: (data) => { this.tasks = data; this.loading = false; },
+      error: () => { this.error = 'No se pudieron cargar las tareas'; this.loading = false; },
+    });
   }
 
-  this.form = this.fb.group({
-    title: ['', Validators.required],
-    description: [''],
-    completed: [false],
-  });
-}
-
-loadTask(id: number): void {
-  this.taskApi.getById(id).subscribe({
-    next: task => this.form.patchValue(task),
-    error: () => (this.error = 'No se pudo cargar la tarea'),
-  });
-}
-
-onSubmit(): void {
-  if (this.form.invalid) {
-    this.form.markAllAsTouched();
-    return;
+  deleteTask(id: number) {
+    this.api.remove(id).subscribe({
+      next: () => this.tasks = this.tasks.filter(t => t.id !== id),
+      error: () => this.error = 'No se pudo eliminar la tarea',
+    });
   }
-
-  const value = this.form.value as Omit<Task, 'id'>;
-
-  this.saving = true;
-  this.error = undefined;
-
-  const request$ =
-    this.mode === 'create'
-      ? this.taskApi.create(value)
-      : this.taskApi.update(this.taskId!, value);
-
-  request$.subscribe({
-    next: () => {
-      this.saving = false;
-      this.router.navigate(['/tasks']);
-    },
-    error: () => {
-      this.error = 'No se pudo guardar la tarea';
-      this.saving = false;
-    },
-  });
 }
 ```
 
-Con esto: **CRUD completo**:
+Plantilla `tasks.component.html`:
 
-- **Create** → `create(task)` desde formulario (modo create).
-- **Read**   → `getAll()` para el listado, `getById()` para editar.
-- **Update** → `update(id, task)` desde formulario (modo edit).
-- **Delete** → `delete(id)` desde el listado.
+```html
+<section class="card">
+  <h2>Tareas</h2>
+
+  @if (loading) {
+    <p>Cargando...</p>
+  } @else if (error) {
+    <p class="error">{{ error }}</p>
+  } @else {
+    <ul>
+      @for (t of tasks; track t.id) {
+        <li>
+          <strong>{{ t.titulo }}</strong>
+          <button (click)="deleteTask(t.id)">Eliminar</button>
+        </li>
+      }
+    </ul>
+  }
+</section>
+```
 
 ---
 
-## 6.6. Ejercicio práctico
+## 6.5. Errores HTTP más comunes
 
-1. Implementar todos los métodos en `TaskApiService`.
-2. Completar `TaskFormComponent` para que funcione tanto para crear como para editar.
-3. Probar el flujo completo contra tu backend Spring Boot.
+- **0 / CORS**: el navegador bloquea la petición (CORS mal configurado).
+- **401**: no estás autenticado (falta JWT).
+- **403**: autenticado pero sin permisos.
+- **500**: fallo del servidor.
+
+> En el tema de JWT veremos cómo enviar el token con un **Interceptor**.
+
+---
 
 </div>

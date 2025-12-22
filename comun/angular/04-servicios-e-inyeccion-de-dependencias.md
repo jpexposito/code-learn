@@ -2,6 +2,11 @@
 
 # <img src=.../../../../images/coding-book.png width="40"> Code & Learn (4. Servicios e inyección de dependencias)
 
+<div align="center">
+  <img src=images/4-servicios-dependencias.png
+   width="350">
+</div>
+
 ## 4.1. ¿Qué es un servicio en Angular?
 
 Un **servicio** es una clase que encapsula lógica que no pertenece a la vista:

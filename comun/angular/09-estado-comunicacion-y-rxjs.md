@@ -2,6 +2,11 @@
 
 # <img src=.../../../../images/coding-book.png width="40"> Code & Learn (9. Estado, comunicación y RxJS (introducción))
 
+<div align="center">
+  <img src=images/9-estado-comunicacion-rxjs.png
+   width="350">
+</div>
+
 ## 9.1. Observables básicos
 
 Angular utiliza **RxJS** para trabajar con datos asíncronos mediante `Observable<T>`.

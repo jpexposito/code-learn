@@ -1,37 +1,38 @@
 <div align="justify">
 
-# <img src=.../../../../images/coding-book.png width="40"> Code & Learn (Manualillo de angular)
+# <img src=.../../../../images/coding-book.png width="40"> Manual de Angular (Angular moderno – Standalone, CLI 21)
 
-# Manualillo Angular + TypeScript + REST 
+Este manual está adaptado a **Angular CLI 21** (proyectos standalone por defecto).
 
-En este manualillo aprenderemos a:
+## 0.1 Contenidos (resumen)
 
-- Aprender **Angular** desde cero con TypeScript.
-- Entender bien cómo se relacionan el **HTML (templates)** y el **TypeScript (clases de componente)**.
-- Construir un **micro-proyecto CRUD completo** que consume un servicio **REST** (por ejemplo, un backend en Spring Boot).
+0. Prerrequisitos y entorno  
+1. Introducción a Angular  
+2. Componentes y templates  
+3. Organización del proyecto (standalone)  
+4. Servicios e inyección de dependencias  
+5. Routing y navegación (standalone) 
+6. HTTP y REST  
+7. Formularios y validación  
+8. Reutilización (pipes/directivas)  
+9. Estado y RxJS  
+10. Testing (introducción)  
+11. Problemas comunes (caché, Vite, live reload)
 
-## Estructura de los apuntes
+## 0.2 Prácticas
 
-Cada punto del índice tiene su propio archivo `.md`:
+- **Práctica 01 (guiada)**: Gestor de tareas con páginas, estilos y formulario (CRUD en memoria)  
+- **Práctica 02**: Conectar el gestor a una API REST (CRUD)  
+- **Práctica 03**: Login JWT + Interceptor + Guard (rutas protegidas)
 
-0. `00-prerrequisitos-y-entorno.md`  
-1. `01-introduccion-angular.md`  
-2. `02-componentes-y-templates-html-ts.md`  
-3. `03-modulos-y-organizacion.md`  
-4. `04-servicios-e-inyeccion-de-dependencias.md`  
-5. `05-routing-navegacion.md`  
-6. `06-http-y-rest-crud-completo.md`  
-7. `07-formularios-y-validacion.md`  
-8. `08-pipes-directivas-y-reutilizacion.md`  
-9. `09-estado-comunicacion-y-rxjs.md`  
-10. `10-testing-y-calidad-de-codigo.md`  
-11. `11-buenas-practicas-y-proyecto-final.md`  
-
-Si los lees en orden y haces los ejercicios, al terminar deberías ser capaz de:
-
-- Crear un proyecto Angular.
-- Definir componentes, servicios, rutas y formularios.
-- Consumir un backend REST (Spring Boot u otro).
-- Implementar un CRUD completo (Create, Read, Update, Delete).
+> Recomendación didáctica: realizar la Práctica 01 completa antes de pasar a REST/JWT.
 
 </div>
+
+
+## Prácticas
+
+- [Práctica 01](practicas/practica-01.md)
+- [Práctica 02](practicas/practica-02.md)
+- [Práctica 03](practicas/practica-03.md)
+- [Práctica final (integrador)](practicas/practica-final.md)

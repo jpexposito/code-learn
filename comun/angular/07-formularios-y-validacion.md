@@ -1,136 +1,140 @@
 <div align="justify">
 
-# <img src=.../../../../images/coding-book.png width="40"> Code & Learn (7. Formularios y validación)
+# <img src=.../../../../images/coding-book.png width="40"> Code & Learn (7. Formularios y validación con Reactive Forms)
 
-En Angular tienes dos enfoques principales para formularios:
+<div align="center">
+  <img src=images/7-formularios-validacion.png
+   width="350">
+</div>
 
-- **Template-driven** (más sencillo, apoyado en `ngModel`).
-- **Reactive forms** (más estructurado, ideal para proyectos grandes).
+En Angular existen dos enfoques para formularios:
+- **Template-driven** (más simple, menos control)
+- **Reactive Forms** (recomendado en proyectos reales)
 
-En este manual usaremos **reactive forms**.
+✅ Trabajaremos principalmente con **Reactive Forms**, porque es el enfoque más usado en empresa y facilita validación y mantenimiento.
 
-## 7.1. Preparación del módulo
+---
+
+## 7.1. Activar Reactive Forms en un componente standalone
+
+En proyectos standalone, se importa `ReactiveFormsModule` directamente en el componente:
 
 ```ts
+import { Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
-@NgModule({
-  imports: [
-    // ...
-    ReactiveFormsModule,
-  ],
+@Component({
+  selector: 'app-task-new',
+  standalone: true,
+  imports: [ReactiveFormsModule],
+  templateUrl: './task-new.component.html',
 })
-export class AppModule {}
+export class TaskNewComponent {}
 ```
 
 ---
 
-## 7.2. FormGroup, FormControl y FormBuilder
-
-En `TaskFormComponent`:
+## 7.2. FormGroup y validadores (ejemplo de “Nueva tarea”)
 
 ```ts
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
-form!: FormGroup;
+@Component({
+  selector: 'app-task-new',
+  standalone: true,
+  imports: [ReactiveFormsModule],
+  templateUrl: './task-new.component.html',
+})
+export class TaskNewComponent {
+  constructor(private fb: FormBuilder) {}
 
-constructor(
-  private fb: FormBuilder,
-  // ...
-) {}
-
-ngOnInit(): void {
-  this.form = this.fb.group({
-    title: ['', Validators.required],
-    description: [''],
-    completed: [false],
+  form = this.fb.group({
+    titulo: ['', [Validators.required, Validators.minLength(3)]],
+    descripcion: [''],
+    completada: [false],
   });
-}
-```
 
-- `FormGroup`: conjunto de campos (controles).
-- `FormControl`: campo individual.
-- `FormBuilder`: ayuda para construir formularios más rápido.
+  save() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
 
----
-
-## 7.3. Validadores
-
-Usamos los validadores integrados de Angular:
-
-- `Validators.required`
-- `Validators.email`
-- `Validators.minLength(n)`, etc.
-
-Ejemplo:
-
-```ts
-this.form = this.fb.group({
-  title: ['', [Validators.required, Validators.minLength(3)]],
-  description: [''],
-  completed: [false],
-});
-```
-
-En el template:
-
-```html
-<input formControlName="title" />
-<div *ngIf="form.controls['title'].invalid && form.controls['title'].touched">
-  <span *ngIf="form.controls['title'].errors?.['required']">
-    El título es obligatorio.
-  </span>
-  <span *ngIf="form.controls['title'].errors?.['minlength']">
-    El título debe tener al menos 3 caracteres.
-  </span>
-</div>
-```
-
----
-
-## 7.4. Envío del formulario
-
-```html
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <!-- campos... -->
-  <button type="submit" [disabled]="form.invalid || saving">
-    Guardar
-  </button>
-</form>
-```
-
-En TS:
-
-```ts
-onSubmit(): void {
-  if (this.form.invalid) {
-    this.form.markAllAsTouched();
-    return;
+    const data = this.form.getRawValue();
+    console.log('Enviar al servicio:', data);
   }
-
-  const value = this.form.value;
-  // llamar a create/update en el servicio...
 }
 ```
 
 ---
 
-## 7.5. Formulario para crear y editar
+## 7.3. Plantilla HTML con mensajes de error
 
-Como vimos en el capítulo de HTTP, el mismo formulario puede servir para
-crear y editar. La diferencia está en:
+```html
+<section class="card">
+  <h2>Nueva tarea</h2>
 
-- Si hay `id` en la ruta → cargar datos (`patchValue`) y llamar a `update()`.
-- Si no hay `id` → dejar form vacío y llamar a `create()`.
+  <form (ngSubmit)="save()">
+    <label>
+      Título
+      <input class="input" formControlName="titulo" />
+    </label>
 
-Esto te evita duplicar componentes.
+    @if (form.controls.titulo.touched && form.controls.titulo.invalid) {
+      <div class="error">
+        El título es obligatorio y debe tener al menos 3 caracteres.
+      </div>
+    }
+
+    <label>
+      Descripción (opcional)
+      <input class="input" formControlName="descripcion" />
+    </label>
+
+    <label class="check">
+      <input type="checkbox" formControlName="completada" />
+      Completada
+    </label>
+
+    <button class="btn btn-primary" type="submit">Guardar</button>
+  </form>
+</section>
+```
 
 ---
 
-## 7.6. Ejercicio práctico
+## 7.4. Validación opcional (descripción)
 
-1. Añadir validación de mínimo 5 caracteres para la descripción.
-2. Mostrar mensajes de error debajo de cada campo.
-3. Después de crear/editar, limpiar el formulario o navegar al listado.
+Ejemplo: si hay descripción, mínimo 5 caracteres.
+
+```ts
+import { AbstractControl, ValidationErrors } from '@angular/forms';
+
+export function minLengthIfNotEmpty(min: number) {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const value = (control.value ?? '').toString().trim();
+    if (value.length === 0) return null;
+    return value.length >= min ? null : { minLengthIfNotEmpty: true };
+  };
+}
+```
+
+Y en el formulario:
+
+```ts
+descripcion: ['', [minLengthIfNotEmpty(5)]],
+```
+
+---
+
+## 7.5. Buenas prácticas
+
+- Validar en el formulario (frontend) **y** en el backend.
+- Mostrar mensajes de error claros.
+- `markAllAsTouched()` ayuda a que el usuario vea qué falta.
+- No mezclar dos enfoques (template + reactive) en el mismo ejercicio.
+
+---
 
 </div>

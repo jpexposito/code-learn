@@ -1,100 +1,114 @@
 <div align="justify">
 
-# <img src=.../../../../images/coding-book.png width="40"> Code & Learn (3. Módulos y organización del proyecto)
+# <img src=.../../../../images/coding-book.png width="40"> Code & Learn (3. Organización del proyecto en Angular moderno)
 
-# 
+<div align="center">
+  <img src=images/3-modulo-organizacion.png
+   width="350">
+</div>
 
-## 3.1. `AppModule` y módulos de funcionalidad
 
-En Angular, un **módulo** (`@NgModule`) agrupa componentes, directivas, pipes y servicios.
-
-Ejemplo simplificado de `AppModule`:
-
-```ts
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
-
-import { AppComponent } from './app.component';
-import { TaskListComponent } from './tasks/task-list/task-list.component';
-import { TaskFormComponent } from './tasks/task-form/task-form.component';
-import { AppRoutingModule } from './app-routing.module';
-
-@NgModule({
-  declarations: [
-    AppComponent,
-    TaskListComponent,
-    TaskFormComponent,
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent],
-})
-export class AppModule {}
-```
-
-- `declarations`: componentes (y directivas/pipes) pertenecientes a este módulo.
-- `imports`: otros módulos que quieres usar.
-- `bootstrap`: componente raíz que arranca la app.
+> **Angular CLI 21** crea proyectos **standalone** por defecto. En este enfoque, no necesitas `AppModule` ni `@NgModule` para empezar.
+>
+> Nos interesa sobre todo: **organizar bien carpetas**, entender **componentes/servicios/rutas** y trabajar con un código mantenible.
 
 ---
 
-## 3.2. Creación de un módulo de tareas (opcional)
+## 3.1. Standalone vs NgModules (qué debes saber)
 
-Para proyectos más grandes es buena idea separar por módulos de funcionalidad.
+### Standalone (recomendado hoy)
+- Los componentes pueden declararse como `standalone: true`.
+- La aplicación se arranca con `bootstrapApplication(...)`.
+- Los *providers* globales van en `app.config.ts` (router, http, etc.).
 
-```bash
-ng g module tasks
-```
+**Ventajas**
+- Menos “boilerplate”
+- Más fácil de entender al principio
+- Es el estándar en Angular moderno
 
-Esto crea `tasks.module.ts`. Podrías mover `TaskListComponent` y `TaskFormComponent`
-a este módulo, y dejar `AppModule` más limpio.
+### NgModules (legado / proyectos antiguos)
+- Se organizaba todo en `@NgModule` (por ejemplo, `AppModule`).
+- Sigue existiendo, pero **no es lo habitual en proyectos nuevos**.
 
-```ts
-// tasks/tasks.module.ts
-@NgModule({
-  declarations: [TaskListComponent, TaskFormComponent],
-  imports: [CommonModule, ReactiveFormsModule],
-})
-export class TasksModule {}
-```
-
-Luego importas `TasksModule` en `AppModule` o lo cargas de forma perezosa con
-el router (lazy loading).
+> ✅ En este manual trabajaremos en **standalone**.  
+> 🧾 Mencionamos NgModules solo para entender código antiguo.
 
 ---
 
-## 3.3. Organización por carpetas
+## 3.2. Estructura recomendada para proyectos pequeños/medios
 
-Un enfoque habitual:
+Una organización simple y profesional:
 
 ```text
 src/app/
-├─ core/           # servicios globales (auth, layout, etc.)
-├─ shared/         # componentes/pipes reutilizables
-├─ tasks/          # módulo de tareas
-│  ├─ task.model.ts
-│  ├─ task-api.service.ts
-│  ├─ task-list/
-│  └─ task-form/
-└─ app.module.ts
+├─ pages/            # Páginas (vistas asociadas a rutas)
+├─ components/       # Componentes reutilizables (UI)
+├─ shared/           # Navbar, footer, elementos comunes
+├─ services/         # Acceso a datos (API, almacenamiento, auth)
+├─ models/           # Interfaces y tipos (Task, User, etc.)
+├─ guards/           # Protecciones de rutas (si hay login)
+├─ interceptors/     # Interceptores HTTP (JWT)
+├─ app.routes.ts     # Definición de rutas
+└─ app.config.ts     # Providers globales (router, http, etc.)
 ```
 
-- Cada “zona” de tu app tiene su propia carpeta.
-- Dentro de cada carpeta, los componentes tienen su propio subdirectorio.
+**Idea clave:**  
+- *pages* = pantallas  
+- *components* = piezas reutilizables  
+- *services* = lógica y datos (sin HTML)
 
 ---
 
-## 3.4. Ejercicio práctico
+## 3.3. Ejemplo: componente standalone con imports
 
-1. Crear un módulo `TasksModule` e importar `TaskListComponent` y `TaskFormComponent` ahí.
-2. Mantener en `AppModule` solo lo mínimo (AppComponent, AppRoutingModule, etc.).
-3. Más adelante, convertir `TasksModule` en un módulo cargado por el router.
+Un componente standalone declara qué necesita en `imports`:
+
+```ts
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+
+@Component({
+  selector: 'app-home',
+  standalone: true,
+  imports: [RouterLink],
+  template: `
+    <h2>Home</h2>
+    <a routerLink="/tareas">Ir a tareas</a>
+  `,
+})
+export class HomeComponent {}
+```
+
+---
+
+## 3.4. `app.config.ts`: dónde se configura router y http
+
+En Angular moderno, configuramos la app en `app.config.ts`:
+
+```ts
+import { ApplicationConfig } from '@angular/core';
+import { provideRouter } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
+import { routes } from './app.routes';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideRouter(routes),
+    provideHttpClient(),
+  ],
+};
+```
+
+---
+
+## 3.5. Buenas prácticas rápidas
+
+- Un componente debe tener **una responsabilidad**.
+- Evitar lógica de negocio en el HTML.
+- Los componentes **llaman a servicios**, no al revés.
+- Los modelos (`interface`) van en `models/`.
+- Las rutas siempre en `app.routes.ts`.
+
+---
 
 </div>

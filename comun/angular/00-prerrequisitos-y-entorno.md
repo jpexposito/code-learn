@@ -2,6 +2,11 @@
 
 # <img src=.../../../../images/coding-book.png width="40"> Code & Learn (0. Prerrequisitos y entorno)
 
+
+<div align="center">
+  <img src=images/0-entorno.png width="350">
+</div>
+
 ## 0.1. HTML y CSS básicos
 
 Antes de meterte de lleno en Angular, es importante que controles lo siguiente:

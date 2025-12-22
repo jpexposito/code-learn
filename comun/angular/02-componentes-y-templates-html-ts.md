@@ -2,6 +2,12 @@
 
 # <img src=.../../../../images/coding-book.png width="40"> Code & Learn (2. Componentes y templates: trabajar con HTML + TypeScript)
 
+
+<div align="center">
+  <img src=images/2-componente-template.png width="350">
+</div>
+
+
 Este es uno de los puntos más importantes. Aquí es donde se ve perfectamente
 la relación entre **HTML (template)** y **TypeScript (clase del componente)**.
 

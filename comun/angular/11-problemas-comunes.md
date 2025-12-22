@@ -2,6 +2,11 @@
 
 # <img src=.../../../../images/coding-book.png width="40"> Code & Learn (11. Problemas y soluciones para Angular)
 
+<div align="center">
+  <img src=images/11-problemas-soluciones.png
+   width="350">
+</div>
+
 Este documento recoge los **errores más habituales al desarrollar aplicaciones Angular** y sus soluciones, especialmente en entornos de **local de desarrollo**.
 
 ---

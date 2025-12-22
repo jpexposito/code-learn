@@ -1,6 +1,12 @@
 <div align="justify">
 
-# <img src=.../../../../images/coding-book.png width="40"> Code & Learn (8. Pipes, directivas y reutilización)
+# <img src=.../../../../images/coding-book.png width="40"> Code & Learn (8. Pipes, directivas y reutilización) 
+
+
+<div align="center">
+  <img src=images/8-pipes-directivas-reutilizacion.png
+   width="350">
+</div>
 
 ## 8.1. Pipes incorporados
 
