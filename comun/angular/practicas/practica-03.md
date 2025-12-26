@@ -43,7 +43,7 @@ Proteger la ruta `/tareas` y `/tareas/nueva`:
 
 ---
 
-## ✅ Entregables
+##  Entregables
 
 - Login funcional (token guardado)
 - Interceptor funcionando (peticiones con Bearer)

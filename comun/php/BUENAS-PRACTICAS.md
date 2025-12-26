@@ -22,7 +22,7 @@ if($x==1){
 echo "Hola";
 }
 
-// ✅ Bueno
+//  Bueno
 if ($x === 1) {
     echo "Hola";
 }
@@ -94,7 +94,7 @@ class Usuario {}
 $precioConIva = $precio * 1.21;
 $precioConIva2 = $precio2 * 1.21;
 
-// ✅ Bueno
+//  Bueno
 function aplicarIVA($precio) {
     return $precio * 1.21;
 }
@@ -156,7 +156,7 @@ password_verify("mi_password_seguro", $hash);
 // ❌ Malo
 eval($_GET['code']);
 
-// ✅ Bueno
+//  Bueno
 // Evitarlo siempre, usar alternativas seguras.
 ```
 
@@ -185,7 +185,7 @@ foreach ($usuarios as $u) {
     $db->query("SELECT * FROM pedidos WHERE user_id = {$u['id']}");
 }
 
-// ✅ Bueno (una sola consulta)
+//  Bueno (una sola consulta)
 SELECT * FROM pedidos WHERE user_id IN (1,2,3,...);
 ```
 
@@ -215,13 +215,13 @@ class Usuario {
 require 'Usuario.php';
 require 'Pedido.php';
 
-// ✅ Bueno con Composer Autoload
+//  Bueno con Composer Autoload
 require 'vendor/autoload.php';
 ```
 
 ---
 
-## ✅ Buenas prácticas de desarrollo
+##  Buenas prácticas de desarrollo
 
 - **SOLID principles:**  
 

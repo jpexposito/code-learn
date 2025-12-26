@@ -85,6 +85,11 @@ export interface Task {
 export type NewTask = Omit<Task, 'id'>;
 ```
 
+> **Nota:**  
+> Se utilizan dos tipos (`Task` y `NewTask`) para diferenciar entre una tarea **ya creada** y una tarea **nueva**.  
+> `Task` incluye el campo `id`, que identifica de forma única a la tarea, mientras que `NewTask` lo omite porque el `id` se genera automáticamente en el servicio y no en el formulario.  
+> Esto mejora la claridad del código, evita errores y aprovecha el tipado fuerte de TypeScript.
+
 ---
 
 ## 4) Routing: crear páginas
@@ -104,6 +109,14 @@ export const routes: Routes = [
   { path: '**', redirectTo: '' },
 ];
 ```
+
+> **Nota**: Si te genera un error de importación comprueba el nombre de los ficheros y de los componentes que te ha generado. Serán sin 'component', y los componentes serán `Task` en lugar de `TasksComponent` y así sucesivamente.
+
+> ```js
+> import { HomeComponent } from './pages/home/home.component';
+> import { TasksComponent } from './pages/tasks/tasks.component';
+> import { TaskNewComponent } from './pages/task-new/task-new.component';
+> ```
 
 ---
 
@@ -389,7 +402,7 @@ label { display: grid; gap: 6px; }
 
 ---
 
-## ✅ Ejercicios para entregar
+##  Ejercicios para entregar
 
 1. Cambia el tema de colores (fondo, navbar y botones).
 2. Añade validación: si hay descripción, mínimo 5 caracteres.

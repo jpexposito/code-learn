@@ -11,7 +11,7 @@ En Angular existen dos enfoques para formularios:
 - **Template-driven** (más simple, menos control)
 - **Reactive Forms** (recomendado en proyectos reales)
 
-✅ Trabajaremos principalmente con **Reactive Forms**, porque es el enfoque más usado en empresa y facilita validación y mantenimiento.
+ Trabajaremos principalmente con **Reactive Forms**, porque es el enfoque más usado en empresa y facilita validación y mantenimiento.
 
 ---
 

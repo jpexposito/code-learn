@@ -11,9 +11,9 @@ En Angular, el **routing** permite crear una SPA (Single Page Application) con v
 
 En Angular CLI **21** (y Angular moderno), los proyectos se crean por defecto con **Standalone Components**, por lo que:
 
-- ✅ No se usa `AppRoutingModule`
-- ✅ No se usa `RouterModule.forRoot(...)`
-- ✅ El router se configura con `provideRouter(routes)` en `app.config.ts`
+-  No se usa `AppRoutingModule`
+-  No se usa `RouterModule.forRoot(...)`
+-  El router se configura con `provideRouter(routes)` en `app.config.ts`
 
 ---
 

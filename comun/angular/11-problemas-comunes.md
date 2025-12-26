@@ -166,7 +166,7 @@ ng serve
 
 ---
 
-## ✅ Buenas prácticas para evitar errores
+##  Buenas prácticas para evitar errores
 
 - Ejecutar siempre `ng serve` desde la **raíz del proyecto**
 - No mezclar versiones de Angular CLI

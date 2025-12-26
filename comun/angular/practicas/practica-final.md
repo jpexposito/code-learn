@@ -151,7 +151,7 @@ Ejemplo recomendado:
 
 ---
 
-## ✅ Rúbrica de evaluación
+##  Rúbrica de evaluación
 
 ### Funcionalidad (40%)
 - [ ] Login funciona y guarda token (10)

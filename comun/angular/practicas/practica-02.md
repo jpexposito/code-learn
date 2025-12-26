@@ -88,7 +88,7 @@ En `TaskNewComponent`, al guardar:
 
 ---
 
-## ✅Entregables
+## Entregables
 
 - Listado de tareas cargado desde API
 - Crear tarea desde formulario (POST)

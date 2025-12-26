@@ -238,7 +238,7 @@ String jsonOut = json.writeValueAsString(p2);
 
 ---
 
-## ✅ Buenas prácticas
+##  Buenas prácticas
 
 - Anota **getters/setters** cuando haya lógica derivada; anota **campos** si buscas control directo.
 - Usa `@JsonInclude(Include.NON_EMPTY)` para reducir ruido en salidas.

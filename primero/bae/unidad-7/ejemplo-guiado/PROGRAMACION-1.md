@@ -51,7 +51,7 @@ Por eso, se cambia temporalmente el delimitador para evitar que MySQL interprete
 
 ---
 
-#### ✅ Ejemplo práctico con un procedimiento en la BBDD `ventas`
+####  Ejemplo práctico con un procedimiento en la BBDD `ventas`
 
 ```sql
 DELIMITER $$
@@ -144,7 +144,7 @@ Este ejemplo muestra el resumen de ventas para el cliente con ID = 1.
 
 ---
 
-#### ✅ Resultado esperado
+####  Resultado esperado
 
 | nombre       | numero_ventas | total_unidades | total_gastado |
 |--------------|----------------|----------------|----------------|
@@ -238,7 +238,7 @@ DELIMITER ;
 - Recuerda que al final se restablece el delimitador original con `DELIMITER ;`
 ---
 
-#### ✅ ¿Cómo se usa?
+####  ¿Cómo se usa?
 
 ```sql
 SELECT calcular_total_venta(1, 3);
@@ -272,7 +272,7 @@ En MySQL, una función puede ser **determinista** o **no determinista**, lo cual
 
 ---
 
-##### ✅ Función Determinista
+#####  Función Determinista
 
 Una función **determinista** siempre devuelve el mismo resultado cuando se le pasan los mismos argumentos.
 
@@ -420,7 +420,7 @@ VALUES (1, 2, '2024-05-16', 1);
 
 ---
 
-##### ✅ ¿Por qué es útil?
+#####  ¿Por qué es útil?
 
 Este mecanismo es útil para:
 
@@ -448,7 +448,7 @@ Este mecanismo es útil para:
 
 ---
 
-#### ✅ Uso típico
+####  Uso típico
 
 - Control de cambios y auditoría
 - Reglas de negocio automáticas

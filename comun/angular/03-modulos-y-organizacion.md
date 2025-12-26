@@ -30,7 +30,7 @@
 - Se organizaba todo en `@NgModule` (por ejemplo, `AppModule`).
 - Sigue existiendo, pero **no es lo habitual en proyectos nuevos**.
 
-> ✅ En este manual trabajaremos en **standalone**.  
+>  En este manual trabajaremos en **standalone**.  
 > 🧾 Mencionamos NgModules solo para entender código antiguo.
 
 ---

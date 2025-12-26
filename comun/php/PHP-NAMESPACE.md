@@ -178,7 +178,7 @@ final class Partida
 
         if (mb_strpos($this->palabra, $letra) !== false) {
             $this->aciertos[] = $letra;
-            echo "✅ ¡Acertaste!\n"; 
+            echo " ¡Acertaste!\n"; 
         } else {
             $this->fallos[] = $letra;
             echo "❌ Fallo.\n";

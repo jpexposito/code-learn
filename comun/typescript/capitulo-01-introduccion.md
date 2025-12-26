@@ -148,7 +148,7 @@ function sumaTS(a: number, b: number): number {
 }
 
 // console.log(sumaTS(1, "hola")); // ❌ Error de tipos
-console.log(sumaTS(1, 2));        // ✅ 3
+console.log(sumaTS(1, 2));        //  3
 ```
 
 ### Cambios propuestos

@@ -183,7 +183,7 @@ Se define una sola vez y puede reutilizarse como si fuera una tabla común.
 
 Las vistas tienen múltiples usos en MySQL:
 
-- ✅ **Simplificar consultas complejas**: encapsulan `JOIN`, filtros y cálculos para que no tengas que escribirlos cada vez.
+-  **Simplificar consultas complejas**: encapsulan `JOIN`, filtros y cálculos para que no tengas que escribirlos cada vez.
 - 🔒 **Restringir acceso a datos sensibles**: se pueden mostrar solo algunas columnas a ciertos usuarios.
 - 🔁 **Reutilizar lógica de negocio**: se centraliza la definición de datos derivados como totales, promedios, relaciones, etc.
 - 📐 **Organizar consultas y estructuras**: especialmente útil en aplicaciones grandes o con muchos informes.
