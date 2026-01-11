@@ -85,8 +85,6 @@ com.jpexposito.tasks
 - Código más mantenible
 - Tests unitarios sencillos
 - Dominio reutilizable
-- Seguridad desacoplada
-- Arquitectura profesional real
 
 ---
 
