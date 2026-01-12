@@ -80,6 +80,77 @@ com.jpexposito.tasks
 
 ---
 
+
+## Dependencias necesarias
+
+```xml
+<properties>
+    <jacoco.version>0.8.12</jacoco.version>
+    <mapstruct.version>1.5.5.Final</mapstruct.version>
+</properties>
+<dependency>
+   <groupId>org.mapstruct</groupId>
+   <artifactId>mapstruct</artifactId>
+   <version>${mapstruct.version}</version>
+</dependency>
+<dependency>
+   <groupId>org.mockito</groupId>
+   <artifactId>mockito-core</artifactId>
+   <scope>test</scope>
+</dependency>
+<dependency>
+   <groupId>org.mockito</groupId>
+   <artifactId>mockito-junit-jupiter</artifactId>
+   <scope>test</scope>
+</dependency>
+
+
+<build>
+    <plugins>
+      <!-- Compiler plugin: necesario para annotation processors (MapStruct) -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.mapstruct</groupId>
+              <artifactId>mapstruct-processor</artifactId>
+              <version>${mapstruct.version}</version>
+            </path>
+          </annotationProcessorPaths>
+        </configuration>
+      </plugin>
+
+      <!-- JaCoCo: cobertura de tests -->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco.version}</version>
+        <executions>
+          <execution>
+            <id>prepare-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+
+          <execution>
+            <id>report</id>
+            <phase>test</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+```
+
+
 ## ✅ Beneficios del refactor
 
 - Código más mantenible
@@ -87,6 +158,73 @@ com.jpexposito.tasks
 - Dominio reutilizable
 
 ---
+
+## Declaración de mappers
+
+Para la declaración de mappers, dado que hacemos uso de `spring`, lo haremos de la siguiente forma:
+
+```java
+@Mapper(componentModel = "spring")
+public interface TaskMapper { ... }
+```
+
+> **Nota**: Permite inyectar a través de `spring` los `mappers`.
+
+
+## Utilización de Mokito en el Testing
+
+```java
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+@ExtendWith(MockitoExtension.class)
+class UpdateTaskTest {
+
+    @Mock
+    private TaskRepository taskRepository;
+
+    @InjectMocks
+    private UpdateTask updateTask;
+
+    @Test
+    void shouldUpdateTaskTitlewhenTaskExistsTest() {
+        Long id = 1L;
+        Task existing = new Task(id, "Titulo antiguo");
+
+        when(taskRepository.findById(id)).thenReturn(Optional.of(existing));
+        when(taskRepository.save(any(Task.class)))
+                .thenAnswer(invocation -> invocation.getArgument(0)); 
+
+        Task result = updateTask.execute(id, "Titulo nuevo");
+
+        assertEquals(id, result.getId());
+        assertEquals("Titulo nuevo", result.getTitle());
+
+        verify(taskRepository).findById(id);
+        verify(taskRepository).save(any(Task.class));
+
+        ArgumentCaptor<Task> captor = ArgumentCaptor.forClass(Task.class);
+        verify(taskRepository).save(captor.capture());
+        Task savedTask = captor.getValue();
+
+        assertEquals("Titulo nuevo", savedTask.getTitle());
+    }
+   @Test
+    void shouldThrowExceptionWhenTaskDoesNotExistTest() {
+        when(taskRepository.findById(99L)).thenReturn(Optional.empty());
+
+        IllegalArgumentException ex = assertThrows(
+                IllegalArgumentException.class,
+                () -> updateTask.execute(99L, "Da igual")
+        );
+
+        assertEquals("Task not found", ex.getMessage());
+
+        verify(taskRepository, never()).save(any());
+    }  
+```
 
 ## Licencia 📄
 
