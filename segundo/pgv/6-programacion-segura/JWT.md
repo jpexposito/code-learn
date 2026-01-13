@@ -23,6 +23,13 @@
 
 ---
 
+## Proceso de validación 
+
+<div align="center">
+    <img src=images/validacion-roles-jwt.png width="400">
+</div>
+
+
 ## Dependencias (Maven)
 
 A continuación el conjunto de dependencias maven que debemos de añadir para cada una de las capas es la siguiente:
