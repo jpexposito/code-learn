@@ -31,6 +31,45 @@ console.log(tuplaUsuario[0]);  // "Ana"
 
 ---
 
+## `Map<K, V>`
+
+**Definición:** diccionario avanzado clave–valor (mejor que `Record` cuando hay muchas operaciones, claves no string, o necesidad de iteración ordenada por inserción).
+
+**Funciones/métodos útiles:**
+
+- `set()` / `get()` / `has()` / `delete()` / `clear()`
+- `keys()` / `values()` / `entries()`
+- `Object.fromEntries(map)` para convertir a objeto
+
+**Ejemplo (sesiones por token):**
+
+```ts
+const sessions = new Map<string, Date>();
+sessions.set("token123", new Date());
+const lastSeen = sessions.get("token123");
+```
+
+---
+
+## `Set<T>`
+
+**Definición:** colección sin duplicados.
+
+**Funciones/métodos útiles:**
+
+- `add()` / `has()` / `delete()` / `clear()`
+- convertir: `new Set(array)` y `[...set]`
+
+**Ejemplo (permisos):**
+
+```ts
+const permisos = new Set<Role>([Role.USER]);
+permisos.add(Role.ADMIN);
+const esAdmin = permisos.has(Role.ADMIN);
+```
+
+---
+
 ## Objetos
 
 ### Explicación

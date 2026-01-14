@@ -18,6 +18,25 @@ En este capítulo veremos:
 
 ---
 
+### `JSON`
+
+**Definición:** formato de intercambio (texto). En JS: serializar y parsear.
+
+**Funciones/métodos útiles:**
+
+- `JSON.stringify(obj)` → objeto → string
+- `JSON.parse(str)` → string → objeto
+
+**Ejemplo:**
+```ts
+const txt = JSON.stringify({ a: 1 });
+const obj = JSON.parse(txt) as { a: number };
+```
+
+> ⚠️ Nota: `Date` en JSON se convierte en string ISO.
+
+---
+
 ## Conceptos básicos de una API REST
 
 Una API REST suele exponer recursos mediante URLs, por ejemplo:

@@ -15,6 +15,32 @@ TypeScript incluye varios **tipos utilitarios** que transforman otros tipos:
 - `Omit<T, K>`: toma todas las propiedades de `T` excepto algunas.
 - `Record<K, T>`: crea un tipo de objeto con claves de tipo `K` y valores de tipo `T`.
 
+### `Partial<T>
+
+**Definición:** vuelve todas las propiedades de `T` opcionales.
+
+```ts
+type Task = { id: string; title: string; description: string; completed: boolean };
+type TaskPatch = Partial<Omit<Task, "id">>;
+```
+
+### `Record<K, V>`
+
+**Definición:** objeto clave–valor tipado (diccionario simple).
+
+**Funciones/uso útil:**
+- combinar con `Object.keys/entries/values`
+- útil para claims, configuraciones, mapas simples
+
+**Ejemplo (claims JWT):**
+
+```ts
+type Claims = Record<string, string | number | boolean>;
+
+const claims: Claims = { sub: "u1", role: "ADMIN", exp: 1710000000 };
+```
+
+
 ### Ejemplo
 
 ```ts
