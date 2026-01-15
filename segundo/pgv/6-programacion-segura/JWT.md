@@ -23,12 +23,6 @@
 
 ---
 
-## Proceso de validación 
-
-<div align="center">
-    <img src=images/validacion-roles-jwt.png width="400">
-</div>
-
 
 ## Dependencias (Maven)
 
@@ -57,18 +51,18 @@ A continuación el conjunto de dependencias maven que debemos de añadir para ca
 <dependency>
   <groupId>io.jsonwebtoken</groupId>
   <artifactId>jjwt-api</artifactId>
-  <version>0.12.6</version>
+  <version>0.12.5</version>
 </dependency>
 <dependency>
   <groupId>io.jsonwebtoken</groupId>
   <artifactId>jjwt-impl</artifactId>
-  <version>0.12.6</version>
+  <version>0.12.5</version>
   <scope>compile</scope>
 </dependency>
 <dependency>
   <groupId>io.jsonwebtoken</groupId>
   <artifactId>jjwt-jackson</artifactId>
-  <version>0.12.6</version>
+  <version>0.12.5</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -93,7 +87,8 @@ A continuación el conjunto de dependencias maven que debemos de añadir para ca
 
 # JWT (HS256) - recomendado cargar desde entorno
 
-app.jwt.secret=${APP_JWT_SECRET:CAMBIA_ESTE_SECRETO_MUY_LARGO_MIN_32_CHARS}
+app.jwt.secret=${APP_JWT_SECRET:CAMBIA_ESTE_SECRETO_MUY_LARGO_MIN_32_CHARS} 
+# Un ejemplo:Kraj8AxPPe5XdByv9wN4o4cwhW8ExUoxH3kGIG9oY3MobGgN7zbPmmG2aomaZ7RP6EH17Le6RdX6+k0DPxqbfQ==
 app.jwt.expiration-minutes=60
 
 # CORS: URLs permitidas (frontends)
@@ -114,66 +109,100 @@ springdoc.swagger-ui.path=/swagger-ui.html
 
 ---
 
-## Alternativas a `app.jwt.secret` (recomendado en entornos reales)
+## 1) Idea general 
 
-1) **Variables de entorno / secretos del despliegue**
-
-- Kubernetes Secrets / Docker secrets / Secret Managers cloud
-- En Spring: `${APP_JWT_SECRET}`
-
-2) **Firma asimétrica (RSA/ECDSA)**
-
-- Private key firma (backend)
-- Public key verifica (otros servicios / gateway)
-- Mejor para sistemas distribuidos
-
-3) **Keystore (JKS/PKCS12)**
-
-- Claves/certificados en `.p12` con contraseña (evita texto plano)
-
-4) **Rotación de claves (`kid`)**
-
-- Varias claves vigentes; permite rotar sin “tirar” todo de golpe
+- **Controller**: expone endpoints HTTP (ej: login).
+- **Service**: contiene lógica reutilizable (ej: crear/validar JWT).
+- **Filter (Spring Security)**: intercepta peticiones antes de llegar al controller.
+- **SecurityConfig**: "cablea" Spring Security: rutas públicas, rutas protegidas, filtros, sesiones, etc.
+- **OpenApiConfig**: configura Swagger/OpenAPI para que el alumnado pueda probar endpoints con el botón **Authorize**.
 
 ---
 
-# ¿Qué son los `record` en Java y por qué usarlos aquí?
+## 2) Responsabilidad de cada clase
 
-Los **`record`** (Java 17+) son una forma concisa de declarar **clases inmutables orientadas a transportar datos**.  
-Generan automáticamente constructor, accessors, `equals/hashCode/toString`.
+### 2.1 `AuthController` (capa web)
+**Qué hace**
+- Expone el endpoint `POST /login`.
+- Recibe credenciales (usuario/password).
+- Pide a Spring Security que autentique mediante `AuthenticationManager`.
+- Si las credenciales son correctas, genera un JWT y lo devuelve al cliente.
 
-> **Nota:** Imagina que un **`record`** es una clase normal de java, con `propiedades finales` con **funciones** que se generan de forma automática, que son los `equals/hashCode/toString` que has `conocido hasta este momento`.
+**Dependencias típicas**
+- `AuthenticationManager` para autenticar usuario/password.
+- `JwtService` para generar el token.
 
-### Ejemplo
+**Qué NO hace**
+- No valida JWT en cada request (eso lo hace el filtro).
+- No decide reglas globales de seguridad (eso es `SecurityConfig`).
 
 ```java
-// Con record (recomendado para clases de Dtos/Inputs en función de lo que construyes)
-public record User(String username, String password) {}
+package com.docencia.auth.service;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class AuthService {
+
+  public boolean validateCredentials(String username, String password) {
+    return "user".equals(username) && "pass".equals(password);
+  }
+}
 ```
 
-> Nota: los accesos son `user.username()` (no `user.getUsername()`).
+> **Nota**: Esta clase es muy simple y se entiende perfectamente lo que hace. En la realidad se complica mucho más. Se puede integrar con **bbdd**, etc.
+
+### `AuthController`
+
+```java
+package com.docencia.auth.controller;
+
+import com.docencia.auth.dto.LoginRequest;
+import com.docencia.auth.dto.TokenResponse;
+import com.docencia.auth.service.AuthService;
+import com.docencia.auth.service.JwtService;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
+@RestController
+@RequestMapping("/api/auth")
+public class AuthController {
+
+  private final AuthService authService;
+  private final JwtService jwtService;
+
+  public AuthController(AuthService authService, JwtService jwtService) {
+    this.authService = authService;
+    this.jwtService = jwtService;
+  }
+
+  @PostMapping("/login")
+  public TokenResponse login(@RequestBody LoginRequest req) {
+    if (!authService.validateCredentials(req.username(), req.password())) {
+      throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials");
+    }
+    return new TokenResponse(jwtService.generateToken(req.username()));
+  }
+}
+```
+
+> **Nota**: Api Rest pública que hace uso de los servicios implementados anteriormente. Esta devuelve el **tocken** o **credenciales inválidas**.
+
 
 ---
 
-# Implementación paso a paso (con ejemplos)
+### 2.2 `JwtService` 
+**Qué hace**
+- Genera tokens JWT (`generateToken(UserDetails)` o similar).
+- Extrae información del token (ej: `extractUsername`, `extractClaims`).
+- Valida token (firma, expiración, sujeto, etc).
 
-## Paso 1 — Records/Dtos de login (con `record`)
-
-```java
-package com.docencia.auth.records; // o package com.docencia.auth.dto;
-
-public record LoginRequest(String username, String password) {}
-```
-
-```java
-package com.docencia.auth.records; // o package com.docencia.auth.dto;
-
-public record TokenResponse(String token) {}
-```
-
----
-
-## Paso 2 — `JwtService` (JJWT 0.12.x)
+**Por qué es un Service**
+- Porque la lógica JWT se reutiliza en:
+  - el login (para emitir token)
+  - el filtro (para validar token en cada request)
+- Mantiene el controller y el filtro más limpios.
 
 ```java
 package com.docencia.auth.service;
@@ -238,120 +267,72 @@ public class JwtService {
 }
 ```
 
-> **Nota**: Existe mucho código que no comprendes, pero la implementación de los métodos indican que se obtiene de cada una de ellas, y lo deberás de utilizar en una u otra parte del código para verifcar si el tocken `es válido`, o el `nombre del usuario`, etc.
-
 ---
 
-## Paso 3 — Login público (`AuthController`) + validación mínima (`AuthService`)
+### 2.3 `JwtAuthenticationFilter` (filtro de seguridad)
+**Qué hace**
+- Intercepta **todas** las peticiones (según se registre en la cadena de filtros).
+- Lee la cabecera HTTP: `Authorization: Bearer <token>`.
+- Si hay token:
+  - lo valida usando `JwtService`
+  - obtiene el usuario (normalmente vía `UserDetailsService`)
+  - crea un `Authentication` y lo guarda en `SecurityContext`
+- Si no hay token o es inválido:
+  - no autentica (y la petición quedará como anónima)
+  - el acceso final dependerá de las reglas de `SecurityConfig`
 
-### `AuthService` (versión simple)
-
-
-```java
-package com.docencia.auth.service;
-
-import org.springframework.stereotype.Service;
-
-@Service
-public class AuthService {
-
-  public boolean validateCredentials(String username, String password) {
-    return "user".equals(username) && "pass".equals(password);
-  }
-}
-```
-
-> **Nota**: Esta clase es muy simple y se entiende perfectamente lo que hace. En la realidad se complica mucho más. Se puede integrar con **bbdd**, etc.
-
-### `AuthController`
+> **Idea clave:**
+>El filtro es el `portero`: decide si la petición llega como autenticada o anónima.
 
 ```java
-package com.docencia.auth.controller;
-
-import com.docencia.auth.dto.LoginRequest;
-import com.docencia.auth.dto.TokenResponse;
-import com.docencia.auth.service.AuthService;
-import com.docencia.auth.service.JwtService;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-
-@RestController
-@RequestMapping("/api/auth")
-public class AuthController {
-
-  private final AuthService authService;
-  private final JwtService jwtService;
-
-  public AuthController(AuthService authService, JwtService jwtService) {
-    this.authService = authService;
-    this.jwtService = jwtService;
-  }
-
-  @PostMapping("/login")
-  public TokenResponse login(@RequestBody LoginRequest req) {
-    if (!authService.validateCredentials(req.username(), req.password())) {
-      throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials");
-    }
-    return new TokenResponse(jwtService.generateToken(req.username()));
-  }
-}
-```
-
-> **Nota**: Api Rest pública que hace uso de los servicios implementados anteriormente. Esta devuelve el **tocken** o **credenciales inválidas**.
-
----
-
-## Paso 4 — Filtro JWT (`JwtAuthenticationFilter`)
-
-```java
-package com.docencia.security.filter;
-
-import com.docencia.auth.service.JwtService;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.filter.OncePerRequestFilter;
-
-import java.io.IOException;
-import java.util.List;
-
+Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
   private final JwtService jwtService;
+  private final UserDetailsService userDetailsService;
 
-  public JwtAuthenticationFilter(JwtService jwtService) {
+  public JwtAuthenticationFilter(JwtService jwtService, UserDetailsService userDetailsService) {
     this.jwtService = jwtService;
+    this.userDetailsService = userDetailsService;
   }
 
   @Override
-  protected void doFilterInternal(HttpServletRequest request,
-                                  HttpServletResponse response,
-                                  FilterChain filterChain)
+  protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
       throws ServletException, IOException {
 
-    String auth = request.getHeader("Authorization");
-    if (auth == null || !auth.startsWith("Bearer ")) {
+    String authHeader = request.getHeader("Authorization");
+    if (authHeader == null || !authHeader.startsWith("Bearer ")) {
       filterChain.doFilter(request, response);
       return;
     }
 
-    String token = auth.substring("Bearer ".length());
-    if (!jwtService.isValid(token)) {
+    String token = authHeader.substring("Bearer ".length()).trim();
+    if (token.isEmpty() || SecurityContextHolder.getContext().getAuthentication() != null) {
       filterChain.doFilter(request, response);
       return;
     }
 
-    String username = jwtService.extractUsername(token);
+    try {
+      String username = jwtService.extractUsername(token);
+      if (username == null || username.isBlank()) {
+        filterChain.doFilter(request, response);
+        return;
+      }
 
-    var authorities = List.of(new SimpleGrantedAuthority("ROLE_USER"));
-    var authentication = new UsernamePasswordAuthenticationToken(username, null, authorities);
+      UserDetails user = userDetailsService.loadUserByUsername(username);
+      if (jwtService.isTokenValid(token, user)) {
+        UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
+            user,
+            null,
+            user.getAuthorities()
+        );
+        auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+        SecurityContextHolder.getContext().setAuthentication(auth);
+      }
+    } catch (Exception ignored) {
+      // Invalid token -> proceed without authentication (will be blocked by security rules)
+    }
 
-    SecurityContextHolder.getContext().setAuthentication(authentication);
     filterChain.doFilter(request, response);
   }
 }
@@ -364,7 +345,23 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 ---
 
-## Paso 5 — Configurar Spring Security (`SecurityFilterChain`)
+### 2.4 `SecurityConfig` (configuración principal de Spring Security)
+**Qué hace**
+- Define el `SecurityFilterChain`:
+  - rutas `permitAll()` (públicas)
+  - rutas `authenticated()` (protegidas)
+  - gestión de sesiones (`STATELESS` para JWT)
+  - registro del `JwtAuthenticationFilter` en el orden correcto
+- Expone beans típicos:
+  - `PasswordEncoder`
+  - `AuthenticationManager`
+  - (a veces) `UserDetailsService` para usuarios en memoria o BD
+
+**Por qué es importante**
+- Sin esta clase, Spring Security no sabe:
+  - qué endpoints son públicos
+  - qué endpoints requieren token
+  - cuándo se ejecuta el filtro JWT
 
 ```java
 package com.docencia.security.config;
@@ -400,54 +397,55 @@ public class SecurityConfig {
 }
 ```
 
+ó
+
+```java
+@Configuration
+@EnableMethodSecurity
+public class SecurityConfig {
+
+  @Bean
+  public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthenticationFilter jwtFilter) throws Exception {
+    http
+        .csrf(csrf -> csrf.disable())
+        .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
+        .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        .authorizeHttpRequests(auth -> auth
+            .requestMatchers(
+                "/api/v1/auth/**",
+                "/swagger-ui/**",
+                "/v3/api-docs/**",
+                "/h2-console/**"
+            ).permitAll()
+
+            .requestMatchers(HttpMethod.GET, "/api/v1/tasks/**").hasAnyRole("USER", "ADMIN")
+            .requestMatchers(HttpMethod.POST, "/api/v1/tasks/**").hasRole("ADMIN")
+            .requestMatchers(HttpMethod.PATCH, "/api/v1/tasks/**").hasRole("ADMIN")
+            .requestMatchers(HttpMethod.DELETE, "/api/v1/tasks/**").hasRole("ADMIN")
+
+            .anyRequest().authenticated()
+        )
+        .httpBasic(httpBasic -> httpBasic.disable());
+
+    http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+    return http.build();
+  }
+```
+
 > **Nota:** Esta parte es la que filtra la parte pública y la parte securizada. ¿Qué debemos de colocar aquí?, Todo aquello que querramos acceder de forma libre dentro del servidor.
 
 ---
 
-## Paso 6 — CORS (`CorsConfigurationSource`)
+### 2.5 `OpenApiConfig` (Swagger / OpenAPI)
+**Qué hace**
+- Define un `OpenAPI` bean con un `SecurityScheme` tipo **HTTP Bearer** (JWT).
+- Eso habilita el botón **Authorize** en Swagger UI.
+- Permite probar endpoints protegidos pegando el token.
 
-```java
-package com.docencia.security.cors;
+**Idea clave**
+- Swagger no protege nada por sí solo; solo documenta y facilita pruebas.
+- La seguridad real está en `SecurityConfig` + `JwtAuthenticationFilter`.
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-import java.util.Arrays;
-import java.util.List;
-
-@Configuration
-public class CorsConfig {
-
-  @Bean
-  public CorsConfigurationSource corsConfigurationSource(
-      @Value("${app.cors.allowed-origins}") String allowedOriginsCsv
-  ) {
-    List<String> allowedOrigins = Arrays.stream(allowedOriginsCsv.split(","))
-        .map(String::trim)
-        .filter(s -> !s.isBlank())
-        .toList();
-
-    CorsConfiguration cfg = new CorsConfiguration();
-    cfg.setAllowedOrigins(allowedOrigins);
-    cfg.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-    cfg.setAllowedHeaders(List.of("Authorization", "Content-Type"));
-    cfg.setExposedHeaders(List.of("Authorization"));
-    cfg.setAllowCredentials(false);
-
-    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    source.registerCorsConfiguration("/**", cfg);
-    return source;
-  }
-}
-```
-
----
-
-## Paso 7 — Swagger/OpenAPI con candado (Authorize)
 ```java
 package com.docencia.openapi;
 
@@ -478,6 +476,126 @@ public class OpenApiConfig {
   }
 }
 ```
+
+---
+
+## 3) Relación entre clases (mapa mental)
+
+### Dependencias (quién usa a quién)
+
+- `AuthController` -> usa -> `AuthenticationManager`
+- `AuthController` -> usa -> `JwtService`
+- `JwtAuthenticationFilter` -> usa -> `JwtService`
+- `JwtAuthenticationFilter` -> usa -> `UserDetailsService` (detallles del usuario)
+- `SecurityConfig` -> registra -> `JwtAuthenticationFilter`
+- `OpenApiConfig` -> no depende de las otras, pero documenta el esquema Bearer para Swagger
+
+---
+
+
+<div align="center">
+    <img src=images/dependencias-clases-seguridad.png width="400">
+</div>
+
+## 4) Flujo 1: Login (obtener JWT)
+
+### Paso a paso
+1. Cliente envía `POST /login` con credenciales.
+2. `AuthController` llama a `authenticationManager.authenticate(...)`.
+3. Si autentica OK:
+   - `AuthController` llama `jwtService.generateToken(userDetails)`.
+4. `AuthController` responde: `{ token: "...", roles: [...] }`.
+
+---
+
+## 5) Flujo 2: Acceder a un endpoint protegido (con JWT)
+
+### Paso a paso
+1. Cliente llama a un endpoint protegido (ej: `GET /tasks`).
+2. Envía cabecera: `Authorization: Bearer <token>`.
+3. `JwtAuthenticationFilter` intercepta:
+   - extrae token
+   - valida con `JwtService`
+   - si OK, coloca autenticación en `SecurityContext`
+4. Spring Security evalúa reglas de `SecurityConfig`:
+   - si requiere `authenticated()`, la petición pasa
+   - si no hay autenticación, responde `401`
+
+### Mini-diagrama
+```text
+Cliente -> JwtAuthenticationFilter -> JwtService (validar) -> SecurityContext
+      -> Controller protegido -> Respuesta
+```
+
+## Proceso de validación 
+
+<div align="center">
+    <img src=images/validacion-roles-jwt.png width="400">
+</div>
+
+---
+
+## 6) Dónde se decide "público vs protegido"
+
+Esto vive en `SecurityConfig`.
+
+Ejemplos típicos (conceptuales):
+
+- Público:
+  - `/login`
+  - `/swagger-ui/**`
+  - `/v3/api-docs/**`
+- Protegido:
+  - cualquier otra ruta por defecto
+
+---
+
+## 7) Cómo probar en Swagger
+
+1. Lanza la app.
+2. Abre Swagger UI.
+3. Ejecuta `POST /login` y copia el token.
+4. Pulsa **Authorize**.
+5. Pega solo el token (o con prefijo `Bearer ` según configuración).
+6. Prueba endpoints protegidos.
+
+---
+
+<div align="center">
+    <img src=images/api-task-secure.png width="400">
+</div>
+
+
+## 8) ¿Qué debes de implementar?
+
+- Securizar la `api-task` siguiendo los pasos y construyendo las clases indicadas en el paquete `infraestructura`.
+
+  - `com.docencia.tasks.infrastructure`
+    - `security`
+      - `JwtService`
+      - `JwtAuthenticationFilter`
+      - `SecurityConfig`
+    - `openapi`
+      - `OpenApiConfig`
+
+- Completar el conjunto de test del servicio, utilizando `mokito`.
+
+---
+
+## 9) Errores comunes y cómo detectarlos
+
+- **El token no se lee**: revisar cabecera `Authorization` y prefijo `Bearer `.
+- **El filtro no corre**: revisar que `SecurityConfig` lo agrega en la cadena.
+- **Swagger no muestra Authorize**: revisar `OpenApiConfig` y `SecurityScheme`.
+- **401 aunque hay token**:
+  - token expirado
+  - firma distinta (secret incorrecto)
+  - usuario no encontrado (si se valida contra `UserDetailsService`)
+- **403 (prohibido)**:
+  - autenticado pero sin rol requerido
+
+---
+
 
 ## Proyecto ejemplo completo
 
