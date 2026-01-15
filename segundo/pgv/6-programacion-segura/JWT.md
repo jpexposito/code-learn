@@ -565,14 +565,15 @@ Ejemplos típicos (conceptuales):
 
 - Securizar la `api-task` siguiendo los pasos y construyendo las clases indicadas en el paquete `infraestructura`.
 
-  - `com.docencia.tasks.infrastructure`
-    - `security`
-      - `JwtService`
-      - `JwtAuthenticationFilter`
-      - `SecurityConfig`
-    - `openapi`
-      - `OpenApiConfig`
-
+```text
+src/main/java/com/docencia/tasks/infrastructure
+├── openapi
+│   └── OpenApiConfig.java
+└── security
+    ├── JwtAuthenticationFilter.java
+    ├── JwtService.java
+    └── SecurityConfig.java
+```
 - Completar el conjunto de test del servicio, utilizando `mokito`.
 
 ---
