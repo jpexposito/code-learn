@@ -521,11 +521,6 @@ public class OpenApiConfig {
    - si requiere `authenticated()`, la petición pasa
    - si no hay autenticación, responde `401`
 
-### Mini-diagrama
-```text
-Cliente -> JwtAuthenticationFilter -> JwtService (validar) -> SecurityContext
-      -> Controller protegido -> Respuesta
-```
 
 ## Proceso de validación 
 
