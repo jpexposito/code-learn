@@ -312,7 +312,7 @@ assertEquals(1L, captured.getId());
 
 ---
 
-## <img src="images/jacoco-logo.png" width="120"> 
+## <img src="images/jacoco-logo.png" width="200"> 
 
 
 ### Ejecutar tests + generar reporte
