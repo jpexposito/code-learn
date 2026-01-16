@@ -335,12 +335,29 @@ El reporte HTML se genera típicamente en:
 
 La combinación **JUnit + Mockito + JaCoCo + CI** permite automatizar la validación del código en cada cambio:
 
-<div align="center">
-  <img src=images/flujo-ci.png width="200">
+<div >
+  <img src=images/flujo-ci.png width="250">
 </div>
 
-El objetivo es **detectar errores lo antes posible**, antes de que el código llegue a producción.
+### Flujo completo en CI
 
+1. CI clona el repositorio
+2. Instala JDK (ej. Java 17)
+3. Ejecuta:
+   ```bash
+   mvn clean test
+   ```
+4. Durante ese comando:
+   - JUnit ejecuta los tests
+   - Mockito valida mocks e interacciones
+   - JaCoCo recoge cobertura
+5. Resultado:
+   - ✅ Todo correcto → pipeline OK
+   - ❌ Test roto o cobertura insuficiente → pipeline FAIL
+
+> **El objetivo** es **detectar errores lo antes posible**, antes de que el código llegue a producción.
+
+---
 
 Crea `.github/workflows/ci.yml`:
 
@@ -389,21 +406,4 @@ jobs:
 
 ---
 
-### Flujo completo en CI
-
-1. CI clona el repositorio
-2. Instala JDK (ej. Java 17)
-3. Ejecuta:
-   ```bash
-   mvn clean test
-   ```
-4. Durante ese comando:
-   - JUnit ejecuta los tests
-   - Mockito valida mocks e interacciones
-   - JaCoCo recoge cobertura
-5. Resultado:
-   - ✅ Todo correcto → pipeline OK
-   - ❌ Test roto o cobertura insuficiente → pipeline FAIL
-
----
 </div>
