@@ -15,7 +15,7 @@
 
 ## 0) Requisitos
 
-- Node.js 22.x
+- Node.js 19.2
 - Angular CLI 21.x
 - npm 10.x
 
@@ -37,6 +37,11 @@ Opciones:
 - SSR: **No**
 - AI tools: **None**
 
+> **Mejor:**
+
+```bash
+ng new gestor-tareas-2 --routing --style=css
+```
 ---
 
 ## 2) Generar componentes y servicio
@@ -320,7 +325,7 @@ En el componente `TaskNewComponent` importamos `ReactiveFormsModule`.
 **`src/app/pages/task-new/task-new.component.ts`**
 
 ```ts
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TasksService } from '../../services/tasks.service';
@@ -333,24 +338,27 @@ import { TasksService } from '../../services/tasks.service';
   styleUrl: './task-new.component.css',
 })
 export class TaskNewComponent {
-  constructor(
-    private fb: FormBuilder,
-    private tasks: TasksService,
-    private router: Router
-  ) {}
+  private fb = inject(FormBuilder);
+  private tasks = inject(TasksService);
+  private router = inject(Router);
 
-  form = this.fb.group({
-    titulo: ['', [Validators.required, Validators.minLength(3)]],
-    descripcion: [''],
-    completada: [false],
+  form = this.fb.nonNullable.group({
+    titulo: this.fb.nonNullable.control('', [Validators.required, Validators.minLength(3)]),
+    descripcion: this.fb.nonNullable.control(''),
+    completada: this.fb.nonNullable.control(false),
   });
 
   save() {
     if (this.form.invalid) {
+      console.warn('form inválido', this.form.errors, this.form.value);
       this.form.markAllAsTouched();
       return;
     }
     this.tasks.add(this.form.getRawValue());
+    this.router.navigateByUrl('/tareas');
+  }
+
+  cancel() {
     this.router.navigateByUrl('/tareas');
   }
 }
@@ -362,7 +370,7 @@ export class TaskNewComponent {
 <section class="card">
   <h2>Nueva tarea</h2>
 
-  <form (ngSubmit)="save()">
+  <form [formGroup]="form" (ngSubmit)="save()">
     <label>
       Título
       <input class="input" formControlName="titulo" />
@@ -386,7 +394,7 @@ export class TaskNewComponent {
 
     <div class="row">
       <button class="btn btn-primary" type="submit">Guardar</button>
-      <button class="btn btn-ghost" type="button" (click)="router.navigateByUrl('/tareas')">Cancelar</button>
+      <button class="btn btn-ghost" type="button" (click)="cancel()">Cancelar</button>
     </div>
   </form>
 </section>
