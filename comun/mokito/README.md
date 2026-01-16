@@ -264,15 +264,15 @@ class TaskControllerTest {
   void getAllResponsesTest() {
     Task task = new Task(1L, "nombre", "descripcion", false);
 
-    when(service.getAll()).thenReturn(List.of(task));
-    when(mapper.toResponse(task)).thenReturn(new TaskResponse(1L, "nombre", "descripcion", false));
+    when(serviceMock.getAll()).thenReturn(List.of(task));
+    when(mapperMock.toResponse(task)).thenReturn(new TaskResponse(1L, "nombre", "descripcion", false));
 
     List<TaskResponse> res = controller.getAll();
 
     assertEquals(1, res.size());
     assertEquals(1L, res.get(0).getId());
     verify(service).getAll();
-    verify(mapper).toResponse(task);
+    verify(mapperMock).toResponse(task);
   }
 }
 ```
@@ -284,14 +284,14 @@ class TaskControllerTest {
 ### 6.1 Simular excepciones
 
 ```java
-when(service.getAll()).thenThrow(new RuntimeException("boom"));
+when(serviceMock.getAll()).thenThrow(new RuntimeException("boom"));
 assertThrows(RuntimeException.class, () -> controller.getAll());
 ```
 
 ### 6.2 Verificar que NO se llama algo
 
 ```java
-verify(mapper, never()).toResponse(any());
+verify(mapperMock, never()).toResponse(any());
 ```
 
 ### 6.3 Verificar número de llamadas
