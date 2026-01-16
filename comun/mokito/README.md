@@ -335,20 +335,9 @@ El reporte HTML se genera típicamente en:
 
 La combinación **JUnit + Mockito + JaCoCo + CI** permite automatizar la validación del código en cada cambio:
 
-```text
-Push / Pull Request
-    ↓
-    CI
-    ↓
-mvn clean test
-    ↓
-JUnit  → ejecuta tests
-Mockito → valida interacciones y lógica
-JaCoCo → mide cobertura
-        ↓
-     Resultado
-   ✅ OK   ❌ FAIL
-```
+<div align="center">
+  <img src=images/flujo-ci.png width="200">
+</div>
 
 El objetivo es **detectar errores lo antes posible**, antes de que el código llegue a producción.
 
