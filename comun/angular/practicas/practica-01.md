@@ -40,7 +40,7 @@ Opciones:
 > **Mejor:**
 
 ```bash
-ng new gestor-tareas-2 --routing --style=css
+ng new gestor-tareas --routing --style=css
 ```
 ---
 
@@ -53,7 +53,6 @@ ng g c pages/home
 ng g c pages/tasks
 ng g c pages/task-new
 ng g c shared/navbar
-
 ng g s services/tasks
 ```
 
