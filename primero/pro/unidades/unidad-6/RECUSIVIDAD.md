@@ -1,103 +1,279 @@
 <div align="justify">
 
-# <img src=../../../../images/coding-book.png width="40"> Code & Learn (Programación: Uso Avanzado de clases)
+# 📘 Recursividad en Java (Guía paso a paso con ejemplos)
 
-La recursividad en programación Java es un concepto que, normalmente, cuesta entender a los principiantes en este lenguaje. Se trata de algo que ___puede parecer bastante complejo a primera vista___, pero que, en realidad, es relativamente sencillo.
+La **recursividad** es una técnica de programación en la que un método **se llama a sí mismo** para resolver un problema dividiéndolo en **subproblemas más pequeños**.
 
-Resumiéndolo mucho, podemos decir que la recursividad en programación Java es la capacidad que existe en este lenguaje de ___crear funciones que llamen a otras funciones___. De esta manera se evita el uso de bucles u otros iteradores.  Se trata de una técnica de programación que permite crear instrucciones que se repitan un número n de veces, por eso se trata de una forma de programación que permite evitar el uso de estructuras de datos repetitivas.
+En Java, cuando un método se llama a sí mismo, hablamos de un **método recursivo**.
 
->___En Java los métodos y las funciones pueden llamarse a sí mismos, cuando esto sucede, se denominan métodos recursivos.___
+> ✅ Idea clave: *la recursividad repite trabajo “sin bucles”, pero usando la pila de llamadas.*
 
-Una de las ventajas de aprender a programar con técnicas recursivas es que esto permite crear códigos complejos con una sintaxis simple y clara. Esto, al final supone un ___ahorro para el trabajo de los programadores___. No obstante, también hay que tener en cuenta que la recursividad en programación Java puede tener el inconveniente de ralentizar el programa que se está desarrollando.
+---
 
-Otro detalle importante sobre la recursividad en programación en Java es que, cada vez que se emplea, por ejemplo, para llamar a una función desde otra función, esto genera una entrada en la pilla de llamadas (estructura dinámica de datos) del programa. Si esto se satura, se produce un error, el stack overflow, ___un fallo en el tiempo de ejecución___ de las aplicaciones.
+## 🧠 ¿Qué problema resuelve la recursividad?
 
-## Ventajas e inconvenientes
+La recursividad es especialmente útil cuando el problema ya tiene una estructura “anidada” o “por niveles”, por ejemplo:
 
-Hemos profundizado un poco en qué es la recursividad en programación Java y hemos visto algunas de las ventajas que el uso de esta técnica puede tener para el trabajo de los programadores. No obstante, se trata de una técnica que también puede ocasionar problemas, por eso, ___hay que saber cuándo es conveniente usarla___.
+- Cálculos matemáticos definidos por recurrencia (factorial, Fibonacci).
+- Estructuras jerárquicas (carpetas y subcarpetas, árboles).
+- Backtracking (laberintos, N-reinas, combinaciones y permutaciones).
 
-Para la creación de determinados tipos de programas o elementos dentro del código, la recursividad se convierte en una manera lenta de hacerlo y cuenta con el gran inconveniente de ___ocupar mucho espacio en la memoria___, pudiendo llevar, como decíamos, a errores en el tiempo de ejecución de los programas.
+---
 
-Sin embargo, una de sus grandes ventajas es que permite que los programadores puedan resolver algunos problemas cotidianos de una forma ___elegante y eficiente___.
+## 🧱 Las 3 piezas obligatorias de un método recursivo
 
->___La recursividad en progrmación Java permite crear métodos y funciones capaces de enumerar cualquier tipo de estructura, por compleja que esta pudiera ser.___
+Un método recursivo siempre necesita:
 
-Imagina que tienes que crear una ___función que recorra todo un sistema de archivos___, con carpetas y subcarpetas. Usando la __recursividad__, tan solo habría que crear una única función que se fuese llamando a si misma en todo el sistema de archivos.
+1) **Caso base (condición de parada)**  
+   - La situación más simple que se puede responder directamente.
+   - Evita recursividad infinita.
 
-Esto solo es un ejemplo de cómo la recursividad en Java puede simplificar el trabajo, hay aplicaciones mucho más potentes para esta técnica, aplicaciones que podrás aprender si te formas como programador Java.
+2) **Caso recursivo (paso recursivo)**  
+   - Cómo el método se reduce a un subproblema.
+   - Debe acercarse al caso base.
 
-## Importante
+3) **Progreso hacia el caso base**  
+   - En cada llamada, el “tamaño” del problema debe disminuir (o cambiar hacia el caso base).
 
-Otro de los detalles a tener en cuenta cuando hablamos sobre recursividad en programación Java es la condición de parada. Este término hace referencia a la forma de comprobar que una función (por ejemplo) no volverá a llamarse a si misma. Es decir, es la condición que se programa para que los valores retornen al inicio de la llamada.
+> Si falta cualquiera de estas 3 piezas, es muy probable que el método falle (por ejemplo, con **StackOverflowError**).
 
-_Si la condición de parada no se controla adecuadamente, se pueden producir errores con la técnica de la recursividad. Y es que, si no se determina y establece esta condición de detección se produce lo que se conoce como recursividad infinita. Es lo mismo que pasa cuando se programan_ ___bucles infinitos___.
+---
 
->___Una condición de parada la determina el programador en el momento de crear o usar la recursividad.___
+## 🧵 ¿Qué es la pila de llamadas (call stack)?
 
-Esto es un problema porque, como decimos, la función nunca deja de llamarse a sí misma, lo que lleva a una sobrecarga en el programa que se está ejecutando y a diversos errores:
+Cada vez que se llama a un método, Java crea un **frame** (una “ficha”) en la **pila de llamadas**, donde guarda:
 
-- Stackoverflow
-- Ocupación de una mayor capacidad de la memoria
-- Desbordamientos variables por acumulación de llamadas a una misma función
-- Errores en la ejecución y carga del programa.
+- parámetros
+- variables locales
+- dirección de retorno
 
-## Ejemplo Factorial
+En recursividad, se apilan muchas llamadas, y luego se “desapilan” al volver.
 
-<div align="center">
-    <img src="images/factorial-recursividad.png" width="400px">
-</div>
+📌 Si hay demasiadas llamadas recursivas (o no se detiene), puede ocurrir:
 
+- `StackOverflowError` (desbordamiento de pila)
+- alto consumo de memoria
+- rendimiento peor que una versión iterativa (en algunos casos)
+
+---
+
+## ✅ Ventajas e inconvenientes
+
+### Ventajas
+- Código más corto y expresivo en problemas naturalmente recursivos.
+- Solución elegante para estructuras jerárquicas.
+- Muy útil en backtracking.
+
+### Inconvenientes
+- Puede ser más lenta que un bucle (por sobrecarga de llamadas).
+- Puede consumir más memoria (pila de llamadas).
+- Riesgo de recursividad infinita si el caso base es incorrecto.
+
+---
+
+# 🧪 Ejemplo 1: Factorial (con explicación paso a paso)
+
+El factorial se define como:
+
+- `0! = 1`  ✅ (caso base)
+- `n! = n * (n-1)!`  ✅ (caso recursivo)
+
+## 🧩 Implementación recursiva (correcta)
 
 ```java
 public class Factorial {
-    public static void main(String[] args) {
-        int numero = 5; 
-        long factorial = calcular(numero);
-        System.out.println("El factorial de " + numero + " es: " + factorial);
-    }
 
-    public static long calcular(int numero) {
-        if (n == 0) {
-            return 1;
-        }
-        return numero * calcular(numero - 1);
+    public static long factorial(int n) {
+        if (n < 0) throw new IllegalArgumentException("n debe ser >= 0");
+
+        // Caso base
+        if (n == 0) return 1;
+
+        // Caso recursivo
+        return n * factorial(n - 1);
     }
 }
 ```
 
-### Ejemplo contar ficheros de directorio
+## 🔍 ¿Qué pasa al ejecutar `factorial(5)`?
 
-<div align="center">
-    <img src="images/directorios.png" width="400px">
-</div>
+Se generan llamadas anidadas:
 
-Imagina que tienes una carpeta con muchos archivos y subcarpetas, y quieres contar cuántos archivos existen en total, incluyendo los de las subcarpetas. Este problema se puede resolver recursivamente, ya que, para contar los archivos en una subcarpeta, necesitas realizar la misma operación en esa subcarpeta.
+1. `factorial(5) = 5 * factorial(4)`
+2. `factorial(4) = 4 * factorial(3)`
+3. `factorial(3) = 3 * factorial(2)`
+4. `factorial(2) = 2 * factorial(1)`
+5. `factorial(1) = 1 * factorial(0)`
+6. `factorial(0) = 1` ✅ caso base
 
+Ahora “regresa” (se desapila):
+
+- `factorial(1) = 1 * 1 = 1`
+- `factorial(2) = 2 * 1 = 2`
+- `factorial(3) = 3 * 2 = 6`
+- `factorial(4) = 4 * 6 = 24`
+- `factorial(5) = 5 * 24 = 120`
+
+✅ Resultado final: `120`
+
+### Ejemplos entrada/salida
+- `factorial(0)` → `1`
+- `factorial(5)` → `120`
+- `factorial(-2)` → lanza `IllegalArgumentException`
+
+---
+
+# 🧪 Ejemplo 2: Fibonacci (con traza simple)
+
+Definición:
+
+- `F(0)=0`, `F(1)=1` ✅ (casos base)
+- `F(n)=F(n-1)+F(n-2)` ✅ (caso recursivo)
+
+## Implementación recursiva (simple)
+
+```java
+public static long fib(int n) {
+    if (n < 0) throw new IllegalArgumentException("n debe ser >= 0");
+    if (n <= 1) return n;
+    return fib(n - 1) + fib(n - 2);
+}
+```
+
+## ¿Por qué esta versión puede ser lenta?
+Porque recalcula muchas veces lo mismo:
+
+- `fib(5)` llama a `fib(4)` y `fib(3)`
+- pero `fib(4)` también llama a `fib(3)` otra vez, etc.
+
+✅ Solución típica: **memoización** (guardar resultados) o una versión iterativa.
+
+### Ejemplos entrada/salida
+- `fib(0)` → `0`
+- `fib(1)` → `1`
+- `fib(10)` → `55`
+
+---
+
+# 🧪 Ejemplo 3: Suma de 1 hasta N
+
+Definición:
+
+- `sum(0)=0` ✅ caso base
+- `sum(n)=n+sum(n-1)` ✅ recursivo
+
+```java
+public static long sumaHastaN(int n) {
+    if (n < 0) throw new IllegalArgumentException("n debe ser >= 0");
+    if (n == 0) return 0;
+    return n + sumaHastaN(n - 1);
+}
+```
+
+### Ejemplos entrada/salida
+- `sumaHastaN(0)` → `0`
+- `sumaHastaN(5)` → `15`
+- `sumaHastaN(-1)` → lanza `IllegalArgumentException`
+
+---
+
+# 📁 Ejemplo 4: Contar ficheros en un directorio (estructura jerárquica)
+
+Este es un caso “naturalmente recursivo”: una carpeta contiene archivos y subcarpetas, y cada subcarpeta… contiene lo mismo.
+
+## 🔁 Idea del algoritmo
+1) Listar contenido del directorio actual.  
+2) Por cada elemento:  
+   - si es archivo → contar 1  
+   - si es carpeta → contar recursivamente dentro y sumar  
 
 ```java
 import java.io.File;
 
 public class ContarArchivos {
-    public static int contarArchivos(File directorio) {
-        int totalArchivos = 0;
-        File[] archivos = directorio.listFiles();
 
-        // Recursivamente contar archivos en subdirectorios
-        for (File archivo : archivos) {
-            if (archivo.isDirectory()) {
-                totalArchivos += contarArchivos(archivo); // Llamada recursiva
+    public static int contarArchivos(File dir) {
+        if (dir == null || !dir.exists())
+            throw new IllegalArgumentException("Directorio inválido");
+
+        File[] contenido = dir.listFiles();
+        if (contenido == null) return 0;
+
+        int total = 0;
+
+        for (File f : contenido) {
+            if (f.isDirectory()) {
+                total += contarArchivos(f); // llamada recursiva
             } else {
-                totalArchivos++;
+                total++;
             }
         }
-
-        return totalArchivos;
+        return total;
     }
+}
+```
 
-    public static void main(String[] args) {
-        File directorio = new File("C:/misArchivos");
-        System.out.println("Total de archivos: " + contarArchivos(directorio));
-    }
- ```   
+### Ejemplo conceptual
+Si tienes:
+
+```
+/misArchivos
+  /fotos
+     a.jpg
+     b.jpg
+  /docs
+     cv.pdf
+  nota.txt
+```
+
+Resultado:
+- `contarArchivos(misArchivos)` → `4`
+
+---
+
+# 🧭 Cómo “diseñar” una solución recursiva (receta rápida)
+
+Cuando no sabes por dónde empezar, usa esta receta:
+
+1) **Define el caso base** (lo más pequeño).
+2) **Define el caso recursivo** (cómo reducir el problema).
+3) Asegúrate de que **cada llamada acerca** al caso base.
+4) Prueba con valores pequeños y dibuja la traza (como hicimos en factorial).
+5) Si el rendimiento es malo, considera:
+   - memoización
+   - versión iterativa
+   - poda (en backtracking)
+
+---
+
+# 🚨 Errores típicos (y cómo detectarlos)
+
+✅ **1) No hay caso base**
+- Síntoma: recursión infinita → `StackOverflowError`.
+
+✅ **2) El caso recursivo no progresa**
+- Ejemplo: llamas a `f(n)` desde `f(n)` sin cambiar n.
+
+✅ **3) Caso base incorrecto**
+- Devuelve valores erróneos o se detiene demasiado pronto.
+
+✅ **4) Desbordamiento de tipo**
+- En factorial/potencias grandes puede haber overflow: usar `long` o `Math.multiplyExact`.
+
+---
+
+# 🧩 Extra: Recursividad vs Iteración (cuándo usar cuál)
+
+- Usa **recursividad** cuando:
+  - el problema es jerárquico (árboles, directorios)
+  - el problema es de exploración (backtracking)
+  - te aporta claridad
+
+- Usa **iteración** cuando:
+  - el problema es lineal y muy repetitivo
+  - necesitas máximo rendimiento
+  - la profundidad puede ser grande
+
+---
 
 </div>
