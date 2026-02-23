@@ -1,6 +1,6 @@
 <div align="justify">
 
-# Construyendo una aplicación modular en arquitectura hexagonal sobre wildfly.
+# Servidor de aplicaciones Wildfly.
 
 <div align="center">
   <img src=images/wildfly.png width="200">
@@ -257,3 +257,4 @@ Cada módulo contiene un archivo `module.xml`.
 - [Wildfly-31.0.0](https://github.com/wildfly/wildfly/releases/download/31.0.0.Final/wildfly-31.0.0.Final.zip)
 
 
+</div>
