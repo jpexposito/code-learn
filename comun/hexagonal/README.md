@@ -80,8 +80,7 @@ A continuación se muestra la estructura de módulos Maven para implementar la s
   ├─ codeLearn-adapter-client-rest-service-1 (jar)   <- Clientes REST externos
   └─ codeLearn-adapter-client-soap-service-2 (jar)   <- Clientes SOAP externos
 ─ codeLearn-rest/                     (jar)  <-- IN: expone REST y se comunica con codeLearn-service
-─ codeLearn-war/                      (war)  <-- ensamblado de todos los jar en un war + despliegue WildFly
-─ codeLearn-war (war)              <- Inbound + bootstrap (web.xml, CXF, wiring)
+─ codeLearn-war/                      (war)  <-- ensamblado de todos los jar en un war (web.xml, CXF, wiring) + despliegue WildFly
 ```
 
 <div align="center">
