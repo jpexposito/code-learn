@@ -1,64 +1,49 @@
-
 <div align="justify">
 
-# CodeLearn – Creación y despliegue de una solución multimódulo en un servidor de aplicaciones
+# CodeLearn – Servicio Multimódulo desplegado en WildFly
 
-## 1. Descripción general
+## 1. Introducción
 
-Este proyecto implementa una **aplicación Java basada en Spring Boot desplegada como WAR en WildFly**.  
-La solución utiliza una **arquitectura multimódulo Maven**, separando responsabilidades entre persistencia, servicios REST y despliegue.
+Este proyecto es una **aplicación Java basada en Spring Boot desplegada como WAR en WildFly**.
+Está organizada como **proyecto Maven multimódulo** para separar responsabilidades entre:
+
+- persistencia de datos
+- lógica de negocio y API REST
+- configuración de despliegue
+
+Además, la configuración de la aplicación **no está dentro del WAR**, sino que se **externaliza en un módulo de WildFly**, lo que permite modificar parámetros sin recompilar la aplicación.
 
 - [Descarga Wildfly 26](https://github.com/wildfly/wildfly/releases/download/26.1.3.Final/wildfly-26.1.3.Final.zip)
 
-Además, se describe **la configuración de la aplicación (`application.properties`) externalizada en un módulo de WildFly**, lo que permite modificar parámetros sin recompilar el WAR.
+El proyecto también incluye:
+
+- seguridad básica con **Spring Security**
+- documentación automática de la API con **OpenAPI / Swagger**
+- base de datos **H2 configurada dentro de WildFly**
 
 ---
 
-# 2. Arquitectura del proyecto
+## 2. Requisitos previos
 
-La solución sigue una arquitectura **multimódulo Maven**:
+Antes de ejecutar el proyecto necesitas tener instalado:
+
+| Software | Versión recomendada |
+|--------|--------|
+| Java | 17 |
+| Maven | 3.8+ |
+| WildFly | 26.x |
+| Git | opcional |
+
+Comprobar instalación:
 
 ```
-codelearn-parent
-│
-├── codelearn-persistence
-│   ├── Entidades JPA
-│   ├── Repositorios Spring Data
-│
-├── codelearn-rest
-│   ├── Controladores REST
-│   ├── Servicios de negocio
-│
-├── codelearn-war
-│   ├── Configuración Spring Boot
-│   ├── Seguridad
-│   ├── Bootstrap de datos
-│   └── Empaquetado WAR para WildFly
+java -version
+mvn -version
 ```
-
-<div align="center">
-  <img src=images/code-lear-modulos.png width="400">
-</div>
-
-
-### Responsabilidades
-
-| Módulo | Responsabilidad |
-|------|------|
-| persistence | Acceso a base de datos |
-| rest | API REST y lógica de negocio |
-| war | Configuración de despliegue y seguridad |
-
-Esta separación facilita:
-
-- mantenimiento
-- reutilización
-- testing
-- escalabilidad del proyecto
 
 ---
 
-# 3. Versiones principales utilizadas
+## 3. Tecnologías utilizadas
 
 | Tecnología | Versión |
 |------------|--------|
@@ -71,18 +56,53 @@ Esta separación facilita:
 | OpenAPI / Swagger | springdoc 1.6.x |
 | Base de datos | H2 (configurada en WildFly) |
 
-
 <div align="center">
   <img src=images/code-lear-librerias.png width="400">
 </div>
 
 ---
 
-# 4. Configuración de base de datos en WildFly
+## 4. Arquitectura del proyecto
 
-La base de datos se configura directamente dentro de WildFly mediante un **datasource**. La configuración se realiza en el fichero **standalone.xml** en la carpeta `WILDFLY_HOME/standalone/configuguracion`.
+El proyecto está dividido en módulos Maven:
 
-Ejemplo de datasource utilizado:
+```
+codelearn-parent
+│
+├── codeLearn-persistence
+│   ├── Entidades JPA
+│   └── Repositorios Spring Data
+│
+├── codeLearn-rest
+│   ├── Controladores REST
+│   └── Servicios de negocio
+│
+├── codeLearn-war
+│   ├── Configuración Spring Boot
+│   ├── Seguridad
+│   ├── Inicialización de datos
+│   └── Empaquetado WAR para WildFly
+```
+
+<div align="center">
+  <img src=images/code-lear-modulos.png width="400">
+</div>
+
+### Responsabilidades
+
+| Módulo | Responsabilidad |
+|------|------|
+| persistence | Acceso a base de datos |
+| rest | API REST |
+| war | Configuración, seguridad y despliegue |
+
+---
+
+## 5. Base de datos configurada en WildFly
+
+La base de datos **no está dentro de la aplicación**, sino que se configura en WildFly mediante un **datasource**.
+
+Ejemplo:
 
 ```xml
 <datasource jndi-name="java:jboss/CodeLearnDS" pool-name="CodeLearnDS" enabled="true">
@@ -95,25 +115,25 @@ Ejemplo de datasource utilizado:
 </datasource>
 ```
 
-<div align="center">
-  <img src=images/code-lear-arquitectura.png width="400">
-</div>
-
-El datasource se referencia en Spring mediante:
+La aplicación accede mediante:
 
 ```
 spring.datasource.jndi-name=java:jboss/CodeLearnDS
 ```
 
-Esto evita almacenar credenciales dentro de la aplicación.
+> Tienes disponible el fichero ya preparado para la [descarga](resources/standalone.xml).
+
+<div align="center">
+  <img src=images/code-lear-arquitectura.png width="400">
+</div>
 
 ---
 
-# 5. Externalización de configuración mediante módulo WildFly
+## 6. Configuración externalizada (módulo WildFly)
 
-Para evitar que la configuración esté dentro del WAR se utiliza un **WildFly module**.
+La configuración de Spring **no se incluye dentro del WAR**.
 
-### Módulo
+Se utiliza el módulo:
 
 ```
 com.docencia.codelearn.config
@@ -132,101 +152,35 @@ module.xml
 application.properties
 ```
 
-### module.xml
+En la carpeta **resources** tienes:
 
-```xml
-<module xmlns="urn:jboss:module:1.9" name="com.docencia.codelearn.config">
-    <resources>
-        <resource-root path="."/>
-    </resources>
-</module>
-```
-
-### application.properties
-
-Contiene la configuración principal:
-
-```
-spring.datasource.jndi-name=java:jboss/CodeLearnDS
-
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=false
-
-auth.max-failed-attempts=3
-
-# Swagger / OpenAPI
-springdoc.api-docs.enabled=true
-springdoc.swagger-ui.enabled=true
-
-# Forzar URLs correctas bajo el context-root /codelearn
-springdoc.swagger-ui.url=/codelearn/v3/api-docs
-springdoc.swagger-ui.configUrl=/codelearn/v3/api-docs/swagger-config
-springdoc.swagger-ui.disable-swagger-default-url=true
-```
-
-### Dependencia desde el WAR
-
-El WAR declara el módulo mediante:
-
-```
-WEB-INF/jboss-deployment-structure.xml
-```
-
-```xml
-<jboss-deployment-structure>
-  <deployment>
-    <dependencies>
-      <module name="com.docencia.codelearn.config"/>
-    </dependencies>
-  </deployment>
-</jboss-deployment-structure>
-```
-
-Ventajas:
-
-- configuración editable sin recompilar
-- separación entre código y configuración
-- mayor seguridad
-
-<div align="center">
-  <img src=images/code-lear-arquitectura.png width="400">
-</div>
+- ZIP del [módulo](resorces/) WildFly ya preparado
+- [standalone.xml]((resorces/standalone.xml)) de ejemplo
 
 ---
 
-# 6. Seguridad
+## 7. Swagger / OpenAPI
 
-La seguridad se implementa con **Spring Security**.
+Swagger permite probar la API desde el navegador.
 
-## Autenticación
+URL:
 
-Se utiliza **HTTP Basic** para simplificar pruebas.
+```
+http://localhost:8080/codelearn/swagger-ui/index.html
+```
 
-Usuarios de ejemplo:
+---
+
+## 8. Seguridad
+
+Se utiliza **Spring Security con HTTP Basic**.
+
+Usuarios de prueba:
 
 | Usuario | Password | Rol |
 |-------|--------|------|
 | admin | admin | ADMIN |
 | user | user | USER |
-
-## Reglas de seguridad
-
-| Endpoint | Permiso |
-|--------|--------|
-| GET /api/tasks | USER, ADMIN |
-| POST /api/tasks | ADMIN |
-| PUT /api/tasks | ADMIN |
-| DELETE /api/tasks | ADMIN |
-| /api/auth/** | Público |
-
-Configuración simplificada:
-
-```java
-.antMatchers(HttpMethod.GET, "/api/tasks/**").hasAnyRole("USER","ADMIN")
-.antMatchers(HttpMethod.POST, "/api/tasks/**").hasRole("ADMIN")
-.antMatchers(HttpMethod.PUT, "/api/tasks/**").hasRole("ADMIN")
-.antMatchers(HttpMethod.DELETE, "/api/tasks/**").hasRole("ADMIN")
-```
 
 <div align="center">
   <img src=images/code-learn-securizacion.png width="400">
@@ -234,124 +188,167 @@ Configuración simplificada:
 
 ---
 
-# 7. Swagger / OpenAPI
-
-La documentación de la API se genera automáticamente.
-
-URL:
-
-```
-/swagger-ui.html
-```
-
-Puede deshabilitarse desde configuración:
-
-```
-springdoc.api-docs.enabled=false
-springdoc.swagger-ui.enabled=false
-```
-
----
-
-# 8. Códigos HTTP implementados
-
-La API REST devuelve códigos correctos según la operación.
+## 9. Códigos HTTP
 
 | Operación | Código |
 |--------|--------|
-GET OK | 200 |
-Creación | 201 |
-Borrado | 204 |
-No encontrado | 404 |
-No autorizado | 401 |
-Prohibido | 403 |
+| OK | 200 |
+| Creación | 201 |
+| Eliminación | 204 |
+| No encontrado | 404 |
+| No autenticado | 401 |
+| Sin permisos | 403 |
 
 ---
 
-# 9. Inicialización de datos
+## 10. Despliegue
 
-Al arrancar la aplicación se crean usuarios de prueba mediante un **ApplicationRunner**.
-
-Esto facilita pruebas rápidas del sistema.
-
----
-
-# 10. Posibles mejoras
-
-### Seguridad
-
-- JWT en lugar de Basic Auth
-- OAuth2 / Keycloak
-- Password hashing (BCrypt)
-
-### Arquitectura
-
-- Separar capa de servicios
-- Introducir DTO mappers (MapStruct)
-- Añadir capa de testing
-
-### Observabilidad
-
-- Prometheus metrics
-- Spring Actuator
-- Logs estructurados
-
-### Persistencia
-
-- Migraciones con Flyway o Liquibase
-
-### Infraestructura
-
-- Docker
-- CI/CD pipeline
-- Configuración externa con Vault
-
----
-
-# 11. Ventajas de la solución
-
-- Configuración externalizada
-- Arquitectura modular
-- Seguridad integrada
-- Compatible con WildFly
-- Documentación automática API
-- Fácil de mantener y extender
-
----
-
-# 12. Flujo de despliegue
-
-1. Construir proyecto
+1. Compilar:
 
 ```
 mvn clean package
 ```
 
-2. Copiar WAR
+2. Copiar WAR a:
 
 ```
-standalone/deployments/
+WILDFLY_HOME/standalone/deployments/
 ```
 
-3. Instalar módulo WildFly de configuración
-
-```
-modules/com/docencia/codelearn/config/
-```
+3. Instalar módulo de configuración desde `resources`
 
 4. Reiniciar WildFly
 
 ---
 
-# 13. Conclusión
+## 11. Verificación
 
-La solución proporciona una base sólida para aplicaciones empresariales desplegadas en WildFly, combinando:
+Abrir:
 
-- Spring Boot
-- configuración externalizada
-- arquitectura modular
-- seguridad básica
+```
+http://localhost:8080/codelearn/swagger-ui/index.html
+```
 
-El diseño permite evolucionar fácilmente hacia arquitecturas más complejas manteniendo una base limpia y mantenible.
+---
+
+## 12. Posibles mejoras
+
+- JWT
+- Keycloak
+- Flyway
+- Observabilidad
+
+## 13. Crear un usuario administrador en WildFly
+
+WildFly incluye un script para crear usuarios de administración necesarios para acceder a la consola web.
+
+### Linux / Mac
+
+Desde el directorio de instalación de WildFly ejecutar:
+
+```bash
+WILDFLY_HOME/bin/add-user.sh
+```
+
+### Windows
+
+Ejecutar:
+
+```bat
+WILDFLY_HOME\bin\add-user.bat
+```
+
+### Proceso de creación
+
+El asistente preguntará:
+
+```
+What type of user do you wish to add?
+a) Management User
+b) Application User
+```
+
+Seleccionar:
+
+```
+a
+```
+
+Después introducir:
+
+```
+Username: admin
+Password: ********
+```
+
+y al resto de opciones `yes`.
+
+Al finalizar aparecerá:
+
+```
+Added user 'admin' to file 'mgmt-users.properties'
+```
+
+---
+
+### Arrancar WildFly
+
+Para arranca el servidor en remoto debemos de añadir `-b 0.0.0.0 -bmanagement 0.0.0.0` al scrip `standalone.sh\bat`. 
+
+#### Linux / Mac
+
+```bash
+WILDFLY_HOME/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0
+```
+
+#### Windows
+
+```bat
+WILDFLY_HOME\bin\standalone.bat -b 0.0.0.0 -bmanagement 0.0.0.0
+```
+
+### Windows
+
+```bat
+standalone.bat -b 0.0.0.0 -bmanagement 0.0.0.0
+```
+
+---
+
+### Acceder a la consola de administración
+
+Abrir en el navegador:
+
+```
+http://localhost:9990
+```
+
+Introducir el usuario creado anteriormente.
+
+---
+
+### Verificar que el servidor ha arrancado
+
+Cuando WildFly arranca correctamente aparecerá un mensaje similar a:
+
+```
+WFLYSRV0025: WildFly Full 26.x started
+```
+
+---
+
+### Acceso a la aplicación
+
+Aplicación:
+
+```
+http://localhost:8080/codelearn
+```
+
+Swagger:
+
+```
+http://localhost:8080/codelearn/swagger-ui/index.html
+```
 
 </div>
