@@ -1,0 +1,7 @@
+<jboss-deployment-structure>
+  <deployment>
+    <dependencies>
+      <module name="com.docencia.codelearn.config"/>
+    </dependencies>
+  </deployment>
+</jboss-deployment-structure>
