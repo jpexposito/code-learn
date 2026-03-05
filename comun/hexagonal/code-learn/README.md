@@ -127,6 +127,7 @@ spring.datasource.jndi-name=java:jboss/CodeLearnDS
   <img src=images/code-lear-arquitectura.png width="400">
 </div>
 
+
 ---
 
 ## 6. Configuración externalizada (módulo WildFly)
@@ -324,6 +325,11 @@ http://localhost:9990
 ```
 
 Introducir el usuario creado anteriormente.
+
+
+<div align="center">
+  <img src=images/wildfly-ds.png width="400">
+</div>
 
 ---
 
