@@ -224,11 +224,20 @@ WILDFLY_HOME/standalone/deployments/
 
 ## 11. Verificación
 
+<div align="center">
+  <img src=images/code-learn-wildfly-start.png width="400">
+</div>
+
 Abrir:
 
 ```
 http://localhost:8080/codelearn/swagger-ui/index.html
 ```
+
+<div align="center">
+  <img src=images/code-learn-swagger.png width="400">
+</div>
+
 
 ---
 
