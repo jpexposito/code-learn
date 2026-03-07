@@ -155,8 +155,8 @@ application.properties
 
 En la carpeta **resources** tienes:
 
-- ZIP del [módulo](resorces/) WildFly ya preparado
-- [standalone.xml]((resorces/standalone.xml)) de ejemplo
+- ZIP del [módulo](resources/) WildFly ya preparado
+- [standalone.xml]((resources/standalone.xml)) de ejemplo
 
 ---
 
