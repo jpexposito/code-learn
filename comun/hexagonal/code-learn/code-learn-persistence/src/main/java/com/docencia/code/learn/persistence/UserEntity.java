@@ -33,6 +33,10 @@ public class UserEntity {
   @Column(name = "bloqueado", nullable = false)
   private boolean bloqueado = false;
 
+  @NotBlank
+  @Column(name = "rol", nullable = false)
+  private String rol;
+
   protected UserEntity() {}
 
   public UserEntity(String nombre, String email, String password) {
@@ -46,6 +50,7 @@ public class UserEntity {
   public Long getId() { return id; }
   public String getNombre() { return nombre; }
   public void setNombre(String nombre) { this.nombre = nombre; }
+  public void setEmail(String email) { this.email = email; }
   public String getEmail() { return email; }
   public String getPassword() { return password; }
   public void setPassword(String password) { this.password = password; }
@@ -53,6 +58,8 @@ public class UserEntity {
   public void setIntentosFallidos(int intentosFallidos) { this.intentosFallidos = intentosFallidos; }
   public boolean isBloqueado() { return bloqueado; }
   public void setBloqueado(boolean bloqueado) { this.bloqueado = bloqueado; }
+  public String getRol() { return rol; }
+  public void setRol(String rol) { this.rol = rol; }
 
   @PrePersist
   void prePersist() {
