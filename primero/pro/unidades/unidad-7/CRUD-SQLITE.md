@@ -6,48 +6,81 @@
 
 ## ¿Que es SQLite?
 
-SQLite es un sistema de gestión de bases de datos relacional, contenida en una relativamente pequeña biblioteca escrita en C. Como ya se menciono anteriormente en la presentación la principal ventaja de este motor de base de datos es que no tenemos la necesidad de hacer uso de servidores locales o externos que gestionan el contenido de esta.
+SQLite es un sistema de gestión de bases de datos relacional, contenida
+en una relativamente pequeña biblioteca escrita en C. Como ya se
+menciono anteriormente en la presentación la principal ventaja de este
+motor de base de datos es que no tenemos la necesidad de hacer uso de
+servidores locales o externos que gestionan el contenido de esta.
 
-Nuestra base de datos SQLite se gestiona en un archivo donde tenemos todos nuestros datos. Así que simplemente con copiar este archivo en otra maquina tendremos acceso a nuestros datos, sin tener la necesidad de tener implantado un servidor de acceso a estos datos.
+Nuestra base de datos SQLite se gestiona en un archivo donde tenemos
+todos nuestros datos. Así que simplemente con copiar este archivo en
+otra maquina tendremos acceso a nuestros datos, sin tener la necesidad
+de tener implantado un servidor de acceso a estos datos.
 
-Así que a continuación iremos a desarrollar una guía de como instalar nuestra base de datos, conectarnos, realizar consultas, y demás.
+Así que a continuación iremos a desarrollar una guía de como instalar
+nuestra base de datos, conectarnos, realizar consultas, y demás.
 
 ## ¿Que necesitamos para trabajar?
 
-Antes de comenzar a trabajar con SQLite vamos a mencionar lo que debemos tener instalado en nuestra maquina, y explicar que función cumple cada uno de estos.
+Antes de comenzar a trabajar con SQLite vamos a mencionar lo que debemos
+tener instalado en nuestra maquina, y explicar que función cumple cada
+uno de estos.
 
-- [**SQLite:**]([download/sqlite.zip](https://www.sqlite.org/download.html)) Es nuestro sistema de gestión de base de datos que mencionamos anteriormente.
-- [**JDBC (Java Database Conectivity):**]([./download/sqlite-jdbc-3.20.0.jar.zip](https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc/3.20.0)) Es una API que permite la ejecución de operaciones sobre nuestra base de datos desde Java, es la que ira a "hablar" con nuestra base de datos.
+-   [**SQLite:**](%5Bdownload/sqlite.zip%5D(https://www.sqlite.org/download.html))
+    Es nuestro sistema de gestión de base de datos que mencionamos
+    anteriormente.
+-   [**JDBC (Java Database
+    Conectivity):**](%5B./download/sqlite-jdbc-3.20.0.jar.zip%5D(https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc/3.20.0))
+    Es una API que permite la ejecución de operaciones sobre nuestra
+    base de datos desde Java, es la que ira a "hablar" con nuestra base
+    de datos.
 
-Para descargar estas herramientas simplemente basta hacer clic encima del titulo de cada una, o en caso contrario hacer [click aquí](./download) para ver todos las descargas.
+Para descargar estas herramientas simplemente basta hacer clic encima
+del titulo de cada una, o en caso contrario hacer [click
+aquí](./download) para ver todos las descargas.
 
-> **Aclaración:** Todas estas herramientas ya se encuentran instaladas en las maquinas del laboratorio que iremos a desarrollar esta guía.
+> **Aclaración:** Todas estas herramientas ya se encuentran instaladas
+> en las maquinas del laboratorio que iremos a desarrollar esta guía.
 
 ## ¿Como iremos a trabajar?
 
 ![](./img/arq.png)
 
-Como se puede ver en la imagen superior, la arquitectura sobre la cual estaremos trabajando, nuestra aplicación **Java** intercambia mensajes con **JDBC**, y este le envía nuestros mensajes a nuestra base de datos **SQLite**.
+Como se puede ver en la imagen superior, la arquitectura sobre la cual
+estaremos trabajando, nuestra aplicación **Java** intercambia mensajes
+con **JDBC**, y este le envía nuestros mensajes a nuestra base de datos
+**SQLite**.
 
-Bueno, ahora que ya tenemos todas las herramientas necesarias y sabemos como funciona la arquitectura sobre la cual vamos a trabajar, nos ponemos manos a la obra y a trabajar :stuck_out_tongue_winking_eye:.
+Bueno, ahora que ya tenemos todas las herramientas necesarias y sabemos
+como funciona la arquitectura sobre la cual vamos a trabajar, nos
+ponemos manos a la obra y a trabajar :stuck_out_tongue_winking_eye:.
 
 ## Comienzo de la guía de trabajo
 
 ### ¿Que nos pidieron?
 
-Una veterinaria muy popular de la ciudad la cual atiende muchos animales, entre ellos perros :dog: nos solicito que desarrollemos una aplicación.
+Una veterinaria muy popular de la ciudad la cual atiende muchos
+animales, entre ellos perros :dog: nos solicito que desarrollemos una
+aplicación.
 
-- **Guardar perros:** Nos pidieron que guardemos cada perro que es atendido por ellos, de cada uno de ellos les interesa su numero de chip, su nombre, su raza.
-  - **Listar perros:** También nos solicitan que seamos capaces de mostrar todos los perros que se han guardado, mostrando cada uno de sus datos.
-  - **Listar perros ordenados por raza:** También les interesa tener la posibilidad de ver todos los perros ordenados por raza.
-  
+-   **Guardar perros:** Nos pidieron que guardemos cada perro que es
+    atendido por ellos, de cada uno de ellos les interesa su numero de
+    chip, su nombre, su raza.
+    -   **Listar perros:** También nos solicitan que seamos capaces de
+        mostrar todos los perros que se han guardado, mostrando cada uno
+        de sus datos.
+    -   **Listar perros ordenados por raza:** También les interesa tener
+        la posibilidad de ver todos los perros ordenados por raza.
+
 ## Desarrollando nuestra aplicación
 
 ### Creando nuestro proyecto
 
-Para el desarrollo de la aplicación, nuestro primer paso será crear un proyecto en __nuestro ide con soporte maven__. Después incorporamos la libreria:
+Para el desarrollo de la aplicación, nuestro primer paso será crear un
+proyecto en **nuestro ide con soporte maven**. Después incorporamos la
+libreria:
 
-```xml
+``` xml
 <dependency>
     <groupId>org.xerial</groupId>
     <artifactId>sqlite-jdbc</artifactId>
@@ -57,10 +90,11 @@ Para el desarrollo de la aplicación, nuestro primer paso será crear un proyect
 
 ### Creando nuestra clase Perro
 
-Luego de crear el proyecto pasaremos a modelar nuestro problema, para ello tendremos que crear la clase **Perro**, ya sabemos que atributos tendrá esta.
-Nuestra clase quedara muy parecida a esta:
+Luego de crear el proyecto pasaremos a modelar nuestro problema, para
+ello tendremos que crear la clase **Perro**, ya sabemos que atributos
+tendrá esta. Nuestra clase quedara muy parecida a esta:
 
-```java
+``` java
 public class Perro {
     private int chip;
     private String nombre;
@@ -105,11 +139,17 @@ public class Perro {
 
 ### Creando nuestra clase Conexión
 
-Ahora que ya tenemos la librería JDBC importada, pasaremos a crear la clase **Conexión** ; esta clase será la encargada de conectarse, desconectarse, así como insertar y eliminar los perros a nuestra base de datos.
+Ahora que ya tenemos la librería JDBC importada, pasaremos a crear la
+clase **Conexión** ; esta clase será la encargada de conectarse,
+desconectarse, así como insertar y eliminar los perros a nuestra base de
+datos.
 
-Lo primero que debemos definir de esta clase será los atributos que tendremos en esta, vamos a tener un **String** que representa la ruta donde estará ubicada nuestra base de datos y un objeto **Connection** que va a ser el punto de entrada a nuestra base de datos.
+Lo primero que debemos definir de esta clase será los atributos que
+tendremos en esta, vamos a tener un **String** que representa la ruta
+donde estará ubicada nuestra base de datos y un objeto **Connection**
+que va a ser el punto de entrada a nuestra base de datos.
 
-```java
+``` java
 public class Conexion {
     private String rutaArchivoBD;
     private Connection conexion;
@@ -120,9 +160,11 @@ public class Conexion {
 }
 ```
 
-Ahora debemos agregar un método **conectar()** y un método **cerrar()**, estos se encargaran de abrir la conexión con la base de datos y cerrarla.
+Ahora debemos agregar un método **conectar()** y un método **cerrar()**,
+estos se encargaran de abrir la conexión con la base de datos y
+cerrarla.
 
-```java
+``` java
 private void conectar() throws SQLException{
     conexion = DriverManager.getConnection("jdbc:sqlite:" + rutaArchivoBD);
 }
@@ -132,22 +174,32 @@ private void cerrar() throws SQLException{
 }
 ```
 
-> **Nota:** Como se puede observar el código esta sujeto a mejoras, ya que podríamos añadir un manejo de excepciones que no lo estamos haciendo.
+> **Nota:** Como se puede observar el código esta sujeto a mejoras, ya
+> que podríamos añadir un manejo de excepciones que no lo estamos
+> haciendo.
 
-Lo que hace el primer método es simplemente instanciar un objeto del tipo **Connection**, y para esto su constructor recibe como parámetro el tipo de base de datos que estamos usando (en este caso SQLite), asi como la ruta de donde guardaremos esta base de datos. Y el segundo método simplemente cierra la conexión.
-Con esto ya podríamos conectarnos a nuestra base de datos yeah :smiley:.
+Lo que hace el primer método es simplemente instanciar un objeto del
+tipo **Connection**, y para esto su constructor recibe como parámetro el
+tipo de base de datos que estamos usando (en este caso SQLite), asi como
+la ruta de donde guardaremos esta base de datos. Y el segundo método
+simplemente cierra la conexión. Con esto ya podríamos conectarnos a
+nuestra base de datos yeah :smiley:.
 
 ### Creando nuestra Tabla Perros
 
-Falta una cosa :disappointed: para guardar nuestros perros necesitamos tener una estructura que se llama Tabla. Esto es simplemente una tabla como el nombre lo indica donde cada fila de esta tabla representa un perro especifico, y cada columna representa los datos que tienen estos perros.
+Falta una cosa :disappointed: para guardar nuestros perros necesitamos
+tener una estructura que se llama Tabla. Esto es simplemente una tabla
+como el nombre lo indica donde cada fila de esta tabla representa un
+perro especifico, y cada columna representa los datos que tienen estos
+perros.
 
-| **Chip** | **Nombre** | **Raza** |
-|--------|-----|---------|
-| 47586 | Ruffo | Bulldog Ingles | 
-| 32452 | Maia | Cocker Spaniel |
-| 94401 | Toby | Doberman |
+  **Chip**   **Nombre**   **Raza**
+  ---------- ------------ ----------------
+  47586      Ruffo        Bulldog Ingles
+  32452      Maia         Cocker Spaniel
+  94401      Toby         Doberman
 
-```java
+``` java
 private void crearTablaPerrosSiNoExiste() throws SQLException{
     conectar();
     PreparedStatement sentencia = conexion.prepareStatement("CREATE TABLE IF NOT EXISTS Perros"
@@ -160,12 +212,21 @@ private void crearTablaPerrosSiNoExiste() throws SQLException{
 }
 ```
 
-Lo que hacemos es simplemente abrir la conexión con nuestra base de datos, luego preparamos una sentencia que contiene una consulta en lenguaje SQL, esta consulta esta diciendo que queremos crear una tabla que se llame **Perros** si no existe (de lo contrario no se crea), y además que tiene como columnas un atributo **chip** (entero), un **nombre** (texto), una **raza** (texto).
-Además estamos diciendo que **chip** es <kbd>PRIMARY KEY</kbd> esto quiere decir que no pueden haber dos filas con el mismo **chip**, esto tiene sentido ya que este es único para cada perro.
+Lo que hacemos es simplemente abrir la conexión con nuestra base de
+datos, luego preparamos una sentencia que contiene una consulta en
+lenguaje SQL, esta consulta esta diciendo que queremos crear una tabla
+que se llame **Perros** si no existe (de lo contrario no se crea), y
+además que tiene como columnas un atributo **chip** (entero), un
+**nombre** (texto), una **raza** (texto). Además estamos diciendo que
+**chip** es `<kbd>`{=html}PRIMARY KEY`</kbd>`{=html} esto quiere decir
+que no pueden haber dos filas con el mismo **chip**, esto tiene sentido
+ya que este es único para cada perro.
 
-Así que ahora deberíamos agregar una llamada a este método en nuestro constructor de la clase Conexión, ya que si no existe la tabla la deberíamos crear.
+Así que ahora deberíamos agregar una llamada a este método en nuestro
+constructor de la clase Conexión, ya que si no existe la tabla la
+deberíamos crear.
 
-```java
+``` java
 public Conexion(String unaRutaArchivoBD) throws SQLException{
      rutaArchivoBD = unaRutaArchivoBD;
      crearTablaPerrosSiNoExiste();
@@ -174,9 +235,10 @@ public Conexion(String unaRutaArchivoBD) throws SQLException{
 
 ### Insertando objetos
 
-Ahora que ya tenemos nuestra tabla donde guardar nuestros Perros, podemos crear un método que inserte estos en la base de datos.
+Ahora que ya tenemos nuestra tabla donde guardar nuestros Perros,
+podemos crear un método que inserte estos en la base de datos.
 
-```java
+``` java
 public void guardarPerro(Perro unPerro) throws SQLException{
      conectar();
      PreparedStatement sentencia = 
@@ -189,13 +251,22 @@ public void guardarPerro(Perro unPerro) throws SQLException{
 }
 ```
 
-Lo que vamos hacer es abrir la conexión, como lo hicimos en el método anterior, para luego crear una sentencia; esta lo que hace es insertar una nueva fila en la tabla y se le especifica los valores que tomara cada columna mediante el método **"setString"**, para finalmente con el método **"execute()"** realizar la inserción.
+Lo que vamos hacer es abrir la conexión, como lo hicimos en el método
+anterior, para luego crear una sentencia; esta lo que hace es insertar
+una nueva fila en la tabla y se le especifica los valores que tomara
+cada columna mediante el método **"setString"**, para finalmente con el
+método **"execute()"** realizar la inserción.
 
 ### Obtener objetos
 
-Con este método lo que vamos a lograr es poder obtener todos los Perros que tenemos guardados en nuestra base de datos, para eso simplemente realizamos la consulta SQL **"SELECT * FROM Perros"**, esta nos retorna un objeto del tipo **ResultSet** sobre el cual iremos a iterar para obtener una fila de la tabla, para luego crear un objeto Perro y agregarlo al ArrayList que iremos a retornar.
+Con este método lo que vamos a lograr es poder obtener todos los Perros
+que tenemos guardados en nuestra base de datos, para eso simplemente
+realizamos la consulta SQL **"SELECT \* FROM Perros"**, esta nos retorna
+un objeto del tipo **ResultSet** sobre el cual iremos a iterar para
+obtener una fila de la tabla, para luego crear un objeto Perro y
+agregarlo al ArrayList que iremos a retornar.
 
-```java
+``` java
 public ArrayList<Perro> obtenerPerros() throws SQLException{
      conectar();
      PreparedStatement sentencia = conexion.prepareStatement("SELECT * FROM Perros");
@@ -215,10 +286,12 @@ public ArrayList<Perro> obtenerPerros() throws SQLException{
 
 ### Creando nuestra clase Prueba
 
-Ahora ya tenemos todo, solamente debemos crear nuestra clase Prueba para ofrecer un menú desde el cual podamos cumplir con los requerimientos que nos solicito la veterinaria.
-Nuestra clase Prueba tendrá un **main**, donde iremos a mostrar las opciones disponibles.
+Ahora ya tenemos todo, solamente debemos crear nuestra clase Prueba para
+ofrecer un menú desde el cual podamos cumplir con los requerimientos que
+nos solicito la veterinaria. Nuestra clase Prueba tendrá un **main**,
+donde iremos a mostrar las opciones disponibles.
 
-```java
+``` java
 public static void main(String[] args) throws SQLException, IOException{
      Scanner entrada = new Scanner(System.in);
      int opcionMenu;
@@ -246,9 +319,11 @@ public static void main(String[] args) throws SQLException, IOException{
 }
 ```
 
-Ahora debemos crear nuestros métodos **pedirDatos()** y **mostrarPerros()**, estos se encargaran de guardar un nuevo perro y mostrar todos los perros.
+Ahora debemos crear nuestros métodos **pedirDatos()** y
+**mostrarPerros()**, estos se encargaran de guardar un nuevo perro y
+mostrar todos los perros.
 
-```java
+``` java
 private static void pedirDatos() throws SQLException{
      Scanner entrada = new Scanner(System.in);
      System.out.println("Ingrese el numero de chip");
@@ -263,9 +338,12 @@ private static void pedirDatos() throws SQLException{
  }
 ```
 
-Como se puede lo único que hacemos es pedir los datos mediante un Scanner para luego crear una **Conexión**, pasándole al constructor la ruta del fichero donde estará nuestra base de datos, para luego llamar al método **guardarPerro** que creamos anteriormente.
+Como se puede lo único que hacemos es pedir los datos mediante un
+Scanner para luego crear una **Conexión**, pasándole al constructor la
+ruta del fichero donde estará nuestra base de datos, para luego llamar
+al método **guardarPerro** que creamos anteriormente.
 
-```java
+``` java
 private static void mostrarPerros() throws SQLException{
      Conexion unaConexion = new Conexion("./miBaseDeDatos.db");
      ArrayList<Perro> perros = unaConexion.obtenerPerros();
@@ -277,14 +355,136 @@ private static void mostrarPerros() throws SQLException{
 }
 ```
 
-De manera similar al anterior, creamos una **Conexión** para luego llamar al método **obtenerPerros** que nos retorna un ArrayList<Perro> que luego iremos a iterar para mostrar los perros.
- 
+De manera similar al anterior, creamos una **Conexión** para luego
+llamar al método **obtenerPerros** que nos retorna un
+ArrayList`<Perro>`{=html} que luego iremos a iterar para mostrar los
+perros.
+
 ## Extra
 
 ### Ejercicio
 
-Queda como ejercicio crear un método para listar los perros ordenados por raza.
+Queda como ejercicio crear un método para listar los perros ordenados
+por raza.
 
-> **Sugerencia:** Se recomienda utilizar el método **obtenerPerros()** de nuestra clase **Conexión**, para luego ordenar.
+> **Sugerencia:** Se recomienda utilizar el método **obtenerPerros()**
+> de nuestra clase **Conexión**, para luego ordenar.
+:::
 
+---
+
+## MEJORAS Y OPTIMIZACIÓN (FORMA CORRECTA DE IMPLEMENTAR)
+
+A continuación se mantiene la implementación original, pero esta sección
+explica **cómo debería hacerse en un entorno profesional** y el por qué.
+
+---
+
+### Problemas de la implementación original
+
+-   Manejo manual de conexión (`conectar()` / `cerrar()`)
+-   Uso de `execute()` en lugar de métodos específicos
+-   Posibles fugas de recursos
+-   Código poco modular
+
+---
+
+###  Mejora 1: try-with-resources
+
+``` java
+try (Connection conn = DriverManager.getConnection(url);
+     PreparedStatement pstmt = conn.prepareStatement(sql)) {
+```
+
+### ✔️ ¿Por qué?
+
+-   Cierra automáticamente conexión y statement
+-   Evita fugas de memoria
+-   Reduce errores humanos
+
+---
+
+### Mejora 2: executeUpdate()
+
+``` java
+pstmt.executeUpdate();
+```
+
+### ✔️ ¿Por qué?
+
+-   Es el método correcto para INSERT, UPDATE y DELETE
+-   Devuelve número de filas afectadas
+-   Mejora claridad del código
+
+---
+
+### Mejora 3: Uso correcto de PreparedStatement
+
+``` java
+String sql = "INSERT INTO Perros (chip, nombre, raza) VALUES (?, ?, ?)";
+```
+
+### ✔️ ¿Por qué?
+
+-   Evita SQL Injection
+-   Mejora rendimiento
+-   Código más limpio
+
+---
+
+### Mejora 4: Separación en DAO/Persistence
+
+Separar en: - Modelo (Perro) - DAO (acceso a datos) - Servicios (lógica)
+
+### ✔️ ¿Por qué?
+
+-   Código más mantenible
+-   Más escalable
+-   Estándar profesional
+
+---
+
+### Ejemplo optimizado
+
+``` java
+public void insertar(Perro perro) {
+    String url = "jdbc:sqlite:miBaseDeDatos.db";
+    String sql = "INSERT INTO Perros (chip, nombre, raza) VALUES (?, ?, ?)";
+
+    try (Connection conn = DriverManager.getConnection(url);
+         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+        pstmt.setInt(1, perro.getChip());
+        pstmt.setString(2, perro.getNombre());
+        pstmt.setString(3, perro.getRaza());
+
+        pstmt.executeUpdate();
+
+    } catch (SQLException e) {
+        System.out.println(e.getMessage());
+    }
+}
+```
+
+---
+
+### Comparativa
+
+  Aspecto              Original   Optimizado
+  -------------------- ---------- -------------
+  Conexión             Manual     Automática
+  Seguridad            Baja      Alta
+  Código               Básico     Profesional
+  Estándar industria   ❌         ✅
+
+---
+
+### Conclusión
+
+- La implementación original es correcta para aprender\
+- Pero la versión optimizada es la que se debe usar siempre porque:
+    -   Evita errores críticos
+    -   Mejora la seguridad
+    -   Hace el código mantenible
+    -   Sigue buenas prácticas reales de JDBC
 </div>
