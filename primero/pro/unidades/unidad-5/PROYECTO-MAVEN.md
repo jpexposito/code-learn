@@ -23,7 +23,7 @@ mvn -version
 
 ---
 
-# 1. Vamos a construir un ejemplo real
+## 1. Vamos a construir un ejemplo real
 
 Uno de los puntos más importantes para mejorar la calidad del proyecto es mantener una nomenclatura coherente.
 
@@ -42,7 +42,7 @@ En esta guía usaremos siempre los siguientes nombres:
 | FXML principal | `usuario-view.fxml` |
 | CSS principal | `estilos.css` |
 
-## Reglas recomendadas
+### Reglas recomendadas
 
 - Usar siempre el mismo idioma en nombres de clases y paquetes.
 - Evitar mezclar nombres como `MainApp`, `PrincipalApplication`, `PrincipalAplication` o `ControladorPrincipal` para la misma responsabilidad.
@@ -52,9 +52,9 @@ En esta guía usaremos siempre los siguientes nombres:
 
 ---
 
-# 2. Añadir un proyecto completo funcional paso a paso
+## 2. Añadir un proyecto completo funcional paso a paso
 
-## Paso 1: Crear la estructura del proyecto
+### Paso 1: Crear la estructura del proyecto
 
 Crea la siguiente estructura:
 
@@ -100,7 +100,7 @@ mi-proyecto-javafx/
 
 ---
 
-## Paso 2: Crear el archivo `pom.xml`
+### Paso 2: Crear el archivo `pom.xml`
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -172,7 +172,7 @@ mi-proyecto-javafx/
 
 ---
 
-## Paso 3: Crear la clase principal
+### Paso 3: Crear la clase principal
 
 Archivo:
 
@@ -216,7 +216,7 @@ public class PrincipalApplication extends Application {
 
 ---
 
-## Paso 4: Crear el modelo
+### Paso 4: Crear el modelo
 
 Archivo:
 
@@ -263,7 +263,7 @@ public class Usuario {
 
 ---
 
-## Paso 5: Añadir el concepto de repositorio
+### Paso 5: Añadir el concepto de repositorio
 
 En una arquitectura más mantenible, el **controlador** no debería guardar datos directamente en ficheros ni conectarse directamente a una base de datos. Para eso añadimos una nueva capa: el **repositorio**.
 
@@ -273,7 +273,7 @@ El repositorio es la clase responsable de decidir **dónde** y **cómo** se guar
 Vista JavaFX → Controlador → Servicio → Repositorio → Fichero / Base de datos
 ```
 
-## ¿Qué hace cada capa?
+### ¿Qué hace cada capa?
 
 | Capa | Responsabilidad |
 |---|---|
@@ -283,7 +283,7 @@ Vista JavaFX → Controlador → Servicio → Repositorio → Fichero / Base de 
 | Controlador | Recibe acciones de la interfaz y llama al servicio. |
 | Vista | Muestra la interfaz al usuario. |
 
-## Modelo `Usuario`
+### Modelo `Usuario`
 
 El modelo no debe saber si se guarda en un fichero, en SQLite, en MySQL o en una API. Solo representa información.
 
@@ -323,7 +323,7 @@ public class Usuario {
 }
 ```
 
-## Interfaz del repositorio
+### Interfaz del repositorio
 
 Archivo:
 
@@ -347,7 +347,7 @@ public interface UsuarioRepository {
 
 Esta interfaz define **qué operaciones existen**, pero no indica todavía si se trabaja con fichero o base de datos.
 
-## Repositorio basado en fichero
+### Repositorio basado en fichero
 
 Archivo:
 
@@ -373,38 +373,17 @@ public class UsuarioFileRepository implements UsuarioRepository {
 
     @Override
     public void guardar(Usuario usuario) {
-        try {
-            Files.writeString(
-                    RUTA_FICHERO,
-                    usuario.toString() + System.lineSeparator(),
-                    StandardOpenOption.CREATE,
-                    StandardOpenOption.APPEND
-            );
-        } catch (IOException exception) {
-            throw new RuntimeException("No se pudo guardar el usuario en fichero", exception);
-        }
+        
     }
 
     @Override
     public List<Usuario> obtenerTodos() {
-        if (!Files.exists(RUTA_FICHERO)) {
-            return new ArrayList<>();
-        }
-
-        try {
-            return Files.readAllLines(RUTA_FICHERO)
-                    .stream()
-                    .map(linea -> linea.split(";"))
-                    .map(partes -> new Usuario(partes[0], Integer.parseInt(partes[1])))
-                    .toList();
-        } catch (IOException exception) {
-            throw new RuntimeException("No se pudieron leer los usuarios", exception);
-        }
+        
     }
 }
 ```
 
-## Repositorio basado en base de datos
+### Repositorio basado en base de datos
 
 Archivo:
 
@@ -440,7 +419,7 @@ public class UsuarioDatabaseRepository implements UsuarioRepository {
 }
 ```
 
-## Elegir si trabajamos con fichero o BBDD
+### Elegir si trabajamos con fichero o BBDD
 
 La decisión se puede centralizar en el servicio. Para proyectos pequeños es suficiente hacerlo así:
 
@@ -496,7 +475,7 @@ De esta forma, si mañana cambiamos de fichero a base de datos, el controlador y
 
 ---
 
-## Paso 6: Crear el servicio actualizado
+### Paso 6: Crear el servicio actualizado
 
 Archivo:
 
@@ -535,7 +514,7 @@ public class UsuarioService {
 
 ---
 
-## Paso 7: Crear el controlador
+### Paso 7: Crear el controlador
 
 Archivo:
 
@@ -596,7 +575,7 @@ public class UsuarioController {
 
 ---
 
-## Paso 8: Crear la vista FXML
+### Paso 8: Crear la vista FXML
 
 Archivo:
 
@@ -638,7 +617,7 @@ src/main/resources/es/ies/puerto/usuario-view.fxml
 
 ---
 
-## Paso 9: Crear la hoja de estilos
+### Paso 9: Crear la hoja de estilos
 
 Archivo:
 
@@ -659,7 +638,7 @@ src/main/resources/es/ies/puerto/css/estilos.css
 
 ---
 
-## Paso 10: Crear una prueba unitaria
+### Paso 10: Crear una prueba unitaria
 
 Archivo:
 
@@ -688,7 +667,7 @@ class UsuarioTest {
 
 ---
 
-## Paso 11: Ejecutar el proyecto
+### Paso 11: Ejecutar el proyecto
 
 Para compilar y ejecutar las pruebas:
 
@@ -724,11 +703,11 @@ mvn dependency:tree
 
 ---
 
-# Construir una APK para Android con GluonFX
+## Construir una APK para Android con GluonFX
 
 JavaFX no genera una APK directamente con el plugin estándar `javafx-maven-plugin`. Para Android se utiliza **GluonFX**, que permite compilar aplicaciones Java/JavaFX a aplicaciones nativas para distintos sistemas, incluyendo Android.
 
-## Requisitos para Android
+### Requisitos para Android
 
 Antes de compilar la APK necesitas instalar y configurar:
 
@@ -740,7 +719,7 @@ Antes de compilar la APK necesitas instalar y configurar:
 | Android Studio o Android SDK | Generar el proyecto Android y la APK. |
 | Variables de entorno | Permitir que Maven, GraalVM y Android SDK sean localizados. |
 
-## Cambios necesarios en `pom.xml`
+### Cambios necesarios en `pom.xml`
 
 Añade una propiedad para la versión del plugin de GluonFX:
 
@@ -812,7 +791,7 @@ En Windows:
 <graalvmHome>C:\ruta\a\graalvm</graalvmHome>
 ```
 
-## Adaptar el proyecto para móvil
+### Adaptar el proyecto para móvil
 
 Aunque el código JavaFX puede ejecutarse en Android mediante GluonFX, conviene tener en cuenta estas recomendaciones:
 
@@ -823,7 +802,7 @@ Aunque el código JavaFX puede ejecutarse en Android mediante GluonFX, conviene 
 - Separar bien la lógica de negocio de la interfaz.
 - Mantener la capa `repository` para poder cambiar entre fichero, SQLite, API REST o BBDD externa.
 
-## Comandos para generar la APK
+### Comandos para generar la APK
 
 Desde la raíz del proyecto:
 
@@ -850,7 +829,7 @@ También puedes comprobar que el dispositivo está conectado con:
 adb devices
 ```
 
-## Flujo recomendado
+### Flujo recomendado
 
 ```text
 1. Probar primero en escritorio con mvn clean javafx:run
@@ -861,7 +840,7 @@ adb devices
 6. Instalar o copiar la APK generada
 ```
 
-## Problemas frecuentes al generar la APK
+### Problemas frecuentes al generar la APK
 
 | Error | Posible causa | Solución |
 |---|---|---|
@@ -895,9 +874,9 @@ module es.ies.puerto {
 
 ---
 
-# Errores comunes
+## Errores comunes
 
-## `Location is not set`
+### `Location is not set`
 
 El archivo FXML no se encuentra. Revisa la ruta usada en:
 
@@ -905,11 +884,11 @@ El archivo FXML no se encuentra. Revisa la ruta usada en:
 PrincipalApplication.class.getResource("usuario-view.fxml")
 ```
 
-## `NullPointerException` en campos con `@FXML`
+### `NullPointerException` en campos con `@FXML`
 
 Puede ocurrir si el `fx:id` del FXML no coincide con el nombre del atributo del controlador.
 
-## El botón no ejecuta el método
+### El botón no ejecuta el método
 
 Comprueba que el método existe en el controlador y que el FXML tiene:
 
@@ -917,7 +896,7 @@ Comprueba que el método existe en el controlador y que el FXML tiene:
 onAction="#mostrarUsuario"
 ```
 
-## Error con el controlador
+### Error con el controlador
 
 Comprueba que el `fx:controller` coincide con el paquete real:
 
@@ -926,5 +905,11 @@ fx:controller="es.ies.puerto.controllers.UsuarioController"
 ```
 
 ---
+
+## Continuando con el desarrollo
+
+- [Uso de ListView](FX-LISTVIEW.md)
+- [Uso de TabelView](FX-TABELVIEW.md)
+- [Incorporando Multi-idioma](FX-MULTI-IDIOMA.md)
 
 </div>
