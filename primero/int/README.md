@@ -43,6 +43,10 @@ El alumnado desarrollará un ecosistema completo formado por:
 | Despliegue | Docker |
 | Repositorio remoto | GitHub |
 
+<div align="center" width="400">
+     <img src="images/intermodular.png">
+</div>
+
 ---
 
 ## 3. Objetivo funcional
