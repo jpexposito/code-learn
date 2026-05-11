@@ -2,7 +2,7 @@
 
 # CentroPlus Connect — Proyecto Intermodular
 
-<div align="center" width="400">
+<div align="center" width="200">
      <img src="images/centroplus.png">
 </div>
 
