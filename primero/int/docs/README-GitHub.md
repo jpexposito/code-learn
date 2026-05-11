@@ -1,6 +1,6 @@
 <div align="justify">
 
-## README — Gestión profesional del proyecto con GitHub
+## Gestión profesional del proyecto con GitHub
 
 ## 1. Objetivo
 
