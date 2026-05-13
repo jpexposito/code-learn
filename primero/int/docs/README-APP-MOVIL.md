@@ -902,3 +902,5 @@ Al finalizar esta parte, la aplicación JavaFX deberá permitir:
 - mantener una arquitectura clara por capas.
 
 ---
+
+</div>

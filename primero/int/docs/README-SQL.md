@@ -730,3 +730,5 @@ El alumnado debe entregar:
 - `seed.sql`
 - captura del diagrama
 - README documentando la base de datos
+
+</div>
