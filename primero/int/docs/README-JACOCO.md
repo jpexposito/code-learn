@@ -418,7 +418,7 @@ src
 
 ---
 
-# #Recomendaciones
+## Recomendaciones
 
 ### No probar inicialmente
 
